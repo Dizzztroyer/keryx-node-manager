@@ -5,3 +5,10 @@ artifacts/
 .vs/
 .vscode/
 *.suo
+
+# Internal dev-process notes - not needed by end users, kept locally only.
+PROJECT_STATUS.md
+CHANGELOG.md
+docs/ARCHITECTURE.md
+docs/KERYX_RESEARCH.md
+docs/RECOVERY.md
