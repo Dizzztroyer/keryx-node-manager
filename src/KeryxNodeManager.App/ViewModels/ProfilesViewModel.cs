@@ -57,12 +57,12 @@ public partial class ProfilesViewModel : ObservableObject
         foreach (var profile in _profileStore.Profiles)
         {
             var addressPart = string.IsNullOrWhiteSpace(profile.MiningAddress)
-                ? "адрес не задан"
+                ? AppStrings.Get("Str_Profiles_NoAddress")
                 : SecretMasker.MaskAddress(profile.MiningAddress);
             var gpuCount = profile.GpuAssignments.Count;
             var gpuPart = gpuCount == 0
-                ? "GPU: авто"
-                : $"GPU назначено: {gpuCount}";
+                ? AppStrings.Get("Str_Profiles_GpuAuto")
+                : AppStrings.Format("Str_Profiles_GpuAssignedCount", gpuCount);
             ProfileRows.Add(new ProfileRow(profile.Name, $"{addressPart} · {gpuPart}"));
         }
     }
@@ -80,11 +80,11 @@ public partial class ProfilesViewModel : ObservableObject
         {
             await _profileStore.SwitchActiveProfileAsync(SelectedProfileName);
             OnPropertyChanged(nameof(ActiveProfileName));
-            StatusMessage = $"Активный профиль: «{SelectedProfileName}».";
+            StatusMessage = AppStrings.Format("Str_Profiles_ActiveProfile", SelectedProfileName);
         }
         catch (Exception ex)
         {
-            StatusMessage = $"Не удалось переключить профиль: {ex.Message}";
+            StatusMessage = AppStrings.Format("Str_Profiles_SwitchFailed", ex.Message);
         }
     }
 
@@ -99,11 +99,11 @@ public partial class ProfilesViewModel : ObservableObject
             SelectedProfileName = created;
             NewProfileName = string.Empty;
             OnPropertyChanged(nameof(ActiveProfileName));
-            StatusMessage = $"Профиль «{created}» создан и стал активным.";
+            StatusMessage = AppStrings.Format("Str_Profiles_Created", created);
         }
         catch (Exception ex)
         {
-            StatusMessage = $"Не удалось создать профиль: {ex.Message}";
+            StatusMessage = AppStrings.Format("Str_Profiles_CreateFailed", ex.Message);
         }
     }
 
@@ -119,11 +119,11 @@ public partial class ProfilesViewModel : ObservableObject
             RefreshList();
             SelectedProfileName = newName;
             OnPropertyChanged(nameof(ActiveProfileName));
-            StatusMessage = $"Профиль «{oldName}» переименован в «{newName}».";
+            StatusMessage = AppStrings.Format("Str_Profiles_Renamed", oldName, newName);
         }
         catch (Exception ex)
         {
-            StatusMessage = $"Не удалось переименовать профиль: {ex.Message}";
+            StatusMessage = AppStrings.Format("Str_Profiles_RenameFailed", ex.Message);
         }
     }
 
@@ -138,11 +138,11 @@ public partial class ProfilesViewModel : ObservableObject
             RefreshList();
             SelectedProfileName = _profileStore.ActiveProfile.Name;
             OnPropertyChanged(nameof(ActiveProfileName));
-            StatusMessage = $"Профиль «{deleted}» удалён.";
+            StatusMessage = AppStrings.Format("Str_Profiles_Deleted", deleted);
         }
         catch (Exception ex)
         {
-            StatusMessage = $"Не удалось удалить профиль: {ex.Message}";
+            StatusMessage = AppStrings.Format("Str_Profiles_DeleteFailed", ex.Message);
         }
     }
 }

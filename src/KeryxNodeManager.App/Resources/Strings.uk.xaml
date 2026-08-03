@@ -156,4 +156,175 @@
     <sys:String x:Key="Str_Wizard_Next">Далі</sys:String>
     <sys:String x:Key="Str_Wizard_Finish">Завершити</sys:String>
 
+
+    <!-- Tray icon (SingleInstanceIpc/TrayIconService C#-built strings) -->
+    <sys:String x:Key="Str_Tray_Tooltip_Stopped">Keryx Node Manager — все зупинено</sys:String>
+    <sys:String x:Key="Str_Tray_Tooltip_Starting">Keryx Node Manager — запуск...</sys:String>
+    <sys:String x:Key="Str_Tray_Tooltip_Running">Keryx Node Manager — працює</sys:String>
+    <sys:String x:Key="Str_Tray_Tooltip_Error">Keryx Node Manager — помилка</sys:String>
+    <sys:String x:Key="Str_Tray_Tooltip_InferenceActive">Keryx Node Manager — обробка inference-запиту</sys:String>
+    <sys:String x:Key="Str_Tray_Menu_Open">Відкрити Keryx Node Manager</sys:String>
+    <sys:String x:Key="Str_Tray_Menu_RestartMiner">Перезапустити майнер</sys:String>
+    <sys:String x:Key="Str_Tray_Menu_RestartNode">Перезапустити ноду</sys:String>
+    <sys:String x:Key="Str_Tray_Menu_OpenLogs">Відкрити логи</sys:String>
+    <sys:String x:Key="Str_Tray_Menu_Exit">Вийти</sys:String>
+    <sys:String x:Key="Str_Tray_ExitConfirm_Title">Вихід із Keryx Node Manager</sys:String>
+    <sys:String x:Key="Str_Tray_ExitConfirm_Body">Зупинити ноду і майнер перед виходом?
+
+Так — зупинити все і закрити застосунок.
+Ні — закрити тільки інтерфейс, нода і майнер продовжать роботу.
+Скасувати — не виходити.</sys:String>
+
+    <!-- PlaceholderView (stub-page notice, C#-built string) -->
+    <sys:String x:Key="Str_Placeholder_NotImplemented">«{0}» ще не реалізовано в цій збірці</sys:String>
+    <sys:String x:Key="Str_Placeholder_SeeStatus">Див. PROJECT_STATUS.md — розділ &quot;In progress&quot;/&quot;Next steps&quot;.</sys:String>
+
+    <!-- DataDirSectionViewModel (Node page data-dir download card) -->
+    <sys:String x:Key="Str_DataDir_BrowseDialog_Title">Виберіть папку для даних ноди (data dir)</sys:String>
+    <sys:String x:Key="Str_DataDir_InvalidUrl">Вкажіть коректне посилання на архів (.zip) або .torrent-файл.</sys:String>
+    <sys:String x:Key="Str_DataDir_StartingDownload">Починаю завантаження ({0})...</sys:String>
+    <sys:String x:Key="Str_DataDir_DownloadComplete">Готово. Дані розпаковано в «{0}» - під час наступного запуску нода використовуватиме цей каталог (--appdir).</sys:String>
+    <sys:String x:Key="Str_DataDir_DownloadFailed">Не вдалося завантажити/розпакувати data dir: {0}</sys:String>
+
+    <!-- GpuViewModel (mode dropdown labels, assignment summary) -->
+    <sys:String x:Key="Str_Gpu_MiningDisabledManually">{0}: майнінг на цій GPU вимкнено вручну.</sys:String>
+    <sys:String x:Key="Str_Gpu_Mode_Auto">Авто</sys:String>
+    <sys:String x:Key="Str_Gpu_Mode_Disabled">Вимкнено</sys:String>
+    <sys:String x:Key="Str_Gpu_Mode_ManualPrefix">Вручну: {0}</sys:String>
+
+    <!-- LogsViewModel (diagnostics export dialog/status) -->
+    <sys:String x:Key="Str_Logs_ExportDialog_Title">Експорт діагностики</sys:String>
+    <sys:String x:Key="Str_Logs_ExportDialog_Filter">ZIP-архів (*.zip)|*.zip</sys:String>
+    <sys:String x:Key="Str_Logs_ExportSaved">Діагностику збережено: {0}</sys:String>
+    <sys:String x:Key="Str_Logs_ExportFailed">Не вдалося експортувати: {0}</sys:String>
+
+    <!-- DashboardViewModel / App.xaml.cs (status labels, launch messages) -->
+    <sys:String x:Key="Str_Dashboard_NodeStatus_Stopped">Зупинено</sys:String>
+    <sys:String x:Key="Str_Dashboard_NodeStatus_Running">Працює</sys:String>
+    <sys:String x:Key="Str_Dashboard_MinerStatus_Stopped">Зупинено</sys:String>
+    <sys:String x:Key="Str_Dashboard_MinerStatus_Running">Працює</sys:String>
+    <sys:String x:Key="Str_Dashboard_LogPrefix_Node">[Нода] {0}</sys:String>
+    <sys:String x:Key="Str_Dashboard_LogPrefix_Miner">[Майнер] {0}</sys:String>
+    <sys:String x:Key="Str_Dashboard_LogPrefix_Safety">[Захист] {0}</sys:String>
+    <sys:String x:Key="Str_Dashboard_MissingNodePath">Вкажіть шлях до keryxd.exe на сторінці «Нода» перед запуском.</sys:String>
+    <sys:String x:Key="Str_Dashboard_MissingMiningAddress">Вкажіть mining address на сторінці «Майнер» перед запуском.</sys:String>
+    <sys:String x:Key="Str_Dashboard_LaunchInitiated">Запуск ініційовано.</sys:String>
+    <sys:String x:Key="Str_Dashboard_LaunchFailed">Не вдалося запустити: {0}</sys:String>
+    <sys:String x:Key="Str_Dashboard_StoppedForOverheat">Майнінг зупинено автоматично через перегрів GPU.</sys:String>
+    <sys:String x:Key="Str_Dashboard_GpuQueryFailedBeforeLaunch">Не вдалося визначити GPU перед запуском ({0}); використовується автопідбір моделі самим майнером.</sys:String>
+    <sys:String x:Key="Str_App_AlreadyRunningUnreachable">Keryx Node Manager вже запущено, але не вдалося з'єднатися з ним. Перевірте системний трей.</sys:String>
+
+    <!-- NodeViewModel (executable browse dialog, endpoint check) -->
+    <sys:String x:Key="Str_Node_BrowseDialog_Title">Виберіть keryxd.exe</sys:String>
+    <sys:String x:Key="Str_Node_BrowseDialog_Filter">keryxd.exe|keryxd.exe|Виконувані файли (*.exe)|*.exe</sys:String>
+    <sys:String x:Key="Str_Node_SettingsSaved">Налаштування ноди збережено.</sys:String>
+    <sys:String x:Key="Str_Node_CheckingEndpoint">Перевірка {0}:{1}...</sys:String>
+    <sys:String x:Key="Str_Node_EndpointAccepting">Endpoint {0}:{1} приймає з'єднання.</sys:String>
+    <sys:String x:Key="Str_Node_EndpointNotResponding">Endpoint {0}:{1} не відповідає (тайм-аут 3с). Нода не запущена або порт вказано неправильно.</sys:String>
+    <sys:String x:Key="Str_Node_ConnectFailed">Не вдалося під'єднатися до {0}:{1}: {2}</sys:String>
+
+    <!-- MinerViewModel (executable/models dialogs, address validation, preview) -->
+    <sys:String x:Key="Str_Miner_BrowseExecutable_Title">Виберіть keryx-miner.exe</sys:String>
+    <sys:String x:Key="Str_Miner_BrowseExecutable_Filter">keryx-miner.exe|keryx-miner.exe|Виконувані файли (*.exe)|*.exe</sys:String>
+    <sys:String x:Key="Str_Miner_BrowseModelsDir_Title">Виберіть папку для моделей</sys:String>
+    <sys:String x:Key="Str_Miner_InvalidAddress">Адреса не схожа на дійсну Keryx-адресу (очікується keryx:... або keryxtest:...).</sys:String>
+    <sys:String x:Key="Str_Miner_SettingsSaved">Налаштування майнера збережено.</sys:String>
+    <sys:String x:Key="Str_Miner_CommandPreviewError">(неможливо побудувати команду: {0})</sys:String>
+
+    <!-- ProfilesViewModel (profile list summaries, switch/create/rename/delete status) -->
+    <sys:String x:Key="Str_Profiles_NoAddress">адресу не задано</sys:String>
+    <sys:String x:Key="Str_Profiles_GpuAuto">GPU: авто</sys:String>
+    <sys:String x:Key="Str_Profiles_GpuAssignedCount">GPU призначено: {0}</sys:String>
+    <sys:String x:Key="Str_Profiles_ActiveProfile">Активний профіль: «{0}».</sys:String>
+    <sys:String x:Key="Str_Profiles_SwitchFailed">Не вдалося перемкнути профіль: {0}</sys:String>
+    <sys:String x:Key="Str_Profiles_Created">Профіль «{0}» створено і зроблено активним.</sys:String>
+    <sys:String x:Key="Str_Profiles_CreateFailed">Не вдалося створити профіль: {0}</sys:String>
+    <sys:String x:Key="Str_Profiles_Renamed">Профіль «{0}» перейменовано на «{1}».</sys:String>
+    <sys:String x:Key="Str_Profiles_RenameFailed">Не вдалося перейменувати профіль: {0}</sys:String>
+    <sys:String x:Key="Str_Profiles_Deleted">Профіль «{0}» видалено.</sys:String>
+    <sys:String x:Key="Str_Profiles_DeleteFailed">Не вдалося видалити профіль: {0}</sys:String>
+
+    <!-- SettingsViewModel (autostart status/errors) -->
+    <sys:String x:Key="Str_Settings_CheckAutostartFailed">Не вдалося перевірити статус автозапуску: {0}</sys:String>
+    <sys:String x:Key="Str_Settings_ExePathNotFound">Не вдалося визначити шлях до виконуваного файлу.</sys:String>
+    <sys:String x:Key="Str_Settings_AutostartEnabled">Автозапуск увімкнено: застосунок запуститься під час наступного входу в Windows.</sys:String>
+    <sys:String x:Key="Str_Settings_AutostartDisabled">Автозапуск вимкнено.</sys:String>
+    <sys:String x:Key="Str_Settings_AutostartChangeFailed">Не вдалося змінити автозапуск: {0}</sys:String>
+    <sys:String x:Key="Str_Settings_SavedGeneric">Налаштування збережено.</sys:String>
+
+    <!-- BinaryUpdateSectionViewModel (check/install update status) -->
+    <sys:String x:Key="Str_Update_NoWindowsArchive">Доступна версія {0}, але в цьому релізі немає Windows-архіву (win64-amd64.zip).</sys:String>
+    <sys:String x:Key="Str_Update_Available">Доступне оновлення: {0}.</sys:String>
+    <sys:String x:Key="Str_Update_UpToDate">Встановлено останню версію.</sys:String>
+    <sys:String x:Key="Str_Update_CheckFailed">Не вдалося перевірити оновлення: {0}</sys:String>
+    <sys:String x:Key="Str_Update_Installed">Оновлено до {0}.</sys:String>
+    <sys:String x:Key="Str_Update_FileLocked">Не вдалося замінити файл - схоже, процес ще запущено. Зупиніть його на сторінці Dashboard і спробуйте знову. ({0})</sys:String>
+    <sys:String x:Key="Str_Update_InstallError">Помилка оновлення: {0}</sys:String>
+
+    <!-- GpuOverclockSectionViewModel (apply/reset confirm dialogs, status) -->
+    <sys:String x:Key="Str_Overclock_CriticalTemp">«{0}» зараз у критичному стані за температурою — розгін не буде застосовано, поки карта не охолоне нижче порогу.</sys:String>
+    <sys:String x:Key="Str_Overclock_FanManual">
+Кулер: {0}% (ручний режим)</sys:String>
+    <sys:String x:Key="Str_Overclock_FanAuto">
+Кулер: автоматичний (без змін)</sys:String>
+    <sys:String x:Key="Str_Overclock_ApplyConfirm_Body">Застосувати розгін до «{0}»?
+
+Ядро: {1} МГц
+Пам'ять: {2} МГц{3}
+
+Зміна частот та/або кулера відеокарти — потенційно небезпечна операція: неправильні значення можуть призвести до нестабільності драйвера, зависання або перегріву. Продовжити?</sys:String>
+    <sys:String x:Key="Str_Overclock_ApplyConfirm_Title">Розгін відеокарти</sys:String>
+    <sys:String x:Key="Str_Overclock_Applied">Розгін застосовано.</sys:String>
+    <sys:String x:Key="Str_Overclock_ResetConfirm_Body">Скинути розгін «{0}» до заводських налаштувань (0 МГц, автоматичний кулер)?</sys:String>
+    <sys:String x:Key="Str_Overclock_ResetConfirm_Title">Скидання розгону</sys:String>
+    <sys:String x:Key="Str_Overclock_ResetDone">Скинуто до заводських налаштувань.</sys:String>
+
+    <!-- PublicNodeListViewModel (discovery/ping/switch status messages) -->
+    <sys:String x:Key="Str_PublicNodes_EmptyList">Список порожній. Якщо у вас є посилання на публічний список нод, вкажіть його вище, або натисніть «Знайти через свою ноду».</sys:String>
+    <sys:String x:Key="Str_PublicNodes_LoadedCount">Завантажено нод: {0}.</sys:String>
+    <sys:String x:Key="Str_PublicNodes_LoadFailed">Не вдалося завантажити список нод: {0}</sys:String>
+    <sys:String x:Key="Str_PublicNodes_NoNewPeersFromOwnNode">Ваша нода не повідомила нових пірів (можливо, вона ще не підключена ні до кого, або список уже містить їх).</sys:String>
+    <sys:String x:Key="Str_PublicNodes_AddedPeersFromOwnNode">Додано {0} пір(ів), виявлених через RPC вашої ноди.</sys:String>
+    <sys:String x:Key="Str_PublicNodes_DiscoverFromOwnNodeFailed">Не вдалося отримати пірів від власної ноди - переконайтеся, що вона запущена. ({0})</sys:String>
+    <sys:String x:Key="Str_PublicNodes_NoNewPeersFromNode">Нода «{0}» не повідомила нових пірів, або її RPC-порт недоступний.</sys:String>
+    <sys:String x:Key="Str_PublicNodes_AddedPeersFromNode">Додано {0} пір(ів), виявлених через RPC ноди «{1}».</sys:String>
+    <sys:String x:Key="Str_PublicNodes_DiscoverThroughNodeFailed">Не вдалося отримати пірів від «{0}» - її RPC-порт, найімовірніше, закрито назовні (це нормально, більшість операторів його не відкривають). ({1})</sys:String>
+    <sys:String x:Key="Str_PublicNodes_UptimeNoteSuffix"> · аптайм за заявою оператора: {0}%</sys:String>
+    <sys:String x:Key="Str_PublicNodes_Reachable">У мережі · {0} мс{1}</sys:String>
+    <sys:String x:Key="Str_PublicNodes_Unreachable">Недоступна ({0}){1}</sys:String>
+    <sys:String x:Key="Str_PublicNodes_SavedLocallyNote">Збережено локально після успішної перевірки доступності.</sys:String>
+    <sys:String x:Key="Str_PublicNodes_NodeSelected">Нода «{0}» ({1}:{2}) вибрана для підключення. Автозапуск локальної ноди вимкнено - його все ще можна ввімкнути назад на цій сторінці.</sys:String>
+    <sys:String x:Key="Str_PublicNodes_SwitchedBackToOwn">Повернено підключення до власної ноди.</sys:String>
+    <sys:String x:Key="Str_PublicNodes_AutoSwitchedBackSynced">Ваша нода синхронізувалася - виконано автоматичне перемикання назад на неї.</sys:String>
+
+    <!-- ModelsViewModel / ModelCardViewModel (download status, delete confirm, sizes) -->
+    <sys:String x:Key="Str_Models_NoModelsDirConfigured">Вкажіть папку моделей на сторінці «Майнер», щоб керувати файлами тут.</sys:String>
+    <sys:String x:Key="Str_Models_Installed">Встановлена ({0}).</sys:String>
+    <sys:String x:Key="Str_Models_DownloadPaused">Завантаження призупинено (отримано {0}).</sys:String>
+    <sys:String x:Key="Str_Models_NotInstalled">Не встановлена. Модель також буде автоматично завантажена майнером через IPFS під час першого запуску - ця сторінка потрібна лише для ручного попереднього завантаження.</sys:String>
+    <sys:String x:Key="Str_Models_SetModelsDirFirst">Спочатку вкажіть папку моделей на сторінці «Майнер».</sys:String>
+    <sys:String x:Key="Str_Models_InvalidUrl">URL має бути повним посиланням http:// або https://.</sys:String>
+    <sys:String x:Key="Str_Models_DownloadingWithTotal">Завантаження... {0}% ({1} із {2})</sys:String>
+    <sys:String x:Key="Str_Models_DownloadingNoTotal">Завантаження... {0}% ({1})</sys:String>
+    <sys:String x:Key="Str_Models_DownloadingUnknownTotal">Завантаження... {0} (загальний розмір невідомий)</sys:String>
+    <sys:String x:Key="Str_Models_DownloadComplete">Завантаження завершено.</sys:String>
+    <sys:String x:Key="Str_Models_DownloadPausedByUser">Завантаження призупинено - натисніть «Продовжити», щоб відновити з тієї самої точки.</sys:String>
+    <sys:String x:Key="Str_Models_DownloadError">Помилка завантаження: {0}</sys:String>
+    <sys:String x:Key="Str_Models_OfficialProgressWithTotal">{0} {1}% ({2} із {3})</sys:String>
+    <sys:String x:Key="Str_Models_OfficialProgressNoTotal">{0} {1}</sys:String>
+    <sys:String x:Key="Str_Models_DownloadCancelled">Завантаження скасовано.</sys:String>
+    <sys:String x:Key="Str_Models_DeleteConfirm_Body">Видалити модель «{0}»? Файл буде видалено з диска безповоротно.</sys:String>
+    <sys:String x:Key="Str_Models_DeleteConfirm_Title">Видалення моделі</sys:String>
+    <sys:String x:Key="Str_Models_SizeGb">{0} ГБ</sys:String>
+    <sys:String x:Key="Str_Models_SizeMb">{0} МБ</sys:String>
+    <sys:String x:Key="Str_Models_SizeKb">{0} КБ</sys:String>
+    <sys:String x:Key="Str_Models_TotalDiskUsage">Встановлено моделей: {0}, зайнято на диску: {1}.</sys:String>
+
+    <!-- WizardViewModel (step header, profile create, address/GPU checks) -->
+    <sys:String x:Key="Str_Wizard_StepHeader">Крок {0} з {1}</sys:String>
+    <sys:String x:Key="Str_Wizard_EnterProfileName">Введіть ім'я нового профілю.</sys:String>
+    <sys:String x:Key="Str_Wizard_ProfileCreated">Профіль «{0}» створено і зроблено активним — майстер тепер налаштовує саме його.</sys:String>
+    <sys:String x:Key="Str_Wizard_ProfileCreateFailed">Не вдалося створити профіль: {0}</sys:String>
+    <sys:String x:Key="Str_Wizard_InvalidAddress">Адреса не схожа на дійсну Keryx-адресу (очікується keryx:... або keryxtest:...). Майстер дозволяє продовжити, але запуск майнінгу з неправильною адресою буде відхилено нодою.</sys:String>
+    <sys:String x:Key="Str_Wizard_NoGpuDetected">Відеокарти NVIDIA не виявлено.</sys:String>
 </ResourceDictionary>

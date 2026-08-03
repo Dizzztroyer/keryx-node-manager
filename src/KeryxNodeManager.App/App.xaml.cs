@@ -59,7 +59,7 @@ public partial class App : Application
                 // startup race, or something is actually wrong) - the honest fallback this
                 // message box always was, not the primary path anymore.
                 MessageBox.Show(
-                    "Keryx Node Manager уже запущен, но не удалось связаться с ним. Проверьте системный трей.",
+                    AppStrings.Get("Str_App_AlreadyRunningUnreachable"),
                     "Keryx Node Manager", MessageBoxButton.OK, MessageBoxImage.Information);
             }
             Shutdown();
@@ -201,7 +201,12 @@ public partial class App : Application
         {
             var state = dashboardViewModel.StartAllCommand.IsRunning
                 ? TrayState.Starting
-                : (dashboardViewModel.NodeStatus == "Работает" || dashboardViewModel.MinerStatus == "Работает"
+                // Was comparing NodeStatus/MinerStatus (localized display text) against the
+                // hardcoded Russian literal "Работает" - broke the tray icon color for every
+                // language but Russian, since those properties now hold real translated text
+                // (see DashboardViewModel.IsNodeRunning/IsMinerRunning doc comment). Reading the
+                // language-independent bool properties instead fixes it for all languages.
+                : (dashboardViewModel.IsNodeRunning || dashboardViewModel.IsMinerRunning
                     ? TrayState.Running
                     : TrayState.Stopped);
             _tray?.SetState(state);

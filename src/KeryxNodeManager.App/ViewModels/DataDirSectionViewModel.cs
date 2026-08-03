@@ -47,7 +47,7 @@ public partial class DataDirSectionViewModel : ObservableObject
     [RelayCommand]
     private void BrowseDataDirectory()
     {
-        var dialog = new OpenFolderDialog { Title = "Выберите папку для данных ноды (data dir)" };
+        var dialog = new OpenFolderDialog { Title = AppStrings.Get("Str_DataDir_BrowseDialog_Title") };
         if (dialog.ShowDialog() == true)
         {
             _setDataDirectory(dialog.FolderName);
@@ -61,7 +61,7 @@ public partial class DataDirSectionViewModel : ObservableObject
     {
         if (string.IsNullOrWhiteSpace(SourceUrl) || !Uri.TryCreate(SourceUrl, UriKind.Absolute, out var uri))
         {
-            StatusMessage = "Укажите корректную ссылку на архив (.zip) или .torrent-файл.";
+            StatusMessage = AppStrings.Get("Str_DataDir_InvalidUrl");
             return;
         }
 
@@ -73,7 +73,7 @@ public partial class DataDirSectionViewModel : ObservableObject
 
         IsBusy = true;
         ProgressPercent = 0;
-        StatusMessage = $"Начинаю скачивание ({(DataDirDownloadService.IsTorrentUrl(SourceUrl) ? "torrent" : "HTTP")})...";
+        StatusMessage = AppStrings.Format("Str_DataDir_StartingDownload", DataDirDownloadService.IsTorrentUrl(SourceUrl) ? "torrent" : "HTTP");
         try
         {
             var progress = new Progress<DataDirDownloadProgress>(p =>
@@ -89,11 +89,11 @@ public partial class DataDirSectionViewModel : ObservableObject
             _setDataDirectory(targetDir);
             _persist();
             OnPropertyChanged(nameof(DataDirectory));
-            StatusMessage = $"Готово. Данные распакованы в «{targetDir}» - при следующем запуске нода будет использовать этот каталог (--appdir).";
+            StatusMessage = AppStrings.Format("Str_DataDir_DownloadComplete", targetDir);
         }
         catch (Exception ex)
         {
-            StatusMessage = $"Не удалось скачать/распаковать data dir: {ex.Message}";
+            StatusMessage = AppStrings.Format("Str_DataDir_DownloadFailed", ex.Message);
         }
         finally
         {

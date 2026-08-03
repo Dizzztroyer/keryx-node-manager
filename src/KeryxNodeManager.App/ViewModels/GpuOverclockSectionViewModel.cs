@@ -147,20 +147,18 @@ public partial class GpuOverclockSectionViewModel : ObservableObject
     {
         if (_safetyMonitor.GetLastLevel(_gpuUuid) == SafetyLevel.Critical)
         {
-            LastError = $"«{_deviceName}» сейчас в критическом состоянии по температуре — " +
-                "разгон не будет применён, пока карта не остынет ниже порога.";
+            LastError = AppStrings.Format("Str_Overclock_CriticalTemp", _deviceName);
             return;
         }
 
-        var fanLine = FanIsManual ? $"\nКулер: {FanPercent}% (ручной режим)" : "\nКулер: автоматический (без изменений)";
+        var fanLine = FanIsManual
+            ? AppStrings.Format("Str_Overclock_FanManual", FanPercent)
+            : AppStrings.Get("Str_Overclock_FanAuto");
+        var coreStr = (CoreOffsetMhz >= 0 ? "+" : "") + CoreOffsetMhz;
+        var memStr = (MemoryOffsetMhz >= 0 ? "+" : "") + MemoryOffsetMhz;
         var result = MessageBox.Show(
-            $"Применить разгон к «{_deviceName}»?\n\n" +
-            $"Ядро: {(CoreOffsetMhz >= 0 ? "+" : "")}{CoreOffsetMhz} МГц\n" +
-            $"Память: {(MemoryOffsetMhz >= 0 ? "+" : "")}{MemoryOffsetMhz} МГц" + fanLine +
-            "\n\nИзменение частот и/или кулера видеокарты — потенциально опасная операция: " +
-            "неверные значения могут привести к нестабильности драйвера, зависанию или перегреву. " +
-            "Продолжить?",
-            "Разгон видеокарты",
+            AppStrings.Format("Str_Overclock_ApplyConfirm_Body", _deviceName, coreStr, memStr, fanLine),
+            AppStrings.Get("Str_Overclock_ApplyConfirm_Title"),
             MessageBoxButton.YesNo,
             MessageBoxImage.Warning);
         if (result != MessageBoxResult.Yes) return;
@@ -181,7 +179,7 @@ public partial class GpuOverclockSectionViewModel : ObservableObject
             });
             _persist();
 
-            StatusMessage = "Разгон применён.";
+            StatusMessage = AppStrings.Get("Str_Overclock_Applied");
         }
         catch (GpuOverclockException ex)
         {
@@ -199,8 +197,8 @@ public partial class GpuOverclockSectionViewModel : ObservableObject
     private async Task ResetAsync()
     {
         var result = MessageBox.Show(
-            $"Сбросить разгон «{_deviceName}» к заводским настройкам (0 МГц, автоматический кулер)?",
-            "Сброс разгона",
+            AppStrings.Format("Str_Overclock_ResetConfirm_Body", _deviceName),
+            AppStrings.Get("Str_Overclock_ResetConfirm_Title"),
             MessageBoxButton.YesNo,
             MessageBoxImage.Question);
         if (result != MessageBoxResult.Yes) return;
@@ -218,7 +216,7 @@ public partial class GpuOverclockSectionViewModel : ObservableObject
             _setPersisted(new GpuOverclockSettings());
             _persist();
 
-            StatusMessage = "Сброшено к заводским настройкам.";
+            StatusMessage = AppStrings.Get("Str_Overclock_ResetDone");
         }
         catch (GpuOverclockException ex)
         {

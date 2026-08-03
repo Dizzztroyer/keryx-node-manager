@@ -113,12 +113,12 @@ public partial class PublicNodeListViewModel : ObservableObject
             }
 
             StatusMessage = Nodes.Count == 0
-                ? "Список пуст. Если у вас есть ссылка на публичный список нод, укажите её выше, или нажмите «Найти через свою ноду»."
-                : $"Загружено нод: {Nodes.Count}.";
+                ? AppStrings.Get("Str_PublicNodes_EmptyList")
+                : AppStrings.Format("Str_PublicNodes_LoadedCount", Nodes.Count);
         }
         catch (Exception ex)
         {
-            StatusMessage = $"Не удалось загрузить список нод: {ex.Message}";
+            StatusMessage = AppStrings.Format("Str_PublicNodes_LoadFailed", ex.Message);
         }
         finally
         {
@@ -145,13 +145,12 @@ public partial class PublicNodeListViewModel : ObservableObject
                 addedCount++;
             }
             StatusMessage = addedCount == 0
-                ? "Ваша нода не сообщила новых пиров (возможно, она ещё не подключена ни к кому, или список уже содержит их)."
-                : $"Добавлено {addedCount} пир(ов), обнаруженных через RPC вашей ноды.";
+                ? AppStrings.Get("Str_PublicNodes_NoNewPeersFromOwnNode")
+                : AppStrings.Format("Str_PublicNodes_AddedPeersFromOwnNode", addedCount);
         }
         catch (Exception ex)
         {
-            StatusMessage = "Не удалось получить пиров от своей ноды - убедитесь, что она запущена. " +
-                             $"({ex.Message})";
+            StatusMessage = AppStrings.Format("Str_PublicNodes_DiscoverFromOwnNodeFailed", ex.Message);
         }
         finally
         {
@@ -178,13 +177,12 @@ public partial class PublicNodeListViewModel : ObservableObject
                 addedCount++;
             }
             StatusMessage = addedCount == 0
-                ? $"Нода «{row.Info.Name}» не сообщила новых пиров, или её RPC-порт недоступен."
-                : $"Добавлено {addedCount} пир(ов), обнаруженных через RPC ноды «{row.Info.Name}».";
+                ? AppStrings.Format("Str_PublicNodes_NoNewPeersFromNode", row.Info.Name)
+                : AppStrings.Format("Str_PublicNodes_AddedPeersFromNode", addedCount, row.Info.Name);
         }
         catch (Exception ex)
         {
-            StatusMessage = $"Не удалось получить пиров от «{row.Info.Name}» - её RPC-порт, скорее всего, " +
-                             $"закрыт наружу (это нормально, большинство операторов его не открывают). ({ex.Message})";
+            StatusMessage = AppStrings.Format("Str_PublicNodes_DiscoverThroughNodeFailed", row.Info.Name, ex.Message);
         }
         finally
         {
@@ -200,11 +198,11 @@ public partial class PublicNodeListViewModel : ObservableObject
         {
             var result = await PublicNodeDirectoryService.CheckHealthAsync(row.Info, TimeSpan.FromSeconds(3));
             var uptimeNote = row.Info.SelfReportedUptimePercent is double uptime
-                ? $" · аптайм по заявлению оператора: {uptime:0.#}%"
+                ? AppStrings.Format("Str_PublicNodes_UptimeNoteSuffix", uptime.ToString("0.#"))
                 : "";
             row.StatusText = result.Reachable
-                ? $"В сети · {result.LatencyMs:0} мс{uptimeNote}"
-                : $"Недоступна ({result.Error}){uptimeNote}";
+                ? AppStrings.Format("Str_PublicNodes_Reachable", (result.LatencyMs ?? 0).ToString("0"), uptimeNote)
+                : AppStrings.Format("Str_PublicNodes_Unreachable", result.Error, uptimeNote);
 
             // Only ever persist nodes that came from RPC discovery (see PublicNodeInfo.Notes
             // provenance convention) AND were just confirmed reachable by this app's own probe -
@@ -250,7 +248,7 @@ public partial class PublicNodeListViewModel : ObservableObject
             if (existing.Any(n => n.Endpoint == info.Endpoint)) return; // already cached
             existing.Add(info with
             {
-                Notes = (info.Notes ?? "") + " Сохранено локально после успешной проверки доступности.",
+                Notes = (info.Notes ?? "") + " " + AppStrings.Get("Str_PublicNodes_SavedLocallyNote"),
             });
             var dir = Path.GetDirectoryName(_discoveredCachePath);
             if (!string.IsNullOrEmpty(dir)) Directory.CreateDirectory(dir);
@@ -282,8 +280,7 @@ public partial class PublicNodeListViewModel : ObservableObject
         // one - AutoStartMiner is deliberately left untouched, only the node side changes.
         _profile.AutoStartNode = false;
         _persist();
-        StatusMessage = $"Нода «{row.Info.Name}» ({row.Info.Endpoint}:{row.Info.Port}) выбрана для подключения. " +
-                         "Автозапуск локальной ноды отключён - её всё ещё можно включить обратно на этой странице.";
+        StatusMessage = AppStrings.Format("Str_PublicNodes_NodeSelected", row.Info.Name, row.Info.Endpoint, row.Info.Port);
 
         StartWatchingForOwnNodeSync();
     }
@@ -299,7 +296,7 @@ public partial class PublicNodeListViewModel : ObservableObject
         _profile.NodePort = _rememberedOwnPort;
         _profile.AutoStartNode = _rememberedAutoStartNode || true;
         _persist();
-        StatusMessage = "Возвращено подключение к собственной ноде.";
+        StatusMessage = AppStrings.Get("Str_PublicNodes_SwitchedBackToOwn");
     }
 
     /// <summary>Called by NodeViewModel when the active profile changes or the app is shutting
@@ -351,7 +348,7 @@ public partial class PublicNodeListViewModel : ObservableObject
                     _profile.NodePort = _rememberedOwnPort;
                     _profile.AutoStartNode = true;
                     _persist();
-                    StatusMessage = "Ваша нода синхронизировалась - выполнено автоматическое переключение обратно на неё.";
+                    StatusMessage = AppStrings.Get("Str_PublicNodes_AutoSwitchedBackSynced");
                     IsWatchingForOwnNodeSync = false;
                     return;
                 }

@@ -76,8 +76,8 @@ public partial class NodeViewModel : ObservableObject
     {
         var dialog = new OpenFileDialog
         {
-            Title = "Выберите keryxd.exe",
-            Filter = "keryxd.exe|keryxd.exe|Исполняемые файлы (*.exe)|*.exe",
+            Title = AppStrings.Get("Str_Node_BrowseDialog_Title"),
+            Filter = AppStrings.Get("Str_Node_BrowseDialog_Filter"),
         };
         if (dialog.ShowDialog() == true)
         {
@@ -91,7 +91,7 @@ public partial class NodeViewModel : ObservableObject
     private async Task SaveAsync()
     {
         await _profileStore.SaveAsync();
-        StatusMessage = "Настройки ноды сохранены.";
+        StatusMessage = AppStrings.Get("Str_Node_SettingsSaved");
     }
 
     /// <summary>Real TCP connectivity check against the configured gRPC endpoint - not a stub.
@@ -101,7 +101,7 @@ public partial class NodeViewModel : ObservableObject
     private async Task CheckEndpointAsync()
     {
         var port = Profile.NodePort ?? (Profile.UseTestnet ? 22211 : 22110);
-        StatusMessage = $"Проверка {Profile.NodeEndpoint}:{port}...";
+        StatusMessage = AppStrings.Format("Str_Node_CheckingEndpoint", Profile.NodeEndpoint, port);
         try
         {
             using var client = new TcpClient();
@@ -109,17 +109,16 @@ public partial class NodeViewModel : ObservableObject
             var completed = await Task.WhenAny(connectTask, Task.Delay(TimeSpan.FromSeconds(3)));
             if (completed == connectTask && client.Connected)
             {
-                StatusMessage = $"Endpoint {Profile.NodeEndpoint}:{port} принимает соединения.";
+                StatusMessage = AppStrings.Format("Str_Node_EndpointAccepting", Profile.NodeEndpoint, port);
             }
             else
             {
-                StatusMessage = $"Endpoint {Profile.NodeEndpoint}:{port} не отвечает (таймаут 3с). " +
-                                 "Нода не запущена или порт указан неверно.";
+                StatusMessage = AppStrings.Format("Str_Node_EndpointNotResponding", Profile.NodeEndpoint, port);
             }
         }
         catch (Exception ex)
         {
-            StatusMessage = $"Не удалось подключиться к {Profile.NodeEndpoint}:{port}: {ex.Message}";
+            StatusMessage = AppStrings.Format("Str_Node_ConnectFailed", Profile.NodeEndpoint, port, ex.Message);
         }
     }
 }

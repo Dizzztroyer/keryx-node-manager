@@ -67,8 +67,8 @@ public partial class LogsViewModel : ObservableObject
     {
         var dialog = new SaveFileDialog
         {
-            Title = "Экспорт диагностики",
-            Filter = "ZIP-архив (*.zip)|*.zip",
+            Title = AppStrings.Get("Str_Logs_ExportDialog_Title"),
+            Filter = AppStrings.Get("Str_Logs_ExportDialog_Filter"),
             FileName = $"keryx-diagnostics-{DateTime.Now:yyyyMMdd-HHmmss}.zip",
         };
         if (dialog.ShowDialog() != true) return;
@@ -76,11 +76,11 @@ public partial class LogsViewModel : ObservableObject
         try
         {
             DiagnosticsExporter.Export(_logSink.LogsDirectory, dialog.FileName, _profileStore.Settings, AppVersionInfo.Current);
-            StatusMessage = $"Диагностика сохранена: {dialog.FileName}";
+            StatusMessage = AppStrings.Format("Str_Logs_ExportSaved", dialog.FileName);
         }
         catch (Exception ex)
         {
-            StatusMessage = $"Не удалось экспортировать: {ex.Message}";
+            StatusMessage = AppStrings.Format("Str_Logs_ExportFailed", ex.Message);
         }
     }
 

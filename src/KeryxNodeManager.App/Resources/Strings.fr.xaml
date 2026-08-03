@@ -152,4 +152,175 @@
     <sys:String x:Key="Str_Wizard_Next">Suivant</sys:String>
     <sys:String x:Key="Str_Wizard_Finish">Terminer</sys:String>
 
+
+    <!-- Tray icon (SingleInstanceIpc/TrayIconService C#-built strings) -->
+    <sys:String x:Key="Str_Tray_Tooltip_Stopped">Keryx Node Manager — tout est arrêté</sys:String>
+    <sys:String x:Key="Str_Tray_Tooltip_Starting">Keryx Node Manager — démarrage...</sys:String>
+    <sys:String x:Key="Str_Tray_Tooltip_Running">Keryx Node Manager — en cours d'exécution</sys:String>
+    <sys:String x:Key="Str_Tray_Tooltip_Error">Keryx Node Manager — erreur</sys:String>
+    <sys:String x:Key="Str_Tray_Tooltip_InferenceActive">Keryx Node Manager — traitement d'une requête d'inférence</sys:String>
+    <sys:String x:Key="Str_Tray_Menu_Open">Ouvrir Keryx Node Manager</sys:String>
+    <sys:String x:Key="Str_Tray_Menu_RestartMiner">Redémarrer le mineur</sys:String>
+    <sys:String x:Key="Str_Tray_Menu_RestartNode">Redémarrer le nœud</sys:String>
+    <sys:String x:Key="Str_Tray_Menu_OpenLogs">Ouvrir les journaux</sys:String>
+    <sys:String x:Key="Str_Tray_Menu_Exit">Quitter</sys:String>
+    <sys:String x:Key="Str_Tray_ExitConfirm_Title">Quitter Keryx Node Manager</sys:String>
+    <sys:String x:Key="Str_Tray_ExitConfirm_Body">Arrêter le nœud et le mineur avant de quitter ?
+
+Oui — tout arrêter et fermer l'application.
+Non — fermer uniquement l'interface ; le nœud et le mineur continueront de fonctionner.
+Annuler — ne pas quitter.</sys:String>
+
+    <!-- PlaceholderView (stub-page notice, C#-built string) -->
+    <sys:String x:Key="Str_Placeholder_NotImplemented">« {0} » n'est pas encore implémenté dans cette build</sys:String>
+    <sys:String x:Key="Str_Placeholder_SeeStatus">Voir PROJECT_STATUS.md — section « In progress »/« Next steps ».</sys:String>
+
+    <!-- DataDirSectionViewModel (Node page data-dir download card) -->
+    <sys:String x:Key="Str_DataDir_BrowseDialog_Title">Sélectionnez le dossier de données du nœud (data dir)</sys:String>
+    <sys:String x:Key="Str_DataDir_InvalidUrl">Indiquez un lien valide vers une archive (.zip) ou un fichier .torrent.</sys:String>
+    <sys:String x:Key="Str_DataDir_StartingDownload">Démarrage du téléchargement ({0})...</sys:String>
+    <sys:String x:Key="Str_DataDir_DownloadComplete">Terminé. Données extraites dans « {0} » - au prochain démarrage, le nœud utilisera ce dossier (--appdir).</sys:String>
+    <sys:String x:Key="Str_DataDir_DownloadFailed">Échec du téléchargement/de l'extraction du data dir : {0}</sys:String>
+
+    <!-- GpuViewModel (mode dropdown labels, assignment summary) -->
+    <sys:String x:Key="Str_Gpu_MiningDisabledManually">{0} : le minage sur ce GPU est désactivé manuellement.</sys:String>
+    <sys:String x:Key="Str_Gpu_Mode_Auto">Auto</sys:String>
+    <sys:String x:Key="Str_Gpu_Mode_Disabled">Désactivé</sys:String>
+    <sys:String x:Key="Str_Gpu_Mode_ManualPrefix">Manuel : {0}</sys:String>
+
+    <!-- LogsViewModel (diagnostics export dialog/status) -->
+    <sys:String x:Key="Str_Logs_ExportDialog_Title">Exporter le diagnostic</sys:String>
+    <sys:String x:Key="Str_Logs_ExportDialog_Filter">Archive ZIP (*.zip)|*.zip</sys:String>
+    <sys:String x:Key="Str_Logs_ExportSaved">Diagnostic enregistré : {0}</sys:String>
+    <sys:String x:Key="Str_Logs_ExportFailed">Échec de l'export : {0}</sys:String>
+
+    <!-- DashboardViewModel / App.xaml.cs (status labels, launch messages) -->
+    <sys:String x:Key="Str_Dashboard_NodeStatus_Stopped">Arrêté</sys:String>
+    <sys:String x:Key="Str_Dashboard_NodeStatus_Running">En cours d'exécution</sys:String>
+    <sys:String x:Key="Str_Dashboard_MinerStatus_Stopped">Arrêté</sys:String>
+    <sys:String x:Key="Str_Dashboard_MinerStatus_Running">En cours d'exécution</sys:String>
+    <sys:String x:Key="Str_Dashboard_LogPrefix_Node">[Nœud] {0}</sys:String>
+    <sys:String x:Key="Str_Dashboard_LogPrefix_Miner">[Mineur] {0}</sys:String>
+    <sys:String x:Key="Str_Dashboard_LogPrefix_Safety">[Protection] {0}</sys:String>
+    <sys:String x:Key="Str_Dashboard_MissingNodePath">Indiquez le chemin vers keryxd.exe sur la page « Nœud » avant de démarrer.</sys:String>
+    <sys:String x:Key="Str_Dashboard_MissingMiningAddress">Indiquez la mining address sur la page « Mineur » avant de démarrer.</sys:String>
+    <sys:String x:Key="Str_Dashboard_LaunchInitiated">Démarrage lancé.</sys:String>
+    <sys:String x:Key="Str_Dashboard_LaunchFailed">Échec du démarrage : {0}</sys:String>
+    <sys:String x:Key="Str_Dashboard_StoppedForOverheat">Minage arrêté automatiquement en raison d'une surchauffe du GPU.</sys:String>
+    <sys:String x:Key="Str_Dashboard_GpuQueryFailedBeforeLaunch">Impossible de déterminer les GPU avant le démarrage ({0}) ; la sélection automatique du modèle par le mineur lui-même sera utilisée.</sys:String>
+    <sys:String x:Key="Str_App_AlreadyRunningUnreachable">Keryx Node Manager est déjà en cours d'exécution, mais il n'a pas pu être contacté. Vérifiez la zone de notification système.</sys:String>
+
+    <!-- NodeViewModel (executable browse dialog, endpoint check) -->
+    <sys:String x:Key="Str_Node_BrowseDialog_Title">Sélectionnez keryxd.exe</sys:String>
+    <sys:String x:Key="Str_Node_BrowseDialog_Filter">keryxd.exe|keryxd.exe|Fichiers exécutables (*.exe)|*.exe</sys:String>
+    <sys:String x:Key="Str_Node_SettingsSaved">Paramètres du nœud enregistrés.</sys:String>
+    <sys:String x:Key="Str_Node_CheckingEndpoint">Vérification de {0}:{1}...</sys:String>
+    <sys:String x:Key="Str_Node_EndpointAccepting">Le endpoint {0}:{1} accepte les connexions.</sys:String>
+    <sys:String x:Key="Str_Node_EndpointNotResponding">Le endpoint {0}:{1} ne répond pas (délai de 3s dépassé). Le nœud n'est pas démarré ou le port est incorrect.</sys:String>
+    <sys:String x:Key="Str_Node_ConnectFailed">Échec de la connexion à {0}:{1} : {2}</sys:String>
+
+    <!-- MinerViewModel (executable/models dialogs, address validation, preview) -->
+    <sys:String x:Key="Str_Miner_BrowseExecutable_Title">Sélectionnez keryx-miner.exe</sys:String>
+    <sys:String x:Key="Str_Miner_BrowseExecutable_Filter">keryx-miner.exe|keryx-miner.exe|Fichiers exécutables (*.exe)|*.exe</sys:String>
+    <sys:String x:Key="Str_Miner_BrowseModelsDir_Title">Sélectionnez le dossier des modèles</sys:String>
+    <sys:String x:Key="Str_Miner_InvalidAddress">Cela ne ressemble pas à une adresse Keryx valide (attendu : keryx:... ou keryxtest:...).</sys:String>
+    <sys:String x:Key="Str_Miner_SettingsSaved">Paramètres du mineur enregistrés.</sys:String>
+    <sys:String x:Key="Str_Miner_CommandPreviewError">(impossible de construire la commande : {0})</sys:String>
+
+    <!-- ProfilesViewModel (profile list summaries, switch/create/rename/delete status) -->
+    <sys:String x:Key="Str_Profiles_NoAddress">aucune adresse définie</sys:String>
+    <sys:String x:Key="Str_Profiles_GpuAuto">GPU : auto</sys:String>
+    <sys:String x:Key="Str_Profiles_GpuAssignedCount">GPU assignés : {0}</sys:String>
+    <sys:String x:Key="Str_Profiles_ActiveProfile">Profil actif : « {0} ».</sys:String>
+    <sys:String x:Key="Str_Profiles_SwitchFailed">Échec du changement de profil : {0}</sys:String>
+    <sys:String x:Key="Str_Profiles_Created">Profil « {0} » créé et activé.</sys:String>
+    <sys:String x:Key="Str_Profiles_CreateFailed">Échec de la création du profil : {0}</sys:String>
+    <sys:String x:Key="Str_Profiles_Renamed">Profil « {0} » renommé en « {1} ».</sys:String>
+    <sys:String x:Key="Str_Profiles_RenameFailed">Échec du renommage du profil : {0}</sys:String>
+    <sys:String x:Key="Str_Profiles_Deleted">Profil « {0} » supprimé.</sys:String>
+    <sys:String x:Key="Str_Profiles_DeleteFailed">Échec de la suppression du profil : {0}</sys:String>
+
+    <!-- SettingsViewModel (autostart status/errors) -->
+    <sys:String x:Key="Str_Settings_CheckAutostartFailed">Impossible de vérifier l'état du démarrage automatique : {0}</sys:String>
+    <sys:String x:Key="Str_Settings_ExePathNotFound">Impossible de déterminer le chemin de l'exécutable.</sys:String>
+    <sys:String x:Key="Str_Settings_AutostartEnabled">Démarrage automatique activé : l'application démarrera à la prochaine connexion à Windows.</sys:String>
+    <sys:String x:Key="Str_Settings_AutostartDisabled">Démarrage automatique désactivé.</sys:String>
+    <sys:String x:Key="Str_Settings_AutostartChangeFailed">Échec de la modification du démarrage automatique : {0}</sys:String>
+    <sys:String x:Key="Str_Settings_SavedGeneric">Paramètres enregistrés.</sys:String>
+
+    <!-- BinaryUpdateSectionViewModel (check/install update status) -->
+    <sys:String x:Key="Str_Update_NoWindowsArchive">La version {0} est disponible, mais cette version ne contient pas d'archive Windows (win64-amd64.zip).</sys:String>
+    <sys:String x:Key="Str_Update_Available">Mise à jour disponible : {0}.</sys:String>
+    <sys:String x:Key="Str_Update_UpToDate">La dernière version est déjà installée.</sys:String>
+    <sys:String x:Key="Str_Update_CheckFailed">Échec de la vérification des mises à jour : {0}</sys:String>
+    <sys:String x:Key="Str_Update_Installed">Mis à jour vers {0}.</sys:String>
+    <sys:String x:Key="Str_Update_FileLocked">Échec du remplacement du fichier - le processus semble encore en cours d'exécution. Arrêtez-le sur la page Dashboard et réessayez. ({0})</sys:String>
+    <sys:String x:Key="Str_Update_InstallError">Erreur de mise à jour : {0}</sys:String>
+
+    <!-- GpuOverclockSectionViewModel (apply/reset confirm dialogs, status) -->
+    <sys:String x:Key="Str_Overclock_CriticalTemp">« {0} » est actuellement à une température critique — l'overclock ne sera pas appliqué tant que la carte n'aura pas refroidi sous le seuil.</sys:String>
+    <sys:String x:Key="Str_Overclock_FanManual">
+Ventilateur : {0} % (mode manuel)</sys:String>
+    <sys:String x:Key="Str_Overclock_FanAuto">
+Ventilateur : automatique (aucun changement)</sys:String>
+    <sys:String x:Key="Str_Overclock_ApplyConfirm_Body">Appliquer l'overclock à « {0} » ?
+
+Cœur : {1} MHz
+Mémoire : {2} MHz{3}
+
+Modifier les fréquences et/ou le ventilateur du GPU est une opération potentiellement risquée : des valeurs incorrectes peuvent entraîner une instabilité du pilote, des blocages ou une surchauffe. Continuer ?</sys:String>
+    <sys:String x:Key="Str_Overclock_ApplyConfirm_Title">Overclock du GPU</sys:String>
+    <sys:String x:Key="Str_Overclock_Applied">Overclock appliqué.</sys:String>
+    <sys:String x:Key="Str_Overclock_ResetConfirm_Body">Réinitialiser l'overclock de « {0} » aux paramètres d'usine (0 MHz, ventilateur automatique) ?</sys:String>
+    <sys:String x:Key="Str_Overclock_ResetConfirm_Title">Réinitialiser l'overclock</sys:String>
+    <sys:String x:Key="Str_Overclock_ResetDone">Réinitialisé aux paramètres d'usine.</sys:String>
+
+    <!-- PublicNodeListViewModel (discovery/ping/switch status messages) -->
+    <sys:String x:Key="Str_PublicNodes_EmptyList">La liste est vide. Si vous avez un lien vers une liste publique de nœuds, indiquez-le ci-dessus, ou cliquez sur « Rechercher via votre propre nœud ».</sys:String>
+    <sys:String x:Key="Str_PublicNodes_LoadedCount">Nœuds chargés : {0}.</sys:String>
+    <sys:String x:Key="Str_PublicNodes_LoadFailed">Échec du chargement de la liste des nœuds : {0}</sys:String>
+    <sys:String x:Key="Str_PublicNodes_NoNewPeersFromOwnNode">Votre nœud n'a signalé aucun nouveau pair (il n'est peut-être pas encore connecté à quiconque, ou la liste les contient déjà).</sys:String>
+    <sys:String x:Key="Str_PublicNodes_AddedPeersFromOwnNode">{0} pair(s) découvert(s) via le RPC de votre nœud ont été ajoutés.</sys:String>
+    <sys:String x:Key="Str_PublicNodes_DiscoverFromOwnNodeFailed">Échec de la récupération des pairs depuis votre propre nœud - vérifiez qu'il est en cours d'exécution. ({0})</sys:String>
+    <sys:String x:Key="Str_PublicNodes_NoNewPeersFromNode">Le nœud « {0} » n'a signalé aucun nouveau pair, ou son port RPC est inaccessible.</sys:String>
+    <sys:String x:Key="Str_PublicNodes_AddedPeersFromNode">{0} pair(s) découvert(s) via le RPC du nœud « {1} » ont été ajoutés.</sys:String>
+    <sys:String x:Key="Str_PublicNodes_DiscoverThroughNodeFailed">Échec de la récupération des pairs depuis « {0} » - son port RPC est probablement fermé vers l'extérieur (c'est normal, la plupart des opérateurs ne l'ouvrent pas). ({1})</sys:String>
+    <sys:String x:Key="Str_PublicNodes_UptimeNoteSuffix"> · disponibilité déclarée par l'opérateur : {0} %</sys:String>
+    <sys:String x:Key="Str_PublicNodes_Reachable">En ligne · {0} ms{1}</sys:String>
+    <sys:String x:Key="Str_PublicNodes_Unreachable">Inaccessible ({0}){1}</sys:String>
+    <sys:String x:Key="Str_PublicNodes_SavedLocallyNote">Enregistré localement après une vérification d'accessibilité réussie.</sys:String>
+    <sys:String x:Key="Str_PublicNodes_NodeSelected">Nœud « {0} » ({1}:{2}) sélectionné pour la connexion. Le démarrage automatique du nœud local a été désactivé - vous pouvez toujours le réactiver depuis cette page.</sys:String>
+    <sys:String x:Key="Str_PublicNodes_SwitchedBackToOwn">Reconnecté à votre propre nœud.</sys:String>
+    <sys:String x:Key="Str_PublicNodes_AutoSwitchedBackSynced">Votre nœud a terminé sa synchronisation - reconnecté automatiquement à celui-ci.</sys:String>
+
+    <!-- ModelsViewModel / ModelCardViewModel (download status, delete confirm, sizes) -->
+    <sys:String x:Key="Str_Models_NoModelsDirConfigured">Indiquez le dossier des modèles sur la page « Mineur » pour gérer les fichiers ici.</sys:String>
+    <sys:String x:Key="Str_Models_Installed">Installé ({0}).</sys:String>
+    <sys:String x:Key="Str_Models_DownloadPaused">Téléchargement en pause ({0} reçus).</sys:String>
+    <sys:String x:Key="Str_Models_NotInstalled">Non installé. Le modèle sera également téléchargé automatiquement par le mineur via IPFS au premier démarrage - cette page ne sert qu'au préchargement manuel.</sys:String>
+    <sys:String x:Key="Str_Models_SetModelsDirFirst">Indiquez d'abord le dossier des modèles sur la page « Mineur ».</sys:String>
+    <sys:String x:Key="Str_Models_InvalidUrl">L'URL doit être un lien complet http:// ou https://.</sys:String>
+    <sys:String x:Key="Str_Models_DownloadingWithTotal">Téléchargement... {0} % ({1} sur {2})</sys:String>
+    <sys:String x:Key="Str_Models_DownloadingNoTotal">Téléchargement... {0} % ({1})</sys:String>
+    <sys:String x:Key="Str_Models_DownloadingUnknownTotal">Téléchargement... {0} (taille totale inconnue)</sys:String>
+    <sys:String x:Key="Str_Models_DownloadComplete">Téléchargement terminé.</sys:String>
+    <sys:String x:Key="Str_Models_DownloadPausedByUser">Téléchargement en pause - cliquez sur « Reprendre » pour continuer à partir du même point.</sys:String>
+    <sys:String x:Key="Str_Models_DownloadError">Erreur de téléchargement : {0}</sys:String>
+    <sys:String x:Key="Str_Models_OfficialProgressWithTotal">{0} {1} % ({2} sur {3})</sys:String>
+    <sys:String x:Key="Str_Models_OfficialProgressNoTotal">{0} {1}</sys:String>
+    <sys:String x:Key="Str_Models_DownloadCancelled">Téléchargement annulé.</sys:String>
+    <sys:String x:Key="Str_Models_DeleteConfirm_Body">Supprimer le modèle « {0} » ? Le fichier sera supprimé définitivement du disque.</sys:String>
+    <sys:String x:Key="Str_Models_DeleteConfirm_Title">Supprimer le modèle</sys:String>
+    <sys:String x:Key="Str_Models_SizeGb">{0} Go</sys:String>
+    <sys:String x:Key="Str_Models_SizeMb">{0} Mo</sys:String>
+    <sys:String x:Key="Str_Models_SizeKb">{0} Ko</sys:String>
+    <sys:String x:Key="Str_Models_TotalDiskUsage">Modèles installés : {0}, espace disque utilisé : {1}.</sys:String>
+
+    <!-- WizardViewModel (step header, profile create, address/GPU checks) -->
+    <sys:String x:Key="Str_Wizard_StepHeader">Étape {0} sur {1}</sys:String>
+    <sys:String x:Key="Str_Wizard_EnterProfileName">Saisissez un nom pour le nouveau profil.</sys:String>
+    <sys:String x:Key="Str_Wizard_ProfileCreated">Profil « {0} » créé et activé - l'assistant le configure maintenant.</sys:String>
+    <sys:String x:Key="Str_Wizard_ProfileCreateFailed">Échec de la création du profil : {0}</sys:String>
+    <sys:String x:Key="Str_Wizard_InvalidAddress">Cela ne ressemble pas à une adresse Keryx valide (attendu : keryx:... ou keryxtest:...). L'assistant vous permet de continuer, mais le nœud refusera le minage avec une adresse invalide.</sys:String>
+    <sys:String x:Key="Str_Wizard_NoGpuDetected">Aucun GPU NVIDIA détecté.</sys:String>
 </ResourceDictionary>

@@ -80,7 +80,7 @@ public partial class WizardViewModel : ObservableObject
     private bool _isNotLastStep = true;
 
     [ObservableProperty]
-    private string _stepHeader = $"Шаг 1 из {StepCount}";
+    private string _stepHeader = AppStrings.Format("Str_Wizard_StepHeader", 1, StepCount);
 
     [ObservableProperty]
     private bool _isRunningChecks;
@@ -202,7 +202,7 @@ public partial class WizardViewModel : ObservableObject
         IsStep5Autostart = value == 5;
         IsStep6Finish = value == 6;
         IsNotLastStep = value != 6;
-        StepHeader = $"Шаг {value + 1} из {StepCount}";
+        StepHeader = AppStrings.Format("Str_Wizard_StepHeader", value + 1, StepCount);
 
         NextCommand.NotifyCanExecuteChanged();
         BackCommand.NotifyCanExecuteChanged();
@@ -260,7 +260,7 @@ public partial class WizardViewModel : ObservableObject
         var name = NewProfileNameInput.Trim();
         if (string.IsNullOrWhiteSpace(name))
         {
-            CreateProfileMessage = "Введите имя нового профиля.";
+            CreateProfileMessage = AppStrings.Get("Str_Wizard_EnterProfileName");
             return;
         }
         try
@@ -279,11 +279,11 @@ public partial class WizardViewModel : ObservableObject
             AddressValidationMessage = null;
             OnPropertyChanged(nameof(Profile));
 
-            CreateProfileMessage = $"Профиль «{name}» создан и стал активным — мастер теперь настраивает именно его.";
+            CreateProfileMessage = AppStrings.Format("Str_Wizard_ProfileCreated", name);
         }
         catch (Exception ex)
         {
-            CreateProfileMessage = $"Не удалось создать профиль: {ex.Message}";
+            CreateProfileMessage = AppStrings.Format("Str_Wizard_ProfileCreateFailed", ex.Message);
         }
     }
 
@@ -292,8 +292,7 @@ public partial class WizardViewModel : ObservableObject
     {
         AddressValidationMessage = KeryxAddressValidator.LooksValid(Profile.MiningAddress)
             ? null
-            : "Адрес не похож на действительный Keryx-адрес (ожидается keryx:... или keryxtest:...). " +
-              "Мастер позволяет продолжить, но запуск майнинга с неверным адресом будет отклонён узлом.";
+            : AppStrings.Get("Str_Wizard_InvalidAddress");
     }
 
     /// <summary>Fires automatically the first time step 2 is shown (see
@@ -347,7 +346,7 @@ public partial class WizardViewModel : ObservableObject
             }
             if (devices.Count == 0)
             {
-                GpuPreview.Add(new WizardGpuPreviewRow("—", "Видеокарты NVIDIA не обнаружены."));
+                GpuPreview.Add(new WizardGpuPreviewRow("—", AppStrings.Get("Str_Wizard_NoGpuDetected")));
             }
         }
         catch (GpuQueryException ex)
@@ -361,8 +360,8 @@ public partial class WizardViewModel : ObservableObject
     {
         var dialog = new OpenFileDialog
         {
-            Title = "Выберите keryxd.exe",
-            Filter = "keryxd.exe|keryxd.exe|Исполняемые файлы (*.exe)|*.exe",
+            Title = AppStrings.Get("Str_Node_BrowseDialog_Title"),
+            Filter = AppStrings.Get("Str_Node_BrowseDialog_Filter"),
         };
         if (dialog.ShowDialog() == true)
         {
@@ -375,8 +374,8 @@ public partial class WizardViewModel : ObservableObject
     {
         var dialog = new OpenFileDialog
         {
-            Title = "Выберите keryx-miner.exe",
-            Filter = "keryx-miner.exe|keryx-miner.exe|Исполняемые файлы (*.exe)|*.exe",
+            Title = AppStrings.Get("Str_Miner_BrowseExecutable_Title"),
+            Filter = AppStrings.Get("Str_Miner_BrowseExecutable_Filter"),
         };
         if (dialog.ShowDialog() == true)
         {
@@ -387,7 +386,7 @@ public partial class WizardViewModel : ObservableObject
     [RelayCommand]
     private void BrowseModelsDirectory()
     {
-        var dialog = new OpenFolderDialog { Title = "Выберите папку для моделей" };
+        var dialog = new OpenFolderDialog { Title = AppStrings.Get("Str_Miner_BrowseModelsDir_Title") };
         if (dialog.ShowDialog() == true)
         {
             ModelsDirectoryInput = dialog.FolderName; // partial handler validates + writes through

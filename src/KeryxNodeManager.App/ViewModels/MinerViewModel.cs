@@ -91,8 +91,8 @@ public partial class MinerViewModel : ObservableObject
     {
         var dialog = new OpenFileDialog
         {
-            Title = "Выберите keryx-miner.exe",
-            Filter = "keryx-miner.exe|keryx-miner.exe|Исполняемые файлы (*.exe)|*.exe",
+            Title = AppStrings.Get("Str_Miner_BrowseExecutable_Title"),
+            Filter = AppStrings.Get("Str_Miner_BrowseExecutable_Filter"),
         };
         if (dialog.ShowDialog() == true)
         {
@@ -106,7 +106,7 @@ public partial class MinerViewModel : ObservableObject
     {
         // .NET 8's native folder picker (Microsoft.Win32.OpenFolderDialog) - avoids pulling in
         // System.Windows.Forms just for one dialog (see KeryxNodeManager.App.csproj comment).
-        var dialog = new OpenFolderDialog { Title = "Выберите папку для моделей" };
+        var dialog = new OpenFolderDialog { Title = AppStrings.Get("Str_Miner_BrowseModelsDir_Title") };
         if (dialog.ShowDialog() == true)
         {
             var validation = PathValidator.Validate(dialog.FolderName);
@@ -125,7 +125,7 @@ public partial class MinerViewModel : ObservableObject
     {
         AddressValidationMessage = KeryxAddressValidator.LooksValid(Profile.MiningAddress)
             ? null
-            : "Адрес не похож на действительный Keryx-адрес (ожидается keryx:... или keryxtest:...).";
+            : AppStrings.Get("Str_Miner_InvalidAddress");
     }
 
     [RelayCommand]
@@ -136,7 +136,7 @@ public partial class MinerViewModel : ObservableObject
             .Split(' ', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries)
             .ToList();
         await _profileStore.SaveAsync();
-        StatusMessage = "Настройки майнера сохранены.";
+        StatusMessage = AppStrings.Get("Str_Miner_SettingsSaved");
         await RefreshPreviewAsync();
     }
 
@@ -168,7 +168,7 @@ public partial class MinerViewModel : ObservableObject
         }
         catch (InvalidOperationException ex)
         {
-            CommandPreview = $"(нельзя построить команду: {ex.Message})";
+            CommandPreview = AppStrings.Format("Str_Miner_CommandPreviewError", ex.Message);
         }
     }
 

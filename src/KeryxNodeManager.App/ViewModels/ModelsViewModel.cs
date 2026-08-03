@@ -123,7 +123,7 @@ public partial class ModelCardViewModel : ObservableObject
         var modelsDir = _profileStore.ActiveProfile.ModelsDirectory;
         if (string.IsNullOrWhiteSpace(modelsDir))
         {
-            StatusText = "Укажите папку моделей на странице «Майнер», чтобы управлять файлами здесь.";
+            StatusText = AppStrings.Get("Str_Models_NoModelsDirConfigured");
             IsInstalled = false;
             HasPausedDownload = false;
             StateChanged?.Invoke();
@@ -136,18 +136,17 @@ public partial class ModelCardViewModel : ObservableObject
         if (IsInstalled)
         {
             var sizeBytes = ModelFileLocator.GetInstalledSizeBytes(modelsDir, Spec.DirName) ?? 0;
-            StatusText = $"Установлена ({FormatSize(sizeBytes)}).";
+            StatusText = AppStrings.Format("Str_Models_Installed", FormatSize(sizeBytes));
             ProgressPercent = 100;
         }
         else if (HasPausedDownload)
         {
             var partialBytes = new FileInfo(ModelFileLocator.GetPartialPath(modelsDir, Spec.DirName)).Length;
-            StatusText = $"Скачивание приостановлено ({FormatSize(partialBytes)} получено).";
+            StatusText = AppStrings.Format("Str_Models_DownloadPaused", FormatSize(partialBytes));
         }
         else if (!IsDownloading)
         {
-            StatusText = "Не установлена. Модель также будет скачана автоматически майнером по IPFS " +
-                         "при первом запуске - эта страница нужна только для ручной предзагрузки.";
+            StatusText = AppStrings.Get("Str_Models_NotInstalled");
         }
 
         StateChanged?.Invoke();
@@ -172,13 +171,13 @@ public partial class ModelCardViewModel : ObservableObject
         var modelsDir = _profileStore.ActiveProfile.ModelsDirectory;
         if (string.IsNullOrWhiteSpace(modelsDir))
         {
-            StatusText = "Сначала укажите папку моделей на странице «Майнер».";
+            StatusText = AppStrings.Get("Str_Models_SetModelsDirFirst");
             return;
         }
         if (!Uri.TryCreate(SourceUrl.Trim(), UriKind.Absolute, out var uri) ||
             (uri.Scheme != Uri.UriSchemeHttp && uri.Scheme != Uri.UriSchemeHttps))
         {
-            StatusText = "URL должен быть полной ссылкой http:// или https://.";
+            StatusText = AppStrings.Get("Str_Models_InvalidUrl");
             return;
         }
 
@@ -197,24 +196,25 @@ public partial class ModelCardViewModel : ObservableObject
             {
                 ProgressIsIndeterminate = false;
                 ProgressPercent = pct;
-                StatusText = $"Скачивание... {pct:F1}% ({FormatSize(p.BytesReceived)}" +
-                             (p.TotalBytes is long total ? $" из {FormatSize(total)})" : ")");
+                StatusText = p.TotalBytes is long total
+                    ? AppStrings.Format("Str_Models_DownloadingWithTotal", pct.ToString("F1"), FormatSize(p.BytesReceived), FormatSize(total))
+                    : AppStrings.Format("Str_Models_DownloadingNoTotal", pct.ToString("F1"), FormatSize(p.BytesReceived));
             }
             else
             {
                 ProgressIsIndeterminate = true;
-                StatusText = $"Скачивание... {FormatSize(p.BytesReceived)} (общий размер неизвестен)";
+                StatusText = AppStrings.Format("Str_Models_DownloadingUnknownTotal", FormatSize(p.BytesReceived));
             }
         });
 
         try
         {
             await _downloader.DownloadAsync(uri, destination, progress, _cts.Token, expected);
-            StatusText = "Скачивание завершено.";
+            StatusText = AppStrings.Get("Str_Models_DownloadComplete");
         }
         catch (OperationCanceledException)
         {
-            StatusText = "Скачивание приостановлено - нажмите «Продолжить», чтобы возобновить с той же точки.";
+            StatusText = AppStrings.Get("Str_Models_DownloadPausedByUser");
         }
         catch (ModelChecksumMismatchException ex)
         {
@@ -222,7 +222,7 @@ public partial class ModelCardViewModel : ObservableObject
         }
         catch (Exception ex)
         {
-            StatusText = $"Ошибка скачивания: {ex.Message}";
+            StatusText = AppStrings.Format("Str_Models_DownloadError", ex.Message);
         }
         finally
         {
@@ -265,12 +265,12 @@ public partial class ModelCardViewModel : ObservableObject
             {
                 ProgressIsIndeterminate = false;
                 ProgressPercent = 100.0 * p.BytesReceived / total;
-                StatusText = $"{p.Phase} {ProgressPercent:F1}% ({FormatSize(p.BytesReceived)} из {FormatSize(total)})";
+                StatusText = AppStrings.Format("Str_Models_OfficialProgressWithTotal", p.Phase, ProgressPercent.ToString("F1"), FormatSize(p.BytesReceived), FormatSize(total));
             }
             else
             {
                 ProgressIsIndeterminate = true;
-                StatusText = $"{p.Phase} {FormatSize(p.BytesReceived)}";
+                StatusText = AppStrings.Format("Str_Models_OfficialProgressNoTotal", p.Phase, FormatSize(p.BytesReceived));
             }
         });
 
@@ -281,11 +281,11 @@ public partial class ModelCardViewModel : ObservableObject
             // direct HTTP URL for tiers with no torrent (currently just VeryLight).
             var source = mirror.TorrentUrl ?? mirror.DirectUrl;
             await _officialDownloader.DownloadAndInstallAsync(Spec, source, modelsDir, progress, _cts.Token);
-            StatusText = "Скачивание завершено.";
+            StatusText = AppStrings.Get("Str_Models_DownloadComplete");
         }
         catch (OperationCanceledException)
         {
-            StatusText = "Скачивание отменено.";
+            StatusText = AppStrings.Get("Str_Models_DownloadCancelled");
         }
         catch (OfficialModelDownloadException ex)
         {
@@ -293,7 +293,7 @@ public partial class ModelCardViewModel : ObservableObject
         }
         catch (Exception ex)
         {
-            StatusText = $"Ошибка скачивания: {ex.Message}";
+            StatusText = AppStrings.Format("Str_Models_DownloadError", ex.Message);
         }
         finally
         {
@@ -337,8 +337,8 @@ public partial class ModelCardViewModel : ObservableObject
         // MessageBox.Show(...YesNo...) pattern TrayIconService already uses for its own
         // close-vs-minimize confirmation, rather than inventing a second UI convention.
         var result = MessageBox.Show(
-            $"Удалить модель «{Spec.Name}»? Файл будет удалён с диска безвозвратно.",
-            "Удаление модели",
+            AppStrings.Format("Str_Models_DeleteConfirm_Body", Spec.Name),
+            AppStrings.Get("Str_Models_DeleteConfirm_Title"),
             MessageBoxButton.YesNo,
             MessageBoxImage.Warning);
         if (result != MessageBoxResult.Yes) return;
@@ -362,9 +362,9 @@ public partial class ModelCardViewModel : ObservableObject
     internal static string FormatSize(long bytes)
     {
         double mb = bytes / (1024.0 * 1024.0);
-        if (mb >= 1024) return $"{mb / 1024:F2} ГБ";
-        if (mb >= 1) return $"{mb:F0} МБ";
-        return $"{bytes / 1024.0:F0} КБ"; // sub-1MB (e.g. a test download) - "0 МБ" would misleadingly read as empty
+        if (mb >= 1024) return AppStrings.Format("Str_Models_SizeGb", (mb / 1024).ToString("F2"));
+        if (mb >= 1) return AppStrings.Format("Str_Models_SizeMb", mb.ToString("F0"));
+        return AppStrings.Format("Str_Models_SizeKb", (bytes / 1024.0).ToString("F0")); // sub-1MB (e.g. a test download) - "0 MB" would misleadingly read as empty
     }
 }
 
@@ -427,6 +427,6 @@ public partial class ModelsViewModel : ObservableObject
 
         TotalDiskUsageText = installedCount == 0
             ? ""
-            : $"Установлено моделей: {installedCount}, занято на диске: {ModelCardViewModel.FormatSize(totalBytes)}.";
+            : AppStrings.Format("Str_Models_TotalDiskUsage", installedCount, ModelCardViewModel.FormatSize(totalBytes));
     }
 }

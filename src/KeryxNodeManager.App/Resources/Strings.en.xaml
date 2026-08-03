@@ -152,4 +152,175 @@
     <sys:String x:Key="Str_Wizard_Next">Next</sys:String>
     <sys:String x:Key="Str_Wizard_Finish">Finish</sys:String>
 
+
+    <!-- Tray icon (SingleInstanceIpc/TrayIconService C#-built strings) -->
+    <sys:String x:Key="Str_Tray_Tooltip_Stopped">Keryx Node Manager - all stopped</sys:String>
+    <sys:String x:Key="Str_Tray_Tooltip_Starting">Keryx Node Manager - starting...</sys:String>
+    <sys:String x:Key="Str_Tray_Tooltip_Running">Keryx Node Manager - running</sys:String>
+    <sys:String x:Key="Str_Tray_Tooltip_Error">Keryx Node Manager - error</sys:String>
+    <sys:String x:Key="Str_Tray_Tooltip_InferenceActive">Keryx Node Manager - processing inference request</sys:String>
+    <sys:String x:Key="Str_Tray_Menu_Open">Open Keryx Node Manager</sys:String>
+    <sys:String x:Key="Str_Tray_Menu_RestartMiner">Restart miner</sys:String>
+    <sys:String x:Key="Str_Tray_Menu_RestartNode">Restart node</sys:String>
+    <sys:String x:Key="Str_Tray_Menu_OpenLogs">Open logs</sys:String>
+    <sys:String x:Key="Str_Tray_Menu_Exit">Exit</sys:String>
+    <sys:String x:Key="Str_Tray_ExitConfirm_Title">Exit Keryx Node Manager</sys:String>
+    <sys:String x:Key="Str_Tray_ExitConfirm_Body">Stop the node and miner before exiting?
+
+Yes - stop everything and close the application.
+No - close only the interface; the node and miner will keep running.
+Cancel - don't exit.</sys:String>
+
+    <!-- PlaceholderView (stub-page notice, C#-built string) -->
+    <sys:String x:Key="Str_Placeholder_NotImplemented">&quot;{0}&quot; is not implemented in this build yet</sys:String>
+    <sys:String x:Key="Str_Placeholder_SeeStatus">See PROJECT_STATUS.md - the &quot;In progress&quot;/&quot;Next steps&quot; section.</sys:String>
+
+    <!-- DataDirSectionViewModel (Node page data-dir download card) -->
+    <sys:String x:Key="Str_DataDir_BrowseDialog_Title">Select the node data folder (data dir)</sys:String>
+    <sys:String x:Key="Str_DataDir_InvalidUrl">Enter a valid link to an archive (.zip) or a .torrent file.</sys:String>
+    <sys:String x:Key="Str_DataDir_StartingDownload">Starting download ({0})...</sys:String>
+    <sys:String x:Key="Str_DataDir_DownloadComplete">Done. Data extracted to "{0}" - the node will use this directory on the next launch (--appdir).</sys:String>
+    <sys:String x:Key="Str_DataDir_DownloadFailed">Failed to download/extract the data dir: {0}</sys:String>
+
+    <!-- GpuViewModel (mode dropdown labels, assignment summary) -->
+    <sys:String x:Key="Str_Gpu_MiningDisabledManually">{0}: mining on this GPU is manually disabled.</sys:String>
+    <sys:String x:Key="Str_Gpu_Mode_Auto">Auto</sys:String>
+    <sys:String x:Key="Str_Gpu_Mode_Disabled">Disabled</sys:String>
+    <sys:String x:Key="Str_Gpu_Mode_ManualPrefix">Manual: {0}</sys:String>
+
+    <!-- LogsViewModel (diagnostics export dialog/status) -->
+    <sys:String x:Key="Str_Logs_ExportDialog_Title">Export diagnostics</sys:String>
+    <sys:String x:Key="Str_Logs_ExportDialog_Filter">ZIP archive (*.zip)|*.zip</sys:String>
+    <sys:String x:Key="Str_Logs_ExportSaved">Diagnostics saved: {0}</sys:String>
+    <sys:String x:Key="Str_Logs_ExportFailed">Failed to export: {0}</sys:String>
+
+    <!-- DashboardViewModel / App.xaml.cs (status labels, launch messages) -->
+    <sys:String x:Key="Str_Dashboard_NodeStatus_Stopped">Stopped</sys:String>
+    <sys:String x:Key="Str_Dashboard_NodeStatus_Running">Running</sys:String>
+    <sys:String x:Key="Str_Dashboard_MinerStatus_Stopped">Stopped</sys:String>
+    <sys:String x:Key="Str_Dashboard_MinerStatus_Running">Running</sys:String>
+    <sys:String x:Key="Str_Dashboard_LogPrefix_Node">[Node] {0}</sys:String>
+    <sys:String x:Key="Str_Dashboard_LogPrefix_Miner">[Miner] {0}</sys:String>
+    <sys:String x:Key="Str_Dashboard_LogPrefix_Safety">[Protection] {0}</sys:String>
+    <sys:String x:Key="Str_Dashboard_MissingNodePath">Specify the path to keryxd.exe on the "Node" page before launching.</sys:String>
+    <sys:String x:Key="Str_Dashboard_MissingMiningAddress">Specify the mining address on the "Miner" page before launching.</sys:String>
+    <sys:String x:Key="Str_Dashboard_LaunchInitiated">Launch initiated.</sys:String>
+    <sys:String x:Key="Str_Dashboard_LaunchFailed">Failed to launch: {0}</sys:String>
+    <sys:String x:Key="Str_Dashboard_StoppedForOverheat">Mining stopped automatically due to GPU overheating.</sys:String>
+    <sys:String x:Key="Str_Dashboard_GpuQueryFailedBeforeLaunch">Could not determine the GPUs before launch ({0}); the miner's own auto-fit model selection will be used.</sys:String>
+    <sys:String x:Key="Str_App_AlreadyRunningUnreachable">Keryx Node Manager is already running, but it could not be reached. Check the system tray.</sys:String>
+
+    <!-- NodeViewModel (executable browse dialog, endpoint check) -->
+    <sys:String x:Key="Str_Node_BrowseDialog_Title">Select keryxd.exe</sys:String>
+    <sys:String x:Key="Str_Node_BrowseDialog_Filter">keryxd.exe|keryxd.exe|Executable files (*.exe)|*.exe</sys:String>
+    <sys:String x:Key="Str_Node_SettingsSaved">Node settings saved.</sys:String>
+    <sys:String x:Key="Str_Node_CheckingEndpoint">Checking {0}:{1}...</sys:String>
+    <sys:String x:Key="Str_Node_EndpointAccepting">Endpoint {0}:{1} is accepting connections.</sys:String>
+    <sys:String x:Key="Str_Node_EndpointNotResponding">Endpoint {0}:{1} is not responding (3s timeout). The node isn't running, or the port is wrong.</sys:String>
+    <sys:String x:Key="Str_Node_ConnectFailed">Failed to connect to {0}:{1}: {2}</sys:String>
+
+    <!-- MinerViewModel (executable/models dialogs, address validation, preview) -->
+    <sys:String x:Key="Str_Miner_BrowseExecutable_Title">Select keryx-miner.exe</sys:String>
+    <sys:String x:Key="Str_Miner_BrowseExecutable_Filter">keryx-miner.exe|keryx-miner.exe|Executable files (*.exe)|*.exe</sys:String>
+    <sys:String x:Key="Str_Miner_BrowseModelsDir_Title">Select the models folder</sys:String>
+    <sys:String x:Key="Str_Miner_InvalidAddress">This doesn't look like a valid Keryx address (expected keryx:... or keryxtest:...).</sys:String>
+    <sys:String x:Key="Str_Miner_SettingsSaved">Miner settings saved.</sys:String>
+    <sys:String x:Key="Str_Miner_CommandPreviewError">(cannot build the command: {0})</sys:String>
+
+    <!-- ProfilesViewModel (profile list summaries, switch/create/rename/delete status) -->
+    <sys:String x:Key="Str_Profiles_NoAddress">no address set</sys:String>
+    <sys:String x:Key="Str_Profiles_GpuAuto">GPU: auto</sys:String>
+    <sys:String x:Key="Str_Profiles_GpuAssignedCount">GPUs assigned: {0}</sys:String>
+    <sys:String x:Key="Str_Profiles_ActiveProfile">Active profile: "{0}".</sys:String>
+    <sys:String x:Key="Str_Profiles_SwitchFailed">Failed to switch profile: {0}</sys:String>
+    <sys:String x:Key="Str_Profiles_Created">Profile "{0}" created and made active.</sys:String>
+    <sys:String x:Key="Str_Profiles_CreateFailed">Failed to create profile: {0}</sys:String>
+    <sys:String x:Key="Str_Profiles_Renamed">Profile "{0}" renamed to "{1}".</sys:String>
+    <sys:String x:Key="Str_Profiles_RenameFailed">Failed to rename profile: {0}</sys:String>
+    <sys:String x:Key="Str_Profiles_Deleted">Profile "{0}" deleted.</sys:String>
+    <sys:String x:Key="Str_Profiles_DeleteFailed">Failed to delete profile: {0}</sys:String>
+
+    <!-- SettingsViewModel (autostart status/errors) -->
+    <sys:String x:Key="Str_Settings_CheckAutostartFailed">Failed to check the autostart status: {0}</sys:String>
+    <sys:String x:Key="Str_Settings_ExePathNotFound">Could not determine the executable's path.</sys:String>
+    <sys:String x:Key="Str_Settings_AutostartEnabled">Autostart enabled: the app will start at the next Windows sign-in.</sys:String>
+    <sys:String x:Key="Str_Settings_AutostartDisabled">Autostart disabled.</sys:String>
+    <sys:String x:Key="Str_Settings_AutostartChangeFailed">Failed to change autostart: {0}</sys:String>
+    <sys:String x:Key="Str_Settings_SavedGeneric">Settings saved.</sys:String>
+
+    <!-- BinaryUpdateSectionViewModel (check/install update status) -->
+    <sys:String x:Key="Str_Update_NoWindowsArchive">Version {0} is available, but this release has no Windows archive (win64-amd64.zip).</sys:String>
+    <sys:String x:Key="Str_Update_Available">Update available: {0}.</sys:String>
+    <sys:String x:Key="Str_Update_UpToDate">The latest version is already installed.</sys:String>
+    <sys:String x:Key="Str_Update_CheckFailed">Failed to check for updates: {0}</sys:String>
+    <sys:String x:Key="Str_Update_Installed">Updated to {0}.</sys:String>
+    <sys:String x:Key="Str_Update_FileLocked">Failed to replace the file - the process appears to still be running. Stop it on the Dashboard page and try again. ({0})</sys:String>
+    <sys:String x:Key="Str_Update_InstallError">Update error: {0}</sys:String>
+
+    <!-- GpuOverclockSectionViewModel (apply/reset confirm dialogs, status) -->
+    <sys:String x:Key="Str_Overclock_CriticalTemp">"{0}" is currently at a critical temperature - the overclock will not be applied until the card cools below the threshold.</sys:String>
+    <sys:String x:Key="Str_Overclock_FanManual">
+Fan: {0}% (manual mode)</sys:String>
+    <sys:String x:Key="Str_Overclock_FanAuto">
+Fan: automatic (no changes)</sys:String>
+    <sys:String x:Key="Str_Overclock_ApplyConfirm_Body">Apply overclock to "{0}"?
+
+Core: {1} MHz
+Memory: {2} MHz{3}
+
+Changing GPU clocks and/or fan settings is a potentially risky operation: incorrect values can cause driver instability, hangs, or overheating. Continue?</sys:String>
+    <sys:String x:Key="Str_Overclock_ApplyConfirm_Title">GPU overclock</sys:String>
+    <sys:String x:Key="Str_Overclock_Applied">Overclock applied.</sys:String>
+    <sys:String x:Key="Str_Overclock_ResetConfirm_Body">Reset the overclock for "{0}" to factory defaults (0 MHz, automatic fan)?</sys:String>
+    <sys:String x:Key="Str_Overclock_ResetConfirm_Title">Reset overclock</sys:String>
+    <sys:String x:Key="Str_Overclock_ResetDone">Reset to factory defaults.</sys:String>
+
+    <!-- PublicNodeListViewModel (discovery/ping/switch status messages) -->
+    <sys:String x:Key="Str_PublicNodes_EmptyList">The list is empty. If you have a link to a public node list, enter it above, or click "Discover through your own node".</sys:String>
+    <sys:String x:Key="Str_PublicNodes_LoadedCount">Nodes loaded: {0}.</sys:String>
+    <sys:String x:Key="Str_PublicNodes_LoadFailed">Failed to load the node list: {0}</sys:String>
+    <sys:String x:Key="Str_PublicNodes_NoNewPeersFromOwnNode">Your node did not report any new peers (it may not be connected to anyone yet, or the list already contains them).</sys:String>
+    <sys:String x:Key="Str_PublicNodes_AddedPeersFromOwnNode">Added {0} peer(s) discovered via your node's RPC.</sys:String>
+    <sys:String x:Key="Str_PublicNodes_DiscoverFromOwnNodeFailed">Failed to get peers from your own node - make sure it is running. ({0})</sys:String>
+    <sys:String x:Key="Str_PublicNodes_NoNewPeersFromNode">Node "{0}" did not report any new peers, or its RPC port is unreachable.</sys:String>
+    <sys:String x:Key="Str_PublicNodes_AddedPeersFromNode">Added {0} peer(s) discovered via node "{1}"'s RPC.</sys:String>
+    <sys:String x:Key="Str_PublicNodes_DiscoverThroughNodeFailed">Failed to get peers from "{0}" - its RPC port is most likely closed externally (that's normal, most operators don't open it). ({1})</sys:String>
+    <sys:String x:Key="Str_PublicNodes_UptimeNoteSuffix"> · operator-reported uptime: {0}%</sys:String>
+    <sys:String x:Key="Str_PublicNodes_Reachable">Online · {0} ms{1}</sys:String>
+    <sys:String x:Key="Str_PublicNodes_Unreachable">Unreachable ({0}){1}</sys:String>
+    <sys:String x:Key="Str_PublicNodes_SavedLocallyNote">Saved locally after a successful reachability check.</sys:String>
+    <sys:String x:Key="Str_PublicNodes_NodeSelected">Node "{0}" ({1}:{2}) selected for connection. Local node autostart has been disabled - you can still turn it back on from this page.</sys:String>
+    <sys:String x:Key="Str_PublicNodes_SwitchedBackToOwn">Switched back to your own node.</sys:String>
+    <sys:String x:Key="Str_PublicNodes_AutoSwitchedBackSynced">Your node has finished syncing - automatically switched back to it.</sys:String>
+
+    <!-- ModelsViewModel / ModelCardViewModel (download status, delete confirm, sizes) -->
+    <sys:String x:Key="Str_Models_NoModelsDirConfigured">Set the models folder on the "Miner" page to manage files here.</sys:String>
+    <sys:String x:Key="Str_Models_Installed">Installed ({0}).</sys:String>
+    <sys:String x:Key="Str_Models_DownloadPaused">Download paused ({0} received).</sys:String>
+    <sys:String x:Key="Str_Models_NotInstalled">Not installed. The model will also be downloaded automatically by the miner via IPFS on first launch - this page is only for manual pre-staging.</sys:String>
+    <sys:String x:Key="Str_Models_SetModelsDirFirst">First set the models folder on the "Miner" page.</sys:String>
+    <sys:String x:Key="Str_Models_InvalidUrl">The URL must be a full http:// or https:// link.</sys:String>
+    <sys:String x:Key="Str_Models_DownloadingWithTotal">Downloading... {0}% ({1} of {2})</sys:String>
+    <sys:String x:Key="Str_Models_DownloadingNoTotal">Downloading... {0}% ({1})</sys:String>
+    <sys:String x:Key="Str_Models_DownloadingUnknownTotal">Downloading... {0} (total size unknown)</sys:String>
+    <sys:String x:Key="Str_Models_DownloadComplete">Download complete.</sys:String>
+    <sys:String x:Key="Str_Models_DownloadPausedByUser">Download paused - click "Resume" to continue from the same point.</sys:String>
+    <sys:String x:Key="Str_Models_DownloadError">Download error: {0}</sys:String>
+    <sys:String x:Key="Str_Models_OfficialProgressWithTotal">{0} {1}% ({2} of {3})</sys:String>
+    <sys:String x:Key="Str_Models_OfficialProgressNoTotal">{0} {1}</sys:String>
+    <sys:String x:Key="Str_Models_DownloadCancelled">Download cancelled.</sys:String>
+    <sys:String x:Key="Str_Models_DeleteConfirm_Body">Delete model "{0}"? The file will be permanently removed from disk.</sys:String>
+    <sys:String x:Key="Str_Models_DeleteConfirm_Title">Delete model</sys:String>
+    <sys:String x:Key="Str_Models_SizeGb">{0} GB</sys:String>
+    <sys:String x:Key="Str_Models_SizeMb">{0} MB</sys:String>
+    <sys:String x:Key="Str_Models_SizeKb">{0} KB</sys:String>
+    <sys:String x:Key="Str_Models_TotalDiskUsage">Models installed: {0}, disk space used: {1}.</sys:String>
+
+    <!-- WizardViewModel (step header, profile create, address/GPU checks) -->
+    <sys:String x:Key="Str_Wizard_StepHeader">Step {0} of {1}</sys:String>
+    <sys:String x:Key="Str_Wizard_EnterProfileName">Enter a name for the new profile.</sys:String>
+    <sys:String x:Key="Str_Wizard_ProfileCreated">Profile "{0}" created and made active - the wizard is now configuring it.</sys:String>
+    <sys:String x:Key="Str_Wizard_ProfileCreateFailed">Failed to create profile: {0}</sys:String>
+    <sys:String x:Key="Str_Wizard_InvalidAddress">This doesn't look like a valid Keryx address (expected keryx:... or keryxtest:...). The wizard lets you continue, but the node will reject mining with an invalid address.</sys:String>
+    <sys:String x:Key="Str_Wizard_NoGpuDetected">No NVIDIA GPUs detected.</sys:String>
 </ResourceDictionary>

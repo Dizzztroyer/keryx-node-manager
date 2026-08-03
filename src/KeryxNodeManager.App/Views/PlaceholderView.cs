@@ -16,7 +16,7 @@ public sealed class PlaceholderView : UserControl
         var stack = new StackPanel { VerticalAlignment = VerticalAlignment.Center };
         stack.Children.Add(new TextBlock
         {
-            Text = $"«{pageName}» ещё не реализовано в этой сборке",
+            Text = AppStrings.Format("Str_Placeholder_NotImplemented", pageName),
             FontSize = 18,
             FontWeight = FontWeights.SemiBold,
             Foreground = (Brush)Application.Current.Resources["TextPrimaryBrush"],
@@ -24,7 +24,7 @@ public sealed class PlaceholderView : UserControl
         });
         stack.Children.Add(new TextBlock
         {
-            Text = "См. PROJECT_STATUS.md — раздел \"In progress\"/\"Next steps\".",
+            Text = AppStrings.Get("Str_Placeholder_SeeStatus"),
             FontSize = 13,
             Margin = new Thickness(0, 8, 0, 0),
             Foreground = (Brush)Application.Current.Resources["TextSecondaryBrush"],

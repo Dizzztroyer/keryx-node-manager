@@ -79,7 +79,7 @@ public partial class SettingsViewModel : ObservableObject
         }
         catch (Exception ex)
         {
-            StatusMessage = $"Не удалось проверить статус автозапуска: {ex.Message}";
+            StatusMessage = AppStrings.Format("Str_Settings_CheckAutostartFailed", ex.Message);
         }
         finally
         {
@@ -100,21 +100,21 @@ public partial class SettingsViewModel : ObservableObject
             if (enable)
             {
                 string exePath = Environment.ProcessPath
-                    ?? throw new InvalidOperationException("Не удалось определить путь к исполняемому файлу.");
+                    ?? throw new InvalidOperationException(AppStrings.Get("Str_Settings_ExePathNotFound"));
                 await _autostart.RegisterAsync(exePath);
-                StatusMessage = "Автозапуск включён: приложение запустится при следующем входе в Windows.";
+                StatusMessage = AppStrings.Get("Str_Settings_AutostartEnabled");
             }
             else
             {
                 await _autostart.UnregisterAsync();
-                StatusMessage = "Автозапуск выключен.";
+                StatusMessage = AppStrings.Get("Str_Settings_AutostartDisabled");
             }
             Settings.StartWithWindows = enable;
             await _profileStore.SaveAsync();
         }
         catch (Exception ex)
         {
-            StatusMessage = $"Не удалось изменить автозапуск: {ex.Message}";
+            StatusMessage = AppStrings.Format("Str_Settings_AutostartChangeFailed", ex.Message);
             // The Task Scheduler call failed - revert the checkbox so it doesn't show a state
             // that was never actually applied.
             _suppressAutostartHandling = true;
@@ -127,6 +127,6 @@ public partial class SettingsViewModel : ObservableObject
     private async Task SaveAsync()
     {
         await _profileStore.SaveAsync();
-        StatusMessage = "Настройки сохранены.";
+        StatusMessage = AppStrings.Get("Str_Settings_SavedGeneric");
     }
 }

@@ -62,11 +62,11 @@ public sealed class TrayIconService : IDisposable
     {
         _icon.ToolTipText = state switch
         {
-            TrayState.Stopped => "Keryx Node Manager — всё остановлено",
-            TrayState.Starting => "Keryx Node Manager — запуск...",
-            TrayState.Running => "Keryx Node Manager — работает",
-            TrayState.Error => "Keryx Node Manager — ошибка",
-            TrayState.InferenceActive => "Keryx Node Manager — обработка inference-запроса",
+            TrayState.Stopped => AppStrings.Get("Str_Tray_Tooltip_Stopped"),
+            TrayState.Starting => AppStrings.Get("Str_Tray_Tooltip_Starting"),
+            TrayState.Running => AppStrings.Get("Str_Tray_Tooltip_Running"),
+            TrayState.Error => AppStrings.Get("Str_Tray_Tooltip_Error"),
+            TrayState.InferenceActive => AppStrings.Get("Str_Tray_Tooltip_InferenceActive"),
             _ => "Keryx Node Manager",
         };
         _icon.IconSource = IconsByState[state];
@@ -83,7 +83,7 @@ public sealed class TrayIconService : IDisposable
             menu.Items.Add(item);
         }
 
-        AddItem("Открыть Keryx Node Manager", ShowMainWindow);
+        AddItem(AppStrings.Get("Str_Tray_Menu_Open"), ShowMainWindow);
         menu.Items.Add(new System.Windows.Controls.Separator());
         // Reuse the exact same commands the Dashboard page's own buttons call - these were left as
         // no-op lambdas with a stale "wired once a MiningProfile exists" comment from before
@@ -91,29 +91,29 @@ public sealed class TrayIconService : IDisposable
         // since the GPU-wiring session, this was just never revisited (PROJECT_STATUS.md).
         // Fire-and-forget is intentional here (same as a real button click) - IAsyncRelayCommand
         // handles its own IsRunning/re-entrancy guarding.
-        AddItem("Запустить всё", () => _dashboardViewModel.StartAllCommand.Execute(null));
-        AddItem("Остановить всё", () => _dashboardViewModel.StopAllCommand.Execute(null));
+        AddItem(AppStrings.Get("Str_Dashboard_StartAll"), () => _dashboardViewModel.StartAllCommand.Execute(null));
+        AddItem(AppStrings.Get("Str_Dashboard_StopAll"), () => _dashboardViewModel.StopAllCommand.Execute(null));
         // Restarting node/miner individually (as opposed to Stop All + Start All together) has no
         // single Core-layer primitive yet - ProcessSupervisor only exposes Start*/Stop*, and each
         // Start*Async needs a freshly-built LaunchSpec (arguments, GPU assignment resolution, env
         // vars) that today only DashboardViewModel.StartAllAsync knows how to assemble per-process.
         // Left as an honest gap rather than wiring a "stop everything, start everything" fake
         // restart under a per-process-restart label - documented in PROJECT_STATUS.md.
-        AddItem("Перезапустить майнер", () => { });
-        AddItem("Перезапустить ноду", () => { });
+        AddItem(AppStrings.Get("Str_Tray_Menu_RestartMiner"), () => { });
+        AddItem(AppStrings.Get("Str_Tray_Menu_RestartNode"), () => { });
         menu.Items.Add(new System.Windows.Controls.Separator());
-        AddItem("Открыть логи", () =>
+        AddItem(AppStrings.Get("Str_Tray_Menu_OpenLogs"), () =>
         {
             _mainViewModel.SelectedPage = "Logs";
             ShowMainWindow();
         });
-        AddItem("Настройки", () =>
+        AddItem(AppStrings.Get("Str_Settings_Title"), () =>
         {
             _mainViewModel.SelectedPage = "Settings";
             ShowMainWindow();
         });
         menu.Items.Add(new System.Windows.Controls.Separator());
-        AddItem("Выйти", ConfirmExit);
+        AddItem(AppStrings.Get("Str_Tray_Menu_Exit"), ConfirmExit);
 
         return menu;
     }
@@ -131,11 +131,8 @@ public sealed class TrayIconService : IDisposable
     private async void ConfirmExit()
     {
         var result = MessageBox.Show(
-            "Остановить ноду и майнер перед выходом?\n\n" +
-            "Да — остановить всё и закрыть приложение.\n" +
-            "Нет — закрыть только интерфейс, нода и майнер продолжат работать.\n" +
-            "Отмена — не выходить.",
-            "Выход из Keryx Node Manager",
+            AppStrings.Get("Str_Tray_ExitConfirm_Body"),
+            AppStrings.Get("Str_Tray_ExitConfirm_Title"),
             MessageBoxButton.YesNoCancel,
             MessageBoxImage.Question);
 

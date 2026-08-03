@@ -170,7 +170,7 @@ public partial class GpuViewModel : ObservableObject
 
         if (card.Mode == GpuAssignmentMode.Disabled)
         {
-            card.AssignmentSummary = $"{card.Device.Name}: майнинг на этой GPU отключён вручную.";
+            card.AssignmentSummary = AppStrings.Format("Str_Gpu_MiningDisabledManually", card.Device.Name);
             card.IsEnabled = false;
             return;
         }
@@ -192,12 +192,12 @@ public partial class GpuViewModel : ObservableObject
     {
         var options = new List<GpuModeOption>
         {
-            new(GpuAssignmentMode.Auto, "Авто"),
-            new(GpuAssignmentMode.Disabled, "Отключено"),
+            new(GpuAssignmentMode.Auto, AppStrings.Get("Str_Gpu_Mode_Auto")),
+            new(GpuAssignmentMode.Disabled, AppStrings.Get("Str_Gpu_Mode_Disabled")),
         };
         options.AddRange(ModelTierCatalog.Tiers
             .OrderByDescending(t => t.MinVramMb)
-            .Select(t => new GpuModeOption(t.Tier.ToString(), $"Вручную: {t.Name}")));
+            .Select(t => new GpuModeOption(t.Tier.ToString(), AppStrings.Format("Str_Gpu_Mode_ManualPrefix", t.Name))));
         return options;
     }
 }

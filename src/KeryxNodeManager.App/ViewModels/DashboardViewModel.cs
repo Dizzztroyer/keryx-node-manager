@@ -10,6 +10,7 @@ using KeryxNodeManager.Core.Models;
 using KeryxNodeManager.Core.Process;
 using KeryxNodeManager.Core.Runtime;
 using KeryxNodeManager.Core.Safety;
+using KeryxNodeManager.Core.Localization;
 
 namespace KeryxNodeManager.App.ViewModels;
 
@@ -34,10 +35,10 @@ public partial class DashboardViewModel : ObservableObject
     private readonly ProcessSupervisor _minerSupervisor;
 
     [ObservableProperty]
-    private string _nodeStatus = "Остановлена";
+    private string _nodeStatus = "";
 
     [ObservableProperty]
-    private string _minerStatus = "Остановлен";
+    private string _minerStatus = "";
 
     [ObservableProperty]
     private int _activeGpuCount;
@@ -89,17 +90,40 @@ public partial class DashboardViewModel : ObservableObject
             _runtimeBackend, ManagedProcessKind.Miner, profile.AutoRestartOnCrash,
             profile.MaxRestartAttempts, profile.RestartBaseDelaySeconds);
 
+        // Initial displayed status, set here (rather than as the [ObservableProperty] field
+        // initializer above) so it goes through AppStrings and reflects whatever language is
+        // active when this ViewModel is actually constructed, not a hardcoded default that would
+        // only ever be correct for Russian.
+        NodeStatus = AppStrings.Get("Str_Dashboard_NodeStatus_Stopped");
+        MinerStatus = AppStrings.Get("Str_Dashboard_MinerStatus_Stopped");
+
         _nodeSupervisor.EventRaised += evt => App.Current.Dispatcher.Invoke(() =>
         {
-            NodeStatus = _nodeSupervisor.IsRunning ? "Работает" : "Остановлена";
-            LastActionMessage = $"[Нода] {evt.Message}";
+            NodeStatus = _nodeSupervisor.IsRunning
+                ? AppStrings.Get("Str_Dashboard_NodeStatus_Running")
+                : AppStrings.Get("Str_Dashboard_NodeStatus_Stopped");
+            LastActionMessage = AppStrings.Format("Str_Dashboard_LogPrefix_Node", evt.Message);
         });
         _minerSupervisor.EventRaised += evt => App.Current.Dispatcher.Invoke(() =>
         {
-            MinerStatus = _minerSupervisor.IsRunning ? "Работает" : "Остановлен";
-            LastActionMessage = $"[Майнер] {evt.Message}";
+            MinerStatus = _minerSupervisor.IsRunning
+                ? AppStrings.Get("Str_Dashboard_MinerStatus_Running")
+                : AppStrings.Get("Str_Dashboard_MinerStatus_Stopped");
+            LastActionMessage = AppStrings.Format("Str_Dashboard_LogPrefix_Miner", evt.Message);
         });
     }
+
+    /// <summary>Non-localized run-state signal for callers (e.g. App.xaml.cs's tray-icon-state
+    /// logic) that need to know whether the node/miner is actually running - added because that
+    /// code used to compare NodeStatus/MinerStatus against the hardcoded Russian literal
+    /// "Работает", which broke (tray always showed "Stopped" color) the moment a user picked any
+    /// other language, since NodeStatus/MinerStatus are now real localized display text. Reading
+    /// the same ProcessSupervisor.IsRunning this ViewModel already uses to compute those display
+    /// strings can never disagree with them, and is immune to language switches by construction.</summary>
+    public bool IsNodeRunning => _nodeSupervisor.IsRunning;
+
+    /// <summary>See <see cref="IsNodeRunning"/>.</summary>
+    public bool IsMinerRunning => _minerSupervisor.IsRunning;
 
     [RelayCommand]
     private async Task RefreshAsync()
@@ -123,13 +147,13 @@ public partial class DashboardViewModel : ObservableObject
 
         if (string.IsNullOrWhiteSpace(profile.NodeExecutablePath) && !IsMockBackend)
         {
-            LastActionMessage = "Укажите путь к keryxd.exe на странице «Нода» перед запуском.";
+            LastActionMessage = AppStrings.Get("Str_Dashboard_MissingNodePath");
             MissingConfigTarget = "Node";
             return;
         }
         if (string.IsNullOrWhiteSpace(profile.MiningAddress) && !IsMockBackend)
         {
-            LastActionMessage = "Укажите mining address на странице «Майнер» перед запуском.";
+            LastActionMessage = AppStrings.Get("Str_Dashboard_MissingMiningAddress");
             MissingConfigTarget = "Miner";
             return;
         }
@@ -200,11 +224,11 @@ public partial class DashboardViewModel : ObservableObject
                 }
             }
 
-            LastActionMessage = "Запуск инициирован.";
+            LastActionMessage = AppStrings.Get("Str_Dashboard_LaunchInitiated");
         }
         catch (Exception ex)
         {
-            LastActionMessage = $"Не удалось запустить: {ex.Message}";
+            LastActionMessage = AppStrings.Format("Str_Dashboard_LaunchFailed", ex.Message);
         }
     }
 
@@ -214,9 +238,9 @@ public partial class DashboardViewModel : ObservableObject
         await _nodeSupervisor.StopAsync(TimeSpan.FromSeconds(10));
         await _minerSupervisor.StopAsync(TimeSpan.FromSeconds(10));
         _safetyMonitor.Stop();
-        NodeStatus = "Остановлена";
-        MinerStatus = "Остановлен";
-        LastActionMessage = "Остановлено по запросу пользователя.";
+        NodeStatus = AppStrings.Get("Str_Dashboard_NodeStatus_Stopped");
+        MinerStatus = AppStrings.Get("Str_Dashboard_MinerStatus_Stopped");
+        LastActionMessage = CoreStrings.Get("Process.StoppedByUser");
     }
 
     /// <summary>
@@ -228,7 +252,7 @@ public partial class DashboardViewModel : ObservableObject
     /// </summary>
     private void OnSafetyEventRaised(SafetyEvent evt)
     {
-        App.Current.Dispatcher.Invoke(() => LastActionMessage = $"[Защита] {evt.Message}");
+        App.Current.Dispatcher.Invoke(() => LastActionMessage = AppStrings.Format("Str_Dashboard_LogPrefix_Safety", evt.Message));
         if (evt.Level == SafetyLevel.Critical)
         {
             _ = StopForOverheatAsync();
@@ -242,9 +266,9 @@ public partial class DashboardViewModel : ObservableObject
         _safetyMonitor.Stop();
         App.Current.Dispatcher.Invoke(() =>
         {
-            NodeStatus = "Остановлена";
-            MinerStatus = "Остановлен";
-            LastActionMessage = "Майнинг остановлен автоматически из-за перегрева GPU.";
+            NodeStatus = AppStrings.Get("Str_Dashboard_NodeStatus_Stopped");
+            MinerStatus = AppStrings.Get("Str_Dashboard_MinerStatus_Stopped");
+            LastActionMessage = AppStrings.Get("Str_Dashboard_StoppedForOverheat");
         });
     }
 
@@ -262,8 +286,7 @@ public partial class DashboardViewModel : ObservableObject
         }
         catch (GpuQueryException ex)
         {
-            LastActionMessage = $"Не удалось определить GPU перед запуском ({ex.Message}); " +
-                                 "используется авто-подбор модели самим майнером.";
+            LastActionMessage = AppStrings.Format("Str_Dashboard_GpuQueryFailedBeforeLaunch", ex.Message);
             return Array.Empty<GpuDevice>();
         }
     }

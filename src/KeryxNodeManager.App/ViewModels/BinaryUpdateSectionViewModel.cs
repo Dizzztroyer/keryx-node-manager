@@ -98,13 +98,13 @@ public partial class BinaryUpdateSectionViewModel : ObservableObject
 
             StatusMessage = result.UpdateAvailable
                 ? (result.DownloadUrl is null
-                    ? $"Доступна версия {result.LatestVersion}, но в этом релизе нет Windows-архива (win64-amd64.zip)."
-                    : $"Доступно обновление: {result.LatestVersion}.")
-                : "Установлена последняя версия.";
+                    ? AppStrings.Format("Str_Update_NoWindowsArchive", result.LatestVersion)
+                    : AppStrings.Format("Str_Update_Available", result.LatestVersion))
+                : AppStrings.Get("Str_Update_UpToDate");
         }
         catch (Exception ex)
         {
-            StatusMessage = $"Не удалось проверить обновления: {ex.Message}";
+            StatusMessage = AppStrings.Format("Str_Update_CheckFailed", ex.Message);
         }
         finally
         {
@@ -150,16 +150,15 @@ public partial class BinaryUpdateSectionViewModel : ObservableObject
             _persist();
             OnPropertyChanged(nameof(InstalledVersion));
             UpdateAvailable = false;
-            StatusMessage = $"Обновлено до {LatestVersion}.";
+            StatusMessage = AppStrings.Format("Str_Update_Installed", LatestVersion);
         }
         catch (IOException ex)
         {
-            StatusMessage = "Не удалось заменить файл - похоже, процесс ещё запущен. Остановите его на " +
-                             $"странице Dashboard и попробуйте снова. ({ex.Message})";
+            StatusMessage = AppStrings.Format("Str_Update_FileLocked", ex.Message);
         }
         catch (Exception ex)
         {
-            StatusMessage = $"Ошибка обновления: {ex.Message}";
+            StatusMessage = AppStrings.Format("Str_Update_InstallError", ex.Message);
         }
         finally
         {
