@@ -32,6 +32,20 @@
     <sys:String x:Key="Str_Nav_VersionLabel">Version: </sys:String>
     <sys:String x:Key="Str_Nav_ProfileLabel">Profile: </sys:String>
 
+    <!-- 0.2.7 fix: sidebar nav item labels were previously the raw, unlocalized page keys from
+         MainViewModel.Pages (bound directly as ListBox.ItemsSource with no template) - this is why
+         the sidebar stayed in English regardless of selected language. These keys give each nav
+         item a real, localized display string; MainWindow.xaml maps the raw page key to one of
+         these via DataTrigger (see NavList.ItemTemplate). -->
+    <sys:String x:Key="Str_Nav_Dashboard">Dashboard</sys:String>
+    <sys:String x:Key="Str_Nav_Gpu">GPU</sys:String>
+    <sys:String x:Key="Str_Nav_Models">Models</sys:String>
+    <sys:String x:Key="Str_Nav_Node">Node</sys:String>
+    <sys:String x:Key="Str_Nav_Miner">Miner</sys:String>
+    <sys:String x:Key="Str_Nav_Logs">Logs</sys:String>
+    <sys:String x:Key="Str_Nav_Settings">Settings</sys:String>
+    <sys:String x:Key="Str_Nav_About">About</sys:String>
+
     <sys:String x:Key="Str_Dashboard_Title">Overview</sys:String>
     <sys:String x:Key="Str_Dashboard_Node">Node</sys:String>
     <sys:String x:Key="Str_Dashboard_Miner">Miner</sys:String>
@@ -119,6 +133,24 @@
     <sys:String x:Key="Str_About_OsLabel">OS: </sys:String>
     <sys:String x:Key="Str_About_DotNetLabel">.NET: </sys:String>
     <sys:String x:Key="Str_About_Is64BitLabel">64-bit OS: </sys:String>
+
+    <sys:String x:Key="Str_About_GuideHeader">How to start mining: step-by-step guide</sys:String>
+    <sys:String x:Key="Str_About_GuideIntro">Follow these 5 steps in order, top to bottom. Each step matches one page in the menu on the left.</sys:String>
+
+    <sys:String x:Key="Str_About_GuideStep1Header">1. GPU (graphics card)</sys:String>
+    <sys:String x:Key="Str_About_GuideStep1Body">Open the "GPU" page. It shows how much video memory (VRAM) each of your cards has - you'll need that in step 4 to pick a model of the right size. For each card, choose a mode (easiest is to leave it on "Auto" - the app will pick what to run on it).</sys:String>
+
+    <sys:String x:Key="Str_About_GuideStep2Header">2. Node</sys:String>
+    <sys:String x:Key="Str_About_GuideStep2Body">Running your own node takes a long time to sync, so it's easier to start by connecting to someone else's public node. Open the "Node" page, click "Refresh list", pick a node from the list and click "Use" - the selected node will be highlighted so you can see which one is active. If you later want to run your own node, expand "My node settings" at the bottom of the same page and set the path to keryxd.exe and the connection address.</sys:String>
+
+    <sys:String x:Key="Str_About_GuideStep3Header">3. Miner</sys:String>
+    <sys:String x:Key="Str_About_GuideStep3Body">Open the "Miner" page. Paste your reward address - this is your wallet, where mined coins will arrive. Turn on overheat protection and set the temperature thresholds (warning and critical) so your card doesn't overheat while mining.</sys:String>
+
+    <sys:String x:Key="Str_About_GuideStep4Header">4. Models</sys:String>
+    <sys:String x:Key="Str_About_GuideStep4Body">Open the "Models" page. Each card shows how much VRAM that model needs - compare it with what you saw in step 1 and pick one that fits. Click "Download official model" - the easiest option, it downloads a verified version automatically (via torrent too, if that's faster). You can also get a model through Keryx Labs' Discord, where the team posts current mirrors - there's an "Open Discord" button on this same page. Wait until the progress bar reaches 100%.</sys:String>
+
+    <sys:String x:Key="Str_About_GuideStep5Header">5. Start (Dashboard)</sys:String>
+    <sys:String x:Key="Str_About_GuideStep5Body">Go back to the Dashboard and click "Start All" - mining begins. If the status still shows "Stopped" even though the node or miner is clearly already running (e.g. you started it earlier), click "Refresh", or click "Stop All" once and then "Start All", so the app takes the processes back under its management.</sys:String>
     <sys:String x:Key="Str_Wizard_WindowTitle">Keryx Node Manager — First Run</sys:String>
     <sys:String x:Key="Str_Wizard_HeaderTitle">Set up Keryx Node Manager</sys:String>
     <sys:String x:Key="Str_Wizard_Step0_Title">Welcome</sys:String>
@@ -336,6 +368,7 @@ Changing GPU clocks and/or fan settings is a potentially risky operation: incorr
 
     <!-- NodeView restructure (0.2.6 brief §8): public nodes first, own-node settings collapsed -->
     <sys:String x:Key="Str_Node_PublicNodesHeader">Public nodes</sys:String>
+    <sys:String x:Key="Str_Node_InUseBadge">✓ Currently in use</sys:String>
     <sys:String x:Key="Str_Node_PublicNodesDesc">If you don't have your own node yet, or it's still syncing, you can mine through someone else's temporarily. The list is maintained manually (the protocol has no public node registry) - optionally provide a link to a JSON list below.</sys:String>
     <sys:String x:Key="Str_Node_RemoteListUrlTooltip">URL of a public node list in JSON format (optional)</sys:String>
     <sys:String x:Key="Str_Node_RefreshList">Refresh list</sys:String>

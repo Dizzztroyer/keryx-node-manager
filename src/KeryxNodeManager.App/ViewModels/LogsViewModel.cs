@@ -1,6 +1,7 @@
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Windows;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
@@ -24,6 +25,15 @@ public partial class LogsViewModel : ObservableObject
     private readonly LogSink _logSink;
     private readonly ProfileStore _profileStore;
 
+    /// <summary>0.2.7 fix: the Logs page's ItemsControl is not virtualized (plain ItemsControl +
+    /// ScrollViewer, each TextBlock has TextWrapping="Wrap"), and LogSink itself buffers up to
+    /// 2000 lines per process. During an active model download the node/miner can emit lines fast
+    /// enough that the page became nearly unusable ("жестко начинает лагать... еле вышел") -
+    /// re-measuring/arranging thousands of wrapped TextBlocks on every single new line. Capping
+    /// what's actually displayed to the most recent lines fixes this without touching LogSink's own
+    /// on-disk files or its export/diagnostics buffer - only the live on-screen list is capped.</summary>
+    public const int MaxDisplayedLines = 50;
+
     public ObservableCollection<string> NodeLines { get; } = new();
     public ObservableCollection<string> MinerLines { get; } = new();
 
@@ -40,8 +50,8 @@ public partial class LogsViewModel : ObservableObject
         // there is no background timer wired up yet (see PROJECT_STATUS.md next steps).
         _logSink.PruneOldFiles();
 
-        foreach (var line in _logSink.GetBuffered(ManagedProcessKind.Node)) NodeLines.Add(Format(line));
-        foreach (var line in _logSink.GetBuffered(ManagedProcessKind.Miner)) MinerLines.Add(Format(line));
+        foreach (var line in _logSink.GetBuffered(ManagedProcessKind.Node).TakeLast(MaxDisplayedLines)) NodeLines.Add(Format(line));
+        foreach (var line in _logSink.GetBuffered(ManagedProcessKind.Miner).TakeLast(MaxDisplayedLines)) MinerLines.Add(Format(line));
 
         _logSink.LineAppended += OnLineAppended;
     }
@@ -55,7 +65,7 @@ public partial class LogsViewModel : ObservableObject
         {
             var target = line.Kind == ManagedProcessKind.Node ? NodeLines : MinerLines;
             target.Add(Format(line));
-            while (target.Count > LogSink.MaxBufferedLinesPerKind) target.RemoveAt(0);
+            while (target.Count > MaxDisplayedLines) target.RemoveAt(0);
         });
     }
 

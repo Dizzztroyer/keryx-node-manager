@@ -6,12 +6,15 @@
         MinHeight="560" MinWidth="640"
         WindowStartupLocation="CenterScreen"
         ResizeMode="CanResizeWithGrip"
-        ShowInTaskbar="True">
+        ShowInTaskbar="True"
+        Background="{DynamicResource BackgroundBrush}"
+        Foreground="{DynamicResource TextPrimaryBrush}">
+    <!-- 0.2.7 fix: same explicit Background/Foreground as MainWindow.xaml - see that file's comment. -->
     <Window.Resources>
         <BooleanToVisibilityConverter x:Key="BoolToVis"/>
         <conv:InverseBooleanToVisibilityConverter x:Key="InverseBoolToVis"/>
     </Window.Resources>
-    <Grid Margin="24">
+    <Grid Margin="24" Background="{DynamicResource BackgroundBrush}">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>

@@ -42,6 +42,11 @@
             </Border>
         </StackPanel>
 
+        <!-- 0.2.7 fix: the ItemsControl itself has no scrolling behavior of its own - it only lays
+             out its items and reports its full desired height to the parent DockPanel, which simply
+             clips it. Wrapping it in a ScrollViewer restores mouse-wheel scrolling (and a visible
+             thumb the user can drag) once the model list is taller than the window. -->
+        <ScrollViewer VerticalScrollBarVisibility="Auto" CanContentScroll="False">
         <ItemsControl ItemsSource="{Binding Models}">
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
@@ -57,9 +62,14 @@
                             <TextBlock Text="{Binding StatusText}" Margin="0,6,0,0" TextWrapping="Wrap"
                                        Foreground="{DynamicResource TextSecondaryBrush}"/>
 
-                            <ProgressBar Margin="0,8,0,0" Height="6" Minimum="0" Maximum="100"
-                                         Value="{Binding ProgressPercent, Mode=OneWay}"
-                                         IsIndeterminate="{Binding ProgressIsIndeterminate}"/>
+                            <Grid Margin="0,8,0,0">
+                                <ProgressBar Height="6" Minimum="0" Maximum="100"
+                                             Value="{Binding ProgressPercent, Mode=OneWay}"
+                                             IsIndeterminate="{Binding ProgressIsIndeterminate}"/>
+                                <TextBlock Text="{Binding ProgressPercentText}" FontSize="10" Margin="0,10,0,0"
+                                           Foreground="{DynamicResource TextSecondaryBrush}"
+                                           Visibility="{Binding IsDownloading, Converter={StaticResource BoolToVis}}"/>
+                            </Grid>
 
                             <!-- Primary, one-click path: install straight from the verified
                                  official mirror (KeryxNodeManager.Core.ModelsManagement.
@@ -125,5 +135,6 @@
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
         </ItemsControl>
+        </ScrollViewer>
     </DockPanel>
 </UserControl>

@@ -37,6 +37,29 @@
     <Setter Property="FontSize" Value="13"/>
   </Style>
 
+  <!-- 0.2.7 fix: real screenshots of the 0.2.6 build showed a large white main-content area plus
+       near-invisible dark-on-dark headers/statuses across Dashboard/GPU/Settings, even though the
+       Window style above sets a light Foreground. Root cause: dozens of TextBlocks across the
+       View XAML (page titles, card section headers, Dashboard's status values, GPU's device
+       name/mode label/assignment summary) never set an explicit Foreground at all, relying on
+       inheritance from Window - and per-page/per-element `Foreground="{DynamicResource ...}"`
+       patches were exactly the wrong fix (brief explicitly asked for a centralized fix, not
+       whack-a-mole). An implicit (no x:Key) TextBlock style is the single, structural fix: every
+       TextBlock in the app that does NOT already set its own explicit Foreground now inherits a
+       real themed color by default, while every TextBlock that DOES already set Foreground
+       (TextSecondaryBrush, ErrorBrush, etc.) is completely unaffected, since a local Setter always
+       loses to an explicit property value in XAML. -->
+  <Style TargetType="TextBlock">
+    <Setter Property="Foreground" Value="{DynamicResource TextPrimaryBrush}"/>
+  </Style>
+
+  <!-- Same reasoning for CheckBox/RadioButton label text and Slider tick labels - both inherit
+       Foreground from the same broken chain, and several checkboxes across Settings/Node/Miner/
+       GPU already set Foreground explicitly (now redundant but harmless), while others didn't. -->
+  <Style TargetType="CheckBox">
+    <Setter Property="Foreground" Value="{DynamicResource TextPrimaryBrush}"/>
+  </Style>
+
   <Style x:Key="NavButtonStyle" TargetType="RadioButton">
     <Setter Property="Height" Value="40"/>
     <Setter Property="Padding" Value="16,0,0,0"/>

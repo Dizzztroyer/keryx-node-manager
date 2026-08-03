@@ -16,6 +16,14 @@ public partial class PublicNodeRowViewModel : ObservableObject
     [ObservableProperty]
     private bool _isChecking;
 
+    /// <summary>0.2.7 fix: true for the one row whose endpoint/port matches the active profile's
+    /// current NodeEndpoint/NodePort (i.e. the node actually in use for mining right now) - the row
+    /// list otherwise gave no visual sign of which entry (if any) was actually selected after
+    /// clicking "Использовать". PublicNodeListViewModel is the single place that sets this,
+    /// recomputed after RefreshAsync and after UseNode/SwitchBackToOwnNode.</summary>
+    [ObservableProperty]
+    private bool _isSelected;
+
     public PublicNodeRowViewModel(PublicNodeInfo info)
     {
         Info = info;

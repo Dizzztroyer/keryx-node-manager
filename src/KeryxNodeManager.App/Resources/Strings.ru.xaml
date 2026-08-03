@@ -43,6 +43,15 @@
     <sys:String x:Key="Str_Nav_VersionLabel">Версия: </sys:String>
     <sys:String x:Key="Str_Nav_ProfileLabel">Профиль: </sys:String>
 
+    <sys:String x:Key="Str_Nav_Dashboard">Дашборд</sys:String>
+    <sys:String x:Key="Str_Nav_Gpu">GPU</sys:String>
+    <sys:String x:Key="Str_Nav_Models">Модели</sys:String>
+    <sys:String x:Key="Str_Nav_Node">Нода</sys:String>
+    <sys:String x:Key="Str_Nav_Miner">Майнер</sys:String>
+    <sys:String x:Key="Str_Nav_Logs">Логи</sys:String>
+    <sys:String x:Key="Str_Nav_Settings">Настройки</sys:String>
+    <sys:String x:Key="Str_Nav_About">О программе</sys:String>
+
     <!-- Dashboard page (brief §5), added in the "full string extraction" pass - see
          PROJECT_STATUS.md for what's covered so far vs. what's still hardcoded (the
          ViewModel-owned dynamic status strings like NodeStatus/MinerStatus/LastActionMessage are
@@ -157,6 +166,29 @@
     <sys:String x:Key="Str_About_OsLabel">ОС: </sys:String>
     <sys:String x:Key="Str_About_DotNetLabel">.NET: </sys:String>
     <sys:String x:Key="Str_About_Is64BitLabel">64-разрядная ОС: </sys:String>
+
+    <!-- 0.2.7 fix: comprehensive, maximally beginner-friendly "how to start mining, step by step"
+         guide on the About page (user's own words: "от а до я по пунктам, как для маленьких тупых
+         детей"). Split into one Header/Body pair per app page in the order a first-time user should
+         actually visit them (GPU → Node → Miner → Models → Dashboard), rather than one giant blob of
+         text, so each step reads as its own short, bolded mini-section. -->
+    <sys:String x:Key="Str_About_GuideHeader">Как начать майнить: пошаговая инструкция</sys:String>
+    <sys:String x:Key="Str_About_GuideIntro">Пройди по этим 5 шагам по порядку — сверху вниз. Каждый шаг соответствует одному разделу в меню слева.</sys:String>
+
+    <sys:String x:Key="Str_About_GuideStep1Header">1. Видеокарта (GPU)</sys:String>
+    <sys:String x:Key="Str_About_GuideStep1Body">Открой раздел «Видеокарта». Там показано, сколько видеопамяти (VRAM) у каждой твоей карты — это понадобится на шаге 4, чтобы выбрать подходящую по размеру модель. Для каждой карты выбери режим (проще всего оставить «Авто» — программа сама решит, что на неё поставить).</sys:String>
+
+    <sys:String x:Key="Str_About_GuideStep2Header">2. Нода (Node)</sys:String>
+    <sys:String x:Key="Str_About_GuideStep2Body">Своя нода синхронизируется с сетью долго, поэтому проще для начала подключиться к чужой публичной ноде. Открой раздел «Нода», нажми «Обновить список», выбери ноду из списка и нажми «Использовать» — выбранная нода подсветится, чтобы было видно, что именно она сейчас используется. Если позже захочешь запустить свою ноду — разверни блок «Настройки своей ноды» внизу этой же страницы, укажи путь к keryxd.exe и адрес подключения.</sys:String>
+
+    <sys:String x:Key="Str_About_GuideStep3Header">3. Майнер (Miner)</sys:String>
+    <sys:String x:Key="Str_About_GuideStep3Body">Открой раздел «Майнер». Вставь свой адрес для наград — это твой кошелёк, куда будут приходить намайненные монеты. Включи защиту от перегрева и укажи пороги температуры (предупреждение и критический) — так карта не перегреется во время майнинга.</sys:String>
+
+    <sys:String x:Key="Str_About_GuideStep4Header">4. Модели (Models)</sys:String>
+    <sys:String x:Key="Str_About_GuideStep4Body">Открой раздел «Модели». Каждая карточка показывает, сколько видеопамяти нужно этой модели — сравни с тем, что ты увидел на шаге 1, и выбери подходящую. Нажми «Скачать официальную модель» — это самый простой способ, скачивается проверенная версия автоматически (в том числе через торрент, если это быстрее). Также можно скачать модель через Discord Keryx Labs — там команда публикует актуальные зеркала, кнопка «Открыть Discord» есть на этой же странице. Дождись, пока полоса загрузки дойдёт до 100%.</sys:String>
+
+    <sys:String x:Key="Str_About_GuideStep5Header">5. Запуск (Панель управления)</sys:String>
+    <sys:String x:Key="Str_About_GuideStep5Body">Вернись на «Панель управления» и нажми «Запустить всё» — майнинг начнётся. Если статус показывает «Остановлена», хотя нода или майнер точно уже работают (например, были запущены раньше) — нажми «Обновить», либо один раз «Остановить всё» и затем «Запустить всё», чтобы приложение снова взяло процессы под своё управление.</sys:String>
     <sys:String x:Key="Str_Wizard_WindowTitle">Keryx Node Manager — первый запуск</sys:String>
     <sys:String x:Key="Str_Wizard_HeaderTitle">Настройка Keryx Node Manager</sys:String>
     <sys:String x:Key="Str_Wizard_Step0_Title">Добро пожаловать</sys:String>
@@ -377,6 +409,7 @@
 
     <!-- NodeView restructure (0.2.6 brief §8): public nodes first, own-node settings collapsed -->
     <sys:String x:Key="Str_Node_PublicNodesHeader">Публичные ноды</sys:String>
+    <sys:String x:Key="Str_Node_InUseBadge">✓ Используется сейчас</sys:String>
     <sys:String x:Key="Str_Node_PublicNodesDesc">Если своей ноды нет или она ещё синхронизируется, можно временно майнить через чужую. Список ведётся вручную (протокол не хранит публичный реестр нод) - при желании укажите ссылку на JSON-список ниже.</sys:String>
     <sys:String x:Key="Str_Node_RemoteListUrlTooltip">URL публичного JSON-списка нод (необязательно)</sys:String>
     <sys:String x:Key="Str_Node_RefreshList">Обновить список</sys:String>

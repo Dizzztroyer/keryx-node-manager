@@ -8,7 +8,7 @@
 ; carefully, but treat the first real run as the actual verification.
 
 #define MyAppName "Keryx Node Manager"
-#define MyAppVersion "0.2.6"
+#define MyAppVersion "0.2.7"
 #define MyAppPublisher "Keryx Node Manager (community project, not an official Keryx Labs product)"
 #define MyAppExeName "KeryxNodeManager.exe"
 #define MyPublishDir "..\artifacts\publish\win-x64"

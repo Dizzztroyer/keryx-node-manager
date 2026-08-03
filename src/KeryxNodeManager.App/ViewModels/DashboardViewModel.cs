@@ -111,6 +111,31 @@ public partial class DashboardViewModel : ObservableObject
                 : AppStrings.Get("Str_Dashboard_MinerStatus_Stopped");
             LastActionMessage = AppStrings.Format("Str_Dashboard_LogPrefix_Miner", evt.Message);
         });
+
+        // 0.2.7 fix: NodeStatus/MinerStatus are plain cached strings (see the class-level property
+        // declarations above), resolved via AppStrings.Get at the moment each ProcessSupervisor
+        // event fires - they are NOT DynamicResource references, so nothing re-evaluates them when
+        // the user later switches languages on the Settings page while the node/miner are simply
+        // sitting idle (no new supervisor event to trigger a recompute). Verified live: this is
+        // exactly why a real screenshot showed "Gestoppt" surviving a switch back to English on the
+        // Dashboard, while every XAML-bound label on the same page updated immediately.
+        // LocalizationManager.LanguageChanged (raised by every Apply() call, including this one)
+        // lets this ViewModel recompute its own cached text the same way a supervisor event does,
+        // without needing the node/miner to actually start or stop first. DashboardViewModel is
+        // constructed once via DI and lives for the app's process lifetime (MainWindow.xaml.cs
+        // reuses the same instance across every Dashboard navigation, only recreating the View), so
+        // this subscription is never unsubscribed - there is exactly one instance to leak.
+        LocalizationManager.LanguageChanged += RefreshLocalizedStatusText;
+    }
+
+    private void RefreshLocalizedStatusText()
+    {
+        NodeStatus = _nodeSupervisor.IsRunning
+            ? AppStrings.Get("Str_Dashboard_NodeStatus_Running")
+            : AppStrings.Get("Str_Dashboard_NodeStatus_Stopped");
+        MinerStatus = _minerSupervisor.IsRunning
+            ? AppStrings.Get("Str_Dashboard_MinerStatus_Running")
+            : AppStrings.Get("Str_Dashboard_MinerStatus_Stopped");
     }
 
     /// <summary>Non-localized run-state signal for callers (e.g. App.xaml.cs's tray-icon-state

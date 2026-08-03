@@ -33,6 +33,15 @@
     <sys:String x:Key="Str_Nav_VersionLabel">Version: </sys:String>
     <sys:String x:Key="Str_Nav_ProfileLabel">Profil: </sys:String>
 
+    <sys:String x:Key="Str_Nav_Dashboard">Dashboard</sys:String>
+    <sys:String x:Key="Str_Nav_Gpu">GPU</sys:String>
+    <sys:String x:Key="Str_Nav_Models">Modelle</sys:String>
+    <sys:String x:Key="Str_Nav_Node">Node</sys:String>
+    <sys:String x:Key="Str_Nav_Miner">Miner</sys:String>
+    <sys:String x:Key="Str_Nav_Logs">Protokolle</sys:String>
+    <sys:String x:Key="Str_Nav_Settings">Einstellungen</sys:String>
+    <sys:String x:Key="Str_Nav_About">Über</sys:String>
+
     <sys:String x:Key="Str_Dashboard_Title">Übersicht</sys:String>
     <sys:String x:Key="Str_Dashboard_Node">Node</sys:String>
     <sys:String x:Key="Str_Dashboard_Miner">Miner</sys:String>
@@ -120,6 +129,24 @@
     <sys:String x:Key="Str_About_OsLabel">Betriebssystem: </sys:String>
     <sys:String x:Key="Str_About_DotNetLabel">.NET: </sys:String>
     <sys:String x:Key="Str_About_Is64BitLabel">64-Bit-Betriebssystem: </sys:String>
+
+    <sys:String x:Key="Str_About_GuideHeader">So startest du das Mining: Schritt-für-Schritt-Anleitung</sys:String>
+    <sys:String x:Key="Str_About_GuideIntro">Gehe diese 5 Schritte der Reihe nach durch. Jeder Schritt entspricht einer Seite im Menü links.</sys:String>
+
+    <sys:String x:Key="Str_About_GuideStep1Header">1. GPU (Grafikkarte)</sys:String>
+    <sys:String x:Key="Str_About_GuideStep1Body">Öffne die Seite "GPU". Dort siehst du, wie viel Grafikspeicher (VRAM) jede deiner Karten hat - das brauchst du in Schritt 4, um ein passend großes Modell auszuwählen. Wähle für jede Karte einen Modus (am einfachsten "Auto" - die App entscheidet dann selbst, was darauf läuft).</sys:String>
+
+    <sys:String x:Key="Str_About_GuideStep2Header">2. Node</sys:String>
+    <sys:String x:Key="Str_About_GuideStep2Body">Eine eigene Node braucht lange zum Synchronisieren, deshalb ist es einfacher, zuerst eine öffentliche Node eines anderen zu nutzen. Öffne die Seite "Node", klicke auf "Liste aktualisieren", wähle eine Node aus der Liste und klicke auf "Verwenden" - die ausgewählte Node wird hervorgehoben, damit klar ist, welche gerade aktiv ist. Wenn du später deine eigene Node starten willst, klappe unten auf derselben Seite "Eigene Node-Einstellungen" auf und trage den Pfad zu keryxd.exe sowie die Verbindungsadresse ein.</sys:String>
+
+    <sys:String x:Key="Str_About_GuideStep3Header">3. Miner</sys:String>
+    <sys:String x:Key="Str_About_GuideStep3Body">Öffne die Seite "Miner". Füge deine Belohnungsadresse ein - das ist deine Wallet, auf der die geschürften Coins ankommen. Aktiviere den Überhitzungsschutz und lege die Temperaturschwellen (Warnung und kritisch) fest, damit deine Karte beim Mining nicht überhitzt.</sys:String>
+
+    <sys:String x:Key="Str_About_GuideStep4Header">4. Modelle</sys:String>
+    <sys:String x:Key="Str_About_GuideStep4Body">Öffne die Seite "Modelle". Jede Karte zeigt, wie viel VRAM dieses Modell benötigt - vergleiche das mit dem Wert aus Schritt 1 und wähle ein passendes Modell. Klicke auf "Offizielles Modell herunterladen" - die einfachste Option, sie lädt automatisch eine geprüfte Version herunter (bei Bedarf auch per Torrent, wenn das schneller ist). Du kannst ein Modell auch über den Discord von Keryx Labs beziehen, wo das Team aktuelle Mirrors veröffentlicht - dazu gibt es auf derselben Seite den Button "Discord öffnen". Warte, bis der Fortschrittsbalken 100 % erreicht.</sys:String>
+
+    <sys:String x:Key="Str_About_GuideStep5Header">5. Start (Dashboard)</sys:String>
+    <sys:String x:Key="Str_About_GuideStep5Body">Gehe zurück zum Dashboard und klicke auf "Alles starten" - das Mining beginnt. Zeigt der Status weiterhin "Gestoppt" an, obwohl Node oder Miner erkennbar schon laufen (z. B. weil du sie vorher gestartet hast), klicke auf "Aktualisieren" oder einmal auf "Alles stoppen" und danach "Alles starten", damit die App die Prozesse wieder unter ihre Verwaltung nimmt.</sys:String>
     <sys:String x:Key="Str_Wizard_WindowTitle">Keryx Node Manager — Erster Start</sys:String>
     <sys:String x:Key="Str_Wizard_HeaderTitle">Keryx Node Manager einrichten</sys:String>
     <sys:String x:Key="Str_Wizard_Step0_Title">Willkommen</sys:String>
@@ -337,6 +364,7 @@ Das Ändern von GPU-Taktraten und/oder Lüftereinstellungen ist ein potenziell r
 
     <!-- NodeView restructure (0.2.6 brief §8): public nodes first, own-node settings collapsed -->
     <sys:String x:Key="Str_Node_PublicNodesHeader">Öffentliche Nodes</sys:String>
+    <sys:String x:Key="Str_Node_InUseBadge">✓ Wird gerade verwendet</sys:String>
     <sys:String x:Key="Str_Node_PublicNodesDesc">Wenn Sie noch keinen eigenen Node haben oder dieser noch synchronisiert, können Sie vorübergehend über einen anderen minen. Die Liste wird manuell gepflegt (das Protokoll hat kein öffentliches Node-Register) - optional können Sie unten einen Link zu einer JSON-Liste angeben.</sys:String>
     <sys:String x:Key="Str_Node_RemoteListUrlTooltip">URL einer öffentlichen Node-Liste im JSON-Format (optional)</sys:String>
     <sys:String x:Key="Str_Node_RefreshList">Liste aktualisieren</sys:String>

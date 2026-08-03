@@ -115,6 +115,8 @@ public partial class PublicNodeListViewModel : ObservableObject
             StatusMessage = Nodes.Count == 0
                 ? AppStrings.Get("Str_PublicNodes_EmptyList")
                 : AppStrings.Format("Str_PublicNodes_LoadedCount", Nodes.Count);
+
+            RefreshSelection();
         }
         catch (Exception ex)
         {
@@ -123,6 +125,20 @@ public partial class PublicNodeListViewModel : ObservableObject
         finally
         {
             IsBusy = false;
+        }
+    }
+
+    /// <summary>Re-derives which row (if any) is highlighted as "currently in use" by comparing
+    /// each row's endpoint/port against the active profile's live NodeEndpoint/NodePort - never
+    /// tracked as a separate flag that could drift out of sync with the actual profile values that
+    /// drive real mining behaviour.</summary>
+    private void RefreshSelection()
+    {
+        foreach (var row in Nodes)
+        {
+            row.IsSelected = !_profile.AutoStartNode
+                && string.Equals(row.Info.Endpoint, _profile.NodeEndpoint, StringComparison.OrdinalIgnoreCase)
+                && row.Info.Port == _profile.NodePort;
         }
     }
 
@@ -281,6 +297,7 @@ public partial class PublicNodeListViewModel : ObservableObject
         _profile.AutoStartNode = false;
         _persist();
         StatusMessage = AppStrings.Format("Str_PublicNodes_NodeSelected", row.Info.Name, row.Info.Endpoint, row.Info.Port);
+        RefreshSelection();
 
         StartWatchingForOwnNodeSync();
     }
@@ -297,6 +314,7 @@ public partial class PublicNodeListViewModel : ObservableObject
         _profile.AutoStartNode = _rememberedAutoStartNode || true;
         _persist();
         StatusMessage = AppStrings.Get("Str_PublicNodes_SwitchedBackToOwn");
+        RefreshSelection();
     }
 
     /// <summary>Called by NodeViewModel when the active profile changes or the app is shutting
@@ -350,6 +368,7 @@ public partial class PublicNodeListViewModel : ObservableObject
                     _persist();
                     StatusMessage = AppStrings.Get("Str_PublicNodes_AutoSwitchedBackSynced");
                     IsWatchingForOwnNodeSync = false;
+                    RefreshSelection();
                     return;
                 }
             }

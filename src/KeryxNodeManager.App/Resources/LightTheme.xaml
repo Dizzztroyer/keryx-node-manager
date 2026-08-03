@@ -38,6 +38,17 @@
     <Setter Property="FontSize" Value="13"/>
   </Style>
 
+  <!-- Same centralized fix as DarkTheme.xaml (see its own comment) - TextBlocks/CheckBoxes with no
+       explicit Foreground now inherit the correct themed color in Light mode too, instead of
+       whatever the ambient/default happened to be. -->
+  <Style TargetType="TextBlock">
+    <Setter Property="Foreground" Value="{DynamicResource TextPrimaryBrush}"/>
+  </Style>
+
+  <Style TargetType="CheckBox">
+    <Setter Property="Foreground" Value="{DynamicResource TextPrimaryBrush}"/>
+  </Style>
+
   <Style x:Key="NavButtonStyle" TargetType="RadioButton">
     <Setter Property="Height" Value="40"/>
     <Setter Property="Padding" Value="16,0,0,0"/>

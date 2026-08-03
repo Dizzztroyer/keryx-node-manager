@@ -22,6 +22,21 @@ public static class LocalizationManager
 
     public static readonly IReadOnlyList<string> SupportedLanguages = new[] { "ru", "en", "es", "it", "fr", "uk", "de" };
 
+    /// <summary>
+    /// Raised after every successful <see cref="Apply"/> call (both the startup call and every
+    /// later language switch). 0.2.7 fix: added because DashboardViewModel.NodeStatus/MinerStatus
+    /// (and similar ViewModel properties elsewhere that build C# display text via AppStrings.Get)
+    /// resolve their text ONCE, at the moment they're computed, and store the result as a plain
+    /// cached string - not a DynamicResource-style live reference. A real screenshot from the 0.2.7
+    /// visual-acceptance re-review caught this live: after switching Settings' language dropdown
+    /// from German back to English, every XAML-bound label updated immediately (as expected), but
+    /// the Dashboard's Node/Miner status text stayed stuck showing "Gestoppt" until the next actual
+    /// start/stop event recomputed it. Any ViewModel with the same cached-string pattern should
+    /// subscribe here and recompute its own cached text; this event deliberately carries no
+    /// arguments (subscribers already know which keys they used to compute their own properties).
+    /// </summary>
+    public static event Action? LanguageChanged;
+
     public static void Apply(string languageCode)
     {
         string normalized = SupportedLanguages.Contains(languageCode) ? languageCode : "ru";
@@ -41,5 +56,7 @@ public static class LocalizationManager
         // in the one place this method is already called both at startup and on every later
         // language switch (SettingsViewModel's language ComboBox binding).
         CoreStrings.Language = normalized;
+
+        LanguageChanged?.Invoke();
     }
 }

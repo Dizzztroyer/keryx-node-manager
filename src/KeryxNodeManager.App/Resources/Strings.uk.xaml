@@ -35,6 +35,15 @@
     <sys:String x:Key="Str_Nav_VersionLabel">Версія: </sys:String>
     <sys:String x:Key="Str_Nav_ProfileLabel">Профіль: </sys:String>
 
+    <sys:String x:Key="Str_Nav_Dashboard">Дашборд</sys:String>
+    <sys:String x:Key="Str_Nav_Gpu">GPU</sys:String>
+    <sys:String x:Key="Str_Nav_Models">Моделі</sys:String>
+    <sys:String x:Key="Str_Nav_Node">Нода</sys:String>
+    <sys:String x:Key="Str_Nav_Miner">Майнер</sys:String>
+    <sys:String x:Key="Str_Nav_Logs">Журнали</sys:String>
+    <sys:String x:Key="Str_Nav_Settings">Налаштування</sys:String>
+    <sys:String x:Key="Str_Nav_About">Про програму</sys:String>
+
     <sys:String x:Key="Str_Dashboard_Title">Огляд</sys:String>
     <sys:String x:Key="Str_Dashboard_Node">Нода</sys:String>
     <sys:String x:Key="Str_Dashboard_Miner">Майнер</sys:String>
@@ -122,6 +131,24 @@
     <sys:String x:Key="Str_About_OsLabel">ОС: </sys:String>
     <sys:String x:Key="Str_About_DotNetLabel">.NET: </sys:String>
     <sys:String x:Key="Str_About_Is64BitLabel">64-розрядна ОС: </sys:String>
+
+    <sys:String x:Key="Str_About_GuideHeader">Як почати майнити: покрокова інструкція</sys:String>
+    <sys:String x:Key="Str_About_GuideIntro">Пройди ці 5 кроків по порядку — згори донизу. Кожен крок відповідає одному розділу в меню зліва.</sys:String>
+
+    <sys:String x:Key="Str_About_GuideStep1Header">1. Відеокарта (GPU)</sys:String>
+    <sys:String x:Key="Str_About_GuideStep1Body">Відкрий розділ «Відеокарта». Там показано, скільки відеопам'яті (VRAM) має кожна твоя карта - це знадобиться на кроці 4, щоб обрати модель потрібного розміру. Для кожної карти обери режим (найпростіше залишити «Авто» - програма сама вирішить, що на неї встановити).</sys:String>
+
+    <sys:String x:Key="Str_About_GuideStep2Header">2. Нода (Node)</sys:String>
+    <sys:String x:Key="Str_About_GuideStep2Body">Власна нода синхронізується з мережею довго, тому простіше спочатку підключитися до чужої публічної ноди. Відкрий розділ «Нода», натисни «Оновити список», обери ноду зі списку і натисни «Використати» - обрана нода підсвітиться, щоб було видно, яка саме зараз використовується. Якщо згодом захочеш запустити свою ноду - розгорни блок «Налаштування власної ноди» внизу цієї ж сторінки і вкажи шлях до keryxd.exe та адресу підключення.</sys:String>
+
+    <sys:String x:Key="Str_About_GuideStep3Header">3. Майнер (Miner)</sys:String>
+    <sys:String x:Key="Str_About_GuideStep3Body">Відкрий розділ «Майнер». Встав свою адресу для винагород - це твій гаманець, куди надходитимуть намайнені монети. Увімкни захист від перегріву і вкажи пороги температури (попередження та критичний), щоб карта не перегрілася під час майнінгу.</sys:String>
+
+    <sys:String x:Key="Str_About_GuideStep4Header">4. Моделі (Models)</sys:String>
+    <sys:String x:Key="Str_About_GuideStep4Body">Відкрий розділ «Моделі». Кожна картка показує, скільки відеопам'яті потрібно цій моделі - порівняй з тим, що побачив на кроці 1, і обери підходящу. Натисни «Завантажити офіційну модель» - найпростіший спосіб, завантажується перевірена версія автоматично (зокрема через торент, якщо це швидше). Також можна завантажити модель через Discord Keryx Labs - там команда публікує актуальні дзеркала, кнопка «Відкрити Discord» є на цій же сторінці. Дочекайся, поки смуга завантаження дійде до 100%.</sys:String>
+
+    <sys:String x:Key="Str_About_GuideStep5Header">5. Запуск (Панель керування)</sys:String>
+    <sys:String x:Key="Str_About_GuideStep5Body">Повернись на «Панель керування» і натисни «Запустити все» - майнінг розпочнеться. Якщо статус показує «Зупинено», хоча нода чи майнер точно вже працюють (наприклад, були запущені раніше) - натисни «Оновити», або один раз «Зупинити все», а потім «Запустити все», щоб застосунок знову взяв процеси під своє керування.</sys:String>
 
     <sys:String x:Key="Str_Wizard_WindowTitle">Keryx Node Manager — перший запуск</sys:String>
     <sys:String x:Key="Str_Wizard_HeaderTitle">Налаштування Keryx Node Manager</sys:String>

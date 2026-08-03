@@ -32,6 +32,15 @@
     <sys:String x:Key="Str_Nav_VersionLabel">Versione: </sys:String>
     <sys:String x:Key="Str_Nav_ProfileLabel">Profilo: </sys:String>
 
+    <sys:String x:Key="Str_Nav_Dashboard">Pannello</sys:String>
+    <sys:String x:Key="Str_Nav_Gpu">GPU</sys:String>
+    <sys:String x:Key="Str_Nav_Models">Modelli</sys:String>
+    <sys:String x:Key="Str_Nav_Node">Nodo</sys:String>
+    <sys:String x:Key="Str_Nav_Miner">Miner</sys:String>
+    <sys:String x:Key="Str_Nav_Logs">Registri</sys:String>
+    <sys:String x:Key="Str_Nav_Settings">Impostazioni</sys:String>
+    <sys:String x:Key="Str_Nav_About">Informazioni</sys:String>
+
     <sys:String x:Key="Str_Dashboard_Title">Panoramica</sys:String>
     <sys:String x:Key="Str_Dashboard_Node">Nodo</sys:String>
     <sys:String x:Key="Str_Dashboard_Miner">Miner</sys:String>
@@ -119,6 +128,24 @@
     <sys:String x:Key="Str_About_OsLabel">SO: </sys:String>
     <sys:String x:Key="Str_About_DotNetLabel">.NET: </sys:String>
     <sys:String x:Key="Str_About_Is64BitLabel">SO a 64 bit: </sys:String>
+
+    <sys:String x:Key="Str_About_GuideHeader">Come iniziare a minare: guida passo dopo passo</sys:String>
+    <sys:String x:Key="Str_About_GuideIntro">Segui questi 5 passaggi in ordine, dall'alto verso il basso. Ogni passaggio corrisponde a una pagina del menu a sinistra.</sys:String>
+
+    <sys:String x:Key="Str_About_GuideStep1Header">1. GPU (scheda video)</sys:String>
+    <sys:String x:Key="Str_About_GuideStep1Body">Apri la pagina "GPU". Qui vedi quanta memoria video (VRAM) ha ciascuna scheda - ti servirà al passaggio 4 per scegliere un modello della dimensione giusta. Per ogni scheda scegli una modalità (la più semplice è lasciare "Auto" - l'app deciderà cosa installarci).</sys:String>
+
+    <sys:String x:Key="Str_About_GuideStep2Header">2. Nodo</sys:String>
+    <sys:String x:Key="Str_About_GuideStep2Body">Il proprio nodo impiega molto tempo a sincronizzarsi, quindi è più semplice iniziare collegandosi a un nodo pubblico di qualcun altro. Apri la pagina "Nodo", clicca "Aggiorna elenco", scegli un nodo dall'elenco e clicca "Usa" - il nodo scelto verrà evidenziato per far capire quale è attualmente in uso. Se in seguito vuoi avviare il tuo nodo, espandi "Impostazioni del mio nodo" in fondo alla stessa pagina e indica il percorso di keryxd.exe e l'indirizzo di connessione.</sys:String>
+
+    <sys:String x:Key="Str_About_GuideStep3Header">3. Miner</sys:String>
+    <sys:String x:Key="Str_About_GuideStep3Body">Apri la pagina "Miner". Incolla il tuo indirizzo per le ricompense - è il tuo portafoglio, dove arriveranno le monete minate. Attiva la protezione dal surriscaldamento e imposta le soglie di temperatura (avviso e critica), così la scheda non si surriscalda durante il mining.</sys:String>
+
+    <sys:String x:Key="Str_About_GuideStep4Header">4. Modelli</sys:String>
+    <sys:String x:Key="Str_About_GuideStep4Body">Apri la pagina "Modelli". Ogni scheda mostra quanta VRAM richiede quel modello - confrontala con quanto visto al passaggio 1 e scegline uno adatto. Clicca su "Scarica modello ufficiale" - l'opzione più semplice, scarica automaticamente una versione verificata (anche via torrent, se più veloce). Puoi anche ottenere un modello tramite il Discord di Keryx Labs, dove il team pubblica mirror aggiornati - c'è un pulsante "Apri Discord" nella stessa pagina. Attendi che la barra di avanzamento raggiunga il 100%.</sys:String>
+
+    <sys:String x:Key="Str_About_GuideStep5Header">5. Avvio (Dashboard)</sys:String>
+    <sys:String x:Key="Str_About_GuideStep5Body">Torna alla Dashboard e clicca "Avvia tutto" - il mining inizierà. Se lo stato mostra ancora "Fermato" anche se nodo o miner sono chiaramente già in esecuzione (ad esempio li avevi avviati in precedenza), clicca "Aggiorna", oppure clicca una volta "Ferma tutto" e poi "Avvia tutto", così l'app riprende la gestione di quei processi.</sys:String>
     <sys:String x:Key="Str_Wizard_WindowTitle">Keryx Node Manager — primo avvio</sys:String>
     <sys:String x:Key="Str_Wizard_HeaderTitle">Configurazione di Keryx Node Manager</sys:String>
     <sys:String x:Key="Str_Wizard_Step0_Title">Benvenuto</sys:String>

@@ -77,13 +77,30 @@ public sealed class ModelDownloader
             long totalWritten = existingLength;
             progress?.Report(new ModelDownloadProgress(totalWritten, totalBytes));
 
+            // 0.2.7 fix: this loop reads in 80KB chunks, so a multi-GB model on a fast connection
+            // was calling progress.Report() (and therefore Dispatcher-marshalling into the WPF UI
+            // thread via System.Progress<T>'s captured SynchronizationContext) tens of thousands of
+            // times per second. The UI thread couldn't keep up, so the ProgressBar/percentage text
+            // rendered far behind reality - looking "wrong"/stuck/jumpy rather than a smooth,
+            // accurate reflection of the real percentage (the same class of UI-thread flooding
+            // behind the Logs-page lag bug). Throttling reports to a fixed cadence fixes both the
+            // visual accuracy and the UI responsiveness, without losing the final 100% report.
+            var reportStopwatch = System.Diagnostics.Stopwatch.StartNew();
+            var reportInterval = TimeSpan.FromMilliseconds(200);
+
             int read;
             while ((read = await responseStream.ReadAsync(buffer, ct)) > 0)
             {
                 await fileStream.WriteAsync(buffer.AsMemory(0, read), ct);
                 totalWritten += read;
-                progress?.Report(new ModelDownloadProgress(totalWritten, totalBytes));
+                if (reportStopwatch.Elapsed >= reportInterval)
+                {
+                    progress?.Report(new ModelDownloadProgress(totalWritten, totalBytes));
+                    reportStopwatch.Restart();
+                }
             }
+
+            progress?.Report(new ModelDownloadProgress(totalWritten, totalBytes));
         }
 
         if (expectedSha256Hex is not null)

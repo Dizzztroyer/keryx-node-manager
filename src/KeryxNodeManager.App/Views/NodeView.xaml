@@ -48,8 +48,24 @@
                 <ItemsControl ItemsSource="{Binding Nodes}" Margin="0,12,0,0">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
-                            <Border Background="{DynamicResource SurfaceAltBrush}" CornerRadius="4"
-                                    Padding="10" Margin="0,0,0,8">
+                            <!-- 0.2.7 fix: when connected to a public/third-party node, nothing in
+                                 this list previously showed WHICH row that was - the user had to
+                                 remember which one they'd clicked "Использовать" on. IsSelected
+                                 (PublicNodeRowViewModel, kept in sync with the active profile's real
+                                 NodeEndpoint/NodePort by PublicNodeListViewModel.RefreshSelection)
+                                 now drives a highlighted background + accent border on that one row. -->
+                            <Border CornerRadius="4" Padding="10" Margin="0,0,0,8" BorderThickness="2">
+                                <Border.Style>
+                                    <Style TargetType="Border">
+                                        <Setter Property="Background" Value="{DynamicResource SurfaceAltBrush}"/>
+                                        <Setter Property="BorderBrush" Value="Transparent"/>
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding IsSelected}" Value="True">
+                                                <Setter Property="BorderBrush" Value="{DynamicResource AccentBrush}"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Border.Style>
                                 <Grid>
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="*"/>
@@ -63,6 +79,9 @@
                                             <Run Text=" ("/><Run Text="{Binding Info.Endpoint, Mode=OneWay}"/>
                                             <Run Text=":"/><Run Text="{Binding Info.Port, Mode=OneWay}"/><Run Text=")"/>
                                         </TextBlock>
+                                        <TextBlock Text="{DynamicResource Str_Node_InUseBadge}" FontSize="11" FontWeight="Bold"
+                                                   Foreground="{DynamicResource AccentBrush}" Margin="0,2,0,0"
+                                                   Visibility="{Binding IsSelected, Converter={StaticResource BoolToVis}}"/>
                                         <TextBlock Text="{Binding StatusText, Mode=OneWay}"
                                                    Foreground="{DynamicResource TextSecondaryBrush}" Margin="0,2,0,0"/>
                                         <TextBlock Text="{Binding Info.Notes, Mode=OneWay}" FontSize="11" TextWrapping="Wrap"

@@ -26,6 +26,19 @@ namespace KeryxNodeManager.App.ViewModels;
 /// </summary>
 public partial class GpuOverclockSectionViewModel : ObservableObject
 {
+    /// <summary>
+    /// 0.2.7 feature flag (brief follow-up after 0.2.6's visual acceptance review): the overclock
+    /// UI (sliders, Manual fan, Apply/Reset, and the "unavailable"/raw-NVAPI-error message) is
+    /// hidden from GpuView.xaml regardless of <see cref="IsSupported"/> until a real hardware
+    /// Apply/write has actually been performed and verified with the user present - see
+    /// PROJECT_STATUS.md for why no real Apply has been done yet. Flip this back to true (and
+    /// remove the hardcoded Visibility="Collapsed" overrides in GpuView.xaml that reference this
+    /// constant in their comments) once that verification happens. Backend code
+    /// (IGpuOverclockController/NvApiGpuOverclockController/MockGpuOverclockController and this
+    /// ViewModel) is deliberately left fully intact - only the View is gated.
+    /// </summary>
+    public const bool UiFeatureEnabled = false;
+
     private readonly IGpuOverclockController _controller;
     private readonly SafetyMonitor _safetyMonitor;
     private readonly string _gpuUuid;

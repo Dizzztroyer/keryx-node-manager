@@ -5,9 +5,19 @@
         MinHeight="560" MinWidth="900"
         WindowStartupLocation="CenterScreen"
         Closing="Window_Closing"
-        StateChanged="Window_StateChanged">
-
-    <Grid>
+        StateChanged="Window_StateChanged"
+        Background="{DynamicResource BackgroundBrush}"
+        Foreground="{DynamicResource TextPrimaryBrush}">
+    <!-- 0.2.7 fix: explicit Background/Foreground set directly here rather than relying solely on
+         DarkTheme.xaml/LightTheme.xaml's implicit `Style TargetType="Window"` - the 0.2.6 visual
+         review's real screenshots showed the main client area rendering plain white regardless of
+         theme, meaning that implicit Window style was not reliably reaching this exact window in
+         practice. An explicit local value on the Window tag itself is unambiguous and cannot be
+         missed by implicit-style resolution edge cases; DynamicResource still keeps it live across
+         a theme swap. The root Grid below also gets an explicit Background for the same reason -
+         belt-and-suspenders, since ContentControl/PageHost itself paints no background of its own
+         and must not silently show whatever is behind it if this Window-level fix is ever removed. -->
+    <Grid Background="{DynamicResource BackgroundBrush}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="220"/>
             <ColumnDefinition Width="*"/>
@@ -45,6 +55,60 @@
                          SelectedItem="{Binding SelectedPage, Mode=TwoWay}"
                          SelectionChanged="NavList_SelectionChanged"
                          BorderThickness="0" Background="Transparent">
+                    <!-- 0.2.7 fix: Pages is a raw internal routing-key array ("Dashboard", "GPU", ...)
+                         with no built-in localization - previously the ListBox displayed those keys
+                         verbatim, so the sidebar stayed in English no matter which language was
+                         selected. This ItemTemplate maps each key to its Str_Nav_* resource via
+                         DataTrigger; DynamicResource inside a trigger Setter still re-resolves live
+                         when LocalizationManager swaps the Strings.{lang}.xaml dictionary, so the
+                         sidebar now updates immediately on language switch, same as every other
+                         DynamicResource-bound label in the app. -->
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <!-- 0.2.7 fix, take 2: the previous attempt set Text="{Binding}" directly
+                                 on the TextBlock (a local value). WPF's property-value precedence
+                                 ranks a local value ABOVE Style.Triggers Setters unconditionally, so
+                                 every DataTrigger below was silently losing to that local Binding and
+                                 never took effect - verified live (real screenshots kept showing the
+                                 raw, unlocalized page-key text with German selected even after adding
+                                 the triggers and an explicit ContentPresenter TemplateBinding). Moving
+                                 the fallback "{Binding}" into a plain Style Setter (not a local value)
+                                 fixes it: DataTrigger Setters now correctly outrank it. -->
+                            <TextBlock>
+                                <TextBlock.Style>
+                                    <Style TargetType="TextBlock">
+                                        <Setter Property="Text" Value="{Binding}"/>
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding}" Value="Dashboard">
+                                                <Setter Property="Text" Value="{DynamicResource Str_Nav_Dashboard}"/>
+                                            </DataTrigger>
+                                            <DataTrigger Binding="{Binding}" Value="GPU">
+                                                <Setter Property="Text" Value="{DynamicResource Str_Nav_Gpu}"/>
+                                            </DataTrigger>
+                                            <DataTrigger Binding="{Binding}" Value="Models">
+                                                <Setter Property="Text" Value="{DynamicResource Str_Nav_Models}"/>
+                                            </DataTrigger>
+                                            <DataTrigger Binding="{Binding}" Value="Node">
+                                                <Setter Property="Text" Value="{DynamicResource Str_Nav_Node}"/>
+                                            </DataTrigger>
+                                            <DataTrigger Binding="{Binding}" Value="Miner">
+                                                <Setter Property="Text" Value="{DynamicResource Str_Nav_Miner}"/>
+                                            </DataTrigger>
+                                            <DataTrigger Binding="{Binding}" Value="Logs">
+                                                <Setter Property="Text" Value="{DynamicResource Str_Nav_Logs}"/>
+                                            </DataTrigger>
+                                            <DataTrigger Binding="{Binding}" Value="Settings">
+                                                <Setter Property="Text" Value="{DynamicResource Str_Nav_Settings}"/>
+                                            </DataTrigger>
+                                            <DataTrigger Binding="{Binding}" Value="About">
+                                                <Setter Property="Text" Value="{DynamicResource Str_Nav_About}"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBlock.Style>
+                            </TextBlock>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
                     <ListBox.ItemContainerStyle>
                         <Style TargetType="ListBoxItem">
                             <Setter Property="Padding" Value="16,10"/>
@@ -55,7 +119,17 @@
                                     <ControlTemplate TargetType="ListBoxItem">
                                         <Border x:Name="Bg" Background="Transparent" CornerRadius="6"
                                                 Padding="{TemplateBinding Padding}">
-                                            <ContentPresenter/>
+                                            <!-- 0.2.7 fix: explicit TemplateBinding for Content/ContentTemplate
+                                                 instead of a bare ContentPresenter. A bare ContentPresenter
+                                                 relies on WPF's implicit "auto content templating" which did
+                                                 NOT reliably pick up NavList.ItemTemplate in this exact custom
+                                                 ControlTemplate in practice (verified live: real screenshots
+                                                 kept showing the raw, unlocalized page-key text even after
+                                                 ItemTemplate was added and German was selected) - being
+                                                 explicit here removes any doubt about which Content/
+                                                 ContentTemplate the presenter actually uses. -->
+                                            <ContentPresenter Content="{TemplateBinding Content}"
+                                                               ContentTemplate="{TemplateBinding ContentTemplate}"/>
                                         </Border>
                                         <ControlTemplate.Triggers>
                                             <Trigger Property="IsSelected" Value="True">
@@ -79,7 +153,21 @@
         <!-- Content area: MainWindow.xaml.cs swaps the visible UserControl whenever SelectedPage
              changes (see NavList_SelectionChanged). Only Dashboard/GPU are real, working pages in
              this pass; the rest resolve to a shared "not implemented yet" placeholder
-             (PlaceholderView) rather than silently showing nothing - see PROJECT_STATUS.md. -->
-        <ContentControl x:Name="PageHost" Grid.Column="1" Margin="24"/>
+             (PlaceholderView) rather than silently showing nothing - see PROJECT_STATUS.md.
+
+             0.2.7 root-cause fix: ContentControl's default WPF template is just a bare
+             ContentPresenter - unlike Border/Panel, it never actually paints its own Background
+             property (there is no Border/Panel in its template consuming it via TemplateBinding).
+             Setting Background directly on the ContentControl (as the first 0.2.7 attempt did) was
+             therefore a no-op at render time, which is exactly why the real screenshots still
+             showed a white/system-colored main area even after that "fix" - the property was set
+             but nothing ever drew it. Wrapping PageHost in a Border (which DOES paint its own
+             Background, no template involved) is the actual, structural fix: it fills the entire
+             right-hand column, including the margin gutter around the content, so no unthemed
+             area can show through regardless of what the hosted page does or doesn't paint. -->
+        <Border Grid.Column="1" Background="{DynamicResource BackgroundBrush}">
+            <ContentControl x:Name="PageHost" Margin="24"
+                             Foreground="{DynamicResource TextPrimaryBrush}"/>
+        </Border>
     </Grid>
 </Window>

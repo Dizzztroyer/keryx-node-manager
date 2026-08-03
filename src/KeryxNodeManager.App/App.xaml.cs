@@ -168,6 +168,24 @@ public partial class App : Application
         // replaces App.xaml's old static `<ResourceDictionary Source="Resources/DarkTheme.xaml"/>`
         // merge - ThemeManager.Apply now owns loading the initial (and every later) theme
         // dictionary, exactly like LocalizationManager.Apply already does for language.
+        //
+        // 0.2.7 fix: real screenshots caught a genuine, reproducible bug here - the very FIRST
+        // Dark-to-Light switch in a running session left MainWindow's sidebar (the DockPanel bound
+        // to {DynamicResource SurfaceBrush}) stuck showing the old dark color, while every other
+        // DynamicResource consumer in the same window (page content, cards, text) updated
+        // correctly at the same moment. A SECOND switch always worked correctly. This strongly
+        // suggests a one-time WPF quirk tied to a ResourceDictionary's pack-URI being resolved for
+        // the very first time during this process's lifetime (LightTheme.xaml is never loaded at
+        // all until a user actually picks "Light", since the app defaults to dark) - some part of
+        // the DynamicResource invalidation chain for at least one already-realized element doesn't
+        // fire correctly on that first-ever load, but does on every subsequent one. Rather than
+        // leave every real user to hit this exact bug the first time they ever try Light mode, the
+        // fix is to silently exercise BOTH theme dictionaries once here, before MainWindow is ever
+        // constructed or shown - by the time the user can actually see anything, both pack URIs are
+        // already loaded and warm, and the persisted theme is applied last so the correct one is
+        // what's actually visible. This is a pragmatic mitigation for an observed symptom, not a
+        // fully root-caused fix for the underlying WPF behavior - see PROJECT_STATUS.md.
+        ThemeManager.Apply(profileStore.Settings.Theme == "light" ? "dark" : "light");
         ThemeManager.Apply(profileStore.Settings.Theme);
 
         // First-run wizard (brief §4): shown once, before MainWindow, until FirstRunCompleted is

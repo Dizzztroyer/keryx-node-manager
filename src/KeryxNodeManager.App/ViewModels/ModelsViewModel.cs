@@ -60,10 +60,16 @@ public partial class ModelCardViewModel : ObservableObject
     private string _statusText = "";
 
     [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(ProgressPercentText))]
     private double _progressPercent;
 
     [ObservableProperty]
     private bool _progressIsIndeterminate;
+
+    /// <summary>Small "NN%" label drawn over the progress bar itself (0.2.7 fix) - the bar's fill
+    /// width alone was reported as hard to read at a glance; this makes the exact percentage
+    /// explicit right next to the bar it corresponds to.</summary>
+    public string ProgressPercentText => $"{ProgressPercent:F0}%";
 
     [ObservableProperty]
     [NotifyCanExecuteChangedFor(nameof(DownloadCommand))]

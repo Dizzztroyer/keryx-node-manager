@@ -1,4 +1,5 @@
 using System.Diagnostics;
+using System.IO;
 using System.Runtime.InteropServices;
 using System.Text;
 using KeryxNodeManager.Core.Localization;
@@ -86,11 +87,29 @@ public sealed class TaskSchedulerAutostart
         "/Query", "/TN", TaskName,
     };
 
+    /// <summary>0.2.7 fix: a real user report ("checked the box, nothing started, and it
+    /// immediately unchecked itself") plus this class's own documented root-cause finding above
+    /// (some Windows installs' UAC token filtering denies schtasks /Create even for a `/RL LIMITED`
+    /// per-user task, for reasons entirely outside this app's control) means RegisterAsync cannot
+    /// be relied on alone for "make autostart just work for a normal user". The classic, much more
+    /// universally-permitted alternative - dropping a tiny launcher into the current user's Startup
+    /// folder (%APPDATA%\Microsoft\Windows\Start Menu\Programs\Startup) - needs no Task Scheduler
+    /// API, no elevation, and no policy edge cases: Windows Explorer itself runs anything placed
+    /// there at every logon, which is exactly the same ONLOGON/RL LIMITED semantics this class
+    /// already promises. This is used as a silent fallback only when schtasks fails, so a healthy
+    /// machine still gets the (slightly more "proper") Task Scheduler entry as before.</summary>
+    private static string StartupFolderScriptPath =>
+        Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Startup), "KeryxNodeManager.cmd");
+
     public async Task RegisterAsync(string executablePath, CancellationToken ct = default)
     {
         var (exitCode, _, stderr) = await RunAsync(BuildRegisterArguments(executablePath), ct);
         if (exitCode != 0)
         {
+            if (TryRegisterViaStartupFolder(executablePath))
+            {
+                return;
+            }
             // "Access is denied"/"Отказано в доступе" here was originally guessed to be
             // antivirus/EDR interference (this project's own test machine had Norton 360
             // installed) - that guess was never confirmed and turned out to be wrong. Root-caused
@@ -128,10 +147,44 @@ public sealed class TaskSchedulerAutostart
     public async Task UnregisterAsync(CancellationToken ct = default)
     {
         var (exitCode, _, stderr) = await RunAsync(BuildUnregisterArguments(), ct);
+        RemoveStartupFolderScriptIfPresent();
         if (exitCode != 0 && !stderr.Contains("cannot find", StringComparison.OrdinalIgnoreCase))
         {
             throw new AutostartException(
                 CoreStrings.Format("TaskScheduler.UnregisterFailed", exitCode, stderr.Trim()));
+        }
+    }
+
+    /// <summary>Writes the Startup-folder launcher script (see StartupFolderScriptPath's doc
+    /// comment) - returns false (never throws) on any failure so the caller can still surface the
+    /// original schtasks error if this fallback also doesn't work out.</summary>
+    private static bool TryRegisterViaStartupFolder(string executablePath)
+    {
+        try
+        {
+            // "start "" "path"" (not just the bare path) so a path containing spaces is handled
+            // correctly and the batch window itself doesn't stay open waiting on the launched exe.
+            var script = $"@echo off\r\nstart \"\" \"{executablePath}\"\r\n";
+            File.WriteAllText(StartupFolderScriptPath, script);
+            return true;
+        }
+        catch
+        {
+            return false;
+        }
+    }
+
+    private static void RemoveStartupFolderScriptIfPresent()
+    {
+        try
+        {
+            if (File.Exists(StartupFolderScriptPath)) File.Delete(StartupFolderScriptPath);
+        }
+        catch
+        {
+            // Best-effort cleanup only - a leftover launcher script is harmless (worst case it
+            // re-launches an app that's already running, which the app's own single-instance mutex
+            // already handles).
         }
     }
 
@@ -144,7 +197,7 @@ public sealed class TaskSchedulerAutostart
     public async Task<bool> IsRegisteredAsync(CancellationToken ct = default)
     {
         var (exitCode, _, _) = await RunAsync(BuildQueryArguments(), ct);
-        return exitCode == 0;
+        return exitCode == 0 || File.Exists(StartupFolderScriptPath);
     }
 
     private async Task<(int ExitCode, string Stdout, string Stderr)> RunAsync(

@@ -49,9 +49,16 @@
                                  and/or cooler - see GpuOverclockSectionViewModel's own doc comment
                                  for why "not supported" is treated as an expected outcome, not an
                                  error banner. -->
+                            <!-- 0.2.7 brief: overclock UI hidden regardless of Overclock.IsSupported, per
+                                 GpuOverclockSectionViewModel.UiFeatureEnabled (currently false) - no real
+                                 hardware Apply/write has been verified yet. Hardcoded Visibility="Collapsed"
+                                 rather than a binding, since the flag is a compile-time constant; flip
+                                 UiFeatureEnabled back to true and restore
+                                 Visibility="{Binding Overclock.IsSupported, Converter={StaticResource BoolToVis}}"
+                                 here once that verification happens. -->
                             <Border Margin="0,12,0,0" BorderThickness="1,0,0,0" Padding="12,0,0,0"
                                     BorderBrush="{DynamicResource TextSecondaryBrush}"
-                                    Visibility="{Binding Overclock.IsSupported, Converter={StaticResource BoolToVis}}">
+                                    Visibility="Collapsed">
                                 <StackPanel DataContext="{Binding Overclock}">
                                     <TextBlock Text="{DynamicResource Str_Gpu_OverclockHeader}" FontWeight="SemiBold" Margin="0,0,0,6"/>
 
@@ -117,9 +124,15 @@
                                  IsSupported-gated Border above, so the user saw nothing at all -
                                  no controls AND no explanation. This sibling, gated on the inverse,
                                  is what actually surfaces that explanation now. -->
+                            <!-- Also hidden per the 0.2.7 feature flag above - this used to surface the
+                                 raw NVAPI exception message (e.g. "NVAPI reports 1 GPU(s), but device
+                                 index 1 was expected...") directly in the main UI, which the 0.2.6
+                                 visual review correctly flagged as a real, user-facing raw-error leak.
+                                 The technical detail is still available via Overclock.LastError for
+                                 logging - it's just not rendered here while the feature is off. -->
                             <TextBlock Margin="0,12,0,0" TextWrapping="Wrap"
                                        Foreground="{DynamicResource TextSecondaryBrush}"
-                                       Visibility="{Binding Overclock.IsSupported, Converter={StaticResource InverseBoolToVis}}">
+                                       Visibility="Collapsed">
                                 <Run Text="{DynamicResource Str_Gpu_OverclockUnavailablePrefix}"/>
                                 <Run Text="{Binding Overclock.LastError, Mode=OneWay}"/>
                             </TextBlock>

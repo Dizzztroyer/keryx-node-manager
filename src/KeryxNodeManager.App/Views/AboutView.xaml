@@ -18,6 +18,44 @@
             </StackPanel>
         </Border>
 
+        <!-- 0.2.7 fix: beginner-friendly, localized "how to start mining" step-by-step guide -
+             user's own request: "от а до я по пунктам, как для маленьких тупых детей". Placed right
+             after the short description, before the links/system-info cards, since this is the
+             single most useful thing a brand-new user should read on this page. -->
+        <Border Style="{DynamicResource CardStyle}" Margin="0,0,0,16">
+            <StackPanel>
+                <TextBlock Text="{DynamicResource Str_About_GuideHeader}" FontSize="16" FontWeight="Bold"
+                           Foreground="{DynamicResource TextPrimaryBrush}" Margin="0,0,0,6"/>
+                <TextBlock Text="{DynamicResource Str_About_GuideIntro}" TextWrapping="Wrap"
+                           FontStyle="Italic" Foreground="{DynamicResource TextSecondaryBrush}" Margin="0,0,0,12"/>
+
+                <TextBlock Text="{DynamicResource Str_About_GuideStep1Header}" FontWeight="SemiBold"
+                           Foreground="{DynamicResource TextPrimaryBrush}"/>
+                <TextBlock Text="{DynamicResource Str_About_GuideStep1Body}" TextWrapping="Wrap"
+                           Foreground="{DynamicResource TextSecondaryBrush}" Margin="0,2,0,12"/>
+
+                <TextBlock Text="{DynamicResource Str_About_GuideStep2Header}" FontWeight="SemiBold"
+                           Foreground="{DynamicResource TextPrimaryBrush}"/>
+                <TextBlock Text="{DynamicResource Str_About_GuideStep2Body}" TextWrapping="Wrap"
+                           Foreground="{DynamicResource TextSecondaryBrush}" Margin="0,2,0,12"/>
+
+                <TextBlock Text="{DynamicResource Str_About_GuideStep3Header}" FontWeight="SemiBold"
+                           Foreground="{DynamicResource TextPrimaryBrush}"/>
+                <TextBlock Text="{DynamicResource Str_About_GuideStep3Body}" TextWrapping="Wrap"
+                           Foreground="{DynamicResource TextSecondaryBrush}" Margin="0,2,0,12"/>
+
+                <TextBlock Text="{DynamicResource Str_About_GuideStep4Header}" FontWeight="SemiBold"
+                           Foreground="{DynamicResource TextPrimaryBrush}"/>
+                <TextBlock Text="{DynamicResource Str_About_GuideStep4Body}" TextWrapping="Wrap"
+                           Foreground="{DynamicResource TextSecondaryBrush}" Margin="0,2,0,12"/>
+
+                <TextBlock Text="{DynamicResource Str_About_GuideStep5Header}" FontWeight="SemiBold"
+                           Foreground="{DynamicResource TextPrimaryBrush}"/>
+                <TextBlock Text="{DynamicResource Str_About_GuideStep5Body}" TextWrapping="Wrap"
+                           Foreground="{DynamicResource TextSecondaryBrush}" Margin="0,2,0,0"/>
+            </StackPanel>
+        </Border>
+
         <Border Style="{DynamicResource CardStyle}" Margin="0,0,0,16">
             <StackPanel>
                 <TextBlock Text="{DynamicResource Str_About_LinksHeader}" FontWeight="SemiBold" Margin="0,0,0,8"

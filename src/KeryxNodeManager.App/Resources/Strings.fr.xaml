@@ -32,6 +32,15 @@
     <sys:String x:Key="Str_Nav_VersionLabel">Version : </sys:String>
     <sys:String x:Key="Str_Nav_ProfileLabel">Profil : </sys:String>
 
+    <sys:String x:Key="Str_Nav_Dashboard">Tableau de bord</sys:String>
+    <sys:String x:Key="Str_Nav_Gpu">GPU</sys:String>
+    <sys:String x:Key="Str_Nav_Models">Modèles</sys:String>
+    <sys:String x:Key="Str_Nav_Node">Nœud</sys:String>
+    <sys:String x:Key="Str_Nav_Miner">Mineur</sys:String>
+    <sys:String x:Key="Str_Nav_Logs">Journaux</sys:String>
+    <sys:String x:Key="Str_Nav_Settings">Paramètres</sys:String>
+    <sys:String x:Key="Str_Nav_About">À propos</sys:String>
+
     <sys:String x:Key="Str_Dashboard_Title">Aperçu</sys:String>
     <sys:String x:Key="Str_Dashboard_Node">Nœud</sys:String>
     <sys:String x:Key="Str_Dashboard_Miner">Mineur</sys:String>
@@ -119,6 +128,24 @@
     <sys:String x:Key="Str_About_OsLabel">OS : </sys:String>
     <sys:String x:Key="Str_About_DotNetLabel">.NET : </sys:String>
     <sys:String x:Key="Str_About_Is64BitLabel">OS 64 bits : </sys:String>
+
+    <sys:String x:Key="Str_About_GuideHeader">Comment démarrer le minage : guide étape par étape</sys:String>
+    <sys:String x:Key="Str_About_GuideIntro">Suis ces 5 étapes dans l'ordre, de haut en bas. Chaque étape correspond à une page du menu à gauche.</sys:String>
+
+    <sys:String x:Key="Str_About_GuideStep1Header">1. GPU (carte graphique)</sys:String>
+    <sys:String x:Key="Str_About_GuideStep1Body">Ouvre la page « GPU ». Elle indique la quantité de mémoire vidéo (VRAM) de chaque carte - tu en auras besoin à l'étape 4 pour choisir un modèle de la bonne taille. Pour chaque carte, choisis un mode (le plus simple est de laisser « Auto » - l'application choisira quoi y installer).</sys:String>
+
+    <sys:String x:Key="Str_About_GuideStep2Header">2. Node</sys:String>
+    <sys:String x:Key="Str_About_GuideStep2Body">Ton propre nœud met longtemps à se synchroniser, il est donc plus simple de commencer par te connecter à un nœud public de quelqu'un d'autre. Ouvre la page « Node », clique sur « Actualiser la liste », choisis un nœud dans la liste puis clique sur « Utiliser » - le nœud choisi sera mis en surbrillance pour que tu voies lequel est actif. Si tu veux plus tard lancer ton propre nœud, déplie « Paramètres de mon nœud » en bas de la même page et indique le chemin vers keryxd.exe ainsi que l'adresse de connexion.</sys:String>
+
+    <sys:String x:Key="Str_About_GuideStep3Header">3. Mineur</sys:String>
+    <sys:String x:Key="Str_About_GuideStep3Body">Ouvre la page « Mineur ». Colle ton adresse de récompenses - c'est ton portefeuille, où arriveront les pièces minées. Active la protection contre la surchauffe et définis les seuils de température (avertissement et critique) pour que la carte ne surchauffe pas pendant le minage.</sys:String>
+
+    <sys:String x:Key="Str_About_GuideStep4Header">4. Modèles</sys:String>
+    <sys:String x:Key="Str_About_GuideStep4Body">Ouvre la page « Modèles ». Chaque carte indique la VRAM nécessaire pour ce modèle - compare avec ce que tu as vu à l'étape 1 et choisis-en un adapté. Clique sur « Télécharger le modèle officiel » - l'option la plus simple, elle télécharge automatiquement une version vérifiée (aussi via torrent si c'est plus rapide). Tu peux aussi obtenir un modèle via le Discord de Keryx Labs, où l'équipe publie des miroirs à jour - il y a un bouton « Ouvrir Discord » sur cette même page. Attends que la barre de progression atteigne 100 %.</sys:String>
+
+    <sys:String x:Key="Str_About_GuideStep5Header">5. Démarrage (tableau de bord)</sys:String>
+    <sys:String x:Key="Str_About_GuideStep5Body">Reviens au tableau de bord et clique sur « Tout démarrer » - le minage commence. Si le statut affiche toujours « Arrêté » alors que le nœud ou le mineur tournent visiblement déjà (par exemple démarrés plus tôt), clique sur « Actualiser », ou clique une fois sur « Tout arrêter » puis « Tout démarrer », pour que l'application reprenne la gestion de ces processus.</sys:String>
     <sys:String x:Key="Str_Wizard_WindowTitle">Keryx Node Manager — premier démarrage</sys:String>
     <sys:String x:Key="Str_Wizard_HeaderTitle">Configuration de Keryx Node Manager</sys:String>
     <sys:String x:Key="Str_Wizard_Step0_Title">Bienvenue</sys:String>
@@ -335,6 +362,7 @@ Modifier les fréquences et/ou le ventilateur du GPU est une opération potentie
     <sys:String x:Key="Str_Wizard_NoGpuDetected">Aucun GPU NVIDIA détecté.</sys:String>
     <!-- NodeView restructure (0.2.6 brief §8): public nodes first, own-node settings collapsed -->
     <sys:String x:Key="Str_Node_PublicNodesHeader">Nœuds publics</sys:String>
+    <sys:String x:Key="Str_Node_InUseBadge">✓ Utilisé actuellement</sys:String>
     <sys:String x:Key="Str_Node_PublicNodesDesc">Si vous n'avez pas encore votre propre nœud, ou s'il est encore en synchronisation, vous pouvez miner temporairement via celui d'un autre. La liste est tenue manuellement (le protocole ne dispose pas de registre public des nœuds) - indiquez éventuellement un lien vers une liste JSON ci-dessous.</sys:String>
     <sys:String x:Key="Str_Node_RemoteListUrlTooltip">URL d'une liste publique de nœuds au format JSON (facultatif)</sys:String>
     <sys:String x:Key="Str_Node_RefreshList">Actualiser la liste</sys:String>
