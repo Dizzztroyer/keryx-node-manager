@@ -54,6 +54,9 @@
     <sys:String x:Key="Str_Dashboard_StopAll">Зупинити все</sys:String>
     <sys:String x:Key="Str_Dashboard_Refresh">Оновити</sys:String>
     <sys:String x:Key="Str_Dashboard_GoToSettings">Перейти до налаштувань</sys:String>
+    <sys:String x:Key="Str_Dashboard_CudaWarningTitle">Майнер не може використати відеокарту</sys:String>
+    <sys:String x:Key="Str_Dashboard_CudaWarningBody">Виявлено CUDA-відеокарту, але потрібний CUDA runtime не завантажився - майнінг фактично не йде, хоча процес запущено. Встанови вручну NVIDIA CUDA Toolkit 12.6 і перезапусти майнер (Зупинити все → Запустити все).</sys:String>
+    <sys:String x:Key="Str_Dashboard_CudaWarningButton">Завантажити CUDA Toolkit 12.6</sys:String>
 
     <sys:String x:Key="Str_Gpu_Title">Відеокарти</sys:String>
     <sys:String x:Key="Str_Gpu_Refresh">Оновити</sys:String>

@@ -51,6 +51,9 @@
     <sys:String x:Key="Str_Dashboard_StopAll">Tout arrêter</sys:String>
     <sys:String x:Key="Str_Dashboard_Refresh">Actualiser</sys:String>
     <sys:String x:Key="Str_Dashboard_GoToSettings">Aller aux paramètres</sys:String>
+    <sys:String x:Key="Str_Dashboard_CudaWarningTitle">Le mineur ne peut pas utiliser ta carte graphique</sys:String>
+    <sys:String x:Key="Str_Dashboard_CudaWarningBody">Une carte graphique CUDA a été détectée, mais le runtime CUDA nécessaire n'a pas pu se charger - le minage ne se fait pas réellement, même si le processus tourne. Installe manuellement le NVIDIA CUDA Toolkit 12.6 puis redémarre le mineur (Tout arrêter → Tout démarrer).</sys:String>
+    <sys:String x:Key="Str_Dashboard_CudaWarningButton">Télécharger CUDA Toolkit 12.6</sys:String>
 
     <sys:String x:Key="Str_Gpu_Title">Cartes graphiques</sys:String>
     <sys:String x:Key="Str_Gpu_Refresh">Actualiser</sys:String>

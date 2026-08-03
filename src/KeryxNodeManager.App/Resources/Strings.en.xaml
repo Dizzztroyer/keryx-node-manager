@@ -56,6 +56,9 @@
     <sys:String x:Key="Str_Dashboard_StopAll">Stop All</sys:String>
     <sys:String x:Key="Str_Dashboard_Refresh">Refresh</sys:String>
     <sys:String x:Key="Str_Dashboard_GoToSettings">Go to settings</sys:String>
+    <sys:String x:Key="Str_Dashboard_CudaWarningTitle">The miner can't use your graphics card</sys:String>
+    <sys:String x:Key="Str_Dashboard_CudaWarningBody">A CUDA graphics card was detected, but the required CUDA runtime failed to load - mining isn't actually happening even though the process is running. Install the NVIDIA CUDA Toolkit 12.6 manually and restart the miner (Stop All → Start All).</sys:String>
+    <sys:String x:Key="Str_Dashboard_CudaWarningButton">Download CUDA Toolkit 12.6</sys:String>
 
     <sys:String x:Key="Str_Gpu_Title">GPUs</sys:String>
     <sys:String x:Key="Str_Gpu_Refresh">Refresh</sys:String>

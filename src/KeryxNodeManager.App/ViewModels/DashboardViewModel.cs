@@ -58,6 +58,40 @@ public partial class DashboardViewModel : ObservableObject
     [ObservableProperty]
     private string? _missingConfigTarget;
 
+    /// <summary>True once keryx-miner's own stderr has reported it can't load a CUDA runtime
+    /// library (real-world trigger: the user's own diagnostics export showed this looping every
+    /// ~20s, and it was already present in logs from BEFORE this app's own 0.2.7 changes - this is
+    /// keryx-miner.exe's own bundled auto-installer failing, not a regression in this app's code).
+    /// A plain user has no reason to know to go digging in the Logs page for this - surfacing it
+    /// directly on the Dashboard with a one-click link to the real fix (installing the NVIDIA CUDA
+    /// 12.6 toolkit themselves - a system-level, admin-elevated installer this app deliberately
+    /// does not attempt to silently drive) is the difference between "just works" and "silently
+    /// mines nothing forever while looking like it's running".</summary>
+    [ObservableProperty]
+    private bool _showCudaRuntimeWarning;
+
+    [RelayCommand]
+    private void OpenCudaDownloadPage()
+    {
+        System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo(
+            "https://developer.nvidia.com/cuda-12-6-0-download-archive")
+        { UseShellExecute = true });
+    }
+
+    /// <summary>Matches keryx-miner's own real stderr text (both the WARN "installing them
+    /// automatically" line and the terminal ERROR line use "CUDA runtime lib" - matching on that
+    /// substring catches either, without depending on exact wording that could shift between miner
+    /// versions). Only ever flips the warning ON here; it's cleared at the top of every fresh
+    /// StartAllAsync so a user who fixes the toolkit and restarts mining doesn't keep seeing a
+    /// stale banner from the previous run.</summary>
+    private void DetectMinerCudaRuntimeIssue(string line)
+    {
+        if (line.Contains("CUDA runtime lib", StringComparison.OrdinalIgnoreCase))
+        {
+            App.Current.Dispatcher.Invoke(() => ShowCudaRuntimeWarning = true);
+        }
+    }
+
     /// <summary>Raised when the user clicks the "Перейти к настройкам" nudge button.
     /// DashboardViewModel has no reference to MainViewModel/MainWindow (and shouldn't - Dashboard
     /// is a page, not the nav shell), so navigation is requested via this event and MainWindow.xaml.cs
@@ -169,6 +203,7 @@ public partial class DashboardViewModel : ObservableObject
     {
         var profile = _profileStore.ActiveProfile;
         MissingConfigTarget = null;
+        ShowCudaRuntimeWarning = false;
 
         if (string.IsNullOrWhiteSpace(profile.NodeExecutablePath) && !IsMockBackend)
         {
@@ -234,7 +269,11 @@ public partial class DashboardViewModel : ObservableObject
                     Arguments: minerArgs,
                     WorkingDirectory: DirectoryOf(profile.MinerExecutablePath),
                     EnvironmentVariables: minerEnv,
-                    OnOutputLine: (line, isError) => _logSink.Append(ManagedProcessKind.Miner, isError, line));
+                    OnOutputLine: (line, isError) =>
+                    {
+                        _logSink.Append(ManagedProcessKind.Miner, isError, line);
+                        DetectMinerCudaRuntimeIssue(line);
+                    });
                 await _minerSupervisor.StartMinerAsync(minerSpec);
 
                 // Overheat protection (brief §14) only matters while the miner is actually

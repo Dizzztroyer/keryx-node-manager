@@ -5,9 +5,29 @@
              Loaded="UserControl_Loaded">
     <UserControl.Resources>
         <conv:StringToVisibilityConverter x:Key="StringToVis"/>
+        <BooleanToVisibilityConverter x:Key="BoolToVis"/>
     </UserControl.Resources>
     <StackPanel>
         <TextBlock Text="{DynamicResource Str_Dashboard_Title}" FontSize="22" FontWeight="Bold" Margin="0,0,0,16"/>
+
+        <!-- 0.2.7 fix: keryx-miner's own "CUDA runtime lib missing/failed to load" loop (real user
+             report + confirmed present in their diagnostics export from before this app's own 0.2.7
+             changes - a pre-existing environment issue, not a regression here) used to be visible
+             only by digging into the Logs page. A plain user has no reason to know to look there,
+             so this banner surfaces it right on the Dashboard with a direct link to the actual fix -
+             installing the NVIDIA CUDA 12.6 toolkit (a system installer this app deliberately does
+             not try to silently drive itself). -->
+        <Border Style="{DynamicResource CardStyle}" Margin="0,0,0,16" BorderBrush="{DynamicResource ErrorBrush}"
+                BorderThickness="1" Visibility="{Binding ShowCudaRuntimeWarning, Converter={StaticResource BoolToVis}}">
+            <StackPanel>
+                <TextBlock Text="{DynamicResource Str_Dashboard_CudaWarningTitle}" FontWeight="Bold"
+                           Foreground="{DynamicResource ErrorBrush}"/>
+                <TextBlock Text="{DynamicResource Str_Dashboard_CudaWarningBody}" TextWrapping="Wrap"
+                           Margin="0,6,0,0" Foreground="{DynamicResource TextPrimaryBrush}"/>
+                <Button Content="{DynamicResource Str_Dashboard_CudaWarningButton}" Style="{DynamicResource PrimaryButtonStyle}"
+                        Command="{Binding OpenCudaDownloadPageCommand}" HorizontalAlignment="Left" Margin="0,10,0,0"/>
+            </StackPanel>
+        </Border>
 
         <UniformGrid Columns="3" Rows="1">
             <Border Style="{DynamicResource CardStyle}" Margin="0,0,12,0">

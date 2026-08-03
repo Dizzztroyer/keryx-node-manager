@@ -51,6 +51,9 @@
     <sys:String x:Key="Str_Dashboard_StopAll">Detener todo</sys:String>
     <sys:String x:Key="Str_Dashboard_Refresh">Actualizar</sys:String>
     <sys:String x:Key="Str_Dashboard_GoToSettings">Ir a la configuración</sys:String>
+    <sys:String x:Key="Str_Dashboard_CudaWarningTitle">El minero no puede usar tu tarjeta gráfica</sys:String>
+    <sys:String x:Key="Str_Dashboard_CudaWarningBody">Se detectó una tarjeta gráfica CUDA, pero el runtime de CUDA necesario no se pudo cargar - en realidad no se está minando aunque el proceso esté en marcha. Instala manualmente el NVIDIA CUDA Toolkit 12.6 y reinicia el minero (Detener todo → Iniciar todo).</sys:String>
+    <sys:String x:Key="Str_Dashboard_CudaWarningButton">Descargar CUDA Toolkit 12.6</sys:String>
 
     <sys:String x:Key="Str_Gpu_Title">Tarjetas gráficas</sys:String>
     <sys:String x:Key="Str_Gpu_Refresh">Actualizar</sys:String>

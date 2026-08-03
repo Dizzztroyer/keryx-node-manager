@@ -66,6 +66,9 @@
     <sys:String x:Key="Str_Dashboard_StopAll">Остановить всё</sys:String>
     <sys:String x:Key="Str_Dashboard_Refresh">Обновить</sys:String>
     <sys:String x:Key="Str_Dashboard_GoToSettings">Перейти к настройкам</sys:String>
+    <sys:String x:Key="Str_Dashboard_CudaWarningTitle">Майнер не может использовать видеокарту</sys:String>
+    <sys:String x:Key="Str_Dashboard_CudaWarningBody">Обнаружена CUDA-видеокарта, но нужный CUDA runtime не загрузился — майнинг фактически не идёт, хотя процесс запущен. Нужно вручную установить NVIDIA CUDA Toolkit 12.6 и перезапустить майнер (Остановить всё → Запустить всё).</sys:String>
+    <sys:String x:Key="Str_Dashboard_CudaWarningButton">Скачать CUDA Toolkit 12.6</sys:String>
 
     <!-- GPU page (brief §6), second slice of the full-extraction pass. Same scope limitation as
          Dashboard: GpuCardViewModel.AssignmentSummary comes from Core's TierAssigner.Explanation

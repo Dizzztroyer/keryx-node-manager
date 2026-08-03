@@ -29,3 +29,190 @@
 
 ╨Я╤А╨╛╨╣╨┤╨╡╨╜!   : ╨╜╨╡ ╨┐╤А╨╛╨╣╨┤╨╡╨╜╨╛     0, ╨┐╤А╨╛╨╣╨┤╨╡╨╜╨╛   182, ╨┐╤А╨╛╨┐╤Г╤Й╨╡╨╜╨╛     0, ╨▓╤Б╨╡╨│╨╛   182, ╨┤╨╗╨╕╤В╨╡╨╗╤М╨╜╨╛╤Б╤В╤М 2 s. - KeryxNodeManager.Core.Tests.dll (net8.0)
 ---- git add/commit/push ---- 
+warning: in the working copy of '.gitignore', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'KeryxNodeManager.sln', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'README.de.md', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'README.es.md', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'README.fr.md', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'README.md', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'README.ru.md', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'docs/BUILD.md', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'docs/RELEASE.md', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'docs/SECURITY.md', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'docs/TROUBLESHOOTING_RU.md', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'docs/USER_GUIDE_RU.md', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'scripts/build-release.ps1', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'scripts/package-portable.ps1', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/KeryxNodeManager.App/App.xaml', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/KeryxNodeManager.App/App.xaml.cs', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/KeryxNodeManager.App/AppStrings.cs', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/KeryxNodeManager.App/AppVersionInfo.cs', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/KeryxNodeManager.App/Converters/ComboBoxSelectionDisplayConverter.cs', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/KeryxNodeManager.App/Converters/InverseBooleanToVisibilityConverter.cs', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/KeryxNodeManager.App/Converters/StringToVisibilityConverter.cs', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/KeryxNodeManager.App/Gpu/NvApiGpuOverclockController.cs', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/KeryxNodeManager.App/LocalizationManager.cs', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/KeryxNodeManager.App/MainWindow.xaml', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/KeryxNodeManager.App/MainWindow.xaml.cs', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/KeryxNodeManager.App/Resources/DarkTheme.xaml', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/KeryxNodeManager.App/Resources/LightTheme.xaml', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/KeryxNodeManager.App/Resources/Strings.de.xaml', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/KeryxNodeManager.App/Resources/Strings.en.xaml', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/KeryxNodeManager.App/Resources/Strings.es.xaml', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/KeryxNodeManager.App/Resources/Strings.fr.xaml', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/KeryxNodeManager.App/Resources/Strings.it.xaml', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/KeryxNodeManager.App/Resources/Strings.ru.xaml', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/KeryxNodeManager.App/Resources/Strings.uk.xaml', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/KeryxNodeManager.App/SingleInstance/SingleInstanceIpc.cs', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/KeryxNodeManager.App/ThemeManager.cs', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/KeryxNodeManager.App/Tray/TrayIconService.cs', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/KeryxNodeManager.App/ViewModels/AboutViewModel.cs', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/KeryxNodeManager.App/ViewModels/BinaryUpdateSectionViewModel.cs', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/KeryxNodeManager.App/ViewModels/DashboardViewModel.cs', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/KeryxNodeManager.App/ViewModels/DataDirSectionViewModel.cs', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/KeryxNodeManager.App/ViewModels/GpuOverclockSectionViewModel.cs', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/KeryxNodeManager.App/ViewModels/GpuViewModel.cs', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/KeryxNodeManager.App/ViewModels/LogsViewModel.cs', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/KeryxNodeManager.App/ViewModels/MainViewModel.cs', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/KeryxNodeManager.App/ViewModels/MinerViewModel.cs', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/KeryxNodeManager.App/ViewModels/ModelsViewModel.cs', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/KeryxNodeManager.App/ViewModels/NodeViewModel.cs', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/KeryxNodeManager.App/ViewModels/ProfilesViewModel.cs', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/KeryxNodeManager.App/ViewModels/PublicNodeListViewModel.cs', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/KeryxNodeManager.App/ViewModels/PublicNodeRowViewModel.cs', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/KeryxNodeManager.App/ViewModels/SettingsViewModel.cs', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/KeryxNodeManager.App/ViewModels/WizardViewModel.cs', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/KeryxNodeManager.App/Views/AboutView.xaml', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/KeryxNodeManager.App/Views/AboutView.xaml.cs', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/KeryxNodeManager.App/Views/DashboardView.xaml', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/KeryxNodeManager.App/Views/DashboardView.xaml.cs', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/KeryxNodeManager.App/Views/GpuView.xaml', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/KeryxNodeManager.App/Views/GpuView.xaml.cs', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/KeryxNodeManager.App/Views/LogsView.xaml', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/KeryxNodeManager.App/Views/LogsView.xaml.cs', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/KeryxNodeManager.App/Views/MinerView.xaml', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/KeryxNodeManager.App/Views/MinerView.xaml.cs', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/KeryxNodeManager.App/Views/ModelsView.xaml', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/KeryxNodeManager.App/Views/ModelsView.xaml.cs', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/KeryxNodeManager.App/Views/NodeView.xaml', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/KeryxNodeManager.App/Views/NodeView.xaml.cs', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/KeryxNodeManager.App/Views/PlaceholderView.cs', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/KeryxNodeManager.App/Views/ProfilesView.xaml', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/KeryxNodeManager.App/Views/ProfilesView.xaml.cs', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/KeryxNodeManager.App/Views/SettingsView.xaml', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/KeryxNodeManager.App/Views/SettingsView.xaml.cs', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/KeryxNodeManager.App/Views/WizardWindow.xaml', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/KeryxNodeManager.App/Views/WizardWindow.xaml.cs', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/KeryxNodeManager.App/app.manifest', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/KeryxNodeManager.Core/Autostart/TaskSchedulerAutostart.cs', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/KeryxNodeManager.Core/Cli/MinerArgumentBuilder.cs', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/KeryxNodeManager.Core/Cli/NodeArgumentBuilder.cs', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/KeryxNodeManager.Core/Config/ConfigStore.cs', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/KeryxNodeManager.Core/Config/DefaultInstallPaths.cs', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/KeryxNodeManager.Core/Config/ProfileStore.cs', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/KeryxNodeManager.Core/Diagnostics/SystemChecker.cs', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/KeryxNodeManager.Core/Gpu/IGpuInfoProvider.cs', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/KeryxNodeManager.Core/Gpu/IGpuOverclockController.cs', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/KeryxNodeManager.Core/Gpu/MockGpuInfoProvider.cs', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/KeryxNodeManager.Core/Gpu/MockGpuOverclockController.cs', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/KeryxNodeManager.Core/Gpu/NvidiaSmiGpuInfoProvider.cs', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/KeryxNodeManager.Core/KeryxNodeManager.Core.csproj', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/KeryxNodeManager.Core/Localization/CoreStrings.cs', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/KeryxNodeManager.Core/Logging/DiagnosticsExporter.cs', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/KeryxNodeManager.Core/Logging/LogSink.cs', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/KeryxNodeManager.Core/ModelAssignment/GpuAssignmentResolver.cs', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/KeryxNodeManager.Core/ModelAssignment/TierAssigner.cs', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/KeryxNodeManager.Core/Models/GpuDevice.cs', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/KeryxNodeManager.Core/Models/MiningProfile.cs', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/KeryxNodeManager.Core/Models/ModelTier.cs', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/KeryxNodeManager.Core/ModelsManagement/ModelDownloadException.cs', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/KeryxNodeManager.Core/ModelsManagement/ModelDownloadProgress.cs', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/KeryxNodeManager.Core/ModelsManagement/ModelDownloader.cs', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/KeryxNodeManager.Core/ModelsManagement/ModelFileLocator.cs', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/KeryxNodeManager.Core/ModelsManagement/OfficialModelDownloadService.cs', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/KeryxNodeManager.Core/ModelsManagement/OfficialModelMirrors.cs', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/KeryxNodeManager.Core/Networking/DataDirDownloadService.cs', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/KeryxNodeManager.Core/Networking/KeryxRpcJsonClient.cs', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/KeryxNodeManager.Core/Networking/OwnNodePeerDiscoveryService.cs', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/KeryxNodeManager.Core/Networking/PublicNodeDirectoryService.cs', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/KeryxNodeManager.Core/Networking/PublicNodeInfo.cs', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/KeryxNodeManager.Core/Networking/PublicNodes.json', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/KeryxNodeManager.Core/Process/ManagedProcessHandle.cs', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/KeryxNodeManager.Core/Process/ProcessSupervisor.cs', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/KeryxNodeManager.Core/Process/RestartPolicy.cs', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/KeryxNodeManager.Core/Runtime/IKeryxRuntimeBackend.cs', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/KeryxNodeManager.Core/Runtime/LaunchSpecs.cs', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/KeryxNodeManager.Core/Runtime/MockRuntimeBackend.cs', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/KeryxNodeManager.Core/Runtime/NativeWindowsRuntimeBackend.cs', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/KeryxNodeManager.Core/Runtime/WslRuntimeBackend.cs', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/KeryxNodeManager.Core/Safety/SafetyMonitor.cs', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/KeryxNodeManager.Core/Secrets/SecretMasker.cs', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/KeryxNodeManager.Core/Updates/BinaryUpdateService.cs', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/KeryxNodeManager.Core/Updates/GitHubReleaseChecker.cs', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/KeryxNodeManager.Core/Validation/KeryxAddressValidator.cs', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/KeryxNodeManager.Core/Validation/PathValidator.cs', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'tests/KeryxNodeManager.Core.Tests/BinaryUpdateServiceTests.cs', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'tests/KeryxNodeManager.Core.Tests/ConfigStoreTests.cs', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'tests/KeryxNodeManager.Core.Tests/CoreStringsTests.cs', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'tests/KeryxNodeManager.Core.Tests/DataDirDownloadServiceTests.cs', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'tests/KeryxNodeManager.Core.Tests/DefaultInstallPathsTests.cs', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'tests/KeryxNodeManager.Core.Tests/DiagnosticsExporterTests.cs', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'tests/KeryxNodeManager.Core.Tests/GitHubReleaseCheckerTests.cs', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'tests/KeryxNodeManager.Core.Tests/GpuAssignmentResolverTests.cs', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'tests/KeryxNodeManager.Core.Tests/KeryxAddressValidatorTests.cs', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'tests/KeryxNodeManager.Core.Tests/KeryxNodeManager.Core.Tests.csproj', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'tests/KeryxNodeManager.Core.Tests/KeryxRpcJsonClientTests.cs', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'tests/KeryxNodeManager.Core.Tests/LogSinkTests.cs', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'tests/KeryxNodeManager.Core.Tests/MinerArgumentBuilderTests.cs', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'tests/KeryxNodeManager.Core.Tests/MockGpuOverclockControllerTests.cs', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'tests/KeryxNodeManager.Core.Tests/ModelDownloaderTests.cs', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'tests/KeryxNodeManager.Core.Tests/NodeArgumentBuilderTests.cs', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'tests/KeryxNodeManager.Core.Tests/NvidiaSmiGpuInfoProviderTests.cs', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'tests/KeryxNodeManager.Core.Tests/OfficialModelDownloadServiceTests.cs', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'tests/KeryxNodeManager.Core.Tests/PathValidatorTests.cs', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'tests/KeryxNodeManager.Core.Tests/ProfileStoreTests.cs', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'tests/KeryxNodeManager.Core.Tests/PublicNodeDirectoryServiceTests.cs', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'tests/KeryxNodeManager.Core.Tests/RestartPolicyTests.cs', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'tests/KeryxNodeManager.Core.Tests/SafetyMonitorTests.cs', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'tests/KeryxNodeManager.Core.Tests/SecretMaskerTests.cs', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'tests/KeryxNodeManager.Core.Tests/SystemCheckerTests.cs', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'tests/KeryxNodeManager.Core.Tests/TaskSchedulerAutostartTests.cs', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'tests/KeryxNodeManager.Core.Tests/TestAssemblyConfig.cs', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'tests/KeryxNodeManager.Core.Tests/TierAssignerTests.cs', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'deploy_0_2_7_fixes.bat', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'tests/KeryxNodeManager.Core.Tests/XamlLocalizationTests.cs', LF will be replaced by CRLF the next time Git touches it
+[main 55b8f54] 0.2.7 fixes: Models page scroll + accurate download %, throttled progress reporting, Logs page capped to last 50 lines, Node page highlights the in-use public node, About page step-by-step mining guide (all 7 languages), autostart Startup-folder fallback when Task Scheduler is blocked
+ 30 files changed, 838 insertions(+), 22 deletions(-)
+ create mode 100644 deploy.log
+ create mode 100644 deploy_0_2_7_fixes.bat
+ create mode 100644 tests/KeryxNodeManager.Core.Tests/XamlLocalizationTests.cs
+To https://github.com/Dizzztroyer/keryx-node-manager.git
+   4757a29..55b8f54  main -> main
+---- dotnet publish (self-contained win-x64) ---- 
+  ╨Ю╨┐╤А╨╡╨┤╨╡╨╗╨╡╨╜╨╕╨╡ ╨┐╤А╨╛╨╡╨║╤В╨╛╨▓ ╨┤╨╗╤П ╨▓╨╛╤Б╤Б╤В╨░╨╜╨╛╨▓╨╗╨╡╨╜╨╕╤П...
+  ╨Т╨╛╤Б╤Б╤В╨░╨╜╨╛╨▓╨╗╨╡╨╜ C:\Users\hambi\KRX_miner\KeryxNodeManager\src\KeryxNodeManager.App\KeryxNodeManager.App.csproj (╨╖╨░ 200┬а╨╝╤Б).
+  ╨Т╨╛╤Б╤Б╤В╨░╨╜╨╛╨▓╨╗╨╡╨╜ C:\Users\hambi\KRX_miner\KeryxNodeManager\src\KeryxNodeManager.Core\KeryxNodeManager.Core.csproj (╨╖╨░ 199┬а╨╝╤Б).
+  KeryxNodeManager.Core -> C:\Users\hambi\KRX_miner\KeryxNodeManager\src\KeryxNodeManager.Core\bin\Release\net8.0\KeryxNodeManager.Core.dll
+  KeryxNodeManager.App -> C:\Users\hambi\KRX_miner\KeryxNodeManager\src\KeryxNodeManager.App\bin\Release\net8.0-windows\win-x64\KeryxNodeManager.dll
+  KeryxNodeManager.App -> C:\Users\hambi\KRX_miner\KeryxNodeManager\artifacts\publish\win-x64\
+---- stopping old KeryxNodeManager.exe (UI only - keryxd.exe/keryx-miner.exe are never touched) ---- 
+Успешно: Процесс "KeryxNodeManager.exe", с идентификатором 54076, был завершен.
+---- robocopy into real install directory ---- 
+
+
+------------------------------------------------------------------------------
+
+               ВсегоСкопировано ПропущеноНесоответствие      СБОЙДополнения
+Каталогов :        14         0        14         0         0         0
+  Файлов :       509         7       502         0         0         3
+    Байт :  163.80 m    1.31 m  162.48 m         0         0    4.90 m
+   Время :   0:00:00   0:00:00                       0:00:00   0:00:00
+
+
+Скорость :           276 722 200 Байт/сек.
+Скорость :             15834,171 МБ/мин.
+   Окончание: вторник, 4 августа 2026 г. 01:42:31
+
+---- relaunching updated app ---- 
+DEPLOY_DONE 
+==== END 04.08.2026  1:42:31,25 ==== 
