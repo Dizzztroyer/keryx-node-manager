@@ -1,48 +1,52 @@
 # Keryx Node Manager
 
-*[Read this in English](README.en.md)*
+*Read this in: [Русский](README.ru.md) · [Español](README.es.md) · [Français](README.fr.md) · [Deutsch](README.de.md)*
 
-Windows-приложение для управления Keryx-нодой и GPU-майнером из одного окна — без ручной работы
-в PowerShell/WSL/Docker. Community-инструмент, не официальный продукт Keryx Labs.
+A Windows app for managing a Keryx node and GPU miner from a single window — no manual
+PowerShell/WSL/Docker work required. Community tool, not an official Keryx Labs product.
 
-## Скачать и установить
+## Download and install
 
-Перейдите на страницу **[Releases](https://github.com/Dizzztroyer/keryx-node-manager/releases/latest)**
-и скачайте один из двух файлов:
+Go to the **[Releases](https://github.com/Dizzztroyer/keryx-node-manager/releases/latest)** page
+and download one of these:
 
-- **`KeryxNodeManager-Setup-X.Y.Z.exe`** — обычный установщик. Запустите, следуйте шагам мастера,
-  готово. Значок появится на рабочем столе и в меню Пуск. Администраторские права не требуются.
-- **`KeryxNodeManager-Portable-X.Y.Z.zip`** — portable-версия без установки. Распакуйте архив в
-  любую папку и запустите `KeryxNodeManager.exe`.
+- **`KeryxNodeManager-Setup-X.Y.Z.exe`** — regular installer. Run it, follow the wizard, done. A
+  shortcut is added to your desktop and Start menu. No admin rights required.
+- **`KeryxNodeManager-Portable-X.Y.Z.zip`** — no-install portable version. Unzip anywhere and run
+  `KeryxNodeManager.exe`.
 
-При первом запуске откроется мастер настройки: он проверит систему, поможет ввести адрес майнинга
-и выбрать/создать профиль.
+On first launch, a setup wizard walks you through a system check, entering your mining address,
+and creating/selecting a profile — then the Dashboard opens with the node and miner already
+starting.
 
-**Требования:** Windows 10/11 x64, видеокарта NVIDIA (для авто-определения GPU и разгона). Сама
-нода (`keryxd.exe`) и майнер (`keryx-miner.exe`) в комплект не входят — приложение поможет их
-скачать со страницы обновлений внутри программы.
+**Requirements:** Windows 10/11 x64, an NVIDIA GPU (for auto-detection and overclocking). The
+node binary (`keryxd.exe`) and miner binary (`keryx-miner.exe`) aren't bundled inside the
+installer itself, but the app downloads and installs them automatically the first time you need
+them — there's no separate updates page to visit and no manual path to type in.
 
-## Что умеет приложение
+## Features
 
-- Запуск/остановка ноды и майнера одной кнопкой, иконка в трее.
-- Автоопределение видеокарт, автоназначение модели майнинга по объёму VRAM или ручной выбор.
-- Разгон видеокарты (ядро/память) и управление кулером — с подтверждением перед применением.
-- Управляемая загрузка файлов моделей (с докачкой и проверкой целостности).
-- Список публичных нод и автоматическое обнаружение соседних нод через вашу собственную ноду;
-  переключение на резервную ноду на время синхронизации своей — с автоматическим возвратом обратно.
-- Загрузка и распаковка data dir «в один клик» (по прямой ссылке или торренту).
-- Логи с автоматическим маскированием секретов, экспорт диагностики.
-- Защита видеокарты от перегрева, автозапуск при входе в Windows.
-- Несколько профилей, интерфейс на 6 языках (ru/en/es/it/fr/uk).
-- Автопроверка обновлений для ноды и майнера.
+- The Dashboard shows node status, miner status, and GPU status together, with a single
+  Start All / Stop All control for both the node and the miner, plus a tray icon with live status.
+- Automatic GPU detection, auto-assignment of mining tier by VRAM, or manual per-card selection.
+- GPU overclocking (core/memory clock) and fan control — gated behind a confirmation dialog.
+- One-click official model download (HTTP + torrent mirrors), with resumable/integrity-checked
+  manual downloads as a fallback.
+- Public node directory plus automatic peer discovery through your own node; switch to a backup
+  node while yours syncs, with automatic switch-back once it's caught up.
+- One-click data-dir download and extraction (direct link or torrent).
+- Logs with automatic secret masking, diagnostic export.
+- Overheat protection, launch-at-Windows-startup option.
+- Multiple profiles, UI available in 6 languages (ru/en/es/it/fr/uk).
+- Built-in update checker for the node and miner binaries.
 
-## Безопасность
+## Security
 
-Мастер-фразы и приватные ключи приложением никогда не запрашиваются и не хранятся. Все
-сетевые адреса, на которые приложение может отвечать по RPC, привязаны только к
-`127.0.0.1` (localhost) — наружу не открываются. Подробности — `docs/SECURITY.md` в репозитории.
+The app never asks for or stores seed phrases or private keys. Every RPC address the app can
+respond on is bound to `127.0.0.1` (localhost) only — nothing is exposed externally. See
+`docs/SECURITY.md` in the repository for details.
 
-## Для разработчиков
+## For developers
 
 ```powershell
 dotnet restore
@@ -50,10 +54,10 @@ dotnet test tests\KeryxNodeManager.Core.Tests\KeryxNodeManager.Core.Tests.csproj
 dotnet run --project src\KeryxNodeManager.App -- --mock
 ```
 
-`--mock` запускает интерфейс с виртуальными видеокартами, без реальных Keryx-бинарников/NVAPI —
-удобно для просмотра UI без риска для железа. Подробнее о сборке — `docs/BUILD.md`, о процессе
-релиза — `docs/RELEASE.md`.
+`--mock` runs the UI against virtual GPUs, with no real Keryx binaries or NVAPI involved — a safe
+way to preview the interface. See `docs/BUILD.md` for build details and `docs/RELEASE.md` for the
+release process.
 
-## Лицензия и статус
+## License and status
 
-Проект в активной разработке, community-инициатива. Баг-репорты и предложения — через Issues.
+Actively developed, community-driven project. Bug reports and suggestions are welcome via Issues.
