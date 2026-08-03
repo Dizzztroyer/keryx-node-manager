@@ -1,0 +1,147 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:sys="clr-namespace:System;assembly=mscorlib">
+
+    <!-- French translations. Same scope note as Strings.ru.xaml - only the Settings page and the
+         MainWindow nav footer are wired to these keys so far. -->
+
+    <sys:String x:Key="Str_Settings_Title">Paramètres</sys:String>
+    <sys:String x:Key="Str_Settings_Startup_Header">Démarrage</sys:String>
+    <sys:String x:Key="Str_Settings_StartWithWindows">Démarrer Keryx Node Manager au démarrage de Windows</sys:String>
+    <sys:String x:Key="Str_Settings_StartWithWindows_Note">Crée une tâche dans le Planificateur de tâches Windows (aucun droit administrateur requis).</sys:String>
+    <sys:String x:Key="Str_Settings_CheckingAutostart">Vérification de l'état actuel du démarrage automatique...</sys:String>
+    <sys:String x:Key="Str_Settings_StartMinimizedToTray">Démarrer réduit dans la barre d'état système</sys:String>
+    <sys:String x:Key="Str_Settings_CloseMinimizesToTray">Le bouton fermer réduit dans la barre d'état système (au lieu de quitter)</sys:String>
+    <sys:String x:Key="Str_Settings_NotificationsEnabled">Afficher les notifications</sys:String>
+    <sys:String x:Key="Str_Settings_Logs_Header">Journaux</sys:String>
+    <sys:String x:Key="Str_Settings_LogRetentionDays">Conserver les journaux (jours)</sys:String>
+    <sys:String x:Key="Str_Settings_MaxLogSizeMb">Taille maximale du fichier journal (Mo)</sys:String>
+    <sys:String x:Key="Str_Settings_Monitoring_Header">Surveillance</sys:String>
+    <sys:String x:Key="Str_Settings_MonitoringInterval">Intervalle d'interrogation GPU/statut (sec)</sys:String>
+    <sys:String x:Key="Str_Settings_Safety_Header">Protection contre la surchauffe</sys:String>
+    <sys:String x:Key="Str_Settings_SafetyEnabled">Arrêter automatiquement le minage à température GPU critique</sys:String>
+    <sys:String x:Key="Str_Settings_WarningThreshold">Seuil d'avertissement (°C)</sys:String>
+    <sys:String x:Key="Str_Settings_CriticalThreshold">Seuil critique - arrête le minage (°C)</sys:String>
+    <sys:String x:Key="Str_Settings_SafetyNote">Vérifié pendant que le mineur est en cours d'exécution (voir la page Aperçu).</sys:String>
+    <sys:String x:Key="Str_Settings_Language_Header">Langue</sys:String>
+    <sys:String x:Key="Str_Settings_Save">Enregistrer</sys:String>
+
+    <sys:String x:Key="Str_Nav_VersionLabel">Version : </sys:String>
+    <sys:String x:Key="Str_Nav_ProfileLabel">Profil : </sys:String>
+
+    <sys:String x:Key="Str_Dashboard_Title">Aperçu</sys:String>
+    <sys:String x:Key="Str_Dashboard_Node">Nœud</sys:String>
+    <sys:String x:Key="Str_Dashboard_Miner">Mineur</sys:String>
+    <sys:String x:Key="Str_Dashboard_Gpu">GPU</sys:String>
+    <sys:String x:Key="Str_Dashboard_GpuActiveSuffix"> active(s) / </sys:String>
+    <sys:String x:Key="Str_Dashboard_GpuDisabledSuffix"> désactivée(s)</sys:String>
+    <sys:String x:Key="Str_Dashboard_StartAll">Tout démarrer</sys:String>
+    <sys:String x:Key="Str_Dashboard_StopAll">Tout arrêter</sys:String>
+    <sys:String x:Key="Str_Dashboard_Refresh">Actualiser</sys:String>
+    <sys:String x:Key="Str_Dashboard_GoToSettings">Aller aux paramètres</sys:String>
+
+    <sys:String x:Key="Str_Gpu_Title">Cartes graphiques</sys:String>
+    <sys:String x:Key="Str_Gpu_Refresh">Actualiser</sys:String>
+    <sys:String x:Key="Str_Gpu_CudaLabel">CUDA </sys:String>
+    <sys:String x:Key="Str_Gpu_VramUnit"> Mo VRAM · </sys:String>
+    <sys:String x:Key="Str_Gpu_TempUnit">°C</sys:String>
+    <sys:String x:Key="Str_Gpu_ModeLabel">Mode :</sys:String>
+
+    <sys:String x:Key="Str_Models_Title">Modèles</sys:String>
+    <sys:String x:Key="Str_Models_Refresh">Actualiser</sys:String>
+    <sys:String x:Key="Str_Models_FromLabel"> · à partir de </sys:String>
+    <sys:String x:Key="Str_Models_VramSuffix"> Mo VRAM</sys:String>
+    <sys:String x:Key="Str_Models_UrlLabel">URL de téléchargement (collez un lien depuis le README de keryx-miner)</sys:String>
+    <sys:String x:Key="Str_Models_Sha256Label">SHA-256 attendu (facultatif)</sys:String>
+    <sys:String x:Key="Str_Models_Download">Télécharger</sys:String>
+    <sys:String x:Key="Str_Models_Resume">Reprendre</sys:String>
+    <sys:String x:Key="Str_Models_Pause">Pause</sys:String>
+    <sys:String x:Key="Str_Models_Cancel">Annuler</sys:String>
+    <sys:String x:Key="Str_Models_Delete">Supprimer</sys:String>
+    <sys:String x:Key="Str_Models_OpenFolder">Ouvrir le dossier</sys:String>
+
+    <sys:String x:Key="Str_Node_Title">Nœud</sys:String>
+    <sys:String x:Key="Str_Node_PathLabel">Chemin vers keryxd.exe</sys:String>
+    <sys:String x:Key="Str_Node_Browse">Parcourir...</sys:String>
+    <sys:String x:Key="Str_Node_EndpointLabel">Adresse keryxd (généralement 127.0.0.1)</sys:String>
+    <sys:String x:Key="Str_Node_TestnetCheckbox">Réseau de test (testnet)</sys:String>
+    <sys:String x:Key="Str_Node_Save">Enregistrer</sys:String>
+    <sys:String x:Key="Str_Node_CheckEndpoint">Vérifier l'endpoint</sys:String>
+    <sys:String x:Key="Str_Node_FooterNote">Démarrez/arrêtez le nœud depuis cette fenêtre à l'aide des boutons « Tout démarrer »/« Tout arrêter » de la page Aperçu, une fois les paramètres ici enregistrés.</sys:String>
+
+    <sys:String x:Key="Str_Miner_Title">Mineur</sys:String>
+    <sys:String x:Key="Str_Miner_AddressLabel">Adresse de minage</sys:String>
+    <sys:String x:Key="Str_Miner_PathLabel">Chemin vers keryx-miner.exe</sys:String>
+    <sys:String x:Key="Str_Miner_Browse">Parcourir...</sys:String>
+    <sys:String x:Key="Str_Miner_ModelsFolderLabel">Dossier des modèles</sys:String>
+    <sys:String x:Key="Str_Miner_Save">Enregistrer</sys:String>
+    <sys:String x:Key="Str_Miner_AdvancedMode">Mode avancé</sys:String>
+    <sys:String x:Key="Str_Miner_CommandPreviewHeader">Commande de lancement (aperçu)</sys:String>
+    <sys:String x:Key="Str_Miner_GpuNote">Chaque GPU exécute son propre modèle. La VRAM de différents GPU n'est jamais mise en commun.</sys:String>
+
+    <sys:String x:Key="Str_Logs_Title">Journaux</sys:String>
+    <sys:String x:Key="Str_Logs_ExportDiagnostics">Exporter le diagnostic...</sys:String>
+    <sys:String x:Key="Str_Logs_OpenFolder">Ouvrir le dossier des journaux</sys:String>
+    <sys:String x:Key="Str_Logs_ClearDisplay">Effacer l'affichage</sys:String>
+    <sys:String x:Key="Str_Logs_NodeHeader">Nœud (keryxd)</sys:String>
+    <sys:String x:Key="Str_Logs_MinerHeader">Mineur (keryx-miner)</sys:String>
+
+    <sys:String x:Key="Str_Profiles_Title">Profils</sys:String>
+    <sys:String x:Key="Str_Profiles_ActiveLabel">Profil actif : </sys:String>
+    <sys:String x:Key="Str_Profiles_MakeActive">Activer</sys:String>
+    <sys:String x:Key="Str_Profiles_Delete">Supprimer</sys:String>
+    <sys:String x:Key="Str_Profiles_NewHeader">Nouveau profil</sys:String>
+    <sys:String x:Key="Str_Profiles_Create">Créer</sys:String>
+    <sys:String x:Key="Str_Profiles_NewNote">Crée un profil avec les paramètres par défaut et l'active immédiatement.</sys:String>
+    <sys:String x:Key="Str_Profiles_RenameHeader">Renommer le profil sélectionné</sys:String>
+    <sys:String x:Key="Str_Profiles_Rename">Renommer</sys:String>
+    <sys:String x:Key="Str_Profiles_RenameNote">Les paramètres, les affectations GPU et les chemins des exécutables sont conservés sous le nouveau nom.</sys:String>
+
+    <sys:String x:Key="Str_About_VersionLabel">Version </sys:String>
+    <sys:String x:Key="Str_About_Description">Une application pour gérer le nœud et le mineur du réseau Keryx : configuration GPU, téléchargement des modèles, démarrage/arrêt des processus et surveillance, sans avoir besoin de manipuler PowerShell, WSL ou Docker manuellement.</sys:String>
+    <sys:String x:Key="Str_About_LinksHeader">Liens</sys:String>
+    <sys:String x:Key="Str_About_NodeRepoLink">keryx-node (nœud) sur GitHub</sys:String>
+    <sys:String x:Key="Str_About_MinerRepoLink">keryx-miner (mineur) sur GitHub</sys:String>
+    <sys:String x:Key="Str_About_NoRepoNote">Keryx Node Manager lui-même n'a pas encore de dépôt public - il s'agit d'une copie de travail locale (voir PROJECT_STATUS.md).</sys:String>
+    <sys:String x:Key="Str_About_SystemHeader">Système</sys:String>
+    <sys:String x:Key="Str_About_OsLabel">OS : </sys:String>
+    <sys:String x:Key="Str_About_DotNetLabel">.NET : </sys:String>
+    <sys:String x:Key="Str_About_Is64BitLabel">OS 64 bits : </sys:String>
+    <sys:String x:Key="Str_Wizard_WindowTitle">Keryx Node Manager — premier démarrage</sys:String>
+    <sys:String x:Key="Str_Wizard_HeaderTitle">Configuration de Keryx Node Manager</sys:String>
+    <sys:String x:Key="Str_Wizard_Step0_Title">Bienvenue</sys:String>
+    <sys:String x:Key="Str_Wizard_Step0_Body">Cet assistant vous aidera à vérifier une fois le système, à indiquer les chemins vers le nœud et le mineur, à saisir l'adresse de récompense et à configurer le démarrage automatique. Tout pourra être modifié plus tard sur les pages correspondantes de l'application — l'assistant ne crée pas de configuration séparée et indépendante.</sys:String>
+    <sys:String x:Key="Str_Wizard_Step0_ActiveProfileLabel">L'assistant configure le profil :</sys:String>
+    <sys:String x:Key="Str_Wizard_Step0_NewProfileHint">Vous configurez un second poste séparément du profil actuel ? Créez un nouveau profil ci-dessous — l'assistant y basculera immédiatement.</sys:String>
+    <sys:String x:Key="Str_Wizard_Step0_NewProfileNamePlaceholder">Nom du nouveau profil</sys:String>
+    <sys:String x:Key="Str_Wizard_Step0_CreateProfile">Créer et configurer</sys:String>
+    <sys:String x:Key="Str_Wizard_Step1_Title">Vérification du système</sys:String>
+    <sys:String x:Key="Str_Wizard_Step1_Desc">Des vérifications réelles sont effectuées — version de Windows, présence d'un GPU NVIDIA (via nvidia-smi), WSL et Docker (facultatif).</sys:String>
+    <sys:String x:Key="Str_Wizard_Step1_Updating">Mise à jour...</sys:String>
+    <sys:String x:Key="Str_Wizard_Step1_WslDockerNote">WSL et Docker ne sont pas requis — par défaut, l'application fonctionne en mode natif Windows.</sys:String>
+    <sys:String x:Key="Str_Wizard_Step2_Title">Chemins des programmes et du dossier des modèles</sys:String>
+    <sys:String x:Key="Str_Wizard_Step2_NodeLabel">keryxd.exe (nœud, facultatif à cette étape)</sys:String>
+    <sys:String x:Key="Str_Wizard_Step2_MinerLabel">keryx-miner.exe (mineur, facultatif à cette étape)</sys:String>
+    <sys:String x:Key="Str_Wizard_Step2_ModelsLabel">Dossier des modèles (obligatoire)</sys:String>
+    <sys:String x:Key="Str_Wizard_Step2_Browse">Parcourir...</sys:String>
+    <sys:String x:Key="Str_Wizard_Step2_Note">Les chemins vers keryxd.exe/keryx-miner.exe peuvent être indiqués plus tard sur les pages « Nœud » et « Mineur » — pour continuer l'assistant, il suffit d'indiquer le dossier des modèles.</sys:String>
+    <sys:String x:Key="Str_Wizard_Step3_Title">Adresse de récompense</sys:String>
+    <sys:String x:Key="Str_Wizard_Step3_Body">Seule l'adresse publique est indiquée (keryx:... ou keryxtest:...). L'assistant ne demande ni n'enregistre jamais de phrase seed ou de clé privée.</sys:String>
+    <sys:String x:Key="Str_Wizard_Step4_Title">Aperçu de l'attribution des modèles par GPU</sys:String>
+    <sys:String x:Key="Str_Wizard_Step4_Body">Indique quel tier de modèle serait attribué automatiquement dès maintenant pour chaque GPU détecté. La VRAM de GPU différents n'est jamais mise en commun. L'attribution peut être modifiée manuellement plus tard sur la page « GPU ».</sys:String>
+    <sys:String x:Key="Str_Wizard_Step5_Title">Démarrage automatique</sys:String>
+    <sys:String x:Key="Str_Wizard_Step5_AutoNode">Démarrer le nœud (keryxd.exe) automatiquement</sys:String>
+    <sys:String x:Key="Str_Wizard_Step5_AutoMiner">Démarrer le mineur automatiquement une fois le nœud prêt</sys:String>
+    <sys:String x:Key="Str_Wizard_Step5_AutoRestart">Redémarrer automatiquement en cas de plantage</sys:String>
+    <sys:String x:Key="Str_Wizard_Step5_Note">Le démarrage de l'application avec Windows se configure séparément, via l'installateur (une case à cocher lors de l'installation) ou sur la page « Paramètres » après le premier démarrage.</sys:String>
+    <sys:String x:Key="Str_Wizard_Step6_Title">Terminé</sys:String>
+    <sys:String x:Key="Str_Wizard_Step6_Body">Les paramètres seront enregistrés dans le profil. Vous pourrez toujours les modifier plus tard sur les pages « Nœud », « Mineur », « GPU » et « Modèles ».</sys:String>
+    <sys:String x:Key="Str_Wizard_Step6_AddressLabel">Adresse : </sys:String>
+    <sys:String x:Key="Str_Wizard_Step6_AddressWarning">Cela ne ressemble pas à une adresse Keryx valide - le nœud rejettera le minage avec cette adresse. Revenez à l'étape de l'adresse de récompense pour la corriger.</sys:String>
+    <sys:String x:Key="Str_Wizard_Step6_ModelsDirLabel">Dossier des modèles : </sys:String>
+    <sys:String x:Key="Str_Wizard_Skip">Passer</sys:String>
+    <sys:String x:Key="Str_Wizard_Back">Retour</sys:String>
+    <sys:String x:Key="Str_Wizard_Next">Suivant</sys:String>
+    <sys:String x:Key="Str_Wizard_Finish">Terminer</sys:String>
+
+</ResourceDictionary>

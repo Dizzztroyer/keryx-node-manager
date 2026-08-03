@@ -1,0 +1,58 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <!-- Deliberately NOT UseWindowsForms: enabling it pulls a global "using System.Windows.Forms"
+         into every file (via ImplicitUsings), which collides with System.Windows.Controls.
+         UserControl and System.Windows.Application everywhere in this WPF app (CS0104). Folder
+         picking uses .NET 8's native Microsoft.Win32.OpenFolderDialog instead - see
+         MinerViewModel.BrowseModelsDirectory. -->
+
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <LangVersion>latest</LangVersion>
+    <RootNamespace>KeryxNodeManager.App</RootNamespace>
+    <AssemblyName>KeryxNodeManager</AssemblyName>
+    <ApplicationIcon>Resources\app.ico</ApplicationIcon>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <!-- Self-contained win-x64 publish per brief §24; RuntimeIdentifier is supplied at publish
+         time via `dotnet publish -r win-x64` (see docs/BUILD.md) rather than fixed here, so
+         `dotnet build` for day-to-day development stays framework-dependent and fast. -->
+    <SelfContained>false</SelfContained>
+    <Platforms>x64</Platforms>
+    <GenerateAssemblyInfo>true</GenerateAssemblyInfo>
+    <Version>0.1.0</Version>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="CommunityToolkit.Mvvm" Version="8.3.2" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="8.0.1" />
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="8.0.1" />
+    <PackageReference Include="Hardcodet.NotifyIcon.Wpf" Version="1.1.0" />
+    <!-- Real GPU overclock/fan-speed writes (core/memory clock offset, fan percent). This is a
+         Windows-only native-interop wrapper around NVIDIA's undocumented-but-stable NVAPI (the
+         same private API MSI Afterburner/HWiNFO/EVGA Precision use) - deliberately referenced only
+         here, not from KeryxNodeManager.Core, since Core must stay cross-platform buildable (see
+         its own .csproj doc comment) and this package cannot resolve/run on non-Windows. -->
+    <PackageReference Include="NvAPIWrapper.Net" Version="0.8.1.101" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\KeryxNodeManager.Core\KeryxNodeManager.Core.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Resources\tray.ico" />
+    <Resource Include="Resources\app.ico" />
+    <!-- Brief §10 tray state colors: one badge-overlay variant per TrayState, generated from the
+         same tray.ico glyph (see TrayIconService's IconSource-per-state switch). -->
+    <Resource Include="Resources\tray-stopped.ico" />
+    <Resource Include="Resources\tray-starting.ico" />
+    <Resource Include="Resources\tray-running.ico" />
+    <Resource Include="Resources\tray-error.ico" />
+    <Resource Include="Resources\tray-inference.ico" />
+  </ItemGroup>
+
+</Project>

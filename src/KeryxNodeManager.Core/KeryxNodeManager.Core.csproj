@@ -1,0 +1,36 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <LangVersion>latest</LangVersion>
+    <RootNamespace>KeryxNodeManager.Core</RootNamespace>
+    <!-- Deliberately NOT net8.0-windows: this project must stay buildable/testable on any OS
+         (Linux CI, WSL, etc.) per the brief's testing requirements. Windows-only APIs
+         (Process launch flags, registry, Task Scheduler) are isolated behind interfaces here
+         and only exercised for real inside KeryxNodeManager.App on Windows. -->
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- Bundled default public-node list (see PublicNodeDirectoryService's doc comment for why
+         it ships empty). LogicalName pins the exact manifest-resource name the service looks up,
+         independent of this file's folder location. -->
+    <EmbeddedResource Include="Networking\PublicNodes.json" LogicalName="KeryxNodeManager.Core.Networking.PublicNodes.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.Text.Json" Version="8.0.5" />
+    <!-- schtasks.exe writes its (localized, e.g. Cyrillic) error text using the console's OEM
+         codepage (e.g. 866 on a Russian-locale Windows install), not UTF-8 - .NET Core no longer
+         registers legacy codepages by default, so decoding that output needs this package (see
+         TaskSchedulerAutostart). -->
+    <PackageReference Include="System.Text.Encoding.CodePages" Version="8.0.0" />
+    <!-- Real BitTorrent client for DataDirDownloadService's torrent path - the Keryx dev team's
+         own Discord-posted recovery instructions include a genuine .torrent mirror
+         (https://keryx-labs.com/datadir.zip.torrent) alongside the HTTP mirrors, so this is a
+         real, confirmed distribution channel, not a speculative feature. -->
+    <PackageReference Include="MonoTorrent" Version="3.0.2" />
+  </ItemGroup>
+
+</Project>

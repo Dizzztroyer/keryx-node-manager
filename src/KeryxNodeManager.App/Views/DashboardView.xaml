@@ -1,0 +1,59 @@
+<UserControl x:Class="KeryxNodeManager.App.Views.DashboardView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:conv="clr-namespace:KeryxNodeManager.App.Converters"
+             Loaded="UserControl_Loaded">
+    <UserControl.Resources>
+        <conv:StringToVisibilityConverter x:Key="StringToVis"/>
+    </UserControl.Resources>
+    <StackPanel>
+        <TextBlock Text="{DynamicResource Str_Dashboard_Title}" FontSize="22" FontWeight="Bold" Margin="0,0,0,16"/>
+
+        <UniformGrid Columns="3" Rows="1">
+            <Border Style="{StaticResource CardStyle}" Margin="0,0,12,0">
+                <StackPanel>
+                    <TextBlock Text="{DynamicResource Str_Dashboard_Node}" Foreground="{StaticResource TextSecondaryBrush}"/>
+                    <TextBlock Text="{Binding NodeStatus}" FontSize="20" FontWeight="SemiBold" Margin="0,4,0,0"/>
+                </StackPanel>
+            </Border>
+            <Border Style="{StaticResource CardStyle}" Margin="0,0,12,0">
+                <StackPanel>
+                    <TextBlock Text="{DynamicResource Str_Dashboard_Miner}" Foreground="{StaticResource TextSecondaryBrush}"/>
+                    <TextBlock Text="{Binding MinerStatus}" FontSize="20" FontWeight="SemiBold" Margin="0,4,0,0"/>
+                </StackPanel>
+            </Border>
+            <Border Style="{StaticResource CardStyle}">
+                <StackPanel>
+                    <TextBlock Text="{DynamicResource Str_Dashboard_Gpu}" Foreground="{StaticResource TextSecondaryBrush}"/>
+                    <TextBlock Margin="0,4,0,0" FontSize="20" FontWeight="SemiBold">
+                        <Run Text="{Binding ActiveGpuCount, Mode=OneWay}"/>
+                        <Run Text="{DynamicResource Str_Dashboard_GpuActiveSuffix}"/>
+                        <Run Text="{Binding DisabledGpuCount, Mode=OneWay}"/>
+                        <Run Text="{DynamicResource Str_Dashboard_GpuDisabledSuffix}"/>
+                    </TextBlock>
+                </StackPanel>
+            </Border>
+        </UniformGrid>
+
+        <StackPanel Orientation="Horizontal" Margin="0,20,0,0">
+            <Button Content="{DynamicResource Str_Dashboard_StartAll}" Style="{StaticResource PrimaryButtonStyle}"
+                    Command="{Binding StartAllCommand}" Margin="0,0,10,0"/>
+            <Button Content="{DynamicResource Str_Dashboard_StopAll}" Style="{StaticResource SecondaryButtonStyle}"
+                    Command="{Binding StopAllCommand}" Margin="0,0,10,0"/>
+            <Button Content="{DynamicResource Str_Dashboard_Refresh}" Style="{StaticResource SecondaryButtonStyle}"
+                    Command="{Binding RefreshCommand}"/>
+        </StackPanel>
+
+        <TextBlock Text="{Binding LastActionMessage}" Margin="0,16,0,0" TextWrapping="Wrap"
+                   Foreground="{StaticResource TextSecondaryBrush}"/>
+
+        <!-- "Known issues" nudge (PROJECT_STATUS.md): missing NodeExecutablePath/MiningAddress
+             used to be an inert message with no way to act on it - this button jumps straight to
+             whichever page (Node/Miner) actually needs attention. Only visible when
+             MissingConfigTarget is set, i.e. right after a failed Start All for that specific
+             reason. -->
+        <Button Content="{DynamicResource Str_Dashboard_GoToSettings}" Style="{StaticResource SecondaryButtonStyle}"
+                Command="{Binding GoToMissingConfigCommand}" HorizontalAlignment="Left" Margin="0,8,0,0"
+                Visibility="{Binding MissingConfigTarget, Converter={StaticResource StringToVis}}"/>
+    </StackPanel>
+</UserControl>

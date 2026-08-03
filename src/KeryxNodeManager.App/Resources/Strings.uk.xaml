@@ -1,0 +1,151 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:sys="clr-namespace:System;assembly=mscorlib">
+
+    <!-- Ukrainian translations (PROJECT_STATUS.md "In progress" item 2). Same coverage as the other
+         four language files as of the twenty-first increment: every static View label across
+         Settings, the nav footer, Dashboard, GPU, Models, Node, Miner, Logs, Profiles, About, and
+         the first-run wizard. Dynamic ViewModel-owned strings (status/validation/preview messages)
+         and Core-layer exception text are out of scope here too - see PROJECT_STATUS.md. -->
+
+    <sys:String x:Key="Str_Settings_Title">Налаштування</sys:String>
+    <sys:String x:Key="Str_Settings_Startup_Header">Запуск</sys:String>
+    <sys:String x:Key="Str_Settings_StartWithWindows">Запускати Keryx Node Manager при вході в Windows</sys:String>
+    <sys:String x:Key="Str_Settings_StartWithWindows_Note">Створюється завдання в Планувальнику завдань Windows (без прав адміністратора).</sys:String>
+    <sys:String x:Key="Str_Settings_CheckingAutostart">Перевірка поточного статусу автозапуску...</sys:String>
+    <sys:String x:Key="Str_Settings_StartMinimizedToTray">Запускати згорнутим у трей</sys:String>
+    <sys:String x:Key="Str_Settings_CloseMinimizesToTray">Кнопка закриття вікна згортає у трей (а не завершує роботу)</sys:String>
+    <sys:String x:Key="Str_Settings_NotificationsEnabled">Показувати сповіщення</sys:String>
+    <sys:String x:Key="Str_Settings_Logs_Header">Журнали</sys:String>
+    <sys:String x:Key="Str_Settings_LogRetentionDays">Зберігати журнали (днів)</sys:String>
+    <sys:String x:Key="Str_Settings_MaxLogSizeMb">Максимальний розмір файлу журналу (МБ)</sys:String>
+    <sys:String x:Key="Str_Settings_Monitoring_Header">Моніторинг</sys:String>
+    <sys:String x:Key="Str_Settings_MonitoringInterval">Інтервал опитування GPU/статусу (сек)</sys:String>
+    <sys:String x:Key="Str_Settings_Safety_Header">Захист від перегріву</sys:String>
+    <sys:String x:Key="Str_Settings_SafetyEnabled">Автоматично зупиняти майнінг при критичній температурі GPU</sys:String>
+    <sys:String x:Key="Str_Settings_WarningThreshold">Поріг попередження (°C)</sys:String>
+    <sys:String x:Key="Str_Settings_CriticalThreshold">Критичний поріг - зупиняє майнінг (°C)</sys:String>
+    <sys:String x:Key="Str_Settings_SafetyNote">Перевіряється, поки запущено майнер (див. сторінку «Огляд»).</sys:String>
+    <sys:String x:Key="Str_Settings_Language_Header">Мова</sys:String>
+    <sys:String x:Key="Str_Settings_Save">Зберегти</sys:String>
+
+    <sys:String x:Key="Str_Nav_VersionLabel">Версія: </sys:String>
+    <sys:String x:Key="Str_Nav_ProfileLabel">Профіль: </sys:String>
+
+    <sys:String x:Key="Str_Dashboard_Title">Огляд</sys:String>
+    <sys:String x:Key="Str_Dashboard_Node">Нода</sys:String>
+    <sys:String x:Key="Str_Dashboard_Miner">Майнер</sys:String>
+    <sys:String x:Key="Str_Dashboard_Gpu">GPU</sys:String>
+    <sys:String x:Key="Str_Dashboard_GpuActiveSuffix"> активна(і) / </sys:String>
+    <sys:String x:Key="Str_Dashboard_GpuDisabledSuffix"> вимкнена(і)</sys:String>
+    <sys:String x:Key="Str_Dashboard_StartAll">Запустити все</sys:String>
+    <sys:String x:Key="Str_Dashboard_StopAll">Зупинити все</sys:String>
+    <sys:String x:Key="Str_Dashboard_Refresh">Оновити</sys:String>
+    <sys:String x:Key="Str_Dashboard_GoToSettings">Перейти до налаштувань</sys:String>
+
+    <sys:String x:Key="Str_Gpu_Title">Відеокарти</sys:String>
+    <sys:String x:Key="Str_Gpu_Refresh">Оновити</sys:String>
+    <sys:String x:Key="Str_Gpu_CudaLabel">CUDA </sys:String>
+    <sys:String x:Key="Str_Gpu_VramUnit"> МБ VRAM · </sys:String>
+    <sys:String x:Key="Str_Gpu_TempUnit">°C</sys:String>
+    <sys:String x:Key="Str_Gpu_ModeLabel">Режим:</sys:String>
+
+    <sys:String x:Key="Str_Models_Title">Моделі</sys:String>
+    <sys:String x:Key="Str_Models_Refresh">Оновити</sys:String>
+    <sys:String x:Key="Str_Models_FromLabel"> · від </sys:String>
+    <sys:String x:Key="Str_Models_VramSuffix"> МБ VRAM</sys:String>
+    <sys:String x:Key="Str_Models_UrlLabel">URL для завантаження (вставте посилання з README keryx-miner)</sys:String>
+    <sys:String x:Key="Str_Models_Sha256Label">Очікуваний SHA-256 (необов'язково)</sys:String>
+    <sys:String x:Key="Str_Models_Download">Завантажити</sys:String>
+    <sys:String x:Key="Str_Models_Resume">Продовжити</sys:String>
+    <sys:String x:Key="Str_Models_Pause">Пауза</sys:String>
+    <sys:String x:Key="Str_Models_Cancel">Скасувати</sys:String>
+    <sys:String x:Key="Str_Models_Delete">Видалити</sys:String>
+    <sys:String x:Key="Str_Models_OpenFolder">Відкрити папку</sys:String>
+
+    <sys:String x:Key="Str_Node_Title">Нода</sys:String>
+    <sys:String x:Key="Str_Node_PathLabel">Шлях до keryxd.exe</sys:String>
+    <sys:String x:Key="Str_Node_Browse">Огляд...</sys:String>
+    <sys:String x:Key="Str_Node_EndpointLabel">Адреса keryxd (зазвичай 127.0.0.1)</sys:String>
+    <sys:String x:Key="Str_Node_TestnetCheckbox">Тестова мережа (testnet)</sys:String>
+    <sys:String x:Key="Str_Node_Save">Зберегти</sys:String>
+    <sys:String x:Key="Str_Node_CheckEndpoint">Перевірити endpoint</sys:String>
+    <sys:String x:Key="Str_Node_FooterNote">Запуск/зупинка ноди з цього вікна — кнопками «Запустити все»/«Зупинити все» на сторінці «Огляд», після того як налаштування тут збережено.</sys:String>
+
+    <sys:String x:Key="Str_Miner_Title">Майнер</sys:String>
+    <sys:String x:Key="Str_Miner_AddressLabel">Адреса для майнінгу</sys:String>
+    <sys:String x:Key="Str_Miner_PathLabel">Шлях до keryx-miner.exe</sys:String>
+    <sys:String x:Key="Str_Miner_Browse">Огляд...</sys:String>
+    <sys:String x:Key="Str_Miner_ModelsFolderLabel">Папка моделей</sys:String>
+    <sys:String x:Key="Str_Miner_Save">Зберегти</sys:String>
+    <sys:String x:Key="Str_Miner_AdvancedMode">Розширений режим</sys:String>
+    <sys:String x:Key="Str_Miner_CommandPreviewHeader">Команда запуску (попередній перегляд)</sys:String>
+    <sys:String x:Key="Str_Miner_GpuNote">Кожна відеокарта працює зі своєю моделлю. Відеопам'ять різних GPU не об'єднується.</sys:String>
+
+    <sys:String x:Key="Str_Logs_Title">Журнали</sys:String>
+    <sys:String x:Key="Str_Logs_ExportDiagnostics">Експорт діагностики...</sys:String>
+    <sys:String x:Key="Str_Logs_OpenFolder">Відкрити папку журналів</sys:String>
+    <sys:String x:Key="Str_Logs_ClearDisplay">Очистити екран</sys:String>
+    <sys:String x:Key="Str_Logs_NodeHeader">Нода (keryxd)</sys:String>
+    <sys:String x:Key="Str_Logs_MinerHeader">Майнер (keryx-miner)</sys:String>
+
+    <sys:String x:Key="Str_Profiles_Title">Профілі</sys:String>
+    <sys:String x:Key="Str_Profiles_ActiveLabel">Активний профіль: </sys:String>
+    <sys:String x:Key="Str_Profiles_MakeActive">Зробити активним</sys:String>
+    <sys:String x:Key="Str_Profiles_Delete">Видалити</sys:String>
+    <sys:String x:Key="Str_Profiles_NewHeader">Новий профіль</sys:String>
+    <sys:String x:Key="Str_Profiles_Create">Створити</sys:String>
+    <sys:String x:Key="Str_Profiles_NewNote">Створює профіль з налаштуваннями за замовчуванням і одразу робить його активним.</sys:String>
+    <sys:String x:Key="Str_Profiles_RenameHeader">Перейменувати вибраний профіль</sys:String>
+    <sys:String x:Key="Str_Profiles_Rename">Перейменувати</sys:String>
+    <sys:String x:Key="Str_Profiles_RenameNote">Налаштування, GPU-призначення та шляхи до виконуваних файлів переносяться під новим ім'ям.</sys:String>
+
+    <sys:String x:Key="Str_About_VersionLabel">Версія </sys:String>
+    <sys:String x:Key="Str_About_Description">Застосунок для керування нодою та майнером мережі Keryx: налаштування GPU, завантаження моделей, запуск/зупинка процесів і моніторинг — без потреби вручну працювати з PowerShell, WSL або Docker.</sys:String>
+    <sys:String x:Key="Str_About_LinksHeader">Посилання</sys:String>
+    <sys:String x:Key="Str_About_NodeRepoLink">keryx-node (нода) на GitHub</sys:String>
+    <sys:String x:Key="Str_About_MinerRepoLink">keryx-miner (майнер) на GitHub</sys:String>
+    <sys:String x:Key="Str_About_NoRepoNote">Сам Keryx Node Manager поки не має публічного репозиторію — це локальна робоча копія (див. PROJECT_STATUS.md).</sys:String>
+    <sys:String x:Key="Str_About_SystemHeader">Система</sys:String>
+    <sys:String x:Key="Str_About_OsLabel">ОС: </sys:String>
+    <sys:String x:Key="Str_About_DotNetLabel">.NET: </sys:String>
+    <sys:String x:Key="Str_About_Is64BitLabel">64-розрядна ОС: </sys:String>
+
+    <sys:String x:Key="Str_Wizard_WindowTitle">Keryx Node Manager — перший запуск</sys:String>
+    <sys:String x:Key="Str_Wizard_HeaderTitle">Налаштування Keryx Node Manager</sys:String>
+    <sys:String x:Key="Str_Wizard_Step0_Title">Ласкаво просимо</sys:String>
+    <sys:String x:Key="Str_Wizard_Step0_Body">Цей майстер допоможе один раз перевірити систему, вказати шляхи до вузла й майнера, ввести адресу для нарахування винагороди та налаштувати автозапуск. Усе можна буде пізніше змінити на відповідних сторінках застосунку — майстер не створює окрему, незалежну конфігурацію.</sys:String>
+    <sys:String x:Key="Str_Wizard_Step0_ActiveProfileLabel">Майстер налаштовує профіль:</sys:String>
+    <sys:String x:Key="Str_Wizard_Step0_NewProfileHint">Налаштовуєте другий стенд окремо від поточного профілю? Створіть новий профіль нижче — майстер одразу перемкнеться на нього.</sys:String>
+    <sys:String x:Key="Str_Wizard_Step0_NewProfileNamePlaceholder">Ім'я нового профілю</sys:String>
+    <sys:String x:Key="Str_Wizard_Step0_CreateProfile">Створити й налаштувати</sys:String>
+    <sys:String x:Key="Str_Wizard_Step1_Title">Перевірка системи</sys:String>
+    <sys:String x:Key="Str_Wizard_Step1_Desc">Виконуються реальні перевірки — версія Windows, наявність відеокарти NVIDIA (через nvidia-smi), WSL і Docker (необов'язково).</sys:String>
+    <sys:String x:Key="Str_Wizard_Step1_Updating">Оновлення...</sys:String>
+    <sys:String x:Key="Str_Wizard_Step1_WslDockerNote">WSL і Docker не потрібні — за замовчуванням застосунок працює в нативному режимі Windows.</sys:String>
+    <sys:String x:Key="Str_Wizard_Step2_Title">Шляхи до програм і папки моделей</sys:String>
+    <sys:String x:Key="Str_Wizard_Step2_NodeLabel">keryxd.exe (вузол, необов'язково на цьому кроці)</sys:String>
+    <sys:String x:Key="Str_Wizard_Step2_MinerLabel">keryx-miner.exe (майнер, необов'язково на цьому кроці)</sys:String>
+    <sys:String x:Key="Str_Wizard_Step2_ModelsLabel">Папка моделей (обов'язково)</sys:String>
+    <sys:String x:Key="Str_Wizard_Step2_Browse">Огляд...</sys:String>
+    <sys:String x:Key="Str_Wizard_Step2_Note">Шляхи до keryxd.exe/keryx-miner.exe можна вказати пізніше на сторінках «Вузол» і «Майнер» — для продовження майстра достатньо вказати папку моделей.</sys:String>
+    <sys:String x:Key="Str_Wizard_Step3_Title">Адреса для нарахування винагороди</sys:String>
+    <sys:String x:Key="Str_Wizard_Step3_Body">Вказується лише публічна адреса (keryx:... або keryxtest:...). Майстер ніколи не запитує і не зберігає seed-фразу чи приватний ключ.</sys:String>
+    <sys:String x:Key="Str_Wizard_Step4_Title">Попереднє призначення моделей за відеокартами</sys:String>
+    <sys:String x:Key="Str_Wizard_Step4_Body">Показує, який tier моделі було б призначено автоматично прямо зараз для кожної виявленої відеокарти. Відеопам'ять різних GPU не об'єднується. Змінити призначення вручну можна пізніше на сторінці «Відеокарти».</sys:String>
+    <sys:String x:Key="Str_Wizard_Step5_Title">Автозапуск</sys:String>
+    <sys:String x:Key="Str_Wizard_Step5_AutoNode">Запускати вузол (keryxd.exe) автоматично</sys:String>
+    <sys:String x:Key="Str_Wizard_Step5_AutoMiner">Запускати майнер автоматично після готовності вузла</sys:String>
+    <sys:String x:Key="Str_Wizard_Step5_AutoRestart">Автоматично перезапускати при збої</sys:String>
+    <sys:String x:Key="Str_Wizard_Step5_Note">Запуск застосунку разом із Windows налаштовується окремо інсталятором (прапорець під час встановлення) або на сторінці «Налаштування» після першого запуску.</sys:String>
+    <sys:String x:Key="Str_Wizard_Step6_Title">Готово</sys:String>
+    <sys:String x:Key="Str_Wizard_Step6_Body">Налаштування буде збережено в профіль. Ви завжди зможете змінити їх пізніше на сторінках «Вузол», «Майнер», «Відеокарти» та «Моделі».</sys:String>
+    <sys:String x:Key="Str_Wizard_Step6_AddressLabel">Адреса: </sys:String>
+    <sys:String x:Key="Str_Wizard_Step6_AddressWarning">Адреса не схожа на дійсну Keryx-адресу - вузол відхилить майнінг з цією адресою. Поверніться до кроку «Адреса для нарахування винагороди», щоб виправити.</sys:String>
+    <sys:String x:Key="Str_Wizard_Step6_ModelsDirLabel">Папка моделей: </sys:String>
+    <sys:String x:Key="Str_Wizard_Skip">Пропустити</sys:String>
+    <sys:String x:Key="Str_Wizard_Back">Назад</sys:String>
+    <sys:String x:Key="Str_Wizard_Next">Далі</sys:String>
+    <sys:String x:Key="Str_Wizard_Finish">Завершити</sys:String>
+
+</ResourceDictionary>

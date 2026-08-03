@@ -1,0 +1,220 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:conv="clr-namespace:KeryxNodeManager.App.Converters">
+
+  <conv:ComboBoxSelectionDisplayConverter x:Key="ComboBoxSelectionDisplayConverter"/>
+
+  <!-- Dark theme as the primary look (brief §17: "тёмная тема должна выглядеть основной и
+       качественной"). Kept intentionally minimal - flat surfaces, one accent color, no gradients
+       or gamer-style neon, per the brief's explicit "no acid gamer aesthetic" instruction. -->
+
+  <Color x:Key="BackgroundColor">#FF1A1D24</Color>
+  <Color x:Key="SurfaceColor">#FF232732</Color>
+  <Color x:Key="SurfaceAltColor">#FF2C313D</Color>
+  <Color x:Key="BorderColor">#FF3A4050</Color>
+  <Color x:Key="TextPrimaryColor">#FFE6E9EF</Color>
+  <Color x:Key="TextSecondaryColor">#FF9AA3B5</Color>
+  <Color x:Key="AccentColor">#FF40C4B4</Color>
+  <Color x:Key="AccentColorAlt">#FF5A8CF0</Color>
+  <Color x:Key="SuccessColor">#FF4CAF7D</Color>
+  <Color x:Key="WarningColor">#FFE0A840</Color>
+  <Color x:Key="ErrorColor">#FFE05A5A</Color>
+
+  <SolidColorBrush x:Key="BackgroundBrush" Color="{StaticResource BackgroundColor}"/>
+  <SolidColorBrush x:Key="SurfaceBrush" Color="{StaticResource SurfaceColor}"/>
+  <SolidColorBrush x:Key="SurfaceAltBrush" Color="{StaticResource SurfaceAltColor}"/>
+  <SolidColorBrush x:Key="BorderBrush2" Color="{StaticResource BorderColor}"/>
+  <SolidColorBrush x:Key="TextPrimaryBrush" Color="{StaticResource TextPrimaryColor}"/>
+  <SolidColorBrush x:Key="TextSecondaryBrush" Color="{StaticResource TextSecondaryColor}"/>
+  <SolidColorBrush x:Key="AccentBrush" Color="{StaticResource AccentColor}"/>
+  <SolidColorBrush x:Key="SuccessBrush" Color="{StaticResource SuccessColor}"/>
+  <SolidColorBrush x:Key="WarningBrush" Color="{StaticResource WarningColor}"/>
+  <SolidColorBrush x:Key="ErrorBrush" Color="{StaticResource ErrorColor}"/>
+
+  <Style TargetType="Window">
+    <Setter Property="Background" Value="{StaticResource BackgroundBrush}"/>
+    <Setter Property="Foreground" Value="{StaticResource TextPrimaryBrush}"/>
+    <Setter Property="FontFamily" Value="Segoe UI"/>
+    <Setter Property="FontSize" Value="13"/>
+  </Style>
+
+  <Style x:Key="NavButtonStyle" TargetType="RadioButton">
+    <Setter Property="Height" Value="40"/>
+    <Setter Property="Padding" Value="16,0,0,0"/>
+    <Setter Property="Foreground" Value="{StaticResource TextSecondaryBrush}"/>
+    <Setter Property="Background" Value="Transparent"/>
+    <Setter Property="BorderThickness" Value="0"/>
+    <Setter Property="HorizontalContentAlignment" Value="Left"/>
+    <Setter Property="VerticalContentAlignment" Value="Center"/>
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="RadioButton">
+          <Border x:Name="Bg" Background="{TemplateBinding Background}" CornerRadius="6" Margin="8,2">
+            <ContentPresenter Margin="{TemplateBinding Padding}"
+                               VerticalAlignment="Center"/>
+          </Border>
+          <ControlTemplate.Triggers>
+            <Trigger Property="IsChecked" Value="True">
+              <Setter TargetName="Bg" Property="Background" Value="{StaticResource SurfaceAltBrush}"/>
+              <Setter Property="Foreground" Value="{StaticResource TextPrimaryBrush}"/>
+            </Trigger>
+            <Trigger Property="IsMouseOver" Value="True">
+              <Setter TargetName="Bg" Property="Background" Value="{StaticResource SurfaceBrush}"/>
+            </Trigger>
+          </ControlTemplate.Triggers>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
+
+  <Style x:Key="CardStyle" TargetType="Border">
+    <Setter Property="Background" Value="{StaticResource SurfaceBrush}"/>
+    <Setter Property="BorderBrush" Value="{StaticResource BorderBrush2}"/>
+    <Setter Property="BorderThickness" Value="1"/>
+    <Setter Property="CornerRadius" Value="10"/>
+    <Setter Property="Padding" Value="16"/>
+  </Style>
+
+  <Style x:Key="PrimaryButtonStyle" TargetType="Button">
+    <Setter Property="Background" Value="{StaticResource AccentBrush}"/>
+    <Setter Property="Foreground" Value="#FF0E1116"/>
+    <Setter Property="Padding" Value="16,8"/>
+    <Setter Property="BorderThickness" Value="0"/>
+    <Setter Property="FontWeight" Value="SemiBold"/>
+    <Setter Property="Cursor" Value="Hand"/>
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="Button">
+          <Border Background="{TemplateBinding Background}" CornerRadius="6" Padding="{TemplateBinding Padding}">
+            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+          </Border>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
+
+  <Style x:Key="SecondaryButtonStyle" TargetType="Button" BasedOn="{StaticResource PrimaryButtonStyle}">
+    <Setter Property="Background" Value="{StaticResource SurfaceAltBrush}"/>
+    <Setter Property="Foreground" Value="{StaticResource TextPrimaryBrush}"/>
+  </Style>
+
+  <!-- Themed ComboBox (PROJECT_STATUS.md "In progress" item 3, closed here): matches
+       CardStyle/PrimaryButtonStyle's flat, no-gradient look instead of the system's default
+       white-chrome ComboBox. Applied app-wide via TargetType (not x:Key) so every existing
+       ComboBox - Settings' language picker, GPU page's per-card mode picker, etc. - picks it up
+       automatically with no per-usage XAML changes, and so no page can regress back to the old
+       invisible-text bug (see SettingsView.xaml's own comment on that root cause) by simply adding
+       a new ComboBox later without knowing to opt in.
+
+       Deliberately keeps close to the *default* ComboBox template's structural pieces (a
+       ToggleButton-driven Popup with an ItemsPresenter, non-editable path only - this app never
+       sets IsEditable) rather than inventing a new interaction model, specifically to avoid
+       regressing keyboard nav (arrow keys/Escape/Enter) and popup placement, which is the exact
+       risk this item was left unattempted for across several earlier increments. -->
+  <Style x:Key="ComboBoxToggleButtonStyle" TargetType="ToggleButton">
+    <Setter Property="OverridesDefaultStyle" Value="True"/>
+    <Setter Property="Focusable" Value="False"/>
+    <Setter Property="ClickMode" Value="Press"/>
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="ToggleButton">
+          <Border x:Name="Bg" Background="{StaticResource SurfaceAltBrush}"
+                  BorderBrush="{StaticResource BorderBrush2}" BorderThickness="1" CornerRadius="6">
+            <Grid>
+              <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="24"/>
+              </Grid.ColumnDefinitions>
+              <Path Grid.Column="1" Data="M 0 0 L 4 4 L 8 0 Z" Fill="{StaticResource TextSecondaryBrush}"
+                    HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            </Grid>
+          </Border>
+          <ControlTemplate.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+              <Setter TargetName="Bg" Property="BorderBrush" Value="{StaticResource AccentBrush}"/>
+            </Trigger>
+          </ControlTemplate.Triggers>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
+
+  <Style TargetType="ComboBoxItem">
+    <Setter Property="Padding" Value="8,6"/>
+    <Setter Property="Foreground" Value="{StaticResource TextPrimaryBrush}"/>
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="ComboBoxItem">
+          <Border x:Name="Bg" Background="Transparent" Padding="{TemplateBinding Padding}">
+            <ContentPresenter/>
+          </Border>
+          <ControlTemplate.Triggers>
+            <Trigger Property="IsHighlighted" Value="True">
+              <Setter TargetName="Bg" Property="Background" Value="{StaticResource SurfaceAltBrush}"/>
+            </Trigger>
+            <Trigger Property="IsSelected" Value="True">
+              <Setter TargetName="Bg" Property="Background" Value="{StaticResource AccentBrush}"/>
+              <Setter Property="Foreground" Value="#FF0E1116"/>
+            </Trigger>
+          </ControlTemplate.Triggers>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
+
+  <Style TargetType="ComboBox">
+    <Setter Property="Background" Value="{StaticResource SurfaceAltBrush}"/>
+    <Setter Property="Foreground" Value="{StaticResource TextPrimaryBrush}"/>
+    <Setter Property="BorderBrush" Value="{StaticResource BorderBrush2}"/>
+    <Setter Property="BorderThickness" Value="1"/>
+    <Setter Property="Padding" Value="8,6"/>
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="ComboBox">
+          <Grid>
+            <ToggleButton x:Name="ToggleButton" Style="{StaticResource ComboBoxToggleButtonStyle}"
+                          IsChecked="{Binding IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"/>
+            <!-- Deliberately NOT the framework's usual SelectionBoxItem/SelectionBoxItemTemplate
+                 TemplateBindings here - that combination is the standard pattern (and IS what
+                 Microsoft's own default ComboBox templates use) but was verified live to not
+                 project DisplayMemberPath onto the closed selection box through this custom
+                 template: a data-bound ComboBox (GpuView's per-card mode picker, ItemsSource of
+                 GpuModeOption records + DisplayMemberPath="Label") rendered the record's raw
+                 ToString() instead of its Label. ComboBoxSelectionDisplayConverter (see its own
+                 doc comment) reads DisplayMemberPath via reflection instead, and also handles the
+                 other pattern in this app - ComboBoxes whose items are literal
+                 <ComboBoxItem Content="..."/> elements (SettingsView's language picker), where
+                 SelectedItem is the ComboBoxItem container itself and the real text is its
+                 Content. -->
+            <ContentPresenter x:Name="ContentSite" Margin="{TemplateBinding Padding}"
+                               HorizontalAlignment="Left" VerticalAlignment="Center"
+                               IsHitTestVisible="False">
+              <ContentPresenter.Content>
+                <MultiBinding Converter="{StaticResource ComboBoxSelectionDisplayConverter}">
+                  <Binding RelativeSource="{RelativeSource TemplatedParent}" Path="SelectedItem"/>
+                  <Binding RelativeSource="{RelativeSource TemplatedParent}" Path="DisplayMemberPath"/>
+                </MultiBinding>
+              </ContentPresenter.Content>
+            </ContentPresenter>
+            <Popup x:Name="Popup" Placement="Bottom" IsOpen="{TemplateBinding IsDropDownOpen}"
+                   AllowsTransparency="True" Focusable="False" PopupAnimation="None">
+              <Border x:Name="DropDownBorder" MinWidth="{TemplateBinding ActualWidth}" MaxHeight="240"
+                      Background="{StaticResource SurfaceAltBrush}" BorderBrush="{StaticResource BorderBrush2}"
+                      BorderThickness="1" CornerRadius="6" Margin="0,2,0,0">
+                <ScrollViewer SnapsToDevicePixels="True">
+                  <ItemsPresenter KeyboardNavigation.DirectionalNavigation="Contained"/>
+                </ScrollViewer>
+              </Border>
+            </Popup>
+          </Grid>
+          <ControlTemplate.Triggers>
+            <Trigger Property="IsEnabled" Value="False">
+              <Setter Property="Opacity" Value="0.6"/>
+            </Trigger>
+          </ControlTemplate.Triggers>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
+
+</ResourceDictionary>

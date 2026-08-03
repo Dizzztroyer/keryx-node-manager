@@ -1,0 +1,127 @@
+<UserControl x:Class="KeryxNodeManager.App.Views.SettingsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="BoolToVis"/>
+    </UserControl.Resources>
+    <!-- Wrapped in a ScrollViewer (fixing a real, previously-flagged bug): this page's content can
+         exceed the visible height on a non-maximized window, and a bare StackPanel with no
+         ScrollViewer left the Critical-threshold field and Save button genuinely unreachable in
+         that case - discovered live during an earlier session and worked around only by
+         maximizing the window during verification, never fixed in the XAML itself until now. -->
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+    <StackPanel MaxWidth="700" HorizontalAlignment="Left">
+        <TextBlock Text="{DynamicResource Str_Settings_Title}" FontSize="22" FontWeight="Bold" Margin="0,0,0,16"/>
+
+        <Border Style="{StaticResource CardStyle}" Margin="0,0,0,16">
+            <StackPanel>
+                <TextBlock Text="{DynamicResource Str_Settings_Startup_Header}" FontWeight="SemiBold" Margin="0,0,0,8"/>
+                <CheckBox Content="{DynamicResource Str_Settings_StartWithWindows}"
+                          IsChecked="{Binding StartWithWindows, Mode=TwoWay}"
+                          Foreground="{StaticResource TextPrimaryBrush}"/>
+                <TextBlock Text="{DynamicResource Str_Settings_StartWithWindows_Note}"
+                           Margin="0,4,0,0" FontStyle="Italic" TextWrapping="Wrap"
+                           Foreground="{StaticResource TextSecondaryBrush}"/>
+                <TextBlock Text="{DynamicResource Str_Settings_CheckingAutostart}" Margin="0,4,0,0"
+                           Visibility="{Binding IsCheckingAutostart, Converter={StaticResource BoolToVis}}"
+                           Foreground="{StaticResource TextSecondaryBrush}"/>
+
+                <CheckBox Content="{DynamicResource Str_Settings_StartMinimizedToTray}" Margin="0,16,0,0"
+                          IsChecked="{Binding Settings.StartMinimizedToTray, Mode=TwoWay}"
+                          Foreground="{StaticResource TextPrimaryBrush}"/>
+                <CheckBox Content="{DynamicResource Str_Settings_CloseMinimizesToTray}"
+                          Margin="0,8,0,0"
+                          IsChecked="{Binding Settings.CloseButtonMinimizesToTray, Mode=TwoWay}"
+                          Foreground="{StaticResource TextPrimaryBrush}"/>
+                <CheckBox Content="{DynamicResource Str_Settings_NotificationsEnabled}" Margin="0,8,0,0"
+                          IsChecked="{Binding Settings.NotificationsEnabled, Mode=TwoWay}"
+                          Foreground="{StaticResource TextPrimaryBrush}"/>
+            </StackPanel>
+        </Border>
+
+        <Border Style="{StaticResource CardStyle}" Margin="0,0,0,16">
+            <StackPanel>
+                <TextBlock Text="{DynamicResource Str_Settings_Logs_Header}" FontWeight="SemiBold" Margin="0,0,0,8"/>
+                <TextBlock Text="{DynamicResource Str_Settings_LogRetentionDays}" Foreground="{StaticResource TextSecondaryBrush}"/>
+                <TextBox Text="{Binding Settings.LogRetentionDays, Mode=TwoWay}" Margin="0,4,0,0" Padding="8"
+                         Width="120" HorizontalAlignment="Left" Background="{StaticResource SurfaceAltBrush}"
+                         Foreground="{StaticResource TextPrimaryBrush}" BorderThickness="0"/>
+
+                <TextBlock Text="{DynamicResource Str_Settings_MaxLogSizeMb}" Margin="0,16,0,0"
+                           Foreground="{StaticResource TextSecondaryBrush}"/>
+                <TextBox Text="{Binding Settings.MaxLogSizeMb, Mode=TwoWay}" Margin="0,4,0,0" Padding="8"
+                         Width="120" HorizontalAlignment="Left" Background="{StaticResource SurfaceAltBrush}"
+                         Foreground="{StaticResource TextPrimaryBrush}" BorderThickness="0"/>
+            </StackPanel>
+        </Border>
+
+        <Border Style="{StaticResource CardStyle}" Margin="0,0,0,16">
+            <StackPanel>
+                <TextBlock Text="{DynamicResource Str_Settings_Monitoring_Header}" FontWeight="SemiBold" Margin="0,0,0,8"/>
+                <TextBlock Text="{DynamicResource Str_Settings_MonitoringInterval}" Foreground="{StaticResource TextSecondaryBrush}"/>
+                <TextBox Text="{Binding Settings.MonitoringIntervalSeconds, Mode=TwoWay}" Margin="0,4,0,0" Padding="8"
+                         Width="120" HorizontalAlignment="Left" Background="{StaticResource SurfaceAltBrush}"
+                         Foreground="{StaticResource TextPrimaryBrush}" BorderThickness="0"/>
+            </StackPanel>
+        </Border>
+
+        <Border Style="{StaticResource CardStyle}" Margin="0,0,0,16">
+            <StackPanel>
+                <TextBlock Text="{DynamicResource Str_Settings_Safety_Header}" FontWeight="SemiBold" Margin="0,0,0,8"/>
+                <CheckBox Content="{DynamicResource Str_Settings_SafetyEnabled}"
+                          IsChecked="{Binding Settings.SafetyMonitorEnabled, Mode=TwoWay}"
+                          Foreground="{StaticResource TextPrimaryBrush}"/>
+
+                <TextBlock Text="{DynamicResource Str_Settings_WarningThreshold}" Margin="0,16,0,0"
+                           Foreground="{StaticResource TextSecondaryBrush}"/>
+                <TextBox Text="{Binding Settings.GpuWarningTempC, Mode=TwoWay}" Margin="0,4,0,0" Padding="8"
+                         Width="120" HorizontalAlignment="Left" Background="{StaticResource SurfaceAltBrush}"
+                         Foreground="{StaticResource TextPrimaryBrush}" BorderThickness="0"/>
+
+                <TextBlock Text="{DynamicResource Str_Settings_CriticalThreshold}" Margin="0,16,0,0"
+                           Foreground="{StaticResource TextSecondaryBrush}"/>
+                <TextBox Text="{Binding Settings.GpuCriticalTempC, Mode=TwoWay}" Margin="0,4,0,0" Padding="8"
+                         Width="120" HorizontalAlignment="Left" Background="{StaticResource SurfaceAltBrush}"
+                         Foreground="{StaticResource TextPrimaryBrush}" BorderThickness="0"/>
+
+                <TextBlock Text="{DynamicResource Str_Settings_SafetyNote}"
+                           Margin="0,8,0,0" FontStyle="Italic" TextWrapping="Wrap"
+                           Foreground="{StaticResource TextSecondaryBrush}"/>
+            </StackPanel>
+        </Border>
+
+        <Border Style="{StaticResource CardStyle}" Margin="0,0,0,16">
+            <StackPanel>
+                <TextBlock Text="{DynamicResource Str_Settings_Language_Header}" FontWeight="SemiBold" Margin="0,0,0,8"/>
+                <!-- History: this ComboBox originally set an explicit Background/Foreground pair,
+                     which produced invisible near-white-on-white text because the default WPF
+                     ComboBox control template ignores Background on its closed selection box (see
+                     PROJECT_STATUS.md's twelfth increment for the full root-cause writeup) - fixed
+                     at the time by dropping both overrides and accepting the system's default
+                     (visually inconsistent) colors. A themed ComboBox/ComboBoxItem control template
+                     (matching CardStyle/PrimaryButtonStyle's pattern) now lives in DarkTheme.xaml
+                     and applies to every ComboBox in the app via TargetType, so no per-page
+                     Background/Foreground override is needed - or safe to add - here anymore
+                     (twenty-ninth increment). -->
+                <ComboBox SelectedValuePath="Tag" SelectedValue="{Binding Language, Mode=TwoWay}"
+                          Width="160" HorizontalAlignment="Left">
+                    <ComboBoxItem Tag="ru" Content="Русский"/>
+                    <ComboBoxItem Tag="en" Content="English"/>
+                    <ComboBoxItem Tag="es" Content="Español"/>
+                    <ComboBoxItem Tag="it" Content="Italiano"/>
+                    <ComboBoxItem Tag="fr" Content="Français"/>
+                    <ComboBoxItem Tag="uk" Content="Українська"/>
+                </ComboBox>
+            </StackPanel>
+        </Border>
+
+        <StackPanel Orientation="Horizontal">
+            <Button Content="{DynamicResource Str_Settings_Save}" Style="{StaticResource PrimaryButtonStyle}"
+                    Command="{Binding SaveCommand}"/>
+        </StackPanel>
+
+        <TextBlock Text="{Binding StatusMessage}" Margin="0,12,0,0" TextWrapping="Wrap"
+                   Foreground="{StaticResource TextSecondaryBrush}"/>
+    </StackPanel>
+    </ScrollViewer>
+</UserControl>

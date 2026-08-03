@@ -1,0 +1,64 @@
+<UserControl x:Class="KeryxNodeManager.App.Views.LogsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0,0,0,16">
+            <TextBlock Text="{DynamicResource Str_Logs_Title}" FontSize="22" FontWeight="Bold" VerticalAlignment="Center" Margin="0,0,20,0"/>
+            <Button Content="{DynamicResource Str_Logs_ExportDiagnostics}" Style="{StaticResource PrimaryButtonStyle}"
+                    Command="{Binding ExportDiagnosticsCommand}" Margin="0,0,10,0"/>
+            <Button Content="{DynamicResource Str_Logs_OpenFolder}" Style="{StaticResource SecondaryButtonStyle}"
+                    Command="{Binding OpenLogsFolderCommand}" Margin="0,0,10,0"/>
+            <Button Content="{DynamicResource Str_Logs_ClearDisplay}" Style="{StaticResource SecondaryButtonStyle}"
+                    Command="{Binding ClearDisplayedLinesCommand}"/>
+        </StackPanel>
+
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="12"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Border Grid.Column="0" Style="{StaticResource CardStyle}">
+                <DockPanel>
+                    <TextBlock DockPanel.Dock="Top" Text="{DynamicResource Str_Logs_NodeHeader}" FontWeight="SemiBold" Margin="0,0,0,8"/>
+                    <ScrollViewer VerticalScrollBarVisibility="Auto">
+                        <ItemsControl ItemsSource="{Binding NodeLines}">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding}" TextWrapping="Wrap" FontFamily="Consolas" FontSize="11"
+                                               Foreground="{StaticResource TextPrimaryBrush}"/>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </ScrollViewer>
+                </DockPanel>
+            </Border>
+
+            <Border Grid.Column="2" Style="{StaticResource CardStyle}">
+                <DockPanel>
+                    <TextBlock DockPanel.Dock="Top" Text="{DynamicResource Str_Logs_MinerHeader}" FontWeight="SemiBold" Margin="0,0,0,8"/>
+                    <ScrollViewer VerticalScrollBarVisibility="Auto">
+                        <ItemsControl ItemsSource="{Binding MinerLines}">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding}" TextWrapping="Wrap" FontFamily="Consolas" FontSize="11"
+                                               Foreground="{StaticResource TextPrimaryBrush}"/>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </ScrollViewer>
+                </DockPanel>
+            </Border>
+        </Grid>
+
+        <TextBlock Grid.Row="2" Text="{Binding StatusMessage}" Margin="0,12,0,0" TextWrapping="Wrap"
+                   Foreground="{StaticResource TextSecondaryBrush}"/>
+    </Grid>
+</UserControl>

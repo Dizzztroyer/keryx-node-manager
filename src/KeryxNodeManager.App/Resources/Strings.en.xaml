@@ -1,0 +1,147 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:sys="clr-namespace:System;assembly=mscorlib">
+
+    <!-- English translations. See Strings.ru.xaml for the scope note - only the Settings page and
+         the MainWindow nav footer are wired to these keys in this first increment. -->
+
+    <sys:String x:Key="Str_Settings_Title">Settings</sys:String>
+    <sys:String x:Key="Str_Settings_Startup_Header">Startup</sys:String>
+    <sys:String x:Key="Str_Settings_StartWithWindows">Start Keryx Node Manager when Windows starts</sys:String>
+    <sys:String x:Key="Str_Settings_StartWithWindows_Note">Creates a Windows Task Scheduler entry (no administrator rights needed).</sys:String>
+    <sys:String x:Key="Str_Settings_CheckingAutostart">Checking current autostart status...</sys:String>
+    <sys:String x:Key="Str_Settings_StartMinimizedToTray">Start minimized to tray</sys:String>
+    <sys:String x:Key="Str_Settings_CloseMinimizesToTray">Close button minimizes to tray (instead of exiting)</sys:String>
+    <sys:String x:Key="Str_Settings_NotificationsEnabled">Show notifications</sys:String>
+    <sys:String x:Key="Str_Settings_Logs_Header">Logs</sys:String>
+    <sys:String x:Key="Str_Settings_LogRetentionDays">Keep logs (days)</sys:String>
+    <sys:String x:Key="Str_Settings_MaxLogSizeMb">Maximum log file size (MB)</sys:String>
+    <sys:String x:Key="Str_Settings_Monitoring_Header">Monitoring</sys:String>
+    <sys:String x:Key="Str_Settings_MonitoringInterval">GPU/status polling interval (sec)</sys:String>
+    <sys:String x:Key="Str_Settings_Safety_Header">Overheat protection</sys:String>
+    <sys:String x:Key="Str_Settings_SafetyEnabled">Automatically stop mining at critical GPU temperature</sys:String>
+    <sys:String x:Key="Str_Settings_WarningThreshold">Warning threshold (°C)</sys:String>
+    <sys:String x:Key="Str_Settings_CriticalThreshold">Critical threshold - stops mining (°C)</sys:String>
+    <sys:String x:Key="Str_Settings_SafetyNote">Checked while the miner is running (see the Overview page).</sys:String>
+    <sys:String x:Key="Str_Settings_Language_Header">Language</sys:String>
+    <sys:String x:Key="Str_Settings_Save">Save</sys:String>
+
+    <sys:String x:Key="Str_Nav_VersionLabel">Version: </sys:String>
+    <sys:String x:Key="Str_Nav_ProfileLabel">Profile: </sys:String>
+
+    <sys:String x:Key="Str_Dashboard_Title">Overview</sys:String>
+    <sys:String x:Key="Str_Dashboard_Node">Node</sys:String>
+    <sys:String x:Key="Str_Dashboard_Miner">Miner</sys:String>
+    <sys:String x:Key="Str_Dashboard_Gpu">GPU</sys:String>
+    <sys:String x:Key="Str_Dashboard_GpuActiveSuffix"> active / </sys:String>
+    <sys:String x:Key="Str_Dashboard_GpuDisabledSuffix"> disabled</sys:String>
+    <sys:String x:Key="Str_Dashboard_StartAll">Start All</sys:String>
+    <sys:String x:Key="Str_Dashboard_StopAll">Stop All</sys:String>
+    <sys:String x:Key="Str_Dashboard_Refresh">Refresh</sys:String>
+    <sys:String x:Key="Str_Dashboard_GoToSettings">Go to settings</sys:String>
+
+    <sys:String x:Key="Str_Gpu_Title">GPUs</sys:String>
+    <sys:String x:Key="Str_Gpu_Refresh">Refresh</sys:String>
+    <sys:String x:Key="Str_Gpu_CudaLabel">CUDA </sys:String>
+    <sys:String x:Key="Str_Gpu_VramUnit"> MB VRAM · </sys:String>
+    <sys:String x:Key="Str_Gpu_TempUnit">°C</sys:String>
+    <sys:String x:Key="Str_Gpu_ModeLabel">Mode:</sys:String>
+
+    <sys:String x:Key="Str_Models_Title">Models</sys:String>
+    <sys:String x:Key="Str_Models_Refresh">Refresh</sys:String>
+    <sys:String x:Key="Str_Models_FromLabel"> · from </sys:String>
+    <sys:String x:Key="Str_Models_VramSuffix"> MB VRAM</sys:String>
+    <sys:String x:Key="Str_Models_UrlLabel">Download URL (paste a link from the keryx-miner README)</sys:String>
+    <sys:String x:Key="Str_Models_Sha256Label">Expected SHA-256 (optional)</sys:String>
+    <sys:String x:Key="Str_Models_Download">Download</sys:String>
+    <sys:String x:Key="Str_Models_Resume">Resume</sys:String>
+    <sys:String x:Key="Str_Models_Pause">Pause</sys:String>
+    <sys:String x:Key="Str_Models_Cancel">Cancel</sys:String>
+    <sys:String x:Key="Str_Models_Delete">Delete</sys:String>
+    <sys:String x:Key="Str_Models_OpenFolder">Open folder</sys:String>
+
+    <sys:String x:Key="Str_Node_Title">Node</sys:String>
+    <sys:String x:Key="Str_Node_PathLabel">Path to keryxd.exe</sys:String>
+    <sys:String x:Key="Str_Node_Browse">Browse...</sys:String>
+    <sys:String x:Key="Str_Node_EndpointLabel">keryxd address (usually 127.0.0.1)</sys:String>
+    <sys:String x:Key="Str_Node_TestnetCheckbox">Testnet</sys:String>
+    <sys:String x:Key="Str_Node_Save">Save</sys:String>
+    <sys:String x:Key="Str_Node_CheckEndpoint">Check endpoint</sys:String>
+    <sys:String x:Key="Str_Node_FooterNote">Start/stop the node from this window using the "Start All"/"Stop All" buttons on the Overview page, once the settings here are saved.</sys:String>
+
+    <sys:String x:Key="Str_Miner_Title">Miner</sys:String>
+    <sys:String x:Key="Str_Miner_AddressLabel">Mining address</sys:String>
+    <sys:String x:Key="Str_Miner_PathLabel">Path to keryx-miner.exe</sys:String>
+    <sys:String x:Key="Str_Miner_Browse">Browse...</sys:String>
+    <sys:String x:Key="Str_Miner_ModelsFolderLabel">Models folder</sys:String>
+    <sys:String x:Key="Str_Miner_Save">Save</sys:String>
+    <sys:String x:Key="Str_Miner_AdvancedMode">Advanced mode</sys:String>
+    <sys:String x:Key="Str_Miner_CommandPreviewHeader">Launch command (preview)</sys:String>
+    <sys:String x:Key="Str_Miner_GpuNote">Each GPU runs its own model. VRAM across different GPUs is never pooled.</sys:String>
+
+    <sys:String x:Key="Str_Logs_Title">Logs</sys:String>
+    <sys:String x:Key="Str_Logs_ExportDiagnostics">Export diagnostics...</sys:String>
+    <sys:String x:Key="Str_Logs_OpenFolder">Open logs folder</sys:String>
+    <sys:String x:Key="Str_Logs_ClearDisplay">Clear display</sys:String>
+    <sys:String x:Key="Str_Logs_NodeHeader">Node (keryxd)</sys:String>
+    <sys:String x:Key="Str_Logs_MinerHeader">Miner (keryx-miner)</sys:String>
+
+    <sys:String x:Key="Str_Profiles_Title">Profiles</sys:String>
+    <sys:String x:Key="Str_Profiles_ActiveLabel">Active profile: </sys:String>
+    <sys:String x:Key="Str_Profiles_MakeActive">Make active</sys:String>
+    <sys:String x:Key="Str_Profiles_Delete">Delete</sys:String>
+    <sys:String x:Key="Str_Profiles_NewHeader">New profile</sys:String>
+    <sys:String x:Key="Str_Profiles_Create">Create</sys:String>
+    <sys:String x:Key="Str_Profiles_NewNote">Creates a profile with default settings and makes it active immediately.</sys:String>
+    <sys:String x:Key="Str_Profiles_RenameHeader">Rename selected profile</sys:String>
+    <sys:String x:Key="Str_Profiles_Rename">Rename</sys:String>
+    <sys:String x:Key="Str_Profiles_RenameNote">Settings, GPU assignments, and executable paths carry over under the new name.</sys:String>
+
+    <sys:String x:Key="Str_About_VersionLabel">Version </sys:String>
+    <sys:String x:Key="Str_About_Description">An app for managing the Keryx network's node and miner: GPU configuration, model downloads, starting/stopping processes, and monitoring - with no need to work with PowerShell, WSL, or Docker by hand.</sys:String>
+    <sys:String x:Key="Str_About_LinksHeader">Links</sys:String>
+    <sys:String x:Key="Str_About_NodeRepoLink">keryx-node (node) on GitHub</sys:String>
+    <sys:String x:Key="Str_About_MinerRepoLink">keryx-miner (miner) on GitHub</sys:String>
+    <sys:String x:Key="Str_About_NoRepoNote">Keryx Node Manager itself has no public repository yet - this is a local working copy (see PROJECT_STATUS.md).</sys:String>
+    <sys:String x:Key="Str_About_SystemHeader">System</sys:String>
+    <sys:String x:Key="Str_About_OsLabel">OS: </sys:String>
+    <sys:String x:Key="Str_About_DotNetLabel">.NET: </sys:String>
+    <sys:String x:Key="Str_About_Is64BitLabel">64-bit OS: </sys:String>
+    <sys:String x:Key="Str_Wizard_WindowTitle">Keryx Node Manager — First Run</sys:String>
+    <sys:String x:Key="Str_Wizard_HeaderTitle">Set up Keryx Node Manager</sys:String>
+    <sys:String x:Key="Str_Wizard_Step0_Title">Welcome</sys:String>
+    <sys:String x:Key="Str_Wizard_Step0_Body">This wizard will help you check your system once, set the paths to the node and miner, enter your reward address, and configure autostart. Everything can be changed later on the corresponding pages of the app — the wizard does not create a separate, independent configuration.</sys:String>
+    <sys:String x:Key="Str_Wizard_Step0_ActiveProfileLabel">The wizard is configuring profile:</sys:String>
+    <sys:String x:Key="Str_Wizard_Step0_NewProfileHint">Setting up a second rig separately from the current profile? Create a new profile below — the wizard will switch to it immediately.</sys:String>
+    <sys:String x:Key="Str_Wizard_Step0_NewProfileNamePlaceholder">New profile name</sys:String>
+    <sys:String x:Key="Str_Wizard_Step0_CreateProfile">Create and configure</sys:String>
+    <sys:String x:Key="Str_Wizard_Step1_Title">System check</sys:String>
+    <sys:String x:Key="Str_Wizard_Step1_Desc">Real checks are performed — Windows version, NVIDIA GPU presence (via nvidia-smi), WSL and Docker (optional).</sys:String>
+    <sys:String x:Key="Str_Wizard_Step1_Updating">Updating...</sys:String>
+    <sys:String x:Key="Str_Wizard_Step1_WslDockerNote">WSL and Docker are not required — by default the app runs in native Windows mode.</sys:String>
+    <sys:String x:Key="Str_Wizard_Step2_Title">Program and models folder paths</sys:String>
+    <sys:String x:Key="Str_Wizard_Step2_NodeLabel">keryxd.exe (node, optional at this step)</sys:String>
+    <sys:String x:Key="Str_Wizard_Step2_MinerLabel">keryx-miner.exe (miner, optional at this step)</sys:String>
+    <sys:String x:Key="Str_Wizard_Step2_ModelsLabel">Models folder (required)</sys:String>
+    <sys:String x:Key="Str_Wizard_Step2_Browse">Browse...</sys:String>
+    <sys:String x:Key="Str_Wizard_Step2_Note">Paths to keryxd.exe/keryx-miner.exe can be set later on the "Node" and "Miner" pages — to continue the wizard, it's enough to set the models folder.</sys:String>
+    <sys:String x:Key="Str_Wizard_Step3_Title">Reward address</sys:String>
+    <sys:String x:Key="Str_Wizard_Step3_Body">Only a public address is entered (keryx:... or keryxtest:...). The wizard never asks for or stores a seed phrase or private key.</sys:String>
+    <sys:String x:Key="Str_Wizard_Step4_Title">Preview model assignment by GPU</sys:String>
+    <sys:String x:Key="Str_Wizard_Step4_Body">Shows which model tier would be assigned automatically right now for each detected GPU. VRAM across different GPUs is never pooled. The assignment can be changed manually later on the "GPUs" page.</sys:String>
+    <sys:String x:Key="Str_Wizard_Step5_Title">Autostart</sys:String>
+    <sys:String x:Key="Str_Wizard_Step5_AutoNode">Start the node (keryxd.exe) automatically</sys:String>
+    <sys:String x:Key="Str_Wizard_Step5_AutoMiner">Start the miner automatically once the node is ready</sys:String>
+    <sys:String x:Key="Str_Wizard_Step5_AutoRestart">Automatically restart on crash</sys:String>
+    <sys:String x:Key="Str_Wizard_Step5_Note">Launching the app together with Windows is configured separately — either by the installer (a checkbox during setup) or on the "Settings" page after the first run.</sys:String>
+    <sys:String x:Key="Str_Wizard_Step6_Title">Done</sys:String>
+    <sys:String x:Key="Str_Wizard_Step6_Body">The settings will be saved to the profile. You can always change them later on the "Node", "Miner", "GPUs", and "Models" pages.</sys:String>
+    <sys:String x:Key="Str_Wizard_Step6_AddressLabel">Address: </sys:String>
+    <sys:String x:Key="Str_Wizard_Step6_AddressWarning">This doesn't look like a valid Keryx address - mining with it will be rejected by the node. Go back to the reward-address step to fix it.</sys:String>
+    <sys:String x:Key="Str_Wizard_Step6_ModelsDirLabel">Models folder: </sys:String>
+    <sys:String x:Key="Str_Wizard_Skip">Skip</sys:String>
+    <sys:String x:Key="Str_Wizard_Back">Back</sys:String>
+    <sys:String x:Key="Str_Wizard_Next">Next</sys:String>
+    <sys:String x:Key="Str_Wizard_Finish">Finish</sys:String>
+
+</ResourceDictionary>

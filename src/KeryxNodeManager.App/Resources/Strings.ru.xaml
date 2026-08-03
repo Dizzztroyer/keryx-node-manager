@@ -1,0 +1,183 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:sys="clr-namespace:System;assembly=mscorlib">
+
+    <!--
+        Localization infrastructure (brief §16), first increment. This is the "en" set's default/
+        fallback twin - loaded when AppSettings.Language is "ru" (the app's original default, so a
+        fresh install with no explicit language choice behaves exactly as every earlier session's
+        hardcoded-Russian pages already did).
+
+        Scope, stated honestly: only the Settings page and the MainWindow nav-footer labels are
+        wired to these DynamicResource keys so far - the mechanism (LocalizationManager swapping
+        this dictionary at runtime, DynamicResource re-evaluating live with no app restart) is
+        proven end-to-end, but the other ~11 Views and their ViewModels still have Russian text
+        hardcoded inline, same as before this increment. See PROJECT_STATUS.md for the full,
+        file-by-file list of what remains.
+    -->
+
+    <sys:String x:Key="Str_Settings_Title">Настройки</sys:String>
+    <sys:String x:Key="Str_Settings_Startup_Header">Запуск</sys:String>
+    <sys:String x:Key="Str_Settings_StartWithWindows">Запускать Keryx Node Manager при входе в Windows</sys:String>
+    <sys:String x:Key="Str_Settings_StartWithWindows_Note">Создаётся задача в Планировщике заданий Windows (без прав администратора).</sys:String>
+    <sys:String x:Key="Str_Settings_CheckingAutostart">Проверка текущего статуса автозапуска...</sys:String>
+    <sys:String x:Key="Str_Settings_StartMinimizedToTray">Запускать свёрнутым в трей</sys:String>
+    <sys:String x:Key="Str_Settings_CloseMinimizesToTray">Кнопка закрытия окна сворачивает в трей (а не завершает работу)</sys:String>
+    <sys:String x:Key="Str_Settings_NotificationsEnabled">Показывать уведомления</sys:String>
+    <sys:String x:Key="Str_Settings_Logs_Header">Логи</sys:String>
+    <sys:String x:Key="Str_Settings_LogRetentionDays">Хранить логи (дней)</sys:String>
+    <sys:String x:Key="Str_Settings_MaxLogSizeMb">Максимальный размер файла лога (МБ)</sys:String>
+    <sys:String x:Key="Str_Settings_Monitoring_Header">Мониторинг</sys:String>
+    <sys:String x:Key="Str_Settings_MonitoringInterval">Интервал опроса GPU/статуса (сек)</sys:String>
+    <sys:String x:Key="Str_Settings_Safety_Header">Защита от перегрева</sys:String>
+    <sys:String x:Key="Str_Settings_SafetyEnabled">Автоматически останавливать майнинг при критической температуре GPU</sys:String>
+    <sys:String x:Key="Str_Settings_WarningThreshold">Порог предупреждения (°C)</sys:String>
+    <sys:String x:Key="Str_Settings_CriticalThreshold">Критический порог - останавливает майнинг (°C)</sys:String>
+    <sys:String x:Key="Str_Settings_SafetyNote">Проверяется, пока запущен майнер (см. страницу «Обзор»).</sys:String>
+    <sys:String x:Key="Str_Settings_Language_Header">Язык</sys:String>
+    <sys:String x:Key="Str_Settings_Save">Сохранить</sys:String>
+
+    <sys:String x:Key="Str_Nav_VersionLabel">Версия: </sys:String>
+    <sys:String x:Key="Str_Nav_ProfileLabel">Профиль: </sys:String>
+
+    <!-- Dashboard page (brief §5), added in the "full string extraction" pass - see
+         PROJECT_STATUS.md for what's covered so far vs. what's still hardcoded (the
+         ViewModel-owned dynamic status strings like NodeStatus/MinerStatus/LastActionMessage are
+         NOT covered by this pass - only the View's own static labels are). -->
+    <sys:String x:Key="Str_Dashboard_Title">Обзор</sys:String>
+    <sys:String x:Key="Str_Dashboard_Node">Нода</sys:String>
+    <sys:String x:Key="Str_Dashboard_Miner">Майнер</sys:String>
+    <sys:String x:Key="Str_Dashboard_Gpu">GPU</sys:String>
+    <sys:String x:Key="Str_Dashboard_GpuActiveSuffix"> активна(ы) / </sys:String>
+    <sys:String x:Key="Str_Dashboard_GpuDisabledSuffix"> отключена(ы)</sys:String>
+    <sys:String x:Key="Str_Dashboard_StartAll">Запустить всё</sys:String>
+    <sys:String x:Key="Str_Dashboard_StopAll">Остановить всё</sys:String>
+    <sys:String x:Key="Str_Dashboard_Refresh">Обновить</sys:String>
+    <sys:String x:Key="Str_Dashboard_GoToSettings">Перейти к настройкам</sys:String>
+
+    <!-- GPU page (brief §6), second slice of the full-extraction pass. Same scope limitation as
+         Dashboard: GpuCardViewModel.AssignmentSummary comes from Core's TierAssigner.Explanation
+         (a genuine Core-layer message, not covered here) and GpuViewModel.ModeOptions is a static
+         list built once at type-load time, not re-built on language change - both stay hardcoded
+         Russian, tracked in PROJECT_STATUS.md alongside Dashboard's equivalent gap. -->
+    <sys:String x:Key="Str_Gpu_Title">Видеокарты</sys:String>
+    <sys:String x:Key="Str_Gpu_Refresh">Обновить</sys:String>
+    <sys:String x:Key="Str_Gpu_CudaLabel">CUDA </sys:String>
+    <sys:String x:Key="Str_Gpu_VramUnit"> МБ VRAM · </sys:String>
+    <sys:String x:Key="Str_Gpu_TempUnit">°C</sys:String>
+    <sys:String x:Key="Str_Gpu_ModeLabel">Режим:</sys:String>
+
+    <!-- Models page (brief §7), third slice of the full-extraction pass. ModelCardViewModel's
+         StatusText (install/progress/error messages) is dynamic ViewModel-generated text and
+         stays hardcoded Russian, same documented limitation as Dashboard/GPU. -->
+    <sys:String x:Key="Str_Models_Title">Модели</sys:String>
+    <sys:String x:Key="Str_Models_Refresh">Обновить</sys:String>
+    <sys:String x:Key="Str_Models_FromLabel"> · от </sys:String>
+    <sys:String x:Key="Str_Models_VramSuffix"> МБ VRAM</sys:String>
+    <sys:String x:Key="Str_Models_UrlLabel">URL для скачивания (вставьте ссылку из README keryx-miner)</sys:String>
+    <sys:String x:Key="Str_Models_Sha256Label">Ожидаемый SHA-256 (необязательно)</sys:String>
+    <sys:String x:Key="Str_Models_Download">Скачать</sys:String>
+    <sys:String x:Key="Str_Models_Resume">Продолжить</sys:String>
+    <sys:String x:Key="Str_Models_Pause">Пауза</sys:String>
+    <sys:String x:Key="Str_Models_Cancel">Отмена</sys:String>
+    <sys:String x:Key="Str_Models_Delete">Удалить</sys:String>
+    <sys:String x:Key="Str_Models_OpenFolder">Открыть папку</sys:String>
+
+    <!-- Node page (brief §8), fourth slice of the full-extraction pass. NodeViewModel.StatusMessage
+         (connectivity check results/errors) and the native OpenFileDialog title/filter set in C#
+         stay hardcoded Russian, same documented limitation as the other pages. -->
+    <sys:String x:Key="Str_Node_Title">Нода</sys:String>
+    <sys:String x:Key="Str_Node_PathLabel">Путь к keryxd.exe</sys:String>
+    <sys:String x:Key="Str_Node_Browse">Обзор...</sys:String>
+    <sys:String x:Key="Str_Node_EndpointLabel">Адрес keryxd (обычно 127.0.0.1)</sys:String>
+    <sys:String x:Key="Str_Node_TestnetCheckbox">Тестовая сеть (testnet)</sys:String>
+    <sys:String x:Key="Str_Node_Save">Сохранить</sys:String>
+    <sys:String x:Key="Str_Node_CheckEndpoint">Проверить endpoint</sys:String>
+    <sys:String x:Key="Str_Node_FooterNote">Запуск/остановка ноды из этого окна — кнопками «Запустить всё»/«Остановить всё» на странице «Обзор», после того как настройки здесь сохранены.</sys:String>
+
+    <!-- Miner page (brief §9), fifth slice of the full-extraction pass. MinerViewModel's
+         StatusMessage/AddressValidationMessage/CommandPreview and native dialog titles stay
+         hardcoded Russian, same documented limitation as the other pages. -->
+    <sys:String x:Key="Str_Miner_Title">Майнер</sys:String>
+    <sys:String x:Key="Str_Miner_AddressLabel">Адрес для майнинга</sys:String>
+    <sys:String x:Key="Str_Miner_PathLabel">Путь к keryx-miner.exe</sys:String>
+    <sys:String x:Key="Str_Miner_Browse">Обзор...</sys:String>
+    <sys:String x:Key="Str_Miner_ModelsFolderLabel">Папка моделей</sys:String>
+    <sys:String x:Key="Str_Miner_Save">Сохранить</sys:String>
+    <sys:String x:Key="Str_Miner_AdvancedMode">Расширенный режим</sys:String>
+    <sys:String x:Key="Str_Miner_CommandPreviewHeader">Команда запуска (предпросмотр)</sys:String>
+    <sys:String x:Key="Str_Miner_GpuNote">Каждая видеокарта работает со своей моделью. Видеопамять разных GPU не объединяется.</sys:String>
+
+    <!-- Logs page (brief §12), sixth slice of the full-extraction pass. LogsViewModel.StatusMessage
+         and the native SaveFileDialog title/filter stay hardcoded Russian, same documented
+         limitation as the other pages. -->
+    <sys:String x:Key="Str_Logs_Title">Логи</sys:String>
+    <sys:String x:Key="Str_Logs_ExportDiagnostics">Экспорт диагностики...</sys:String>
+    <sys:String x:Key="Str_Logs_OpenFolder">Открыть папку логов</sys:String>
+    <sys:String x:Key="Str_Logs_ClearDisplay">Очистить экран</sys:String>
+    <sys:String x:Key="Str_Logs_NodeHeader">Нода (keryxd)</sys:String>
+    <sys:String x:Key="Str_Logs_MinerHeader">Майнер (keryx-miner)</sys:String>
+
+    <!-- Profiles page, seventh slice of the full-extraction pass. ProfilesViewModel.StatusMessage
+         stays hardcoded Russian, same documented limitation as the other pages. -->
+    <sys:String x:Key="Str_Profiles_Title">Профили</sys:String>
+    <sys:String x:Key="Str_Profiles_ActiveLabel">Активный профиль: </sys:String>
+    <sys:String x:Key="Str_Profiles_MakeActive">Сделать активным</sys:String>
+    <sys:String x:Key="Str_Profiles_Delete">Удалить</sys:String>
+    <sys:String x:Key="Str_Profiles_NewHeader">Новый профиль</sys:String>
+    <sys:String x:Key="Str_Profiles_Create">Создать</sys:String>
+    <sys:String x:Key="Str_Profiles_NewNote">Создаёт профиль с настройками по умолчанию и сразу делает его активным.</sys:String>
+    <sys:String x:Key="Str_Profiles_RenameHeader">Переименовать выбранный профиль</sys:String>
+    <sys:String x:Key="Str_Profiles_Rename">Переименовать</sys:String>
+    <sys:String x:Key="Str_Profiles_RenameNote">Настройки, GPU-назначения и пути к исполняемым файлам переносятся под новым именем.</sys:String>
+
+    <!-- About page, eighth slice of the full-extraction pass. "Keryx Node Manager" (the product
+         name) is left as a literal, untranslated, in the View - it's a proper noun, not UI text. -->
+    <sys:String x:Key="Str_About_VersionLabel">Версия </sys:String>
+    <sys:String x:Key="Str_About_Description">Приложение для управления нодой и майнером сети Keryx: настройка GPU, загрузка моделей, запуск/остановка процессов и мониторинг — без необходимости работать с PowerShell, WSL или Docker вручную.</sys:String>
+    <sys:String x:Key="Str_About_LinksHeader">Ссылки</sys:String>
+    <sys:String x:Key="Str_About_NodeRepoLink">keryx-node (нода) на GitHub</sys:String>
+    <sys:String x:Key="Str_About_MinerRepoLink">keryx-miner (майнер) на GitHub</sys:String>
+    <sys:String x:Key="Str_About_NoRepoNote">У самого Keryx Node Manager пока нет публичного репозитория — это локальная рабочая копия (см. PROJECT_STATUS.md).</sys:String>
+    <sys:String x:Key="Str_About_SystemHeader">Система</sys:String>
+    <sys:String x:Key="Str_About_OsLabel">ОС: </sys:String>
+    <sys:String x:Key="Str_About_DotNetLabel">.NET: </sys:String>
+    <sys:String x:Key="Str_About_Is64BitLabel">64-разрядная ОС: </sys:String>
+    <sys:String x:Key="Str_Wizard_WindowTitle">Keryx Node Manager — первый запуск</sys:String>
+    <sys:String x:Key="Str_Wizard_HeaderTitle">Настройка Keryx Node Manager</sys:String>
+    <sys:String x:Key="Str_Wizard_Step0_Title">Добро пожаловать</sys:String>
+    <sys:String x:Key="Str_Wizard_Step0_Body">Этот мастер поможет один раз проверить систему, указать пути к узлу и майнеру, ввести адрес для начисления вознаграждения и настроить автозапуск. Все действия можно будет позже изменить на соответствующих страницах приложения — мастер не создаёт отдельную, независимую конфигурацию.</sys:String>
+    <sys:String x:Key="Str_Wizard_Step0_ActiveProfileLabel">Мастер настраивает профиль:</sys:String>
+    <sys:String x:Key="Str_Wizard_Step0_NewProfileHint">Хотите настроить второй рабочий стенд отдельно от текущего профиля? Создайте новый профиль ниже — мастер тут же переключится на него.</sys:String>
+    <sys:String x:Key="Str_Wizard_Step0_NewProfileNamePlaceholder">Имя нового профиля</sys:String>
+    <sys:String x:Key="Str_Wizard_Step0_CreateProfile">Создать и настроить</sys:String>
+    <sys:String x:Key="Str_Wizard_Step1_Title">Проверка системы</sys:String>
+    <sys:String x:Key="Str_Wizard_Step1_Desc">Выполняются реальные проверки — версия Windows, наличие видеокарты NVIDIA (через nvidia-smi), WSL и Docker (необязательно).</sys:String>
+    <sys:String x:Key="Str_Wizard_Step1_Updating">Обновление...</sys:String>
+    <sys:String x:Key="Str_Wizard_Step1_WslDockerNote">WSL и Docker не требуются — по умолчанию приложение работает в нативном режиме Windows.</sys:String>
+    <sys:String x:Key="Str_Wizard_Step2_Title">Пути к программам и папке моделей</sys:String>
+    <sys:String x:Key="Str_Wizard_Step2_NodeLabel">keryxd.exe (узел, необязательно на этом шаге)</sys:String>
+    <sys:String x:Key="Str_Wizard_Step2_MinerLabel">keryx-miner.exe (майнер, необязательно на этом шаге)</sys:String>
+    <sys:String x:Key="Str_Wizard_Step2_ModelsLabel">Папка моделей (обязательно)</sys:String>
+    <sys:String x:Key="Str_Wizard_Step2_Browse">Обзор...</sys:String>
+    <sys:String x:Key="Str_Wizard_Step2_Note">Пути к keryxd.exe/keryx-miner.exe можно указать позже на страницах «Узел» и «Майнер» — для продолжения мастера достаточно указать папку моделей.</sys:String>
+    <sys:String x:Key="Str_Wizard_Step3_Title">Адрес для начисления вознаграждения</sys:String>
+    <sys:String x:Key="Str_Wizard_Step3_Body">Указывается только публичный адрес (keryx:... или keryxtest:...). Мастер никогда не запрашивает и не сохраняет seed-фразу или приватный ключ.</sys:String>
+    <sys:String x:Key="Str_Wizard_Step4_Title">Предварительное назначение моделей по видеокартам</sys:String>
+    <sys:String x:Key="Str_Wizard_Step4_Body">Показывает, какой tier модели был бы назначен автоматически прямо сейчас для каждой обнаруженной видеокарты. Видеопамять разных GPU не объединяется. Изменить назначение вручную можно позже на странице «Видеокарты».</sys:String>
+    <sys:String x:Key="Str_Wizard_Step5_Title">Автозапуск</sys:String>
+    <sys:String x:Key="Str_Wizard_Step5_AutoNode">Запускать узел (keryxd.exe) автоматически</sys:String>
+    <sys:String x:Key="Str_Wizard_Step5_AutoMiner">Запускать майнер автоматически после готовности узла</sys:String>
+    <sys:String x:Key="Str_Wizard_Step5_AutoRestart">Автоматически перезапускать при сбое</sys:String>
+    <sys:String x:Key="Str_Wizard_Step5_Note">Запуск приложения вместе с Windows настраивается отдельно установщиком (флажок при установке) или на странице «Настройки» после первого запуска.</sys:String>
+    <sys:String x:Key="Str_Wizard_Step6_Title">Готово</sys:String>
+    <sys:String x:Key="Str_Wizard_Step6_Body">Настройки будут сохранены в профиль. Вы всегда сможете изменить их позже на страницах «Узел», «Майнер», «Видеокарты» и «Модели».</sys:String>
+    <sys:String x:Key="Str_Wizard_Step6_AddressLabel">Адрес: </sys:String>
+    <sys:String x:Key="Str_Wizard_Step6_AddressWarning">Адрес не похож на действительный Keryx-адрес - майнинг с этим адресом будет отклонён узлом. Вернитесь к шагу «Адрес для начисления вознаграждения», чтобы исправить.</sys:String>
+    <sys:String x:Key="Str_Wizard_Step6_ModelsDirLabel">Папка моделей: </sys:String>
+    <sys:String x:Key="Str_Wizard_Skip">Пропустить</sys:String>
+    <sys:String x:Key="Str_Wizard_Back">Назад</sys:String>
+    <sys:String x:Key="Str_Wizard_Next">Далее</sys:String>
+    <sys:String x:Key="Str_Wizard_Finish">Завершить</sys:String>
+
+</ResourceDictionary>
