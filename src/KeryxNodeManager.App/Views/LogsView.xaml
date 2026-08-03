@@ -10,11 +10,11 @@
 
         <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0,0,0,16">
             <TextBlock Text="{DynamicResource Str_Logs_Title}" FontSize="22" FontWeight="Bold" VerticalAlignment="Center" Margin="0,0,20,0"/>
-            <Button Content="{DynamicResource Str_Logs_ExportDiagnostics}" Style="{StaticResource PrimaryButtonStyle}"
+            <Button Content="{DynamicResource Str_Logs_ExportDiagnostics}" Style="{DynamicResource PrimaryButtonStyle}"
                     Command="{Binding ExportDiagnosticsCommand}" Margin="0,0,10,0"/>
-            <Button Content="{DynamicResource Str_Logs_OpenFolder}" Style="{StaticResource SecondaryButtonStyle}"
+            <Button Content="{DynamicResource Str_Logs_OpenFolder}" Style="{DynamicResource SecondaryButtonStyle}"
                     Command="{Binding OpenLogsFolderCommand}" Margin="0,0,10,0"/>
-            <Button Content="{DynamicResource Str_Logs_ClearDisplay}" Style="{StaticResource SecondaryButtonStyle}"
+            <Button Content="{DynamicResource Str_Logs_ClearDisplay}" Style="{DynamicResource SecondaryButtonStyle}"
                     Command="{Binding ClearDisplayedLinesCommand}"/>
         </StackPanel>
 
@@ -25,7 +25,7 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
-            <Border Grid.Column="0" Style="{StaticResource CardStyle}">
+            <Border Grid.Column="0" Style="{DynamicResource CardStyle}">
                 <DockPanel>
                     <TextBlock DockPanel.Dock="Top" Text="{DynamicResource Str_Logs_NodeHeader}" FontWeight="SemiBold" Margin="0,0,0,8"/>
                     <ScrollViewer VerticalScrollBarVisibility="Auto">
@@ -33,7 +33,7 @@
                             <ItemsControl.ItemTemplate>
                                 <DataTemplate>
                                     <TextBlock Text="{Binding}" TextWrapping="Wrap" FontFamily="Consolas" FontSize="11"
-                                               Foreground="{StaticResource TextPrimaryBrush}"/>
+                                               Foreground="{DynamicResource TextPrimaryBrush}"/>
                                 </DataTemplate>
                             </ItemsControl.ItemTemplate>
                         </ItemsControl>
@@ -41,7 +41,7 @@
                 </DockPanel>
             </Border>
 
-            <Border Grid.Column="2" Style="{StaticResource CardStyle}">
+            <Border Grid.Column="2" Style="{DynamicResource CardStyle}">
                 <DockPanel>
                     <TextBlock DockPanel.Dock="Top" Text="{DynamicResource Str_Logs_MinerHeader}" FontWeight="SemiBold" Margin="0,0,0,8"/>
                     <ScrollViewer VerticalScrollBarVisibility="Auto">
@@ -49,7 +49,7 @@
                             <ItemsControl.ItemTemplate>
                                 <DataTemplate>
                                     <TextBlock Text="{Binding}" TextWrapping="Wrap" FontFamily="Consolas" FontSize="11"
-                                               Foreground="{StaticResource TextPrimaryBrush}"/>
+                                               Foreground="{DynamicResource TextPrimaryBrush}"/>
                                 </DataTemplate>
                             </ItemsControl.ItemTemplate>
                         </ItemsControl>
@@ -59,6 +59,6 @@
         </Grid>
 
         <TextBlock Grid.Row="2" Text="{Binding StatusMessage}" Margin="0,12,0,0" TextWrapping="Wrap"
-                   Foreground="{StaticResource TextSecondaryBrush}"/>
+                   Foreground="{DynamicResource TextSecondaryBrush}"/>
     </Grid>
 </UserControl>

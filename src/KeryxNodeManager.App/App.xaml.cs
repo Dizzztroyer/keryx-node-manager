@@ -162,6 +162,14 @@ public partial class App : Application
         // constructed, so nothing briefly flashes in the wrong language on startup.
         LocalizationManager.Apply(profileStore.Settings.Language);
 
+        // Light/dark theme toggle (brief follow-up, 2026-08-03): same reasoning as the
+        // localization call directly above - apply the persisted theme before any page is
+        // constructed, so nothing briefly flashes in the wrong theme on startup. This is also what
+        // replaces App.xaml's old static `<ResourceDictionary Source="Resources/DarkTheme.xaml"/>`
+        // merge - ThemeManager.Apply now owns loading the initial (and every later) theme
+        // dictionary, exactly like LocalizationManager.Apply already does for language.
+        ThemeManager.Apply(profileStore.Settings.Theme);
+
         // First-run wizard (brief §4): shown once, before MainWindow, until FirstRunCompleted is
         // set (by Finish or Skip - both persist, see WizardViewModel.FinishAsync). Also shown in
         // --mock runs deliberately (not special-cased) - a fresh settings.json is a fresh

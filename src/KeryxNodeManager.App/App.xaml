@@ -1,6 +1,7 @@
 <Application x:Class="KeryxNodeManager.App.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:conv="clr-namespace:KeryxNodeManager.App.Converters"
              ShutdownMode="OnExplicitShutdown">
   <!-- Real bug found live (brief follow-up, 2026-08-03): with the default ShutdownMode
        (OnLastWindowClose), closing the first-run wizard - the only open window at that
@@ -16,9 +17,12 @@
        for a moment" races without changing any of those explicit exit paths. -->
   <Application.Resources>
     <ResourceDictionary>
-      <ResourceDictionary.MergedDictionaries>
-        <ResourceDictionary Source="Resources/DarkTheme.xaml"/>
-      </ResourceDictionary.MergedDictionaries>
+      <!-- Not a themed color and never swapped by ThemeManager - moved here (out of
+           DarkTheme.xaml/LightTheme.xaml) so the converter instance survives a live
+           dark/light theme swap instead of being removed along with whichever theme
+           dictionary is currently merged in. See ThemeManager's own doc comment for the
+           theme-swap mechanism this needs to coexist with. -->
+      <conv:ComboBoxSelectionDisplayConverter x:Key="ComboBoxSelectionDisplayConverter"/>
     </ResourceDictionary>
   </Application.Resources>
 </Application>

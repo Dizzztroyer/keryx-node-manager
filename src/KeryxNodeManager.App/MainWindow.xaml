@@ -14,7 +14,7 @@
         </Grid.ColumnDefinitions>
 
         <!-- Left navigation (brief §27) -->
-        <DockPanel Grid.Column="0" Background="{StaticResource SurfaceBrush}">
+        <DockPanel Grid.Column="0" Background="{DynamicResource SurfaceBrush}">
             <StackPanel DockPanel.Dock="Bottom" Margin="12">
                 <!-- Official Keryx Labs links (brief follow-up, 2026-08-03) - real, live-verified
                      URLs pulled from keryx-labs.com's own footer (fetched 2026-08-03), not guessed:
@@ -30,17 +30,17 @@
                     <Run Text=" · "/>
                     <Hyperlink NavigateUri="https://github.com/Keryx-Labs" RequestNavigate="SocialLink_RequestNavigate">GitHub</Hyperlink>
                 </TextBlock>
-                <TextBlock Foreground="{StaticResource TextSecondaryBrush}" FontSize="11">
+                <TextBlock Foreground="{DynamicResource TextSecondaryBrush}" FontSize="11">
                     <Run Text="{DynamicResource Str_Nav_VersionLabel}"/><Run Text="{Binding AppVersion, Mode=OneWay}"/>
                 </TextBlock>
-                <TextBlock Foreground="{StaticResource TextSecondaryBrush}" FontSize="11" Margin="0,4,0,0">
+                <TextBlock Foreground="{DynamicResource TextSecondaryBrush}" FontSize="11" Margin="0,4,0,0">
                     <Run Text="{DynamicResource Str_Nav_ProfileLabel}"/><Run Text="{Binding ActiveProfileName, Mode=OneWay}"/>
                 </TextBlock>
             </StackPanel>
 
             <StackPanel Margin="0,16,0,0">
                 <TextBlock Text="Keryx Node Manager" FontWeight="Bold" FontSize="15"
-                           Margin="16,0,16,16" Foreground="{StaticResource TextPrimaryBrush}"/>
+                           Margin="16,0,16,16" Foreground="{DynamicResource TextPrimaryBrush}"/>
                 <ListBox x:Name="NavList" ItemsSource="{Binding Pages}"
                          SelectedItem="{Binding SelectedPage, Mode=TwoWay}"
                          SelectionChanged="NavList_SelectionChanged"
@@ -49,7 +49,7 @@
                         <Style TargetType="ListBoxItem">
                             <Setter Property="Padding" Value="16,10"/>
                             <Setter Property="Margin" Value="8,2"/>
-                            <Setter Property="Foreground" Value="{StaticResource TextSecondaryBrush}"/>
+                            <Setter Property="Foreground" Value="{DynamicResource TextSecondaryBrush}"/>
                             <Setter Property="Template">
                                 <Setter.Value>
                                     <ControlTemplate TargetType="ListBoxItem">
@@ -60,11 +60,11 @@
                                         <ControlTemplate.Triggers>
                                             <Trigger Property="IsSelected" Value="True">
                                                 <Setter TargetName="Bg" Property="Background"
-                                                        Value="{StaticResource SurfaceAltBrush}"/>
+                                                        Value="{DynamicResource SurfaceAltBrush}"/>
                                             </Trigger>
                                             <Trigger Property="IsMouseOver" Value="True">
                                                 <Setter TargetName="Bg" Property="Background"
-                                                        Value="{StaticResource SurfaceBrush}"/>
+                                                        Value="{DynamicResource SurfaceBrush}"/>
                                             </Trigger>
                                         </ControlTemplate.Triggers>
                                     </ControlTemplate>

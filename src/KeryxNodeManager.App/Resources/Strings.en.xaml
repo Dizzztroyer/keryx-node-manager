@@ -24,6 +24,9 @@
     <sys:String x:Key="Str_Settings_CriticalThreshold">Critical threshold - stops mining (°C)</sys:String>
     <sys:String x:Key="Str_Settings_SafetyNote">Checked while the miner is running (see the Overview page).</sys:String>
     <sys:String x:Key="Str_Settings_Language_Header">Language</sys:String>
+    <sys:String x:Key="Str_Settings_ThemeLabel">Theme</sys:String>
+    <sys:String x:Key="Str_Settings_ThemeDark">Dark</sys:String>
+    <sys:String x:Key="Str_Settings_ThemeLight">Light</sys:String>
     <sys:String x:Key="Str_Settings_Save">Save</sys:String>
 
     <sys:String x:Key="Str_Nav_VersionLabel">Version: </sys:String>
@@ -46,6 +49,13 @@
     <sys:String x:Key="Str_Gpu_VramUnit"> MB VRAM · </sys:String>
     <sys:String x:Key="Str_Gpu_TempUnit">°C</sys:String>
     <sys:String x:Key="Str_Gpu_ModeLabel">Mode:</sys:String>
+    <sys:String x:Key="Str_Gpu_OverclockHeader">GPU overclock</sys:String>
+    <sys:String x:Key="Str_Gpu_OverclockCoreLabel">Core (MHz):</sys:String>
+    <sys:String x:Key="Str_Gpu_OverclockMemoryLabel">Memory (MHz):</sys:String>
+    <sys:String x:Key="Str_Gpu_OverclockManualFan">Manual fan:</sys:String>
+    <sys:String x:Key="Str_Gpu_OverclockApply">Apply</sys:String>
+    <sys:String x:Key="Str_Gpu_OverclockReset">Reset</sys:String>
+    <sys:String x:Key="Str_Gpu_OverclockUnavailablePrefix">Overclocking is unavailable for this GPU: </sys:String>
 
     <sys:String x:Key="Str_Models_Title">Models</sys:String>
     <sys:String x:Key="Str_Models_Refresh">Refresh</sys:String>

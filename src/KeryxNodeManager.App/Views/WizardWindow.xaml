@@ -20,23 +20,23 @@
 
         <StackPanel Grid.Row="0" Margin="0,0,0,16">
             <TextBlock Text="{DynamicResource Str_Wizard_HeaderTitle}" FontSize="20" FontWeight="Bold"/>
-            <TextBlock Text="{Binding StepHeader}" Foreground="{StaticResource TextSecondaryBrush}" Margin="0,4,0,0"/>
+            <TextBlock Text="{Binding StepHeader}" Foreground="{DynamicResource TextSecondaryBrush}" Margin="0,4,0,0"/>
         </StackPanel>
 
         <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
             <StackPanel>
 
                 <!-- Step 0: Welcome -->
-                <Border Style="{StaticResource CardStyle}" Visibility="{Binding IsStep0Welcome, Converter={StaticResource BoolToVis}}">
+                <Border Style="{DynamicResource CardStyle}" Visibility="{Binding IsStep0Welcome, Converter={StaticResource BoolToVis}}">
                     <StackPanel>
                         <TextBlock Text="{DynamicResource Str_Wizard_Step0_Title}" FontSize="16" FontWeight="SemiBold"/>
                         <TextBlock Text="{DynamicResource Str_Wizard_Step0_Body}"
-                                   Margin="0,12,0,0" TextWrapping="Wrap" Foreground="{StaticResource TextSecondaryBrush}"/>
+                                   Margin="0,12,0,0" TextWrapping="Wrap" Foreground="{DynamicResource TextSecondaryBrush}"/>
 
                         <StackPanel Orientation="Horizontal" Margin="0,16,0,0">
-                            <TextBlock Text="{DynamicResource Str_Wizard_Step0_ActiveProfileLabel}" Foreground="{StaticResource TextSecondaryBrush}"/>
+                            <TextBlock Text="{DynamicResource Str_Wizard_Step0_ActiveProfileLabel}" Foreground="{DynamicResource TextSecondaryBrush}"/>
                             <TextBlock Text="{Binding Profile.Name}" FontWeight="Bold" Margin="6,0,0,0"
-                                       Foreground="{StaticResource TextPrimaryBrush}"/>
+                                       Foreground="{DynamicResource TextPrimaryBrush}"/>
                         </StackPanel>
 
                         <!-- Offers a returning user (running the wizard again for a second rig)
@@ -48,7 +48,7 @@
                              comment for why. -->
                         <TextBlock Text="{DynamicResource Str_Wizard_Step0_NewProfileHint}"
                                    Margin="0,16,0,0" TextWrapping="Wrap" FontStyle="Italic"
-                                   Foreground="{StaticResource TextSecondaryBrush}"/>
+                                   Foreground="{DynamicResource TextSecondaryBrush}"/>
                         <Grid Margin="0,8,0,0">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*"/>
@@ -56,36 +56,36 @@
                             </Grid.ColumnDefinitions>
                             <TextBox Grid.Column="0"
                                      Text="{Binding NewProfileNameInput, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                     Padding="8" Background="{StaticResource SurfaceAltBrush}"
-                                     Foreground="{StaticResource TextPrimaryBrush}" BorderThickness="0"/>
+                                     Padding="8" Background="{DynamicResource SurfaceAltBrush}"
+                                     Foreground="{DynamicResource TextPrimaryBrush}" BorderThickness="0"/>
                             <Button Grid.Column="1" Content="{DynamicResource Str_Wizard_Step0_CreateProfile}" Margin="8,0,0,0"
-                                    Style="{StaticResource SecondaryButtonStyle}" Command="{Binding CreateNewProfileCommand}"/>
+                                    Style="{DynamicResource SecondaryButtonStyle}" Command="{Binding CreateNewProfileCommand}"/>
                         </Grid>
                         <TextBlock Text="{Binding CreateProfileMessage}" Margin="0,8,0,0" TextWrapping="Wrap"
-                                   Foreground="{StaticResource TextSecondaryBrush}"/>
+                                   Foreground="{DynamicResource TextSecondaryBrush}"/>
                     </StackPanel>
                 </Border>
 
                 <!-- Step 1: System checks -->
-                <Border Style="{StaticResource CardStyle}" Visibility="{Binding IsStep1SystemChecks, Converter={StaticResource BoolToVis}}">
+                <Border Style="{DynamicResource CardStyle}" Visibility="{Binding IsStep1SystemChecks, Converter={StaticResource BoolToVis}}">
                     <StackPanel>
                         <TextBlock Text="{DynamicResource Str_Wizard_Step1_Title}" FontSize="16" FontWeight="SemiBold"/>
                         <TextBlock Text="{DynamicResource Str_Wizard_Step1_Desc}"
-                                   TextWrapping="Wrap" Foreground="{StaticResource TextSecondaryBrush}" Margin="0,8,0,12"/>
+                                   TextWrapping="Wrap" Foreground="{DynamicResource TextSecondaryBrush}" Margin="0,8,0,12"/>
                         <ItemsControl ItemsSource="{Binding Checks}">
                             <ItemsControl.ItemTemplate>
                                 <DataTemplate>
-                                    <Border Background="{StaticResource SurfaceAltBrush}" CornerRadius="6" Padding="10" Margin="0,0,0,8">
+                                    <Border Background="{DynamicResource SurfaceAltBrush}" CornerRadius="6" Padding="10" Margin="0,0,0,8">
                                         <StackPanel>
                                             <StackPanel Orientation="Horizontal">
                                                 <TextBlock Text="{Binding Passed, StringFormat='{}{0}'}" Visibility="Collapsed"/>
                                                 <Ellipse Width="10" Height="10" Margin="0,0,8,0" VerticalAlignment="Center">
                                                     <Ellipse.Style>
                                                         <Style TargetType="Ellipse">
-                                                            <Setter Property="Fill" Value="{StaticResource ErrorBrush}"/>
+                                                            <Setter Property="Fill" Value="{DynamicResource ErrorBrush}"/>
                                                             <Style.Triggers>
                                                                 <DataTrigger Binding="{Binding Passed}" Value="True">
-                                                                    <Setter Property="Fill" Value="{StaticResource SuccessBrush}"/>
+                                                                    <Setter Property="Fill" Value="{DynamicResource SuccessBrush}"/>
                                                                 </DataTrigger>
                                                             </Style.Triggers>
                                                         </Style>
@@ -94,16 +94,16 @@
                                                 <TextBlock Text="{Binding Name}" FontWeight="SemiBold"/>
                                             </StackPanel>
                                             <TextBlock Text="{Binding Detail}" TextWrapping="Wrap"
-                                                       Foreground="{StaticResource TextSecondaryBrush}" Margin="18,4,0,0"/>
+                                                       Foreground="{DynamicResource TextSecondaryBrush}" Margin="18,4,0,0"/>
                                         </StackPanel>
                                     </Border>
                                 </DataTemplate>
                             </ItemsControl.ItemTemplate>
                         </ItemsControl>
                         <TextBlock Text="{DynamicResource Str_Wizard_Step1_Updating}" Visibility="{Binding IsRunningChecks, Converter={StaticResource BoolToVis}}"
-                                   Foreground="{StaticResource TextSecondaryBrush}"/>
+                                   Foreground="{DynamicResource TextSecondaryBrush}"/>
                         <TextBlock Text="{DynamicResource Str_Wizard_Step1_WslDockerNote}"
-                                   Margin="0,8,0,0" TextWrapping="Wrap" FontStyle="Italic" Foreground="{StaticResource TextSecondaryBrush}"/>
+                                   Margin="0,8,0,0" TextWrapping="Wrap" FontStyle="Italic" Foreground="{DynamicResource TextSecondaryBrush}"/>
                     </StackPanel>
                 </Border>
 
@@ -113,13 +113,13 @@
                      OnCurrentStepIndexChanged) and the models folder already has a real default
                      (DefaultInstallPaths.ModelsDirectory) - a user only ever needs to touch the
                      Expanders below if they want a different location than the defaults. -->
-                <Border Style="{StaticResource CardStyle}" Visibility="{Binding IsStep2Directories, Converter={StaticResource BoolToVis}}">
+                <Border Style="{DynamicResource CardStyle}" Visibility="{Binding IsStep2Directories, Converter={StaticResource BoolToVis}}">
                     <StackPanel>
                         <TextBlock Text="{DynamicResource Str_Wizard_Step2_Title}" FontSize="16" FontWeight="SemiBold"/>
 
                         <TextBlock Text="{DynamicResource Str_Wizard_Step2_NodeHeader}" FontWeight="SemiBold" Margin="0,16,0,0"/>
                         <TextBlock Text="{Binding NodeUpdate.StatusMessage}" TextWrapping="Wrap"
-                                   Foreground="{StaticResource TextSecondaryBrush}" Margin="0,4,0,0"/>
+                                   Foreground="{DynamicResource TextSecondaryBrush}" Margin="0,4,0,0"/>
                         <ProgressBar Height="6" Minimum="0" Maximum="100" Margin="0,6,0,0"
                                      Value="{Binding NodeUpdate.ProgressPercent, Mode=OneWay}"
                                      IsIndeterminate="{Binding NodeUpdate.IsBusy}"
@@ -131,16 +131,16 @@
                                     <ColumnDefinition Width="Auto"/>
                                 </Grid.ColumnDefinitions>
                                 <TextBox Grid.Column="0" Text="{Binding NodeExecutablePathInput, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                         Padding="8" Background="{StaticResource SurfaceAltBrush}"
-                                         Foreground="{StaticResource TextPrimaryBrush}" BorderThickness="0"/>
+                                         Padding="8" Background="{DynamicResource SurfaceAltBrush}"
+                                         Foreground="{DynamicResource TextPrimaryBrush}" BorderThickness="0"/>
                                 <Button Grid.Column="1" Content="{DynamicResource Str_Wizard_Step2_Browse}" Margin="8,0,0,0"
-                                        Style="{StaticResource SecondaryButtonStyle}" Command="{Binding BrowseNodeExecutableCommand}"/>
+                                        Style="{DynamicResource SecondaryButtonStyle}" Command="{Binding BrowseNodeExecutableCommand}"/>
                             </Grid>
                         </Expander>
 
                         <TextBlock Text="{DynamicResource Str_Wizard_Step2_MinerHeader}" FontWeight="SemiBold" Margin="0,20,0,0"/>
                         <TextBlock Text="{Binding MinerUpdate.StatusMessage}" TextWrapping="Wrap"
-                                   Foreground="{StaticResource TextSecondaryBrush}" Margin="0,4,0,0"/>
+                                   Foreground="{DynamicResource TextSecondaryBrush}" Margin="0,4,0,0"/>
                         <ProgressBar Height="6" Minimum="0" Maximum="100" Margin="0,6,0,0"
                                      Value="{Binding MinerUpdate.ProgressPercent, Mode=OneWay}"
                                      IsIndeterminate="{Binding MinerUpdate.IsBusy}"
@@ -152,15 +152,15 @@
                                     <ColumnDefinition Width="Auto"/>
                                 </Grid.ColumnDefinitions>
                                 <TextBox Grid.Column="0" Text="{Binding MinerExecutablePathInput, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                         Padding="8" Background="{StaticResource SurfaceAltBrush}"
-                                         Foreground="{StaticResource TextPrimaryBrush}" BorderThickness="0"/>
+                                         Padding="8" Background="{DynamicResource SurfaceAltBrush}"
+                                         Foreground="{DynamicResource TextPrimaryBrush}" BorderThickness="0"/>
                                 <Button Grid.Column="1" Content="{DynamicResource Str_Wizard_Step2_Browse}" Margin="8,0,0,0"
-                                        Style="{StaticResource SecondaryButtonStyle}" Command="{Binding BrowseMinerExecutableCommand}"/>
+                                        Style="{DynamicResource SecondaryButtonStyle}" Command="{Binding BrowseMinerExecutableCommand}"/>
                             </Grid>
                         </Expander>
 
                         <TextBlock Text="{DynamicResource Str_Wizard_Step2_ModelsHeader}" FontWeight="SemiBold" Margin="0,20,0,0"/>
-                        <TextBlock Foreground="{StaticResource TextSecondaryBrush}" Margin="0,4,0,0" TextWrapping="Wrap">
+                        <TextBlock Foreground="{DynamicResource TextSecondaryBrush}" Margin="0,4,0,0" TextWrapping="Wrap">
                             <Run Text="{DynamicResource Str_Wizard_Step2_DefaultPrefix}"/><Run Text="{Binding Profile.ModelsDirectory, Mode=OneWay}"/>
                         </TextBlock>
                         <Expander Header="{DynamicResource Str_Wizard_Step2_ManualFolderExpander}" Margin="0,8,0,0">
@@ -170,47 +170,47 @@
                                     <ColumnDefinition Width="Auto"/>
                                 </Grid.ColumnDefinitions>
                                 <TextBox Grid.Column="0" Text="{Binding ModelsDirectoryInput, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                         Padding="8" Background="{StaticResource SurfaceAltBrush}"
-                                         Foreground="{StaticResource TextPrimaryBrush}" BorderThickness="0"/>
+                                         Padding="8" Background="{DynamicResource SurfaceAltBrush}"
+                                         Foreground="{DynamicResource TextPrimaryBrush}" BorderThickness="0"/>
                                 <Button Grid.Column="1" Content="{DynamicResource Str_Wizard_Step2_Browse}" Margin="8,0,0,0"
-                                        Style="{StaticResource SecondaryButtonStyle}" Command="{Binding BrowseModelsDirectoryCommand}"/>
+                                        Style="{DynamicResource SecondaryButtonStyle}" Command="{Binding BrowseModelsDirectoryCommand}"/>
                             </Grid>
                         </Expander>
-                        <TextBlock Text="{Binding DirectoriesError}" Foreground="{StaticResource ErrorBrush}"
+                        <TextBlock Text="{Binding DirectoriesError}" Foreground="{DynamicResource ErrorBrush}"
                                    TextWrapping="Wrap" Margin="0,8,0,0"/>
                         <TextBlock Text="{DynamicResource Str_Wizard_Step2_Note}"
-                                   TextWrapping="Wrap" FontStyle="Italic" Foreground="{StaticResource TextSecondaryBrush}" Margin="0,12,0,0"/>
+                                   TextWrapping="Wrap" FontStyle="Italic" Foreground="{DynamicResource TextSecondaryBrush}" Margin="0,12,0,0"/>
                     </StackPanel>
                 </Border>
 
                 <!-- Step 3: Mining address -->
-                <Border Style="{StaticResource CardStyle}" Visibility="{Binding IsStep3Address, Converter={StaticResource BoolToVis}}">
+                <Border Style="{DynamicResource CardStyle}" Visibility="{Binding IsStep3Address, Converter={StaticResource BoolToVis}}">
                     <StackPanel>
                         <TextBlock Text="{DynamicResource Str_Wizard_Step3_Title}" FontSize="16" FontWeight="SemiBold"/>
                         <TextBlock Text="{DynamicResource Str_Wizard_Step3_Body}"
-                                   TextWrapping="Wrap" Foreground="{StaticResource TextSecondaryBrush}" Margin="0,8,0,0"/>
+                                   TextWrapping="Wrap" Foreground="{DynamicResource TextSecondaryBrush}" Margin="0,8,0,0"/>
                         <TextBox Text="{Binding Profile.MiningAddress, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                 Margin="0,12,0,0" Padding="8" Background="{StaticResource SurfaceAltBrush}"
-                                 Foreground="{StaticResource TextPrimaryBrush}" BorderThickness="0"/>
-                        <TextBlock Text="{Binding AddressValidationMessage}" Foreground="{StaticResource WarningBrush}"
+                                 Margin="0,12,0,0" Padding="8" Background="{DynamicResource SurfaceAltBrush}"
+                                 Foreground="{DynamicResource TextPrimaryBrush}" BorderThickness="0"/>
+                        <TextBlock Text="{Binding AddressValidationMessage}" Foreground="{DynamicResource WarningBrush}"
                                    Margin="0,8,0,0" TextWrapping="Wrap"/>
                     </StackPanel>
                 </Border>
 
                 <!-- Step 4: GPU / tier preview -->
-                <Border Style="{StaticResource CardStyle}" Visibility="{Binding IsStep4Gpu, Converter={StaticResource BoolToVis}}">
+                <Border Style="{DynamicResource CardStyle}" Visibility="{Binding IsStep4Gpu, Converter={StaticResource BoolToVis}}">
                     <StackPanel>
                         <TextBlock Text="{DynamicResource Str_Wizard_Step4_Title}" FontSize="16" FontWeight="SemiBold"/>
                         <TextBlock Text="{DynamicResource Str_Wizard_Step4_Body}"
-                                   TextWrapping="Wrap" Foreground="{StaticResource TextSecondaryBrush}" Margin="0,8,0,12"/>
+                                   TextWrapping="Wrap" Foreground="{DynamicResource TextSecondaryBrush}" Margin="0,8,0,12"/>
                         <ItemsControl ItemsSource="{Binding GpuPreview}">
                             <ItemsControl.ItemTemplate>
                                 <DataTemplate>
-                                    <Border Background="{StaticResource SurfaceAltBrush}" CornerRadius="6" Padding="10" Margin="0,0,0,8">
+                                    <Border Background="{DynamicResource SurfaceAltBrush}" CornerRadius="6" Padding="10" Margin="0,0,0,8">
                                         <StackPanel>
                                             <TextBlock Text="{Binding Name}" FontWeight="SemiBold"/>
                                             <TextBlock Text="{Binding Explanation}" TextWrapping="Wrap"
-                                                       Foreground="{StaticResource TextSecondaryBrush}" Margin="0,4,0,0"/>
+                                                       Foreground="{DynamicResource TextSecondaryBrush}" Margin="0,4,0,0"/>
                                         </StackPanel>
                                     </Border>
                                 </DataTemplate>
@@ -220,28 +220,28 @@
                 </Border>
 
                 <!-- Step 5: Autostart -->
-                <Border Style="{StaticResource CardStyle}" Visibility="{Binding IsStep5Autostart, Converter={StaticResource BoolToVis}}">
+                <Border Style="{DynamicResource CardStyle}" Visibility="{Binding IsStep5Autostart, Converter={StaticResource BoolToVis}}">
                     <StackPanel>
                         <TextBlock Text="{DynamicResource Str_Wizard_Step5_Title}" FontSize="16" FontWeight="SemiBold"/>
                         <CheckBox Content="{DynamicResource Str_Wizard_Step5_AutoNode}" Margin="0,12,0,0"
-                                  IsChecked="{Binding Profile.AutoStartNode, Mode=TwoWay}" Foreground="{StaticResource TextPrimaryBrush}"/>
+                                  IsChecked="{Binding Profile.AutoStartNode, Mode=TwoWay}" Foreground="{DynamicResource TextPrimaryBrush}"/>
                         <CheckBox Content="{DynamicResource Str_Wizard_Step5_AutoMiner}" Margin="0,10,0,0"
-                                  IsChecked="{Binding Profile.AutoStartMiner, Mode=TwoWay}" Foreground="{StaticResource TextPrimaryBrush}"/>
+                                  IsChecked="{Binding Profile.AutoStartMiner, Mode=TwoWay}" Foreground="{DynamicResource TextPrimaryBrush}"/>
                         <CheckBox Content="{DynamicResource Str_Wizard_Step5_AutoRestart}" Margin="0,10,0,0"
-                                  IsChecked="{Binding Profile.AutoRestartOnCrash, Mode=TwoWay}" Foreground="{StaticResource TextPrimaryBrush}"/>
+                                  IsChecked="{Binding Profile.AutoRestartOnCrash, Mode=TwoWay}" Foreground="{DynamicResource TextPrimaryBrush}"/>
                         <TextBlock Text="{DynamicResource Str_Wizard_Step5_Note}"
-                                   TextWrapping="Wrap" FontStyle="Italic" Foreground="{StaticResource TextSecondaryBrush}" Margin="0,12,0,0"/>
+                                   TextWrapping="Wrap" FontStyle="Italic" Foreground="{DynamicResource TextSecondaryBrush}" Margin="0,12,0,0"/>
                     </StackPanel>
                 </Border>
 
                 <!-- Step 6: Finish -->
-                <Border Style="{StaticResource CardStyle}" Visibility="{Binding IsStep6Finish, Converter={StaticResource BoolToVis}}">
+                <Border Style="{DynamicResource CardStyle}" Visibility="{Binding IsStep6Finish, Converter={StaticResource BoolToVis}}">
                     <StackPanel>
                         <TextBlock Text="{DynamicResource Str_Wizard_Step6_Title}" FontSize="16" FontWeight="SemiBold"/>
                         <TextBlock Text="{DynamicResource Str_Wizard_Step6_Body}"
-                                   TextWrapping="Wrap" Foreground="{StaticResource TextSecondaryBrush}" Margin="0,12,0,0"/>
+                                   TextWrapping="Wrap" Foreground="{DynamicResource TextSecondaryBrush}" Margin="0,12,0,0"/>
                         <StackPanel Orientation="Horizontal" Margin="0,8,0,0">
-                            <TextBlock Text="{DynamicResource Str_Wizard_Step6_AddressLabel}" Foreground="{StaticResource TextSecondaryBrush}"/>
+                            <TextBlock Text="{DynamicResource Str_Wizard_Step6_AddressLabel}" Foreground="{DynamicResource TextSecondaryBrush}"/>
                             <!-- Highlighted in the same WarningBrush step 3 already uses for its own
                                  non-blocking address warning (PROJECT_STATUS.md "In progress" item
                                  7) - a user who dismissed that step-3 warning and clicked through to
@@ -250,10 +250,10 @@
                             <TextBlock Text="{Binding Profile.MiningAddress}">
                                 <TextBlock.Style>
                                     <Style TargetType="TextBlock">
-                                        <Setter Property="Foreground" Value="{StaticResource TextPrimaryBrush}"/>
+                                        <Setter Property="Foreground" Value="{DynamicResource TextPrimaryBrush}"/>
                                         <Style.Triggers>
                                             <DataTrigger Binding="{Binding IsAddressValid}" Value="False">
-                                                <Setter Property="Foreground" Value="{StaticResource WarningBrush}"/>
+                                                <Setter Property="Foreground" Value="{DynamicResource WarningBrush}"/>
                                                 <Setter Property="FontWeight" Value="SemiBold"/>
                                             </DataTrigger>
                                         </Style.Triggers>
@@ -262,11 +262,11 @@
                             </TextBlock>
                         </StackPanel>
                         <TextBlock Text="{DynamicResource Str_Wizard_Step6_AddressWarning}"
-                                   Foreground="{StaticResource WarningBrush}" TextWrapping="Wrap" Margin="0,4,0,0"
+                                   Foreground="{DynamicResource WarningBrush}" TextWrapping="Wrap" Margin="0,4,0,0"
                                    Visibility="{Binding IsAddressValid, Converter={StaticResource InverseBoolToVis}}"/>
                         <StackPanel Orientation="Horizontal" Margin="0,4,0,0">
-                            <TextBlock Text="{DynamicResource Str_Wizard_Step6_ModelsDirLabel}" Foreground="{StaticResource TextSecondaryBrush}"/>
-                            <TextBlock Text="{Binding Profile.ModelsDirectory}" Foreground="{StaticResource TextPrimaryBrush}"/>
+                            <TextBlock Text="{DynamicResource Str_Wizard_Step6_ModelsDirLabel}" Foreground="{DynamicResource TextSecondaryBrush}"/>
+                            <TextBlock Text="{Binding Profile.ModelsDirectory}" Foreground="{DynamicResource TextPrimaryBrush}"/>
                         </StackPanel>
                     </StackPanel>
                 </Border>
@@ -281,14 +281,14 @@
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
-            <Button Grid.Column="0" Content="{DynamicResource Str_Wizard_Skip}" Style="{StaticResource SecondaryButtonStyle}"
+            <Button Grid.Column="0" Content="{DynamicResource Str_Wizard_Skip}" Style="{DynamicResource SecondaryButtonStyle}"
                     Click="SkipButton_Click"/>
-            <Button Grid.Column="2" Content="{DynamicResource Str_Wizard_Back}" Style="{StaticResource SecondaryButtonStyle}" Margin="0,0,10,0"
+            <Button Grid.Column="2" Content="{DynamicResource Str_Wizard_Back}" Style="{DynamicResource SecondaryButtonStyle}" Margin="0,0,10,0"
                     Command="{Binding BackCommand}"/>
-            <Button Grid.Column="3" Content="{DynamicResource Str_Wizard_Next}" Style="{StaticResource PrimaryButtonStyle}"
+            <Button Grid.Column="3" Content="{DynamicResource Str_Wizard_Next}" Style="{DynamicResource PrimaryButtonStyle}"
                     Command="{Binding NextCommand}" Visibility="{Binding IsNotLastStep, Converter={StaticResource BoolToVis}}"
                     Click="NextButton_Click"/>
-            <Button Grid.Column="3" Content="{DynamicResource Str_Wizard_Finish}" Style="{StaticResource PrimaryButtonStyle}"
+            <Button Grid.Column="3" Content="{DynamicResource Str_Wizard_Finish}" Style="{DynamicResource PrimaryButtonStyle}"
                     Command="{Binding FinishCommand}" Visibility="{Binding IsStep6Finish, Converter={StaticResource BoolToVis}}"
                     Click="FinishButton_Click"/>
         </Grid>

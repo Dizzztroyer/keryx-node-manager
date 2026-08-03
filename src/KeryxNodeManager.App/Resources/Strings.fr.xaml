@@ -24,6 +24,9 @@
     <sys:String x:Key="Str_Settings_CriticalThreshold">Seuil critique - arrête le minage (°C)</sys:String>
     <sys:String x:Key="Str_Settings_SafetyNote">Vérifié pendant que le mineur est en cours d'exécution (voir la page Aperçu).</sys:String>
     <sys:String x:Key="Str_Settings_Language_Header">Langue</sys:String>
+    <sys:String x:Key="Str_Settings_ThemeLabel">Thème</sys:String>
+    <sys:String x:Key="Str_Settings_ThemeDark">Sombre</sys:String>
+    <sys:String x:Key="Str_Settings_ThemeLight">Clair</sys:String>
     <sys:String x:Key="Str_Settings_Save">Enregistrer</sys:String>
 
     <sys:String x:Key="Str_Nav_VersionLabel">Version : </sys:String>
@@ -46,6 +49,13 @@
     <sys:String x:Key="Str_Gpu_VramUnit"> Mo VRAM · </sys:String>
     <sys:String x:Key="Str_Gpu_TempUnit">°C</sys:String>
     <sys:String x:Key="Str_Gpu_ModeLabel">Mode :</sys:String>
+    <sys:String x:Key="Str_Gpu_OverclockHeader">Overclock du GPU</sys:String>
+    <sys:String x:Key="Str_Gpu_OverclockCoreLabel">Cœur (MHz) :</sys:String>
+    <sys:String x:Key="Str_Gpu_OverclockMemoryLabel">Mémoire (MHz) :</sys:String>
+    <sys:String x:Key="Str_Gpu_OverclockManualFan">Ventilateur manuel :</sys:String>
+    <sys:String x:Key="Str_Gpu_OverclockApply">Appliquer</sys:String>
+    <sys:String x:Key="Str_Gpu_OverclockReset">Réinitialiser</sys:String>
+    <sys:String x:Key="Str_Gpu_OverclockUnavailablePrefix">L'overclock n'est pas disponible pour ce GPU : </sys:String>
 
     <sys:String x:Key="Str_Models_Title">Modèles</sys:String>
     <sys:String x:Key="Str_Models_Refresh">Actualiser</sys:String>

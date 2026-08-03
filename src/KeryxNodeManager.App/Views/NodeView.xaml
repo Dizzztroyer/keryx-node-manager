@@ -8,44 +8,44 @@
     <StackPanel MaxWidth="720" HorizontalAlignment="Left">
         <TextBlock Text="{DynamicResource Str_Node_Title}" FontSize="22" FontWeight="Bold" Margin="0,0,0,16"/>
 
-        <Border Style="{StaticResource CardStyle}" Margin="0,0,0,16">
+        <Border Style="{DynamicResource CardStyle}" Margin="0,0,0,16">
             <StackPanel>
-                <TextBlock Text="{DynamicResource Str_Node_PathLabel}" Foreground="{StaticResource TextSecondaryBrush}"/>
+                <TextBlock Text="{DynamicResource Str_Node_PathLabel}" Foreground="{DynamicResource TextSecondaryBrush}"/>
                 <Grid Margin="0,4,0,0">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
                     <TextBox Grid.Column="0" Text="{Binding Profile.NodeExecutablePath, Mode=TwoWay}"
-                             Padding="8" Background="{StaticResource SurfaceAltBrush}"
-                             Foreground="{StaticResource TextPrimaryBrush}" BorderThickness="0"/>
+                             Padding="8" Background="{DynamicResource SurfaceAltBrush}"
+                             Foreground="{DynamicResource TextPrimaryBrush}" BorderThickness="0"/>
                     <Button Grid.Column="1" Content="{DynamicResource Str_Node_Browse}" Margin="8,0,0,0"
-                            Style="{StaticResource SecondaryButtonStyle}"
+                            Style="{DynamicResource SecondaryButtonStyle}"
                             Command="{Binding BrowseExecutableCommand}"/>
                 </Grid>
 
-                <TextBlock Text="{DynamicResource Str_Node_EndpointLabel}" Foreground="{StaticResource TextSecondaryBrush}"
+                <TextBlock Text="{DynamicResource Str_Node_EndpointLabel}" Foreground="{DynamicResource TextSecondaryBrush}"
                            Margin="0,16,0,0"/>
                 <TextBox Text="{Binding Profile.NodeEndpoint, Mode=TwoWay}" Margin="0,4,0,0"
-                         Padding="8" Background="{StaticResource SurfaceAltBrush}"
-                         Foreground="{StaticResource TextPrimaryBrush}" BorderThickness="0"/>
+                         Padding="8" Background="{DynamicResource SurfaceAltBrush}"
+                         Foreground="{DynamicResource TextPrimaryBrush}" BorderThickness="0"/>
 
                 <CheckBox Content="{DynamicResource Str_Node_TestnetCheckbox}" IsChecked="{Binding Profile.UseTestnet, Mode=TwoWay}"
-                          Margin="0,16,0,0" Foreground="{StaticResource TextPrimaryBrush}"/>
+                          Margin="0,16,0,0" Foreground="{DynamicResource TextPrimaryBrush}"/>
 
                 <StackPanel Orientation="Horizontal" Margin="0,20,0,0">
-                    <Button Content="{DynamicResource Str_Node_Save}" Style="{StaticResource PrimaryButtonStyle}"
+                    <Button Content="{DynamicResource Str_Node_Save}" Style="{DynamicResource PrimaryButtonStyle}"
                             Command="{Binding SaveCommand}" Margin="0,0,10,0"/>
-                    <Button Content="{DynamicResource Str_Node_CheckEndpoint}" Style="{StaticResource SecondaryButtonStyle}"
+                    <Button Content="{DynamicResource Str_Node_CheckEndpoint}" Style="{DynamicResource SecondaryButtonStyle}"
                             Command="{Binding CheckEndpointCommand}"/>
                 </StackPanel>
 
                 <TextBlock Text="{Binding StatusMessage}" Margin="0,12,0,0" TextWrapping="Wrap"
-                           Foreground="{StaticResource TextSecondaryBrush}"/>
+                           Foreground="{DynamicResource TextSecondaryBrush}"/>
 
                 <Expander Header="Нужно ли открывать порт и настраивать firewall?" Margin="0,16,0,0"
-                          Foreground="{StaticResource TextPrimaryBrush}">
-                    <TextBlock Margin="0,8,0,0" TextWrapping="Wrap" Foreground="{StaticResource TextSecondaryBrush}">
+                          Foreground="{DynamicResource TextPrimaryBrush}">
+                    <TextBlock Margin="0,8,0,0" TextWrapping="Wrap" Foreground="{DynamicResource TextSecondaryBrush}">
                         <Run Text="Нет, не для того, чтобы майнить. Ваша нода прекрасно работает с обычным домашним интернетом и исходящими подключениями - открытый порт/белый IP тут не нужны."/>
                         <LineBreak/><LineBreak/>
                         <Run Text="Это нужно только если вы ХОТИТЕ, чтобы к вашей ноде могли подключаться ДРУГИЕ участники сети (входящие соединения) - это помогает здоровью сети в целом, но не обязательно лично вам. Если всё же хотите: (1) у вас должен быть публичный («белый») IP-адрес, а не только адрес за NAT/CGNAT провайдера; (2) на роутере нужно прокинуть (port forward) P2P-порт ноды (по умолчанию 22111) на компьютер, где запущена keryxd; (3) в брандмауэре Windows нужно разрешить входящие подключения на этот порт для keryxd.exe."/>
@@ -55,70 +55,70 @@
         </Border>
 
         <TextBlock Text="{DynamicResource Str_Node_FooterNote}"
-                   TextWrapping="Wrap" Foreground="{StaticResource TextSecondaryBrush}"/>
+                   TextWrapping="Wrap" Foreground="{DynamicResource TextSecondaryBrush}"/>
 
-        <Border Style="{StaticResource CardStyle}" Margin="0,16,0,16" DataContext="{Binding NodeUpdate}">
+        <Border Style="{DynamicResource CardStyle}" Margin="0,16,0,16" DataContext="{Binding NodeUpdate}">
             <StackPanel>
-                <TextBlock Text="Обновление keryxd.exe" FontWeight="SemiBold" Foreground="{StaticResource TextPrimaryBrush}"/>
-                <TextBlock Margin="0,6,0,0" TextWrapping="Wrap" Foreground="{StaticResource TextSecondaryBrush}">
+                <TextBlock Text="Обновление keryxd.exe" FontWeight="SemiBold" Foreground="{DynamicResource TextPrimaryBrush}"/>
+                <TextBlock Margin="0,6,0,0" TextWrapping="Wrap" Foreground="{DynamicResource TextSecondaryBrush}">
                     <Run Text="Установлена версия: "/><Run Text="{Binding InstalledVersion, Mode=OneWay, FallbackValue=неизвестно, TargetNullValue=неизвестно}"/>
                     <Run Text="   ·   Последняя версия: "/><Run Text="{Binding LatestVersion, Mode=OneWay, FallbackValue=?, TargetNullValue=?}"/>
                 </TextBlock>
                 <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
-                    <Button Content="Проверить обновления" Style="{StaticResource SecondaryButtonStyle}"
+                    <Button Content="Проверить обновления" Style="{DynamicResource SecondaryButtonStyle}"
                             Command="{Binding CheckForUpdateCommand}" Margin="0,0,10,0"/>
-                    <Button Content="Установить обновление" Style="{StaticResource PrimaryButtonStyle}"
+                    <Button Content="Установить обновление" Style="{DynamicResource PrimaryButtonStyle}"
                             Command="{Binding InstallUpdateCommand}" IsEnabled="{Binding UpdateAvailable}"/>
                 </StackPanel>
                 <ProgressBar Height="6" Margin="0,10,0,0" Minimum="0" Maximum="100"
                              Value="{Binding ProgressPercent, Mode=OneWay, FallbackValue=0}"
                              Visibility="{Binding IsBusy, Converter={StaticResource BoolToVis}}"/>
                 <TextBlock Text="{Binding StatusMessage}" Margin="0,8,0,0" TextWrapping="Wrap"
-                           Foreground="{StaticResource TextSecondaryBrush}"/>
+                           Foreground="{DynamicResource TextSecondaryBrush}"/>
             </StackPanel>
         </Border>
 
-        <Border Style="{StaticResource CardStyle}" Margin="0,0,0,16" DataContext="{Binding DataDir}">
+        <Border Style="{DynamicResource CardStyle}" Margin="0,0,0,16" DataContext="{Binding DataDir}">
             <StackPanel>
-                <TextBlock Text="Данные ноды (data dir)" FontWeight="SemiBold" Foreground="{StaticResource TextPrimaryBrush}"/>
+                <TextBlock Text="Данные ноды (data dir)" FontWeight="SemiBold" Foreground="{DynamicResource TextPrimaryBrush}"/>
                 <TextBlock Margin="0,4,0,0" TextWrapping="Wrap" FontStyle="Italic"
-                           Foreground="{StaticResource TextSecondaryBrush}"
+                           Foreground="{DynamicResource TextSecondaryBrush}"
                            Text="Официального встроенного механизма загрузки снапшота у keryxd нет - но команда Keryx время от времени публикует архив данных для быстрого старта (HTTP-ссылка или .torrent). Вставьте актуальную ссылку ниже - формат определяется автоматически по расширению .torrent."/>
 
-                <TextBlock Text="Ссылка на архив (.zip) или .torrent-файл" Foreground="{StaticResource TextSecondaryBrush}" Margin="0,10,0,0"/>
+                <TextBlock Text="Ссылка на архив (.zip) или .torrent-файл" Foreground="{DynamicResource TextSecondaryBrush}" Margin="0,10,0,0"/>
                 <TextBox Text="{Binding SourceUrl, Mode=TwoWay}" Margin="0,4,0,0"
-                         Padding="8" Background="{StaticResource SurfaceAltBrush}"
-                         Foreground="{StaticResource TextPrimaryBrush}" BorderThickness="0"/>
+                         Padding="8" Background="{DynamicResource SurfaceAltBrush}"
+                         Foreground="{DynamicResource TextPrimaryBrush}" BorderThickness="0"/>
 
-                <TextBlock Text="Каталог для данных" Foreground="{StaticResource TextSecondaryBrush}" Margin="0,12,0,0"/>
+                <TextBlock Text="Каталог для данных" Foreground="{DynamicResource TextSecondaryBrush}" Margin="0,12,0,0"/>
                 <Grid Margin="0,4,0,0">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
                     <TextBox Grid.Column="0" Text="{Binding DataDirectory, Mode=OneWay}" IsReadOnly="True"
-                             Padding="8" Background="{StaticResource SurfaceAltBrush}"
-                             Foreground="{StaticResource TextPrimaryBrush}" BorderThickness="0"/>
+                             Padding="8" Background="{DynamicResource SurfaceAltBrush}"
+                             Foreground="{DynamicResource TextPrimaryBrush}" BorderThickness="0"/>
                     <Button Grid.Column="1" Content="Обзор" Margin="8,0,0,0"
-                            Style="{StaticResource SecondaryButtonStyle}"
+                            Style="{DynamicResource SecondaryButtonStyle}"
                             Command="{Binding BrowseDataDirectoryCommand}"/>
                 </Grid>
 
-                <Button Content="Скачать и распаковать" Style="{StaticResource PrimaryButtonStyle}"
+                <Button Content="Скачать и распаковать" Style="{DynamicResource PrimaryButtonStyle}"
                         Command="{Binding DownloadCommand}" HorizontalAlignment="Left" Margin="0,12,0,0"/>
                 <ProgressBar Height="6" Margin="0,10,0,0" Minimum="0" Maximum="100"
                              Value="{Binding ProgressPercent, Mode=OneWay, FallbackValue=0}"
                              Visibility="{Binding IsBusy, Converter={StaticResource BoolToVis}}"/>
                 <TextBlock Text="{Binding StatusMessage}" Margin="0,8,0,0" TextWrapping="Wrap"
-                           Foreground="{StaticResource TextSecondaryBrush}"/>
+                           Foreground="{DynamicResource TextSecondaryBrush}"/>
             </StackPanel>
         </Border>
 
-        <Border Style="{StaticResource CardStyle}" DataContext="{Binding PublicNodes}">
+        <Border Style="{DynamicResource CardStyle}" DataContext="{Binding PublicNodes}">
             <StackPanel>
-                <TextBlock Text="Публичные ноды" FontWeight="SemiBold" Foreground="{StaticResource TextPrimaryBrush}"/>
+                <TextBlock Text="Публичные ноды" FontWeight="SemiBold" Foreground="{DynamicResource TextPrimaryBrush}"/>
                 <TextBlock Margin="0,4,0,0" TextWrapping="Wrap" FontStyle="Italic"
-                           Foreground="{StaticResource TextSecondaryBrush}"
+                           Foreground="{DynamicResource TextSecondaryBrush}"
                            Text="Если своей ноды нет или она ещё синхронизируется, можно временно майнить через чужую. Список ведётся вручную (протокол не хранит публичный реестр нод) - при желании укажите ссылку на JSON-список ниже."/>
 
                 <Grid Margin="0,10,0,0">
@@ -127,29 +127,29 @@
                         <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
                     <TextBox Grid.Column="0" Text="{Binding RemoteListUrl, Mode=TwoWay}"
-                             Padding="8" Background="{StaticResource SurfaceAltBrush}"
-                             Foreground="{StaticResource TextPrimaryBrush}" BorderThickness="0"
+                             Padding="8" Background="{DynamicResource SurfaceAltBrush}"
+                             Foreground="{DynamicResource TextPrimaryBrush}" BorderThickness="0"
                              ToolTip="URL публичного JSON-списка нод (необязательно)"/>
                     <Button Grid.Column="1" Content="Обновить список" Margin="8,0,0,0"
-                            Style="{StaticResource SecondaryButtonStyle}" Command="{Binding RefreshCommand}"/>
+                            Style="{DynamicResource SecondaryButtonStyle}" Command="{Binding RefreshCommand}"/>
                 </Grid>
 
                 <StackPanel Orientation="Horizontal" Margin="0,8,0,0">
-                    <Button Content="Найти через свою ноду" Style="{StaticResource SecondaryButtonStyle}"
+                    <Button Content="Найти через свою ноду" Style="{DynamicResource SecondaryButtonStyle}"
                             Command="{Binding DiscoverFromOwnNodeCommand}" Margin="0,0,10,0"
                             ToolTip="Спросить список пиров у вашей собственной запущенной ноды через RPC (getConnectedPeerInfo/getPeerAddresses)"/>
-                    <Button Content="Вернуться на свою ноду" Style="{StaticResource SecondaryButtonStyle}"
+                    <Button Content="Вернуться на свою ноду" Style="{DynamicResource SecondaryButtonStyle}"
                             Command="{Binding SwitchBackToOwnNodeCommand}"/>
                 </StackPanel>
                 <TextBlock Margin="0,6,0,0" TextWrapping="Wrap" FontStyle="Italic"
-                           Foreground="{StaticResource TextSecondaryBrush}"
+                           Foreground="{DynamicResource TextSecondaryBrush}"
                            Visibility="{Binding IsWatchingForOwnNodeSync, Converter={StaticResource BoolToVis}}"
                            Text="Наблюдаю за синхронизацией вашей ноды - как только она будет готова, майнер автоматически переключится обратно на неё."/>
 
                 <ItemsControl ItemsSource="{Binding Nodes}" Margin="0,12,0,0">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
-                            <Border Background="{StaticResource SurfaceAltBrush}" CornerRadius="4"
+                            <Border Background="{DynamicResource SurfaceAltBrush}" CornerRadius="4"
                                     Padding="10" Margin="0,0,0,8">
                                 <Grid>
                                     <Grid.ColumnDefinitions>
@@ -159,27 +159,27 @@
                                         <ColumnDefinition Width="Auto"/>
                                     </Grid.ColumnDefinitions>
                                     <StackPanel Grid.Column="0">
-                                        <TextBlock Foreground="{StaticResource TextPrimaryBrush}" FontWeight="SemiBold">
+                                        <TextBlock Foreground="{DynamicResource TextPrimaryBrush}" FontWeight="SemiBold">
                                             <Run Text="{Binding Info.Name, Mode=OneWay}"/>
                                             <Run Text=" ("/><Run Text="{Binding Info.Endpoint, Mode=OneWay}"/>
                                             <Run Text=":"/><Run Text="{Binding Info.Port, Mode=OneWay}"/><Run Text=")"/>
                                         </TextBlock>
                                         <TextBlock Text="{Binding StatusText, Mode=OneWay}"
-                                                   Foreground="{StaticResource TextSecondaryBrush}" Margin="0,2,0,0"/>
+                                                   Foreground="{DynamicResource TextSecondaryBrush}" Margin="0,2,0,0"/>
                                         <TextBlock Text="{Binding Info.Notes, Mode=OneWay}" FontSize="11" TextWrapping="Wrap"
-                                                   Foreground="{StaticResource TextSecondaryBrush}" Margin="0,2,0,0"/>
+                                                   Foreground="{DynamicResource TextSecondaryBrush}" Margin="0,2,0,0"/>
                                     </StackPanel>
                                     <Button Grid.Column="1" Content="Проверить" Margin="8,0,0,0"
-                                            Style="{StaticResource SecondaryButtonStyle}"
+                                            Style="{DynamicResource SecondaryButtonStyle}"
                                             Command="{Binding DataContext.PingCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}"
                                             CommandParameter="{Binding}"/>
                                     <Button Grid.Column="2" Content="Найти пиров через неё" Margin="8,0,0,0"
-                                            Style="{StaticResource SecondaryButtonStyle}"
+                                            Style="{DynamicResource SecondaryButtonStyle}"
                                             ToolTip="Спросить эту ноду через RPC о её пирах (сработает, только если у неё открыт RPC-порт наружу - у большинства нод он закрыт, это нормально)"
                                             Command="{Binding DataContext.DiscoverThroughNodeCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}"
                                             CommandParameter="{Binding}"/>
                                     <Button Grid.Column="3" Content="Использовать" Margin="8,0,0,0"
-                                            Style="{StaticResource PrimaryButtonStyle}"
+                                            Style="{DynamicResource PrimaryButtonStyle}"
                                             Command="{Binding DataContext.UseNodeCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}"
                                             CommandParameter="{Binding}"/>
                                 </Grid>
@@ -189,7 +189,7 @@
                 </ItemsControl>
 
                 <TextBlock Text="{Binding StatusMessage}" Margin="0,4,0,0" TextWrapping="Wrap"
-                           Foreground="{StaticResource TextSecondaryBrush}"/>
+                           Foreground="{DynamicResource TextSecondaryBrush}"/>
             </StackPanel>
         </Border>
     </StackPanel>

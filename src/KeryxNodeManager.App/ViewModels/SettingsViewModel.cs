@@ -45,11 +45,18 @@ public partial class SettingsViewModel : ObservableObject
     [ObservableProperty]
     private string _language = "ru";
 
+    /// <summary>Light/dark theme toggle (brief follow-up, 2026-08-03) - same pattern as Language
+    /// directly above, backed by the previously-dead AppSettings.Theme field. See ThemeManager's
+    /// own doc comment for the swap mechanism this drives.</summary>
+    [ObservableProperty]
+    private string _theme = "dark";
+
     public SettingsViewModel(ProfileStore profileStore, TaskSchedulerAutostart autostart)
     {
         _profileStore = profileStore;
         _autostart = autostart;
         _language = Settings.Language;
+        _theme = Settings.Theme;
         _ = InitializeAutostartStateAsync();
     }
 
@@ -57,6 +64,13 @@ public partial class SettingsViewModel : ObservableObject
     {
         LocalizationManager.Apply(value);
         Settings.Language = value;
+        _ = _profileStore.SaveAsync();
+    }
+
+    partial void OnThemeChanged(string value)
+    {
+        ThemeManager.Apply(value);
+        Settings.Theme = value;
         _ = _profileStore.SaveAsync();
     }
 

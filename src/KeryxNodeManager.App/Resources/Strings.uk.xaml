@@ -27,6 +27,9 @@
     <sys:String x:Key="Str_Settings_CriticalThreshold">Критичний поріг - зупиняє майнінг (°C)</sys:String>
     <sys:String x:Key="Str_Settings_SafetyNote">Перевіряється, поки запущено майнер (див. сторінку «Огляд»).</sys:String>
     <sys:String x:Key="Str_Settings_Language_Header">Мова</sys:String>
+    <sys:String x:Key="Str_Settings_ThemeLabel">Тема</sys:String>
+    <sys:String x:Key="Str_Settings_ThemeDark">Темна</sys:String>
+    <sys:String x:Key="Str_Settings_ThemeLight">Світла</sys:String>
     <sys:String x:Key="Str_Settings_Save">Зберегти</sys:String>
 
     <sys:String x:Key="Str_Nav_VersionLabel">Версія: </sys:String>
@@ -49,6 +52,13 @@
     <sys:String x:Key="Str_Gpu_VramUnit"> МБ VRAM · </sys:String>
     <sys:String x:Key="Str_Gpu_TempUnit">°C</sys:String>
     <sys:String x:Key="Str_Gpu_ModeLabel">Режим:</sys:String>
+    <sys:String x:Key="Str_Gpu_OverclockHeader">Розгін відеокарти</sys:String>
+    <sys:String x:Key="Str_Gpu_OverclockCoreLabel">Ядро (МГц):</sys:String>
+    <sys:String x:Key="Str_Gpu_OverclockMemoryLabel">Пам'ять (МГц):</sys:String>
+    <sys:String x:Key="Str_Gpu_OverclockManualFan">Ручний кулер:</sys:String>
+    <sys:String x:Key="Str_Gpu_OverclockApply">Застосувати</sys:String>
+    <sys:String x:Key="Str_Gpu_OverclockReset">Скинути</sys:String>
+    <sys:String x:Key="Str_Gpu_OverclockUnavailablePrefix">Розгін недоступний для цієї відеокарти: </sys:String>
 
     <sys:String x:Key="Str_Models_Title">Моделі</sys:String>
     <sys:String x:Key="Str_Models_Refresh">Оновити</sys:String>

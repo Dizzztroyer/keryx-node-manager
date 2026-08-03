@@ -6,22 +6,22 @@
     <ScrollViewer VerticalScrollBarVisibility="Auto">
     <StackPanel MaxWidth="700" HorizontalAlignment="Left">
         <TextBlock Text="Keryx Node Manager" FontSize="22" FontWeight="Bold" Margin="0,0,0,4"/>
-        <TextBlock Foreground="{StaticResource TextSecondaryBrush}" Margin="0,0,0,16">
+        <TextBlock Foreground="{DynamicResource TextSecondaryBrush}" Margin="0,0,0,16">
             <Run Text="{DynamicResource Str_About_VersionLabel}"/><Run Text="{Binding AppVersion, Mode=OneWay}"/>
         </TextBlock>
 
-        <Border Style="{StaticResource CardStyle}" Margin="0,0,0,16">
+        <Border Style="{DynamicResource CardStyle}" Margin="0,0,0,16">
             <StackPanel>
                 <TextBlock TextWrapping="Wrap"
                            Text="{DynamicResource Str_About_Description}"
-                           Foreground="{StaticResource TextPrimaryBrush}"/>
+                           Foreground="{DynamicResource TextPrimaryBrush}"/>
             </StackPanel>
         </Border>
 
-        <Border Style="{StaticResource CardStyle}" Margin="0,0,0,16">
+        <Border Style="{DynamicResource CardStyle}" Margin="0,0,0,16">
             <StackPanel>
                 <TextBlock Text="{DynamicResource Str_About_LinksHeader}" FontWeight="SemiBold" Margin="0,0,0,8"
-                           Foreground="{StaticResource TextPrimaryBrush}"/>
+                           Foreground="{DynamicResource TextPrimaryBrush}"/>
                 <TextBlock Margin="0,0,0,4">
                     <Hyperlink NavigateUri="https://github.com/Keryx-Labs/keryx-node"
                                RequestNavigate="Hyperlink_RequestNavigate">
@@ -42,21 +42,21 @@
                 </TextBlock>
                 <TextBlock Text="{DynamicResource Str_About_NoRepoNote}"
                            Margin="0,8,0,0" FontStyle="Italic" TextWrapping="Wrap"
-                           Foreground="{StaticResource TextSecondaryBrush}"/>
+                           Foreground="{DynamicResource TextSecondaryBrush}"/>
             </StackPanel>
         </Border>
 
-        <Border Style="{StaticResource CardStyle}">
+        <Border Style="{DynamicResource CardStyle}">
             <StackPanel>
                 <TextBlock Text="{DynamicResource Str_About_SystemHeader}" FontWeight="SemiBold" Margin="0,0,0,8"
-                           Foreground="{StaticResource TextPrimaryBrush}"/>
-                <TextBlock Foreground="{StaticResource TextSecondaryBrush}">
+                           Foreground="{DynamicResource TextPrimaryBrush}"/>
+                <TextBlock Foreground="{DynamicResource TextSecondaryBrush}">
                     <Run Text="{DynamicResource Str_About_OsLabel}"/><Run Text="{Binding OperatingSystem, Mode=OneWay}"/>
                 </TextBlock>
-                <TextBlock Margin="0,4,0,0" Foreground="{StaticResource TextSecondaryBrush}">
+                <TextBlock Margin="0,4,0,0" Foreground="{DynamicResource TextSecondaryBrush}">
                     <Run Text="{DynamicResource Str_About_DotNetLabel}"/><Run Text="{Binding DotNetRuntime, Mode=OneWay}"/>
                 </TextBlock>
-                <TextBlock Margin="0,4,0,0" Foreground="{StaticResource TextSecondaryBrush}">
+                <TextBlock Margin="0,4,0,0" Foreground="{DynamicResource TextSecondaryBrush}">
                     <Run Text="{DynamicResource Str_About_Is64BitLabel}"/><Run Text="{Binding Is64Bit, Mode=OneWay}"/>
                 </TextBlock>
             </StackPanel>

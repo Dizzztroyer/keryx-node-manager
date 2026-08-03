@@ -10,28 +10,28 @@
     <DockPanel>
         <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Margin="0,0,0,16">
             <TextBlock Text="{DynamicResource Str_Gpu_Title}" FontSize="22" FontWeight="Bold" VerticalAlignment="Center"/>
-            <Button Content="{DynamicResource Str_Gpu_Refresh}" Style="{StaticResource SecondaryButtonStyle}"
+            <Button Content="{DynamicResource Str_Gpu_Refresh}" Style="{DynamicResource SecondaryButtonStyle}"
                     Command="{Binding RefreshCommand}" Margin="16,0,0,0"/>
         </StackPanel>
 
         <!-- Empty/null LastError simply renders as an empty line - no converter needed. -->
-        <TextBlock DockPanel.Dock="Top" Text="{Binding LastError}" Foreground="{StaticResource ErrorBrush}"
+        <TextBlock DockPanel.Dock="Top" Text="{Binding LastError}" Foreground="{DynamicResource ErrorBrush}"
                    Margin="0,0,0,12" TextWrapping="Wrap"/>
 
         <ItemsControl ItemsSource="{Binding Gpus}">
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
-                    <Border Style="{StaticResource CardStyle}" Margin="0,0,0,12">
+                    <Border Style="{DynamicResource CardStyle}" Margin="0,0,0,12">
                         <StackPanel>
                             <TextBlock Text="{Binding Device.Name}" FontSize="16" FontWeight="SemiBold"/>
-                            <TextBlock Margin="0,4,0,0" Foreground="{StaticResource TextSecondaryBrush}">
+                            <TextBlock Margin="0,4,0,0" Foreground="{DynamicResource TextSecondaryBrush}">
                                 <Run Text="{DynamicResource Str_Gpu_CudaLabel}"/><Run Text="{Binding Device.CudaIndex, Mode=OneWay}"/>
                                 <Run Text=" · "/><Run Text="{Binding Device.TotalVramMb, Mode=OneWay}"/>
                                 <Run Text="{DynamicResource Str_Gpu_VramUnit}"/><Run Text="{Binding Device.TemperatureC, Mode=OneWay}"/>
                                 <Run Text="{DynamicResource Str_Gpu_TempUnit}"/>
                             </TextBlock>
                             <TextBlock Text="{Binding Device.Uuid}" FontSize="11"
-                                       Foreground="{StaticResource TextSecondaryBrush}" Margin="0,4,0,0"/>
+                                       Foreground="{DynamicResource TextSecondaryBrush}" Margin="0,4,0,0"/>
 
                             <StackPanel Orientation="Horizontal" Margin="0,8,0,0">
                                 <TextBlock Text="{DynamicResource Str_Gpu_ModeLabel}" VerticalAlignment="Center" Margin="0,0,8,0"/>
@@ -50,10 +50,10 @@
                                  for why "not supported" is treated as an expected outcome, not an
                                  error banner. -->
                             <Border Margin="0,12,0,0" BorderThickness="1,0,0,0" Padding="12,0,0,0"
-                                    BorderBrush="{StaticResource TextSecondaryBrush}"
+                                    BorderBrush="{DynamicResource TextSecondaryBrush}"
                                     Visibility="{Binding Overclock.IsSupported, Converter={StaticResource BoolToVis}}">
                                 <StackPanel DataContext="{Binding Overclock}">
-                                    <TextBlock Text="Разгон видеокарты" FontWeight="SemiBold" Margin="0,0,0,6"/>
+                                    <TextBlock Text="{DynamicResource Str_Gpu_OverclockHeader}" FontWeight="SemiBold" Margin="0,0,0,6"/>
 
                                     <Grid>
                                         <Grid.ColumnDefinitions>
@@ -67,7 +67,7 @@
                                         </Grid.RowDefinitions>
 
                                         <TextBlock Grid.Row="0" Grid.Column="0" VerticalAlignment="Center"
-                                                   Text="Ядро (МГц):"/>
+                                                   Text="{DynamicResource Str_Gpu_OverclockCoreLabel}"/>
                                         <Slider Grid.Row="0" Grid.Column="1" Margin="8,0"
                                                 Minimum="{Binding MinCoreOffsetMhz}" Maximum="{Binding MaxCoreOffsetMhz}"
                                                 Value="{Binding CoreOffsetMhz, Mode=TwoWay}" TickFrequency="10"/>
@@ -75,7 +75,7 @@
                                                    Text="{Binding CoreOffsetMhz}"/>
 
                                         <TextBlock Grid.Row="1" Grid.Column="0" VerticalAlignment="Center"
-                                                   Text="Память (МГц):"/>
+                                                   Text="{DynamicResource Str_Gpu_OverclockMemoryLabel}"/>
                                         <Slider Grid.Row="1" Grid.Column="1" Margin="8,0"
                                                 Minimum="{Binding MinMemoryOffsetMhz}" Maximum="{Binding MaxMemoryOffsetMhz}"
                                                 Value="{Binding MemoryOffsetMhz, Mode=TwoWay}" TickFrequency="10"/>
@@ -85,7 +85,7 @@
 
                                     <StackPanel Orientation="Horizontal" Margin="0,6,0,0"
                                                 Visibility="{Binding SupportsFanControl, Converter={StaticResource BoolToVis}}">
-                                        <CheckBox Content="Ручной кулер:" IsChecked="{Binding FanIsManual, Mode=TwoWay}"
+                                        <CheckBox Content="{DynamicResource Str_Gpu_OverclockManualFan}" IsChecked="{Binding FanIsManual, Mode=TwoWay}"
                                                   VerticalAlignment="Center"/>
                                         <Slider Width="160" Margin="8,0" VerticalAlignment="Center"
                                                 Minimum="{Binding MinFanPercent}" Maximum="{Binding MaxFanPercent}"
@@ -96,15 +96,15 @@
                                     </StackPanel>
 
                                     <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
-                                        <Button Content="Применить" Style="{StaticResource SecondaryButtonStyle}"
+                                        <Button Content="{DynamicResource Str_Gpu_OverclockApply}" Style="{DynamicResource SecondaryButtonStyle}"
                                                 Command="{Binding ApplyCommand}"/>
-                                        <Button Content="Сбросить" Style="{StaticResource SecondaryButtonStyle}"
+                                        <Button Content="{DynamicResource Str_Gpu_OverclockReset}" Style="{DynamicResource SecondaryButtonStyle}"
                                                 Command="{Binding ResetCommand}" Margin="8,0,0,0"/>
                                     </StackPanel>
 
-                                    <TextBlock Text="{Binding StatusMessage}" Foreground="{StaticResource TextSecondaryBrush}"
+                                    <TextBlock Text="{Binding StatusMessage}" Foreground="{DynamicResource TextSecondaryBrush}"
                                                Margin="0,6,0,0" TextWrapping="Wrap"/>
-                                    <TextBlock Text="{Binding LastError}" Foreground="{StaticResource ErrorBrush}"
+                                    <TextBlock Text="{Binding LastError}" Foreground="{DynamicResource ErrorBrush}"
                                                Margin="0,4,0,0" TextWrapping="Wrap"/>
                                 </StackPanel>
                             </Border>
@@ -118,9 +118,9 @@
                                  no controls AND no explanation. This sibling, gated on the inverse,
                                  is what actually surfaces that explanation now. -->
                             <TextBlock Margin="0,12,0,0" TextWrapping="Wrap"
-                                       Foreground="{StaticResource TextSecondaryBrush}"
+                                       Foreground="{DynamicResource TextSecondaryBrush}"
                                        Visibility="{Binding Overclock.IsSupported, Converter={StaticResource InverseBoolToVis}}">
-                                <Run Text="Разгон недоступен для этой видеокарты: "/>
+                                <Run Text="{DynamicResource Str_Gpu_OverclockUnavailablePrefix}"/>
                                 <Run Text="{Binding Overclock.LastError, Mode=OneWay}"/>
                             </TextBlock>
                         </StackPanel>

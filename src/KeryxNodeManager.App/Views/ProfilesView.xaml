@@ -8,7 +8,7 @@
     <StackPanel MaxWidth="700" HorizontalAlignment="Left">
         <TextBlock Text="{DynamicResource Str_Profiles_Title}" FontSize="22" FontWeight="Bold" Margin="0,0,0,16"/>
 
-        <Border Style="{StaticResource CardStyle}" Margin="0,0,0,16">
+        <Border Style="{DynamicResource CardStyle}" Margin="0,0,0,16">
             <StackPanel>
                 <TextBlock FontWeight="SemiBold" Margin="0,0,0,8">
                     <Run Text="{DynamicResource Str_Profiles_ActiveLabel}"/>
@@ -24,64 +24,64 @@
                 <ListBox ItemsSource="{Binding ProfileRows}"
                          SelectedValuePath="Name"
                          SelectedValue="{Binding SelectedProfileName, Mode=TwoWay}"
-                         Background="{StaticResource SurfaceAltBrush}"
-                         Foreground="{StaticResource TextPrimaryBrush}"
+                         Background="{DynamicResource SurfaceAltBrush}"
+                         Foreground="{DynamicResource TextPrimaryBrush}"
                          BorderThickness="0" MaxHeight="220">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
                             <StackPanel Margin="0,4">
                                 <TextBlock Text="{Binding Name}" FontWeight="SemiBold"
-                                           Foreground="{StaticResource TextPrimaryBrush}"/>
+                                           Foreground="{DynamicResource TextPrimaryBrush}"/>
                                 <TextBlock Text="{Binding Summary}" FontSize="12"
-                                           Foreground="{StaticResource TextSecondaryBrush}"/>
+                                           Foreground="{DynamicResource TextSecondaryBrush}"/>
                             </StackPanel>
                         </DataTemplate>
                     </ListBox.ItemTemplate>
                 </ListBox>
 
                 <StackPanel Orientation="Horizontal" Margin="0,12,0,0">
-                    <Button Content="{DynamicResource Str_Profiles_MakeActive}" Style="{StaticResource PrimaryButtonStyle}"
+                    <Button Content="{DynamicResource Str_Profiles_MakeActive}" Style="{DynamicResource PrimaryButtonStyle}"
                             Command="{Binding SwitchCommand}"/>
-                    <Button Content="{DynamicResource Str_Profiles_Delete}" Style="{StaticResource SecondaryButtonStyle}"
+                    <Button Content="{DynamicResource Str_Profiles_Delete}" Style="{DynamicResource SecondaryButtonStyle}"
                             Command="{Binding DeleteCommand}" Margin="8,0,0,0"/>
                 </StackPanel>
             </StackPanel>
         </Border>
 
-        <Border Style="{StaticResource CardStyle}" Margin="0,0,0,16">
+        <Border Style="{DynamicResource CardStyle}" Margin="0,0,0,16">
             <StackPanel>
                 <TextBlock Text="{DynamicResource Str_Profiles_NewHeader}" FontWeight="SemiBold" Margin="0,0,0,8"/>
                 <StackPanel Orientation="Horizontal">
                     <TextBox Text="{Binding NewProfileName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                             Width="220" Padding="8" Background="{StaticResource SurfaceAltBrush}"
-                             Foreground="{StaticResource TextPrimaryBrush}" BorderThickness="0"/>
-                    <Button Content="{DynamicResource Str_Profiles_Create}" Style="{StaticResource PrimaryButtonStyle}"
+                             Width="220" Padding="8" Background="{DynamicResource SurfaceAltBrush}"
+                             Foreground="{DynamicResource TextPrimaryBrush}" BorderThickness="0"/>
+                    <Button Content="{DynamicResource Str_Profiles_Create}" Style="{DynamicResource PrimaryButtonStyle}"
                             Command="{Binding CreateCommand}" Margin="8,0,0,0"/>
                 </StackPanel>
                 <TextBlock Text="{DynamicResource Str_Profiles_NewNote}"
                            Margin="0,4,0,0" FontStyle="Italic" TextWrapping="Wrap"
-                           Foreground="{StaticResource TextSecondaryBrush}"/>
+                           Foreground="{DynamicResource TextSecondaryBrush}"/>
             </StackPanel>
         </Border>
 
-        <Border Style="{StaticResource CardStyle}" Margin="0,0,0,16">
+        <Border Style="{DynamicResource CardStyle}" Margin="0,0,0,16">
             <StackPanel>
                 <TextBlock Text="{DynamicResource Str_Profiles_RenameHeader}" FontWeight="SemiBold" Margin="0,0,0,8"/>
                 <StackPanel Orientation="Horizontal">
                     <TextBox Text="{Binding RenameToName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                             Width="220" Padding="8" Background="{StaticResource SurfaceAltBrush}"
-                             Foreground="{StaticResource TextPrimaryBrush}" BorderThickness="0"/>
-                    <Button Content="{DynamicResource Str_Profiles_Rename}" Style="{StaticResource PrimaryButtonStyle}"
+                             Width="220" Padding="8" Background="{DynamicResource SurfaceAltBrush}"
+                             Foreground="{DynamicResource TextPrimaryBrush}" BorderThickness="0"/>
+                    <Button Content="{DynamicResource Str_Profiles_Rename}" Style="{DynamicResource PrimaryButtonStyle}"
                             Command="{Binding RenameCommand}" Margin="8,0,0,0"/>
                 </StackPanel>
                 <TextBlock Text="{DynamicResource Str_Profiles_RenameNote}"
                            Margin="0,4,0,0" FontStyle="Italic" TextWrapping="Wrap"
-                           Foreground="{StaticResource TextSecondaryBrush}"/>
+                           Foreground="{DynamicResource TextSecondaryBrush}"/>
             </StackPanel>
         </Border>
 
         <TextBlock Text="{Binding StatusMessage}" Margin="0,4,0,0" TextWrapping="Wrap"
-                   Foreground="{StaticResource TextSecondaryBrush}"/>
+                   Foreground="{DynamicResource TextSecondaryBrush}"/>
     </StackPanel>
     </ScrollViewer>
 </UserControl>

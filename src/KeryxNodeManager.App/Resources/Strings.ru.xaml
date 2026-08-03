@@ -35,6 +35,9 @@
     <sys:String x:Key="Str_Settings_CriticalThreshold">Критический порог - останавливает майнинг (°C)</sys:String>
     <sys:String x:Key="Str_Settings_SafetyNote">Проверяется, пока запущен майнер (см. страницу «Обзор»).</sys:String>
     <sys:String x:Key="Str_Settings_Language_Header">Язык</sys:String>
+    <sys:String x:Key="Str_Settings_ThemeLabel">Тема</sys:String>
+    <sys:String x:Key="Str_Settings_ThemeDark">Тёмная</sys:String>
+    <sys:String x:Key="Str_Settings_ThemeLight">Светлая</sys:String>
     <sys:String x:Key="Str_Settings_Save">Сохранить</sys:String>
 
     <sys:String x:Key="Str_Nav_VersionLabel">Версия: </sys:String>
@@ -66,6 +69,13 @@
     <sys:String x:Key="Str_Gpu_VramUnit"> МБ VRAM · </sys:String>
     <sys:String x:Key="Str_Gpu_TempUnit">°C</sys:String>
     <sys:String x:Key="Str_Gpu_ModeLabel">Режим:</sys:String>
+    <sys:String x:Key="Str_Gpu_OverclockHeader">Разгон видеокарты</sys:String>
+    <sys:String x:Key="Str_Gpu_OverclockCoreLabel">Ядро (МГц):</sys:String>
+    <sys:String x:Key="Str_Gpu_OverclockMemoryLabel">Память (МГц):</sys:String>
+    <sys:String x:Key="Str_Gpu_OverclockManualFan">Ручной кулер:</sys:String>
+    <sys:String x:Key="Str_Gpu_OverclockApply">Применить</sys:String>
+    <sys:String x:Key="Str_Gpu_OverclockReset">Сбросить</sys:String>
+    <sys:String x:Key="Str_Gpu_OverclockUnavailablePrefix">Разгон недоступен для этой видеокарты: </sys:String>
 
     <!-- Models page (brief §7), third slice of the full-extraction pass. ModelCardViewModel's
          StatusText (install/progress/error messages) is dynamic ViewModel-generated text and

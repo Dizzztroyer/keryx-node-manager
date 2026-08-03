@@ -13,84 +13,84 @@
     <StackPanel MaxWidth="700" HorizontalAlignment="Left">
         <TextBlock Text="{DynamicResource Str_Settings_Title}" FontSize="22" FontWeight="Bold" Margin="0,0,0,16"/>
 
-        <Border Style="{StaticResource CardStyle}" Margin="0,0,0,16">
+        <Border Style="{DynamicResource CardStyle}" Margin="0,0,0,16">
             <StackPanel>
                 <TextBlock Text="{DynamicResource Str_Settings_Startup_Header}" FontWeight="SemiBold" Margin="0,0,0,8"/>
                 <CheckBox Content="{DynamicResource Str_Settings_StartWithWindows}"
                           IsChecked="{Binding StartWithWindows, Mode=TwoWay}"
-                          Foreground="{StaticResource TextPrimaryBrush}"/>
+                          Foreground="{DynamicResource TextPrimaryBrush}"/>
                 <TextBlock Text="{DynamicResource Str_Settings_StartWithWindows_Note}"
                            Margin="0,4,0,0" FontStyle="Italic" TextWrapping="Wrap"
-                           Foreground="{StaticResource TextSecondaryBrush}"/>
+                           Foreground="{DynamicResource TextSecondaryBrush}"/>
                 <TextBlock Text="{DynamicResource Str_Settings_CheckingAutostart}" Margin="0,4,0,0"
                            Visibility="{Binding IsCheckingAutostart, Converter={StaticResource BoolToVis}}"
-                           Foreground="{StaticResource TextSecondaryBrush}"/>
+                           Foreground="{DynamicResource TextSecondaryBrush}"/>
 
                 <CheckBox Content="{DynamicResource Str_Settings_StartMinimizedToTray}" Margin="0,16,0,0"
                           IsChecked="{Binding Settings.StartMinimizedToTray, Mode=TwoWay}"
-                          Foreground="{StaticResource TextPrimaryBrush}"/>
+                          Foreground="{DynamicResource TextPrimaryBrush}"/>
                 <CheckBox Content="{DynamicResource Str_Settings_CloseMinimizesToTray}"
                           Margin="0,8,0,0"
                           IsChecked="{Binding Settings.CloseButtonMinimizesToTray, Mode=TwoWay}"
-                          Foreground="{StaticResource TextPrimaryBrush}"/>
+                          Foreground="{DynamicResource TextPrimaryBrush}"/>
                 <CheckBox Content="{DynamicResource Str_Settings_NotificationsEnabled}" Margin="0,8,0,0"
                           IsChecked="{Binding Settings.NotificationsEnabled, Mode=TwoWay}"
-                          Foreground="{StaticResource TextPrimaryBrush}"/>
+                          Foreground="{DynamicResource TextPrimaryBrush}"/>
             </StackPanel>
         </Border>
 
-        <Border Style="{StaticResource CardStyle}" Margin="0,0,0,16">
+        <Border Style="{DynamicResource CardStyle}" Margin="0,0,0,16">
             <StackPanel>
                 <TextBlock Text="{DynamicResource Str_Settings_Logs_Header}" FontWeight="SemiBold" Margin="0,0,0,8"/>
-                <TextBlock Text="{DynamicResource Str_Settings_LogRetentionDays}" Foreground="{StaticResource TextSecondaryBrush}"/>
+                <TextBlock Text="{DynamicResource Str_Settings_LogRetentionDays}" Foreground="{DynamicResource TextSecondaryBrush}"/>
                 <TextBox Text="{Binding Settings.LogRetentionDays, Mode=TwoWay}" Margin="0,4,0,0" Padding="8"
-                         Width="120" HorizontalAlignment="Left" Background="{StaticResource SurfaceAltBrush}"
-                         Foreground="{StaticResource TextPrimaryBrush}" BorderThickness="0"/>
+                         Width="120" HorizontalAlignment="Left" Background="{DynamicResource SurfaceAltBrush}"
+                         Foreground="{DynamicResource TextPrimaryBrush}" BorderThickness="0"/>
 
                 <TextBlock Text="{DynamicResource Str_Settings_MaxLogSizeMb}" Margin="0,16,0,0"
-                           Foreground="{StaticResource TextSecondaryBrush}"/>
+                           Foreground="{DynamicResource TextSecondaryBrush}"/>
                 <TextBox Text="{Binding Settings.MaxLogSizeMb, Mode=TwoWay}" Margin="0,4,0,0" Padding="8"
-                         Width="120" HorizontalAlignment="Left" Background="{StaticResource SurfaceAltBrush}"
-                         Foreground="{StaticResource TextPrimaryBrush}" BorderThickness="0"/>
+                         Width="120" HorizontalAlignment="Left" Background="{DynamicResource SurfaceAltBrush}"
+                         Foreground="{DynamicResource TextPrimaryBrush}" BorderThickness="0"/>
             </StackPanel>
         </Border>
 
-        <Border Style="{StaticResource CardStyle}" Margin="0,0,0,16">
+        <Border Style="{DynamicResource CardStyle}" Margin="0,0,0,16">
             <StackPanel>
                 <TextBlock Text="{DynamicResource Str_Settings_Monitoring_Header}" FontWeight="SemiBold" Margin="0,0,0,8"/>
-                <TextBlock Text="{DynamicResource Str_Settings_MonitoringInterval}" Foreground="{StaticResource TextSecondaryBrush}"/>
+                <TextBlock Text="{DynamicResource Str_Settings_MonitoringInterval}" Foreground="{DynamicResource TextSecondaryBrush}"/>
                 <TextBox Text="{Binding Settings.MonitoringIntervalSeconds, Mode=TwoWay}" Margin="0,4,0,0" Padding="8"
-                         Width="120" HorizontalAlignment="Left" Background="{StaticResource SurfaceAltBrush}"
-                         Foreground="{StaticResource TextPrimaryBrush}" BorderThickness="0"/>
+                         Width="120" HorizontalAlignment="Left" Background="{DynamicResource SurfaceAltBrush}"
+                         Foreground="{DynamicResource TextPrimaryBrush}" BorderThickness="0"/>
             </StackPanel>
         </Border>
 
-        <Border Style="{StaticResource CardStyle}" Margin="0,0,0,16">
+        <Border Style="{DynamicResource CardStyle}" Margin="0,0,0,16">
             <StackPanel>
                 <TextBlock Text="{DynamicResource Str_Settings_Safety_Header}" FontWeight="SemiBold" Margin="0,0,0,8"/>
                 <CheckBox Content="{DynamicResource Str_Settings_SafetyEnabled}"
                           IsChecked="{Binding Settings.SafetyMonitorEnabled, Mode=TwoWay}"
-                          Foreground="{StaticResource TextPrimaryBrush}"/>
+                          Foreground="{DynamicResource TextPrimaryBrush}"/>
 
                 <TextBlock Text="{DynamicResource Str_Settings_WarningThreshold}" Margin="0,16,0,0"
-                           Foreground="{StaticResource TextSecondaryBrush}"/>
+                           Foreground="{DynamicResource TextSecondaryBrush}"/>
                 <TextBox Text="{Binding Settings.GpuWarningTempC, Mode=TwoWay}" Margin="0,4,0,0" Padding="8"
-                         Width="120" HorizontalAlignment="Left" Background="{StaticResource SurfaceAltBrush}"
-                         Foreground="{StaticResource TextPrimaryBrush}" BorderThickness="0"/>
+                         Width="120" HorizontalAlignment="Left" Background="{DynamicResource SurfaceAltBrush}"
+                         Foreground="{DynamicResource TextPrimaryBrush}" BorderThickness="0"/>
 
                 <TextBlock Text="{DynamicResource Str_Settings_CriticalThreshold}" Margin="0,16,0,0"
-                           Foreground="{StaticResource TextSecondaryBrush}"/>
+                           Foreground="{DynamicResource TextSecondaryBrush}"/>
                 <TextBox Text="{Binding Settings.GpuCriticalTempC, Mode=TwoWay}" Margin="0,4,0,0" Padding="8"
-                         Width="120" HorizontalAlignment="Left" Background="{StaticResource SurfaceAltBrush}"
-                         Foreground="{StaticResource TextPrimaryBrush}" BorderThickness="0"/>
+                         Width="120" HorizontalAlignment="Left" Background="{DynamicResource SurfaceAltBrush}"
+                         Foreground="{DynamicResource TextPrimaryBrush}" BorderThickness="0"/>
 
                 <TextBlock Text="{DynamicResource Str_Settings_SafetyNote}"
                            Margin="0,8,0,0" FontStyle="Italic" TextWrapping="Wrap"
-                           Foreground="{StaticResource TextSecondaryBrush}"/>
+                           Foreground="{DynamicResource TextSecondaryBrush}"/>
             </StackPanel>
         </Border>
 
-        <Border Style="{StaticResource CardStyle}" Margin="0,0,0,16">
+        <Border Style="{DynamicResource CardStyle}" Margin="0,0,0,16">
             <StackPanel>
                 <TextBlock Text="{DynamicResource Str_Settings_Language_Header}" FontWeight="SemiBold" Margin="0,0,0,8"/>
                 <!-- History: this ComboBox originally set an explicit Background/Foreground pair,
@@ -115,13 +115,28 @@
             </StackPanel>
         </Border>
 
+        <Border Style="{DynamicResource CardStyle}" Margin="0,0,0,16">
+            <StackPanel>
+                <TextBlock Text="{DynamicResource Str_Settings_ThemeLabel}" FontWeight="SemiBold" Margin="0,0,0,8"/>
+                <!-- Same ComboBox pattern as the Language picker directly above (literal
+                     ComboBoxItem/Tag pairs, SelectedValuePath="Tag") - live theme switching is
+                     driven by SettingsViewModel.OnThemeChanged calling ThemeManager.Apply, exactly
+                     mirroring OnLanguageChanged/LocalizationManager.Apply. -->
+                <ComboBox SelectedValuePath="Tag" SelectedValue="{Binding Theme, Mode=TwoWay}"
+                          Width="160" HorizontalAlignment="Left">
+                    <ComboBoxItem Tag="dark" Content="{DynamicResource Str_Settings_ThemeDark}"/>
+                    <ComboBoxItem Tag="light" Content="{DynamicResource Str_Settings_ThemeLight}"/>
+                </ComboBox>
+            </StackPanel>
+        </Border>
+
         <StackPanel Orientation="Horizontal">
-            <Button Content="{DynamicResource Str_Settings_Save}" Style="{StaticResource PrimaryButtonStyle}"
+            <Button Content="{DynamicResource Str_Settings_Save}" Style="{DynamicResource PrimaryButtonStyle}"
                     Command="{Binding SaveCommand}"/>
         </StackPanel>
 
         <TextBlock Text="{Binding StatusMessage}" Margin="0,12,0,0" TextWrapping="Wrap"
-                   Foreground="{StaticResource TextSecondaryBrush}"/>
+                   Foreground="{DynamicResource TextSecondaryBrush}"/>
     </StackPanel>
     </ScrollViewer>
 </UserControl>

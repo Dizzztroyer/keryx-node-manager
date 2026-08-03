@@ -10,21 +10,21 @@
         <TextBlock Text="{DynamicResource Str_Dashboard_Title}" FontSize="22" FontWeight="Bold" Margin="0,0,0,16"/>
 
         <UniformGrid Columns="3" Rows="1">
-            <Border Style="{StaticResource CardStyle}" Margin="0,0,12,0">
+            <Border Style="{DynamicResource CardStyle}" Margin="0,0,12,0">
                 <StackPanel>
-                    <TextBlock Text="{DynamicResource Str_Dashboard_Node}" Foreground="{StaticResource TextSecondaryBrush}"/>
+                    <TextBlock Text="{DynamicResource Str_Dashboard_Node}" Foreground="{DynamicResource TextSecondaryBrush}"/>
                     <TextBlock Text="{Binding NodeStatus}" FontSize="20" FontWeight="SemiBold" Margin="0,4,0,0"/>
                 </StackPanel>
             </Border>
-            <Border Style="{StaticResource CardStyle}" Margin="0,0,12,0">
+            <Border Style="{DynamicResource CardStyle}" Margin="0,0,12,0">
                 <StackPanel>
-                    <TextBlock Text="{DynamicResource Str_Dashboard_Miner}" Foreground="{StaticResource TextSecondaryBrush}"/>
+                    <TextBlock Text="{DynamicResource Str_Dashboard_Miner}" Foreground="{DynamicResource TextSecondaryBrush}"/>
                     <TextBlock Text="{Binding MinerStatus}" FontSize="20" FontWeight="SemiBold" Margin="0,4,0,0"/>
                 </StackPanel>
             </Border>
-            <Border Style="{StaticResource CardStyle}">
+            <Border Style="{DynamicResource CardStyle}">
                 <StackPanel>
-                    <TextBlock Text="{DynamicResource Str_Dashboard_Gpu}" Foreground="{StaticResource TextSecondaryBrush}"/>
+                    <TextBlock Text="{DynamicResource Str_Dashboard_Gpu}" Foreground="{DynamicResource TextSecondaryBrush}"/>
                     <TextBlock Margin="0,4,0,0" FontSize="20" FontWeight="SemiBold">
                         <Run Text="{Binding ActiveGpuCount, Mode=OneWay}"/>
                         <Run Text="{DynamicResource Str_Dashboard_GpuActiveSuffix}"/>
@@ -36,23 +36,23 @@
         </UniformGrid>
 
         <StackPanel Orientation="Horizontal" Margin="0,20,0,0">
-            <Button Content="{DynamicResource Str_Dashboard_StartAll}" Style="{StaticResource PrimaryButtonStyle}"
+            <Button Content="{DynamicResource Str_Dashboard_StartAll}" Style="{DynamicResource PrimaryButtonStyle}"
                     Command="{Binding StartAllCommand}" Margin="0,0,10,0"/>
-            <Button Content="{DynamicResource Str_Dashboard_StopAll}" Style="{StaticResource SecondaryButtonStyle}"
+            <Button Content="{DynamicResource Str_Dashboard_StopAll}" Style="{DynamicResource SecondaryButtonStyle}"
                     Command="{Binding StopAllCommand}" Margin="0,0,10,0"/>
-            <Button Content="{DynamicResource Str_Dashboard_Refresh}" Style="{StaticResource SecondaryButtonStyle}"
+            <Button Content="{DynamicResource Str_Dashboard_Refresh}" Style="{DynamicResource SecondaryButtonStyle}"
                     Command="{Binding RefreshCommand}"/>
         </StackPanel>
 
         <TextBlock Text="{Binding LastActionMessage}" Margin="0,16,0,0" TextWrapping="Wrap"
-                   Foreground="{StaticResource TextSecondaryBrush}"/>
+                   Foreground="{DynamicResource TextSecondaryBrush}"/>
 
         <!-- "Known issues" nudge (PROJECT_STATUS.md): missing NodeExecutablePath/MiningAddress
              used to be an inert message with no way to act on it - this button jumps straight to
              whichever page (Node/Miner) actually needs attention. Only visible when
              MissingConfigTarget is set, i.e. right after a failed Start All for that specific
              reason. -->
-        <Button Content="{DynamicResource Str_Dashboard_GoToSettings}" Style="{StaticResource SecondaryButtonStyle}"
+        <Button Content="{DynamicResource Str_Dashboard_GoToSettings}" Style="{DynamicResource SecondaryButtonStyle}"
                 Command="{Binding GoToMissingConfigCommand}" HorizontalAlignment="Left" Margin="0,8,0,0"
                 Visibility="{Binding MissingConfigTarget, Converter={StaticResource StringToVis}}"/>
     </StackPanel>
