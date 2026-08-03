@@ -319,10 +319,14 @@ public partial class WizardViewModel : ObservableObject
         Checks.Clear();
         try
         {
+            // WSL/Docker checks removed here (brief follow-up, 2026-08-03, explicit user request):
+            // native Windows mode is this app's default runtime and WSL/Docker are never required
+            // for it, so showing two checks the user then has to be told "these don't matter" for
+            // was pure noise on a screen meant to build confidence, not raise questions. The native
+            // runtime path is still exercised - Windows version + NVIDIA GPU are the only things
+            // that actually gate whether this app can do its job.
             Checks.Add(ToRow(SystemChecker.CheckWindowsVersion()));
             Checks.Add(ToRow(await SystemChecker.CheckNvidiaAsync(_gpuInfoProvider)));
-            Checks.Add(ToRow(await SystemChecker.CheckWslAsync()));
-            Checks.Add(ToRow(SystemChecker.CheckDocker()));
         }
         finally
         {
@@ -397,8 +401,28 @@ public partial class WizardViewModel : ObservableObject
     [RelayCommand]
     private async Task FinishAsync()
     {
-        _profileStore.Settings.FirstRunCompleted = true;
-        await _profileStore.SaveAsync();
+        // Unlike every other async command in this file, this one is invoked purely via the WPF
+        // Command binding (WizardWindow.xaml's Finish button) with no observer - CommunityToolkit's
+        // generated AsyncRelayCommand fires the Task but nothing awaits it, so an unguarded
+        // exception here would vanish as an unobserved task exception: WizardCompleted would never
+        // fire, the wizard window would never close, and App.OnStartup would stay parked inside
+        // wizard.ShowDialog() with the user staring at an unresponsive Finish button and no visible
+        // error. Guaranteeing WizardCompleted always fires - even if the save itself failed - means
+        // the user can always reach the dashboard and fix things from there (Node/Miner/Settings
+        // all re-save the same profile), rather than being stranded on a dead-end screen.
+        try
+        {
+            _profileStore.Settings.FirstRunCompleted = true;
+            await _profileStore.SaveAsync();
+        }
+        catch (Exception ex)
+        {
+            // Best-effort: FirstRunCompleted is still set in memory even if the disk write failed,
+            // so the wizard won't loop back on next launch if a later save (e.g. from the Node
+            // page) succeeds. The user sees this if they happen to look, but it must never block
+            // reaching the dashboard.
+            System.Diagnostics.Debug.WriteLine($"Wizard Finish: profile save failed, continuing anyway: {ex}");
+        }
         WizardCompleted?.Invoke();
     }
 

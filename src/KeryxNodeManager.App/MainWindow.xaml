@@ -16,6 +16,20 @@
         <!-- Left navigation (brief §27) -->
         <DockPanel Grid.Column="0" Background="{StaticResource SurfaceBrush}">
             <StackPanel DockPanel.Dock="Bottom" Margin="12">
+                <!-- Official Keryx Labs links (brief follow-up, 2026-08-03) - real, live-verified
+                     URLs pulled from keryx-labs.com's own footer (fetched 2026-08-03), not guessed:
+                     https://github.com/Keryx-Labs, https://discord.gg/U9eDmBUKTF,
+                     https://x.com/Keryx_Labs, https://t.me/keryx_labs. Placed here, always visible
+                     regardless of which page is open, rather than only on the About page. -->
+                <TextBlock FontSize="11" Margin="0,0,0,8">
+                    <Hyperlink NavigateUri="https://discord.gg/U9eDmBUKTF" RequestNavigate="SocialLink_RequestNavigate">Discord</Hyperlink>
+                    <Run Text=" · "/>
+                    <Hyperlink NavigateUri="https://x.com/Keryx_Labs" RequestNavigate="SocialLink_RequestNavigate">X</Hyperlink>
+                    <Run Text=" · "/>
+                    <Hyperlink NavigateUri="https://t.me/keryx_labs" RequestNavigate="SocialLink_RequestNavigate">Telegram</Hyperlink>
+                    <Run Text=" · "/>
+                    <Hyperlink NavigateUri="https://github.com/Keryx-Labs" RequestNavigate="SocialLink_RequestNavigate">GitHub</Hyperlink>
+                </TextBlock>
                 <TextBlock Foreground="{StaticResource TextSecondaryBrush}" FontSize="11">
                     <Run Text="{DynamicResource Str_Nav_VersionLabel}"/><Run Text="{Binding AppVersion, Mode=OneWay}"/>
                 </TextBlock>

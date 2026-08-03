@@ -167,7 +167,11 @@ public partial class App : Application
         // --mock runs deliberately (not special-cased) - a fresh settings.json is a fresh
         // settings.json either way, and gating this on the launch mode would mean the wizard path
         // is never covered by the same manual verification the rest of the app gets in --mock.
-        if (!profileStore.Settings.FirstRunCompleted)
+        // Captured before the wizard runs: this is the one honest signal for "the user just
+        // finished first-run setup in this exact launch" - checked again below, after Dashboard
+        // exists, to decide whether to actually start mining automatically.
+        bool justFinishedFirstRunWizard = !profileStore.Settings.FirstRunCompleted;
+        if (justFinishedFirstRunWizard)
         {
             var wizard = _host.Services.GetRequiredService<WizardWindow>();
             wizard.ShowDialog();
@@ -205,6 +209,25 @@ public partial class App : Application
         dashboardViewModel.PropertyChanged += (_, _) => UpdateTrayState();
         dashboardViewModel.StartAllCommand.PropertyChanged += (_, _) => UpdateTrayState();
         UpdateTrayState();
+
+        // Real UX gap the user hit directly (brief follow-up, 2026-08-03): the wizard's own
+        // step 5 checkboxes literally say "Запускать узел/майнер автоматически", but
+        // AutoStartNode/AutoStartMiner were previously read ONLY inside StartAllAsync - i.e. they
+        // only governed what happens when the user finds and clicks "Запустить всё" on the
+        // Dashboard themselves. Finishing the wizard landed on an idle dashboard with nothing
+        // running and no visible next step, which reads as "the app did nothing" even though it
+        // worked exactly as coded - just not as promised. Firing Start All automatically here,
+        // exactly once, only right after a first-run wizard completion in this same launch, closes
+        // that gap without changing behavior for every subsequent normal app launch (which still
+        // requires an explicit click, matching this project's existing "never silently start
+        // background mining" posture from BinaryUpdateService/InstallUpdateCommand's own doc
+        // comments). StartAllAsync already has its own top-level try/catch and reports failures via
+        // LastActionMessage, never throws - safe to fire-and-forget.
+        if (justFinishedFirstRunWizard &&
+            (profileStore.ActiveProfile.AutoStartNode || profileStore.ActiveProfile.AutoStartMiner))
+        {
+            _ = dashboardViewModel.StartAllCommand.ExecuteAsync(null);
+        }
 
         // Start listening for "SHOW" signals from any future second launch attempt. Started only
         // now (after this instance has definitely won the mutex race and has a real window/tray

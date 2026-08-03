@@ -22,6 +22,7 @@ public sealed class SingleInstanceIpc : IDisposable
 
     private readonly CancellationTokenSource _cts = new();
     private Task? _serverTask;
+    private bool _disposed;
 
     /// <summary>Starts a background accept-loop that invokes <paramref name="onShowRequested"/>
     /// every time a second launch attempt successfully signals this instance. The loop re-creates
@@ -87,8 +88,18 @@ public sealed class SingleInstanceIpc : IDisposable
         }
     }
 
+    /// <summary>Idempotent by design: both App.ShutdownWithCleanup (tray "Exit") and App.OnExit
+    /// (WPF's own normal shutdown, which always runs after ShutdownWithCleanup calls
+    /// Application.Shutdown()) call Dispose() on this same instance - a real crash confirmed via
+    /// Windows Event Log (ObjectDisposedException from _cts.Cancel() on an already-disposed
+    /// CancellationTokenSource, thrown from OnExit, terminating the whole process on every "Exit"
+    /// from the tray). Guarding against the second call is simpler and safer than trying to remove
+    /// one of the two call sites - OnExit must keep its own call for the case where the window is
+    /// closed some OTHER way (e.g. the X button) that never goes through ShutdownWithCleanup.</summary>
     public void Dispose()
     {
+        if (_disposed) return;
+        _disposed = true;
         _cts.Cancel();
         _cts.Dispose();
     }

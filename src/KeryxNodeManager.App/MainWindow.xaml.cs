@@ -1,5 +1,7 @@
+using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Navigation;
 using KeryxNodeManager.App.ViewModels;
 using KeryxNodeManager.App.Views;
 
@@ -100,5 +102,15 @@ public partial class MainWindow : Window
         // Placeholder hook: a "start minimized to tray" setting would call Hide() here on the
         // first StateChanged after Minimized once Settings page persists that toggle
         // (see PROJECT_STATUS.md).
+    }
+
+    // Same pattern as AboutView.xaml.cs's Hyperlink_RequestNavigate - added here too so the nav
+    // footer's official-links row (brief follow-up, 2026-08-03: user asked for Discord/X/
+    // Telegram/GitHub visible "somewhere at the bottom" of the app, not buried on the About page)
+    // works without every page needing its own copy.
+    private void SocialLink_RequestNavigate(object sender, RequestNavigateEventArgs e)
+    {
+        Process.Start(new ProcessStartInfo(e.Uri.AbsoluteUri) { UseShellExecute = true });
+        e.Handled = true;
     }
 }

@@ -1,6 +1,19 @@
 <Application x:Class="KeryxNodeManager.App.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             ShutdownMode="OnExplicitShutdown">
+  <!-- Real bug found live (brief follow-up, 2026-08-03): with the default ShutdownMode
+       (OnLastWindowClose), closing the first-run wizard - the only open window at that
+       moment, since MainWindow isn't created until App.xaml.cs's OnStartup resumes right
+       after wizard.ShowDialog() returns - can trigger WPF's automatic app-shutdown check
+       before that very next line runs. Reproduced live: finishing the wizard launched
+       keryxd.exe successfully (confirmed via settings.json/FirstRunCompleted and a real
+       orphaned keryxd.exe process) but the whole KeryxNodeManager.exe process then exited
+       silently with no window and no logged exception - exactly this race, not a crash.
+       This app already calls Shutdown() explicitly everywhere it actually means to exit
+       (the mutex-already-held early return, and ShutdownWithCleanup for the tray's "Выйти"),
+       so OnExplicitShutdown removes the whole class of "some window happened to hit zero
+       for a moment" races without changing any of those explicit exit paths. -->
   <Application.Resources>
     <ResourceDictionary>
       <ResourceDictionary.MergedDictionaries>
