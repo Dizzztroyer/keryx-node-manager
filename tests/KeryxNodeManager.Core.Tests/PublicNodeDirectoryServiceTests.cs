@@ -17,18 +17,27 @@ namespace KeryxNodeManager.Core.Tests;
 public class PublicNodeDirectoryServiceTests
 {
     [Fact]
-    public void LoadBundled_ReturnsEmptyList_NotNullAndDoesNotThrow()
+    public void LoadBundled_ReturnsRealVerifiedNodes_NotNullAndParsesWithoutThrowing()
     {
-        // The bundled default ships empty by design (see PublicNodeDirectoryService's doc
-        // comment) - this test's job is to prove the embedded-resource wiring itself works
-        // (LogicalName in the .csproj matches the constant in the service), not to assert
-        // anything about real node addresses.
+        // The bundled default used to ship empty (no verified address was known at the time - see
+        // git history). It now ships 3 real addresses, found as P2P peers of this project's own
+        // synced node and confirmed (real TCP probe, 2026-08-03) to also have their RPC/gRPC port
+        // (22110) open - see PublicNodes.json. This test's job is still primarily to prove the
+        // embedded-resource wiring itself works (LogicalName in the .csproj matches the constant
+        // in the service) - it does NOT re-verify the addresses are still reachable right now
+        // (that's what the Node page's own "Проверить" button/PingAsync is for), only that the
+        // bundled JSON parses into well-formed entries.
         var service = new PublicNodeDirectoryService(new HttpClient());
 
         var nodes = service.LoadBundled();
 
         Assert.NotNull(nodes);
-        Assert.Empty(nodes);
+        Assert.NotEmpty(nodes);
+        Assert.All(nodes, n =>
+        {
+            Assert.False(string.IsNullOrWhiteSpace(n.Endpoint));
+            Assert.True(n.Port > 0);
+        });
     }
 
     [Fact]

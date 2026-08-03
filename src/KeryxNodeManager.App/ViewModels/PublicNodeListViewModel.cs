@@ -1,4 +1,6 @@
 using System.Collections.ObjectModel;
+using System.IO;
+using System.Text.Json;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using KeryxNodeManager.Core.Cli;
@@ -22,6 +24,21 @@ namespace KeryxNodeManager.App.ViewModels;
 /// only work if the user's own node is actually running (with --rpclisten-json, which
 /// NodeArgumentBuilder now always adds) even while a substitute node is being used for mining -
 /// the app does not, and should not, silently start the local node just to poll it.
+///
+/// Also new: transitive discovery. "Найти пиров через эту ноду" (DiscoverThroughNodeAsync) runs the
+/// exact same RPC discovery as DiscoverFromOwnNodeAsync, but against ANY node already in the list
+/// (bundled, remote, or discovered) instead of only 127.0.0.1 - so node A's peers can themselves be
+/// asked for their own peers, chaining outward. This was verified for real against this project's
+/// own synced node's log (real peer IPs pulled from keryx.log, then TCP-probed on the gRPC port):
+/// most peers do NOT have their RPC/gRPC port open externally (only the P2P port is expected to
+/// be), so each hop's yield drops off - this is a real, honest limitation, not a bug. A node
+/// successfully verified this way (PingAsync confirms its RPC port is actually reachable) is cached
+/// to disk (see <see cref="_discoveredCachePath"/>) so the list keeps growing across restarts on
+/// THIS machine only - deliberately NOT synced to other users/installs automatically, since blindly
+/// trusting addresses submitted by arbitrary other installations (with no moderation) would be a
+/// real abuse vector (a malicious actor could seed fake/malicious node addresses that everyone's
+/// miner then silently trusts). A shared, moderated community list (e.g. reviewed PRs to this
+/// repo's bundled JSON) is the safer path for cross-user sharing, not automatic sync.
 /// </summary>
 public partial class PublicNodeListViewModel : ObservableObject
 {
@@ -31,6 +48,11 @@ public partial class PublicNodeListViewModel : ObservableObject
     private readonly OwnNodePeerDiscoveryService _discoveryService;
     private readonly MiningProfile _profile;
     private readonly Action _persist;
+    /// <summary>Path to a small local JSON cache of RPC-verified discovered nodes (see this class's
+    /// doc comment) - null disables persistence entirely (e.g. in tests). Deliberately App-layer
+    /// only: Core has no concept of "this machine's local cache file," matching every other
+    /// per-machine file path in this app (ConfigStore, LogSink).</summary>
+    private readonly string? _discoveredCachePath;
 
     private CancellationTokenSource? _syncWatchCts;
     private string? _rememberedOwnEndpoint;
@@ -58,12 +80,14 @@ public partial class PublicNodeListViewModel : ObservableObject
         PublicNodeDirectoryService directoryService,
         OwnNodePeerDiscoveryService discoveryService,
         MiningProfile profile,
-        Action persist)
+        Action persist,
+        string? discoveredCachePath = null)
     {
         _directoryService = directoryService;
         _discoveryService = discoveryService;
         _profile = profile;
         _persist = persist;
+        _discoveredCachePath = discoveredCachePath;
     }
 
     [RelayCommand]
@@ -80,8 +104,11 @@ public partial class PublicNodeListViewModel : ObservableObject
                 remote = await _directoryService.FetchRemoteAsync(uri, CancellationToken.None);
             }
 
-            foreach (var node in bundled.Concat(remote))
+            var cached = LoadDiscoveredCache();
+
+            foreach (var node in bundled.Concat(remote).Concat(cached))
             {
+                if (Nodes.Any(n => n.Info.Endpoint == node.Endpoint)) continue; // cache can overlap bundled
                 Nodes.Add(new PublicNodeRowViewModel(node));
             }
 
@@ -132,6 +159,39 @@ public partial class PublicNodeListViewModel : ObservableObject
         }
     }
 
+    /// <summary>Same RPC discovery as DiscoverFromOwnNodeAsync, but pointed at an arbitrary node
+    /// already in the list instead of the user's own 127.0.0.1 - see this class's doc comment for
+    /// the transitive-discovery reasoning and its real, honest yield limitation.</summary>
+    [RelayCommand]
+    private async Task DiscoverThroughNodeAsync(PublicNodeRowViewModel row)
+    {
+        IsBusy = true;
+        try
+        {
+            var discovered = await _discoveryService.DiscoverPeersAsync(
+                row.Info.Endpoint, row.Info.Port, _profile.UseTestnet, CancellationToken.None);
+            var addedCount = 0;
+            foreach (var node in discovered)
+            {
+                if (Nodes.Any(n => n.Info.Endpoint == node.Endpoint)) continue;
+                Nodes.Add(new PublicNodeRowViewModel(node));
+                addedCount++;
+            }
+            StatusMessage = addedCount == 0
+                ? $"Нода «{row.Info.Name}» не сообщила новых пиров, или её RPC-порт недоступен."
+                : $"Добавлено {addedCount} пир(ов), обнаруженных через RPC ноды «{row.Info.Name}».";
+        }
+        catch (Exception ex)
+        {
+            StatusMessage = $"Не удалось получить пиров от «{row.Info.Name}» - её RPC-порт, скорее всего, " +
+                             $"закрыт наружу (это нормально, большинство операторов его не открывают). ({ex.Message})";
+        }
+        finally
+        {
+            IsBusy = false;
+        }
+    }
+
     [RelayCommand]
     private async Task PingAsync(PublicNodeRowViewModel row)
     {
@@ -145,10 +205,61 @@ public partial class PublicNodeListViewModel : ObservableObject
             row.StatusText = result.Reachable
                 ? $"В сети · {result.LatencyMs:0} мс{uptimeNote}"
                 : $"Недоступна ({result.Error}){uptimeNote}";
+
+            // Only ever persist nodes that came from RPC discovery (see PublicNodeInfo.Notes
+            // provenance convention) AND were just confirmed reachable by this app's own probe -
+            // bundled/remote-JSON entries are already persisted by their source and don't need a
+            // second local copy, and an unreachable discovered node isn't worth remembering.
+            if (result.Reachable && row.Info.Notes?.Contains("Обнаружен", StringComparison.Ordinal) == true)
+            {
+                PersistDiscoveredNode(row.Info);
+            }
         }
         finally
         {
             row.IsChecking = false;
+        }
+    }
+
+    /// <summary>Loads the local discovered-node cache from disk - missing file or any parse error
+    /// is treated as "empty cache," never a hard failure, since this is purely a convenience
+    /// accumulation and not required for the app to function.</summary>
+    private List<PublicNodeInfo> LoadDiscoveredCache()
+    {
+        if (string.IsNullOrEmpty(_discoveredCachePath) || !File.Exists(_discoveredCachePath))
+        {
+            return new List<PublicNodeInfo>();
+        }
+        try
+        {
+            var json = File.ReadAllText(_discoveredCachePath);
+            return JsonSerializer.Deserialize<List<PublicNodeInfo>>(json) ?? new List<PublicNodeInfo>();
+        }
+        catch
+        {
+            return new List<PublicNodeInfo>();
+        }
+    }
+
+    private void PersistDiscoveredNode(PublicNodeInfo info)
+    {
+        if (string.IsNullOrEmpty(_discoveredCachePath)) return;
+        try
+        {
+            var existing = LoadDiscoveredCache();
+            if (existing.Any(n => n.Endpoint == info.Endpoint)) return; // already cached
+            existing.Add(info with
+            {
+                Notes = (info.Notes ?? "") + " Сохранено локально после успешной проверки доступности.",
+            });
+            var dir = Path.GetDirectoryName(_discoveredCachePath);
+            if (!string.IsNullOrEmpty(dir)) Directory.CreateDirectory(dir);
+            File.WriteAllText(_discoveredCachePath, JsonSerializer.Serialize(existing));
+        }
+        catch
+        {
+            // Best-effort convenience cache - a write failure (disk full, permissions) should never
+            // break the ping/discovery flow the user actually cares about.
         }
     }
 

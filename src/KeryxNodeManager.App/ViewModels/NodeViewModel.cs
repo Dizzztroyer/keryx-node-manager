@@ -53,7 +53,10 @@ public partial class NodeViewModel : ObservableObject
             new PublicNodeDirectoryService(httpClient),
             new OwnNodePeerDiscoveryService(),
             Profile,
-            persist: () => { _ = _profileStore.SaveAsync(); });
+            persist: () => { _ = _profileStore.SaveAsync(); },
+            discoveredCachePath: Path.Combine(
+                Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
+                "KeryxNodeManager", "discovered-nodes.json"));
 
         DataDir = new DataDirSectionViewModel(
             new DataDirDownloadService(httpClient),

@@ -42,6 +42,15 @@
 
                 <TextBlock Text="{Binding StatusMessage}" Margin="0,12,0,0" TextWrapping="Wrap"
                            Foreground="{StaticResource TextSecondaryBrush}"/>
+
+                <Expander Header="Нужно ли открывать порт и настраивать firewall?" Margin="0,16,0,0"
+                          Foreground="{StaticResource TextPrimaryBrush}">
+                    <TextBlock Margin="0,8,0,0" TextWrapping="Wrap" Foreground="{StaticResource TextSecondaryBrush}">
+                        <Run Text="Нет, не для того, чтобы майнить. Ваша нода прекрасно работает с обычным домашним интернетом и исходящими подключениями - открытый порт/белый IP тут не нужны."/>
+                        <LineBreak/><LineBreak/>
+                        <Run Text="Это нужно только если вы ХОТИТЕ, чтобы к вашей ноде могли подключаться ДРУГИЕ участники сети (входящие соединения) - это помогает здоровью сети в целом, но не обязательно лично вам. Если всё же хотите: (1) у вас должен быть публичный («белый») IP-адрес, а не только адрес за NAT/CGNAT провайдера; (2) на роутере нужно прокинуть (port forward) P2P-порт ноды (по умолчанию 22111) на компьютер, где запущена keryxd; (3) в брандмауэре Windows нужно разрешить входящие подключения на этот порт для keryxd.exe."/>
+                    </TextBlock>
+                </Expander>
             </StackPanel>
         </Border>
 
@@ -147,6 +156,7 @@
                                         <ColumnDefinition Width="*"/>
                                         <ColumnDefinition Width="Auto"/>
                                         <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="Auto"/>
                                     </Grid.ColumnDefinitions>
                                     <StackPanel Grid.Column="0">
                                         <TextBlock Foreground="{StaticResource TextPrimaryBrush}" FontWeight="SemiBold">
@@ -156,12 +166,19 @@
                                         </TextBlock>
                                         <TextBlock Text="{Binding StatusText, Mode=OneWay}"
                                                    Foreground="{StaticResource TextSecondaryBrush}" Margin="0,2,0,0"/>
+                                        <TextBlock Text="{Binding Info.Notes, Mode=OneWay}" FontSize="11" TextWrapping="Wrap"
+                                                   Foreground="{StaticResource TextSecondaryBrush}" Margin="0,2,0,0"/>
                                     </StackPanel>
                                     <Button Grid.Column="1" Content="Проверить" Margin="8,0,0,0"
                                             Style="{StaticResource SecondaryButtonStyle}"
                                             Command="{Binding DataContext.PingCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}"
                                             CommandParameter="{Binding}"/>
-                                    <Button Grid.Column="2" Content="Использовать" Margin="8,0,0,0"
+                                    <Button Grid.Column="2" Content="Найти пиров через неё" Margin="8,0,0,0"
+                                            Style="{StaticResource SecondaryButtonStyle}"
+                                            ToolTip="Спросить эту ноду через RPC о её пирах (сработает, только если у неё открыт RPC-порт наружу - у большинства нод он закрыт, это нормально)"
+                                            Command="{Binding DataContext.DiscoverThroughNodeCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}"
+                                            CommandParameter="{Binding}"/>
+                                    <Button Grid.Column="3" Content="Использовать" Margin="8,0,0,0"
                                             Style="{StaticResource PrimaryButtonStyle}"
                                             Command="{Binding DataContext.UseNodeCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}"
                                             CommandParameter="{Binding}"/>
