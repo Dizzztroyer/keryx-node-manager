@@ -374,4 +374,39 @@
     <sys:String x:Key="Str_Wizard_ProfileCreateFailed">Не удалось создать профиль: {0}</sys:String>
     <sys:String x:Key="Str_Wizard_InvalidAddress">Адрес не похож на действительный Keryx-адрес (ожидается keryx:... или keryxtest:...). Мастер позволяет продолжить, но запуск майнинга с неверным адресом будет отклонён узлом.</sys:String>
     <sys:String x:Key="Str_Wizard_NoGpuDetected">Видеокарты NVIDIA не обнаружены.</sys:String>
+
+    <!-- NodeView restructure (0.2.6 brief §8): public nodes first, own-node settings collapsed -->
+    <sys:String x:Key="Str_Node_PublicNodesHeader">Публичные ноды</sys:String>
+    <sys:String x:Key="Str_Node_PublicNodesDesc">Если своей ноды нет или она ещё синхронизируется, можно временно майнить через чужую. Список ведётся вручную (протокол не хранит публичный реестр нод) - при желании укажите ссылку на JSON-список ниже.</sys:String>
+    <sys:String x:Key="Str_Node_RemoteListUrlTooltip">URL публичного JSON-списка нод (необязательно)</sys:String>
+    <sys:String x:Key="Str_Node_RefreshList">Обновить список</sys:String>
+    <sys:String x:Key="Str_Node_DiscoverFromOwnNodeButton">Найти через свою ноду</sys:String>
+    <sys:String x:Key="Str_Node_DiscoverFromOwnNodeTooltip">Спросить список пиров у вашей собственной запущенной ноды через RPC (getConnectedPeerInfo/getPeerAddresses)</sys:String>
+    <sys:String x:Key="Str_Node_SwitchBackToOwnNodeButton">Вернуться на свою ноду</sys:String>
+    <sys:String x:Key="Str_Node_WatchingSyncNote">Наблюдаю за синхронизацией вашей ноды - как только она будет готова, майнер автоматически переключится обратно на неё.</sys:String>
+    <sys:String x:Key="Str_Node_PingButton">Проверить</sys:String>
+    <sys:String x:Key="Str_Node_DiscoverThroughNodeButton">Найти пиров через неё</sys:String>
+    <sys:String x:Key="Str_Node_DiscoverThroughNodeTooltip">Спросить эту ноду через RPC о её пирах (сработает, только если у неё открыт RPC-порт наружу - у большинства нод он закрыт, это нормально)</sys:String>
+    <sys:String x:Key="Str_Node_UseNodeButton">Использовать</sys:String>
+    <sys:String x:Key="Str_Node_OwnSettingsHeader">Настройки собственной ноды</sys:String>
+    <sys:String x:Key="Str_Node_FirewallExpanderHeader">Нужно ли открывать порт и настраивать firewall?</sys:String>
+    <sys:String x:Key="Str_Node_FirewallBody1">Нет, не для того, чтобы майнить. Ваша нода прекрасно работает с обычным домашним интернетом и исходящими подключениями - открытый порт/белый IP тут не нужны.</sys:String>
+    <sys:String x:Key="Str_Node_FirewallBody2">Это нужно только если вы ХОТИТЕ, чтобы к вашей ноде могли подключаться ДРУГИЕ участники сети (входящие соединения) - это помогает здоровью сети в целом, но не обязательно лично вам. Если всё же хотите: (1) у вас должен быть публичный («белый») IP-адрес, а не только адрес за NAT/CGNAT провайдера; (2) на роутере нужно прокинуть (port forward) P2P-порт ноды (по умолчанию 22111) на компьютер, где запущена keryxd; (3) в брандмауэре Windows нужно разрешить входящие подключения на этот порт для keryxd.exe.</sys:String>
+    <sys:String x:Key="Str_Node_UpdateHeader">Обновление keryxd.exe</sys:String>
+    <sys:String x:Key="Str_Node_UpdateInstalledVersionPrefix">Установлена версия: </sys:String>
+    <sys:String x:Key="Str_Node_UpdateLatestVersionPrefix">   ·   Последняя версия: </sys:String>
+    <sys:String x:Key="Str_Node_UpdateCheckButton">Проверить обновления</sys:String>
+    <sys:String x:Key="Str_Node_UpdateInstallButton">Установить обновление</sys:String>
+    <sys:String x:Key="Str_Node_UpdateUnknown">неизвестно</sys:String>
+    <sys:String x:Key="Str_Node_DataDirHeader">Данные ноды (data dir)</sys:String>
+    <sys:String x:Key="Str_Node_DataDirDesc">Официального встроенного механизма загрузки снапшота у keryxd нет - но команда Keryx время от времени публикует архив данных для быстрого старта (HTTP-ссылка или .torrent). Вставьте актуальную ссылку ниже - формат определяется автоматически по расширению .torrent.</sys:String>
+    <sys:String x:Key="Str_Node_DataDirUrlLabel">Ссылка на архив (.zip) или .torrent-файл</sys:String>
+    <sys:String x:Key="Str_Node_DataDirDirLabel">Каталог для данных</sys:String>
+    <sys:String x:Key="Str_Node_DataDirDownloadButton">Скачать и распаковать</sys:String>
+
+    <!-- ModelsView Discord/mirrors card (0.2.6 brief §9) -->
+    <sys:String x:Key="Str_Models_DiscordHeader">Актуальные модели и зеркала</sys:String>
+    <sys:String x:Key="Str_Models_DiscordBody">Последние объявления о моделях, официальные torrent-файлы, Hugging Face, Google Drive и другие зеркала публикуются в Discord Keryx. Перед ручной загрузкой модели рекомендуется проверить канал Model Setup. Discord - не единственный источник моделей: автоматическая загрузка через IPFS и загрузка по прямой ссылке ниже по-прежнему работают.</sys:String>
+    <sys:String x:Key="Str_Models_DiscordButton">Открыть Discord Keryx</sys:String>
+    <sys:String x:Key="Str_Models_DiscordOpenFailed">Не удалось открыть ссылку: {0}</sys:String>
 </ResourceDictionary>

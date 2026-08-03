@@ -12,7 +12,7 @@ namespace KeryxNodeManager.App;
 /// time and won't pick up a later swap, which would silently defeat live language switching
 /// without an app restart.
 ///
-/// "ru", "en", "es", "it", "fr", and "uk" are implemented (see Strings.{code}.xaml) - an
+/// "ru", "en", "es", "it", "fr", "uk", and "de" are implemented (see Strings.{code}.xaml) - an
 /// unrecognized AppSettings.Language value falls back to "ru" rather than throwing, since a
 /// bad/old persisted value must never crash startup.
 /// </summary>
@@ -20,7 +20,7 @@ public static class LocalizationManager
 {
     private static ResourceDictionary? _current;
 
-    public static readonly IReadOnlyList<string> SupportedLanguages = new[] { "ru", "en", "es", "it", "fr", "uk" };
+    public static readonly IReadOnlyList<string> SupportedLanguages = new[] { "ru", "en", "es", "it", "fr", "uk", "de" };
 
     public static void Apply(string languageCode)
     {

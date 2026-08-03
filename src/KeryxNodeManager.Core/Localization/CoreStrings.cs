@@ -22,7 +22,7 @@ namespace KeryxNodeManager.Core.Localization;
 public static class CoreStrings
 {
     /// <summary>BCP-47-ish short code matching the App layer's LocalizationManager language keys
-    /// (ru/en/es/it/fr/uk). Defaults to "ru" - this project's default/neutral language throughout,
+    /// (ru/en/es/it/fr/uk/de). Defaults to "ru" - this project's default/neutral language throughout,
     /// including the App layer's own Strings.ru.xaml being the first and most complete
     /// dictionary.</summary>
     public static string Language { get; set; } = "ru";
@@ -516,6 +516,84 @@ public static class CoreStrings
             ["Update.ReleaseCheckEmptyResponse"] = "GitHub повернув порожню відповідь під час перевірки оновлень {0}.",
             ["Update.ExeNotFoundInArchive"] = "Не вдалося знайти виконуваний файл ({0}) у завантаженому архіві.",
             ["Update.ExtractedExeMissing"] = "Видобутий файл не знайдено: {0}",
+        },
+        ["de"] = new Dictionary<string, string>
+        {
+            ["TaskScheduler.AccessDeniedHint"] =
+                " Die Aufgabenplanung hat die Anfrage zum Erstellen der Aufgabe abgelehnt. Normalerweise " +
+                "sind dafür keine Administratorrechte erforderlich - wenn der Fehler weiterhin auftritt, " +
+                "versuchen Sie, diese Anwendung als Administrator auszuführen (Rechtsklick → " +
+                "\"Als Administrator ausführen\"); wenn das auch nicht hilft, überprüfen Sie Ihre " +
+                "Antiviren-/Sicherheitssoftware.",
+            ["TaskScheduler.RegisterFailed"] = "Autostart-Aufgabe konnte nicht erstellt werden (Code {0}): {1}{2}",
+            ["TaskScheduler.UnregisterFailed"] = "Autostart-Aufgabe konnte nicht entfernt werden (Code {0}): {1}",
+
+            ["Profile.NotFound"] = "Profil „{0}“ wurde nicht gefunden.",
+            ["Profile.NameEmpty"] = "Der Profilname darf nicht leer sein.",
+            ["Profile.AlreadyExists"] = "Profil „{0}“ existiert bereits.",
+            ["Profile.CannotDeleteLast"] = "Das letzte verbleibende Profil kann nicht gelöscht werden.",
+
+            ["SystemChecker.WindowsVersionName"] = "Windows-Version",
+            ["SystemChecker.WindowsVersionOk"] = "Windows {0} - unterstützt.",
+            ["SystemChecker.WindowsVersionTooOld"] = "{0} erkannt. Windows 10 oder neuer wird benötigt.",
+            ["SystemChecker.GpuName"] = "NVIDIA-GPU",
+            ["SystemChecker.GpuNoneFound"] = "nvidia-smi wurde erfolgreich ausgeführt, meldete aber keine GPU.",
+            ["SystemChecker.GpuFound"] = "Gefunden: {0}",
+            ["SystemChecker.WslName"] = "WSL (optional)",
+            ["SystemChecker.WslNotStarted"] = "wsl.exe konnte nicht gestartet werden.",
+            ["SystemChecker.WslTimeout"] =
+                "Die WSL-Prüfung wurde nicht rechtzeitig abgeschlossen - dies wirkt sich nicht auf die App aus (natives Backend wird verwendet).",
+            ["SystemChecker.WslDetected"] = "WSL erkannt und verfügbar.",
+            ["SystemChecker.WslNotDetected"] =
+                "WSL nicht erkannt oder nicht konfiguriert - nicht erforderlich: die App verwendet standardmäßig das native Windows-Backend.",
+            ["SystemChecker.WslNotFound"] =
+                "wsl.exe wurde auf diesem System nicht gefunden - nicht erforderlich: die App verwendet standardmäßig das native Windows-Backend.",
+            ["SystemChecker.DockerName"] = "Docker (optional)",
+            ["SystemChecker.DockerFound"] = "docker.exe im PATH gefunden.",
+            ["SystemChecker.DockerNotFound"] = "Docker nicht erkannt - für die App nicht erforderlich.",
+
+            ["Gpu.NvidiaSmiNotFound"] = "nvidia-smi nicht gefunden. Prüfen Sie, ob der NVIDIA-Treiber installiert ist.",
+            ["Gpu.NvidiaSmiFailed"] = "nvidia-smi wurde mit einem Fehler beendet (Code {0}): {1}",
+
+            ["Tier.ExcludedInsufficientVram"] =
+                "{0}: {1} MB VRAM verfügbar - nicht einmal für die leichteste Stufe ausreichend " +
+                "({2} MB). Diese GPU wird vom Mining ausgeschlossen.",
+            ["Tier.AutoAssigned"] = "{0}: {1} MB verfügbar → Stufe \"{2}\" zugewiesen (benötigt {3} MB).",
+            ["Tier.ManualRisky"] =
+                "{0}: Stufe \"{1}\" ausgewählt ({2} MB), aber nur {3} MB verfügbar. Hohes Risiko " +
+                "eines VRAM-Mangels (OOM) beim Start.",
+            ["Tier.ManualFits"] = "{0}: Stufe \"{1}\" passt in den verfügbaren VRAM ({2} MB).",
+
+            ["ModelDownload.ChecksumMismatch"] =
+                "Prüfsummenfehler: erwartet {0}, erhalten {1}. Die Datei wurde gelöscht - der Download " +
+                "scheint beschädigt zu sein, oder die URL verweist auf die falsche Datei.",
+
+            ["Process.AlreadyRunning"] = "Bereits gestartet - erneuter Start ignoriert (Schutz vor Doppelstart).",
+            ["Process.NodeStarted"] = "Node gestartet (PID {0}).",
+            ["Process.MinerStarted"] = "Miner gestartet (PID {0}).",
+            ["Process.StoppedByUser"] = "Auf Anforderung des Benutzers gestoppt.",
+            ["Process.RestartLimitReached"] = "Limit für automatische Neustarts erreicht. Manuelles Eingreifen erforderlich.",
+            ["Process.RestartingSoon"] = "Der Prozess wurde unerwartet beendet. Neustart in {0}s (Versuch {1}).",
+            ["Process.Restarted"] = "Neu gestartet (PID {0}).",
+            ["Process.RestartFailed"] = "Neustart fehlgeschlagen: {0}",
+
+            ["Runtime.ExecutableNotFound"] = "Ausführbare Datei nicht gefunden: {0}",
+
+            ["Safety.Critical"] =
+                "{0}: kritische Temperatur {1}°C (Schwelle {2}°C) - Mining zum Schutz der Hardware gestoppt.",
+            ["Safety.Warning"] = "{0}: hohe Temperatur {1}°C (Schwelle {2}°C).",
+            ["Safety.Normal"] = "{0}: Temperatur normal ({1}°C).",
+
+            ["Path.Empty"] = "Der Pfad darf nicht leer sein.",
+            ["Path.InvalidChars"] = "Der Pfad enthält ungültige Zeichen.",
+            ["Path.NotAbsolute"] = "Bitte geben Sie einen absoluten Pfad an.",
+            ["Path.InvalidPath"] = "Ungültiger Pfad: {0}",
+            ["Path.ProtectedRoot"] = "Der Systemordner ({0}) kann nicht für Keryx-Daten verwendet werden.",
+
+            ["Update.ReleaseCheckFailed"] = "Updates für {0} konnten nicht überprüft werden (Code {1}).",
+            ["Update.ReleaseCheckEmptyResponse"] = "GitHub hat bei der Update-Prüfung für {0} eine leere Antwort zurückgegeben.",
+            ["Update.ExeNotFoundInArchive"] = "In dem heruntergeladenen Archiv wurde keine ausführbare Datei ({0}) gefunden.",
+            ["Update.ExtractedExeMissing"] = "Extrahierte Datei nicht gefunden: {0}",
         },
     };
 }

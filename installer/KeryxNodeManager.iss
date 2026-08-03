@@ -8,7 +8,7 @@
 ; carefully, but treat the first real run as the actual verification.
 
 #define MyAppName "Keryx Node Manager"
-#define MyAppVersion "0.2.5"
+#define MyAppVersion "0.2.6"
 #define MyAppPublisher "Keryx Node Manager (community project, not an official Keryx Labs product)"
 #define MyAppExeName "KeryxNodeManager.exe"
 #define MyPublishDir "..\artifacts\publish\win-x64"
@@ -36,13 +36,32 @@ UninstallDisplayIcon={app}\{#MyAppExeName}
 ArchitecturesAllowed=x64compatible
 ArchitecturesInstallIn64BitMode=x64compatible
 
+; 0.2.6 brief §3: installer must offer all seven app languages, not just ru/en. All six
+; non-English .isl files below ship with a stock Inno Setup 6 install (compiler:Languages\*.isl) -
+; no custom translation files needed for the built-in wizard chrome (welcome/license/directory/
+; tasks/ready/progress/finish/error screens all come translated from Inno Setup itself). Only the
+; one custom Task description below needs its own per-language text, via [CustomMessages].
 [Languages]
-Name: "russian"; MessagesFile: "compiler:Languages\Russian.isl"
 Name: "english"; MessagesFile: "compiler:Default.isl"
+Name: "russian"; MessagesFile: "compiler:Languages\Russian.isl"
+Name: "german"; MessagesFile: "compiler:Languages\German.isl"
+Name: "spanish"; MessagesFile: "compiler:Languages\Spanish.isl"
+Name: "french"; MessagesFile: "compiler:Languages\French.isl"
+Name: "italian"; MessagesFile: "compiler:Languages\Italian.isl"
+Name: "ukrainian"; MessagesFile: "compiler:Languages\Ukrainian.isl"
+
+[CustomMessages]
+english.StartupIconDesc=Start Keryx Node Manager when Windows starts
+russian.StartupIconDesc=Запускать Keryx Node Manager при входе в Windows
+german.StartupIconDesc=Keryx Node Manager beim Windows-Start starten
+spanish.StartupIconDesc=Iniciar Keryx Node Manager al arrancar Windows
+french.StartupIconDesc=Démarrer Keryx Node Manager au démarrage de Windows
+italian.StartupIconDesc=Avvia Keryx Node Manager all'avvio di Windows
+ukrainian.StartupIconDesc=Запускати Keryx Node Manager під час входу в Windows
 
 [Tasks]
 Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked
-Name: "startupicon"; Description: "Запускать Keryx Node Manager при входе в Windows"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked
+Name: "startupicon"; Description: "{cm:StartupIconDesc}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked
 
 [Files]
 ; Everything from the self-contained publish output.

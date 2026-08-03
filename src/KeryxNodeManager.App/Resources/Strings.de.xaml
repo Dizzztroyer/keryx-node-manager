@@ -1,0 +1,372 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:sys="clr-namespace:System;assembly=mscorlib">
+
+    <!-- German translations. Mirrors every key in Strings.en.xaml key-for-key (see CoreStringsTests-
+         style completeness expectation) - added when the seven-language requirement (ru/en/es/it/fr/uk/de)
+         was implemented; German had been missing entirely from both this App layer and CoreStrings. -->
+
+    <sys:String x:Key="Str_Settings_Title">Einstellungen</sys:String>
+    <sys:String x:Key="Str_Settings_Startup_Header">Autostart</sys:String>
+    <sys:String x:Key="Str_Settings_StartWithWindows">Keryx Node Manager beim Windows-Start starten</sys:String>
+    <sys:String x:Key="Str_Settings_StartWithWindows_Note">Erstellt einen Eintrag in der Windows-Aufgabenplanung (keine Administratorrechte erforderlich).</sys:String>
+    <sys:String x:Key="Str_Settings_CheckingAutostart">Aktueller Autostart-Status wird geprüft...</sys:String>
+    <sys:String x:Key="Str_Settings_StartMinimizedToTray">Minimiert im Infobereich starten</sys:String>
+    <sys:String x:Key="Str_Settings_CloseMinimizesToTray">Schließen minimiert ins Infobereich (statt zu beenden)</sys:String>
+    <sys:String x:Key="Str_Settings_NotificationsEnabled">Benachrichtigungen anzeigen</sys:String>
+    <sys:String x:Key="Str_Settings_Logs_Header">Protokolle</sys:String>
+    <sys:String x:Key="Str_Settings_LogRetentionDays">Protokolle aufbewahren (Tage)</sys:String>
+    <sys:String x:Key="Str_Settings_MaxLogSizeMb">Maximale Protokolldateigröße (MB)</sys:String>
+    <sys:String x:Key="Str_Settings_Monitoring_Header">Überwachung</sys:String>
+    <sys:String x:Key="Str_Settings_MonitoringInterval">GPU-/Status-Abfrageintervall (Sek.)</sys:String>
+    <sys:String x:Key="Str_Settings_Safety_Header">Überhitzungsschutz</sys:String>
+    <sys:String x:Key="Str_Settings_SafetyEnabled">Mining bei kritischer GPU-Temperatur automatisch stoppen</sys:String>
+    <sys:String x:Key="Str_Settings_WarningThreshold">Warnschwelle (°C)</sys:String>
+    <sys:String x:Key="Str_Settings_CriticalThreshold">Kritische Schwelle - stoppt Mining (°C)</sys:String>
+    <sys:String x:Key="Str_Settings_SafetyNote">Wird geprüft, während der Miner läuft (siehe Übersichtsseite).</sys:String>
+    <sys:String x:Key="Str_Settings_Language_Header">Sprache</sys:String>
+    <sys:String x:Key="Str_Settings_ThemeLabel">Design</sys:String>
+    <sys:String x:Key="Str_Settings_ThemeDark">Dunkel</sys:String>
+    <sys:String x:Key="Str_Settings_ThemeLight">Hell</sys:String>
+    <sys:String x:Key="Str_Settings_Save">Speichern</sys:String>
+
+    <sys:String x:Key="Str_Nav_VersionLabel">Version: </sys:String>
+    <sys:String x:Key="Str_Nav_ProfileLabel">Profil: </sys:String>
+
+    <sys:String x:Key="Str_Dashboard_Title">Übersicht</sys:String>
+    <sys:String x:Key="Str_Dashboard_Node">Node</sys:String>
+    <sys:String x:Key="Str_Dashboard_Miner">Miner</sys:String>
+    <sys:String x:Key="Str_Dashboard_Gpu">GPU</sys:String>
+    <sys:String x:Key="Str_Dashboard_GpuActiveSuffix"> aktiv / </sys:String>
+    <sys:String x:Key="Str_Dashboard_GpuDisabledSuffix"> deaktiviert</sys:String>
+    <sys:String x:Key="Str_Dashboard_StartAll">Alle starten</sys:String>
+    <sys:String x:Key="Str_Dashboard_StopAll">Alle stoppen</sys:String>
+    <sys:String x:Key="Str_Dashboard_Refresh">Aktualisieren</sys:String>
+    <sys:String x:Key="Str_Dashboard_GoToSettings">Zu den Einstellungen</sys:String>
+
+    <sys:String x:Key="Str_Gpu_Title">GPUs</sys:String>
+    <sys:String x:Key="Str_Gpu_Refresh">Aktualisieren</sys:String>
+    <sys:String x:Key="Str_Gpu_CudaLabel">CUDA </sys:String>
+    <sys:String x:Key="Str_Gpu_VramUnit"> MB VRAM · </sys:String>
+    <sys:String x:Key="Str_Gpu_TempUnit">°C</sys:String>
+    <sys:String x:Key="Str_Gpu_ModeLabel">Modus:</sys:String>
+    <sys:String x:Key="Str_Gpu_OverclockHeader">GPU-Übertaktung</sys:String>
+    <sys:String x:Key="Str_Gpu_OverclockCoreLabel">Kern (MHz):</sys:String>
+    <sys:String x:Key="Str_Gpu_OverclockMemoryLabel">Speicher (MHz):</sys:String>
+    <sys:String x:Key="Str_Gpu_OverclockManualFan">Lüfter manuell:</sys:String>
+    <sys:String x:Key="Str_Gpu_OverclockApply">Anwenden</sys:String>
+    <sys:String x:Key="Str_Gpu_OverclockReset">Zurücksetzen</sys:String>
+    <sys:String x:Key="Str_Gpu_OverclockUnavailablePrefix">Übertaktung ist für diese GPU nicht verfügbar: </sys:String>
+
+    <sys:String x:Key="Str_Models_Title">Modelle</sys:String>
+    <sys:String x:Key="Str_Models_Refresh">Aktualisieren</sys:String>
+    <sys:String x:Key="Str_Models_FromLabel"> · von </sys:String>
+    <sys:String x:Key="Str_Models_VramSuffix"> MB VRAM</sys:String>
+    <sys:String x:Key="Str_Models_UrlLabel">Download-URL (Link aus der keryx-miner-README einfügen)</sys:String>
+    <sys:String x:Key="Str_Models_Sha256Label">Erwarteter SHA-256 (optional)</sys:String>
+    <sys:String x:Key="Str_Models_Download">Herunterladen</sys:String>
+    <sys:String x:Key="Str_Models_Resume">Fortsetzen</sys:String>
+    <sys:String x:Key="Str_Models_Pause">Pausieren</sys:String>
+    <sys:String x:Key="Str_Models_Cancel">Abbrechen</sys:String>
+    <sys:String x:Key="Str_Models_Delete">Löschen</sys:String>
+    <sys:String x:Key="Str_Models_OpenFolder">Ordner öffnen</sys:String>
+    <sys:String x:Key="Str_Models_DownloadOfficial">Offizielles Modell herunterladen</sys:String>
+    <sys:String x:Key="Str_Models_ManualMirrorExpander">Eigenen Link angeben (anderer Mirror)</sys:String>
+
+    <sys:String x:Key="Str_Node_Title">Node</sys:String>
+    <sys:String x:Key="Str_Node_PathLabel">Pfad zu keryxd.exe</sys:String>
+    <sys:String x:Key="Str_Node_Browse">Durchsuchen...</sys:String>
+    <sys:String x:Key="Str_Node_EndpointLabel">keryxd-Adresse (normalerweise 127.0.0.1)</sys:String>
+    <sys:String x:Key="Str_Node_TestnetCheckbox">Testnetz</sys:String>
+    <sys:String x:Key="Str_Node_Save">Speichern</sys:String>
+    <sys:String x:Key="Str_Node_CheckEndpoint">Endpoint prüfen</sys:String>
+    <sys:String x:Key="Str_Node_FooterNote">Starten/Stoppen Sie den Node über dieses Fenster mit den Schaltflächen „Alle starten"/„Alle stoppen" auf der Übersichtsseite, sobald die hier vorgenommenen Einstellungen gespeichert sind.</sys:String>
+
+    <sys:String x:Key="Str_Miner_Title">Miner</sys:String>
+    <sys:String x:Key="Str_Miner_AddressLabel">Mining-Adresse</sys:String>
+    <sys:String x:Key="Str_Miner_PathLabel">Pfad zu keryx-miner.exe</sys:String>
+    <sys:String x:Key="Str_Miner_Browse">Durchsuchen...</sys:String>
+    <sys:String x:Key="Str_Miner_ModelsFolderLabel">Modellordner</sys:String>
+    <sys:String x:Key="Str_Miner_Save">Speichern</sys:String>
+    <sys:String x:Key="Str_Miner_AdvancedMode">Erweiterter Modus</sys:String>
+    <sys:String x:Key="Str_Miner_CommandPreviewHeader">Startbefehl (Vorschau)</sys:String>
+    <sys:String x:Key="Str_Miner_GpuNote">Jede GPU führt ihr eigenes Modell aus. VRAM wird über verschiedene GPUs hinweg nie zusammengefasst.</sys:String>
+
+    <sys:String x:Key="Str_Logs_Title">Protokolle</sys:String>
+    <sys:String x:Key="Str_Logs_ExportDiagnostics">Diagnose exportieren...</sys:String>
+    <sys:String x:Key="Str_Logs_OpenFolder">Protokollordner öffnen</sys:String>
+    <sys:String x:Key="Str_Logs_ClearDisplay">Anzeige leeren</sys:String>
+    <sys:String x:Key="Str_Logs_NodeHeader">Node (keryxd)</sys:String>
+    <sys:String x:Key="Str_Logs_MinerHeader">Miner (keryx-miner)</sys:String>
+
+    <sys:String x:Key="Str_Profiles_Title">Profile</sys:String>
+    <sys:String x:Key="Str_Profiles_ActiveLabel">Aktives Profil: </sys:String>
+    <sys:String x:Key="Str_Profiles_MakeActive">Aktivieren</sys:String>
+    <sys:String x:Key="Str_Profiles_Delete">Löschen</sys:String>
+    <sys:String x:Key="Str_Profiles_NewHeader">Neues Profil</sys:String>
+    <sys:String x:Key="Str_Profiles_Create">Erstellen</sys:String>
+    <sys:String x:Key="Str_Profiles_NewNote">Erstellt ein Profil mit Standardeinstellungen und aktiviert es sofort.</sys:String>
+    <sys:String x:Key="Str_Profiles_RenameHeader">Ausgewähltes Profil umbenennen</sys:String>
+    <sys:String x:Key="Str_Profiles_Rename">Umbenennen</sys:String>
+    <sys:String x:Key="Str_Profiles_RenameNote">Einstellungen, GPU-Zuweisungen und ausführbare Pfade werden unter dem neuen Namen übernommen.</sys:String>
+
+    <sys:String x:Key="Str_About_VersionLabel">Version </sys:String>
+    <sys:String x:Key="Str_About_Description">Eine App zur Verwaltung von Node und Miner des Keryx-Netzwerks: GPU-Konfiguration, Modell-Downloads, Starten/Stoppen von Prozessen und Überwachung - ohne PowerShell, WSL oder Docker manuell bedienen zu müssen.</sys:String>
+    <sys:String x:Key="Str_About_LinksHeader">Links</sys:String>
+    <sys:String x:Key="Str_About_NodeRepoLink">keryx-node (Node) auf GitHub</sys:String>
+    <sys:String x:Key="Str_About_MinerRepoLink">keryx-miner (Miner) auf GitHub</sys:String>
+    <sys:String x:Key="Str_About_NoRepoNote">Keryx Node Manager selbst hat noch kein öffentliches Repository - dies ist eine lokale Arbeitskopie (siehe PROJECT_STATUS.md).</sys:String>
+    <sys:String x:Key="Str_About_SystemHeader">System</sys:String>
+    <sys:String x:Key="Str_About_OsLabel">Betriebssystem: </sys:String>
+    <sys:String x:Key="Str_About_DotNetLabel">.NET: </sys:String>
+    <sys:String x:Key="Str_About_Is64BitLabel">64-Bit-Betriebssystem: </sys:String>
+    <sys:String x:Key="Str_Wizard_WindowTitle">Keryx Node Manager — Erster Start</sys:String>
+    <sys:String x:Key="Str_Wizard_HeaderTitle">Keryx Node Manager einrichten</sys:String>
+    <sys:String x:Key="Str_Wizard_Step0_Title">Willkommen</sys:String>
+    <sys:String x:Key="Str_Wizard_Step0_Body">Dieser Assistent hilft Ihnen, Ihr System einmalig zu prüfen, die Pfade zu Node und Miner festzulegen, Ihre Belohnungsadresse einzugeben und den Autostart zu konfigurieren. Alles kann später auf den entsprechenden Seiten der App geändert werden — der Assistent erstellt keine separate, unabhängige Konfiguration.</sys:String>
+    <sys:String x:Key="Str_Wizard_Step0_ActiveProfileLabel">Der Assistent konfiguriert das Profil:</sys:String>
+    <sys:String x:Key="Str_Wizard_Step0_NewProfileHint">Richten Sie ein zweites Rig getrennt vom aktuellen Profil ein? Erstellen Sie unten ein neues Profil — der Assistent wechselt sofort dorthin.</sys:String>
+    <sys:String x:Key="Str_Wizard_Step0_NewProfileNamePlaceholder">Neuer Profilname</sys:String>
+    <sys:String x:Key="Str_Wizard_Step0_CreateProfile">Erstellen und konfigurieren</sys:String>
+    <sys:String x:Key="Str_Wizard_Step1_Title">Systemprüfung</sys:String>
+    <sys:String x:Key="Str_Wizard_Step1_Desc">Es werden echte Prüfungen durchgeführt — Windows-Version, Vorhandensein einer NVIDIA-GPU (über nvidia-smi), WSL und Docker (optional).</sys:String>
+    <sys:String x:Key="Str_Wizard_Step1_Updating">Wird aktualisiert...</sys:String>
+    <sys:String x:Key="Str_Wizard_Step1_WslDockerNote">WSL und Docker sind nicht erforderlich — die App läuft standardmäßig im nativen Windows-Modus.</sys:String>
+    <sys:String x:Key="Str_Wizard_Step2_Title">Programm- und Modellordnerpfade</sys:String>
+    <sys:String x:Key="Str_Wizard_Step2_NodeLabel">keryxd.exe (Node, in diesem Schritt optional)</sys:String>
+    <sys:String x:Key="Str_Wizard_Step2_MinerLabel">keryx-miner.exe (Miner, in diesem Schritt optional)</sys:String>
+    <sys:String x:Key="Str_Wizard_Step2_ModelsLabel">Modellordner (erforderlich)</sys:String>
+    <sys:String x:Key="Str_Wizard_Step2_Browse">Durchsuchen...</sys:String>
+    <sys:String x:Key="Str_Wizard_Step2_Note">Pfade zu keryxd.exe/keryx-miner.exe können später auf den Seiten „Node" und „Miner" festgelegt werden — um den Assistenten fortzusetzen, genügt es, den Modellordner festzulegen.</sys:String>
+    <sys:String x:Key="Str_Wizard_Step2_NodeHeader">Node (keryxd.exe)</sys:String>
+    <sys:String x:Key="Str_Wizard_Step2_MinerHeader">Miner (keryx-miner.exe)</sys:String>
+    <sys:String x:Key="Str_Wizard_Step2_ModelsHeader">Modellordner</sys:String>
+    <sys:String x:Key="Str_Wizard_Step2_ManualFileExpander">Andere Datei manuell angeben</sys:String>
+    <sys:String x:Key="Str_Wizard_Step2_ManualFolderExpander">Anderen Ordner wählen</sys:String>
+    <sys:String x:Key="Str_Wizard_Step2_DefaultPrefix">Standard: </sys:String>
+    <sys:String x:Key="Str_Wizard_Step3_Title">Belohnungsadresse</sys:String>
+    <sys:String x:Key="Str_Wizard_Step3_Body">Es wird nur eine öffentliche Adresse eingegeben (keryx:... oder keryxtest:...). Der Assistent fragt nie nach einer Seed-Phrase oder einem privaten Schlüssel und speichert diese auch nicht.</sys:String>
+    <sys:String x:Key="Str_Wizard_Step4_Title">Vorschau der Modellzuweisung nach GPU</sys:String>
+    <sys:String x:Key="Str_Wizard_Step4_Body">Zeigt, welche Modellstufe jetzt automatisch für jede erkannte GPU zugewiesen würde. VRAM wird über verschiedene GPUs hinweg nie zusammengefasst. Die Zuweisung kann später manuell auf der Seite „GPUs" geändert werden.</sys:String>
+    <sys:String x:Key="Str_Wizard_Step5_Title">Autostart</sys:String>
+    <sys:String x:Key="Str_Wizard_Step5_AutoNode">Node (keryxd.exe) automatisch starten</sys:String>
+    <sys:String x:Key="Str_Wizard_Step5_AutoMiner">Miner automatisch starten, sobald der Node bereit ist</sys:String>
+    <sys:String x:Key="Str_Wizard_Step5_AutoRestart">Bei Absturz automatisch neu starten</sys:String>
+    <sys:String x:Key="Str_Wizard_Step5_Note">Der Start der App zusammen mit Windows wird separat konfiguriert — entweder durch den Installer (ein Kontrollkästchen während der Einrichtung) oder auf der Seite „Einstellungen" nach dem ersten Start.</sys:String>
+    <sys:String x:Key="Str_Wizard_Step6_Title">Fertig</sys:String>
+    <sys:String x:Key="Str_Wizard_Step6_Body">Die Einstellungen werden im Profil gespeichert. Sie können sie jederzeit später auf den Seiten „Node", „Miner", „GPUs" und „Modelle" ändern.</sys:String>
+    <sys:String x:Key="Str_Wizard_Step6_AddressLabel">Adresse: </sys:String>
+    <sys:String x:Key="Str_Wizard_Step6_AddressWarning">Dies sieht nicht wie eine gültige Keryx-Adresse aus - Mining damit wird vom Node abgelehnt. Gehen Sie zurück zum Schritt „Belohnungsadresse", um sie zu korrigieren.</sys:String>
+    <sys:String x:Key="Str_Wizard_Step6_ModelsDirLabel">Modellordner: </sys:String>
+    <sys:String x:Key="Str_Wizard_Skip">Überspringen</sys:String>
+    <sys:String x:Key="Str_Wizard_Back">Zurück</sys:String>
+    <sys:String x:Key="Str_Wizard_Next">Weiter</sys:String>
+    <sys:String x:Key="Str_Wizard_Finish">Fertigstellen</sys:String>
+
+
+    <!-- Tray icon (SingleInstanceIpc/TrayIconService C#-built strings) -->
+    <sys:String x:Key="Str_Tray_Tooltip_Stopped">Keryx Node Manager - alles gestoppt</sys:String>
+    <sys:String x:Key="Str_Tray_Tooltip_Starting">Keryx Node Manager - wird gestartet...</sys:String>
+    <sys:String x:Key="Str_Tray_Tooltip_Running">Keryx Node Manager - läuft</sys:String>
+    <sys:String x:Key="Str_Tray_Tooltip_Error">Keryx Node Manager - Fehler</sys:String>
+    <sys:String x:Key="Str_Tray_Tooltip_InferenceActive">Keryx Node Manager - Inferenzanfrage wird verarbeitet</sys:String>
+    <sys:String x:Key="Str_Tray_Menu_Open">Keryx Node Manager öffnen</sys:String>
+    <sys:String x:Key="Str_Tray_Menu_RestartMiner">Miner neu starten</sys:String>
+    <sys:String x:Key="Str_Tray_Menu_RestartNode">Node neu starten</sys:String>
+    <sys:String x:Key="Str_Tray_Menu_OpenLogs">Protokolle öffnen</sys:String>
+    <sys:String x:Key="Str_Tray_Menu_Exit">Beenden</sys:String>
+    <sys:String x:Key="Str_Tray_ExitConfirm_Title">Keryx Node Manager beenden</sys:String>
+    <sys:String x:Key="Str_Tray_ExitConfirm_Body">Node und Miner vor dem Beenden stoppen?
+
+Ja - alles stoppen und die Anwendung schließen.
+Nein - nur die Oberfläche schließen; Node und Miner laufen weiter.
+Abbrechen - nicht beenden.</sys:String>
+
+    <!-- PlaceholderView (stub-page notice, C#-built string) -->
+    <sys:String x:Key="Str_Placeholder_NotImplemented">„{0}" ist in dieser Version noch nicht implementiert</sys:String>
+    <sys:String x:Key="Str_Placeholder_SeeStatus">Siehe PROJECT_STATUS.md - Abschnitt „In Bearbeitung"/„Nächste Schritte".</sys:String>
+
+    <!-- DataDirSectionViewModel (Node page data-dir download card) -->
+    <sys:String x:Key="Str_DataDir_BrowseDialog_Title">Datenordner des Node auswählen (data dir)</sys:String>
+    <sys:String x:Key="Str_DataDir_InvalidUrl">Geben Sie einen gültigen Link zu einem Archiv (.zip) oder einer .torrent-Datei ein.</sys:String>
+    <sys:String x:Key="Str_DataDir_StartingDownload">Download wird gestartet ({0})...</sys:String>
+    <sys:String x:Key="Str_DataDir_DownloadComplete">Fertig. Daten wurden nach "{0}" extrahiert - der Node verwendet dieses Verzeichnis beim nächsten Start (--appdir).</sys:String>
+    <sys:String x:Key="Str_DataDir_DownloadFailed">Herunterladen/Extrahieren des Datenordners fehlgeschlagen: {0}</sys:String>
+
+    <!-- GpuViewModel (mode dropdown labels, assignment summary) -->
+    <sys:String x:Key="Str_Gpu_MiningDisabledManually">{0}: Mining auf dieser GPU ist manuell deaktiviert.</sys:String>
+    <sys:String x:Key="Str_Gpu_Mode_Auto">Auto</sys:String>
+    <sys:String x:Key="Str_Gpu_Mode_Disabled">Deaktiviert</sys:String>
+    <sys:String x:Key="Str_Gpu_Mode_ManualPrefix">Manuell: {0}</sys:String>
+
+    <!-- LogsViewModel (diagnostics export dialog/status) -->
+    <sys:String x:Key="Str_Logs_ExportDialog_Title">Diagnose exportieren</sys:String>
+    <sys:String x:Key="Str_Logs_ExportDialog_Filter">ZIP-Archiv (*.zip)|*.zip</sys:String>
+    <sys:String x:Key="Str_Logs_ExportSaved">Diagnose gespeichert: {0}</sys:String>
+    <sys:String x:Key="Str_Logs_ExportFailed">Export fehlgeschlagen: {0}</sys:String>
+
+    <!-- DashboardViewModel / App.xaml.cs (status labels, launch messages) -->
+    <sys:String x:Key="Str_Dashboard_NodeStatus_Stopped">Gestoppt</sys:String>
+    <sys:String x:Key="Str_Dashboard_NodeStatus_Running">Läuft</sys:String>
+    <sys:String x:Key="Str_Dashboard_MinerStatus_Stopped">Gestoppt</sys:String>
+    <sys:String x:Key="Str_Dashboard_MinerStatus_Running">Läuft</sys:String>
+    <sys:String x:Key="Str_Dashboard_LogPrefix_Node">[Node] {0}</sys:String>
+    <sys:String x:Key="Str_Dashboard_LogPrefix_Miner">[Miner] {0}</sys:String>
+    <sys:String x:Key="Str_Dashboard_LogPrefix_Safety">[Schutz] {0}</sys:String>
+    <sys:String x:Key="Str_Dashboard_MissingNodePath">Geben Sie den Pfad zu keryxd.exe auf der Seite „Node" an, bevor Sie starten.</sys:String>
+    <sys:String x:Key="Str_Dashboard_MissingMiningAddress">Geben Sie die Mining-Adresse auf der Seite „Miner" an, bevor Sie starten.</sys:String>
+    <sys:String x:Key="Str_Dashboard_LaunchInitiated">Start eingeleitet.</sys:String>
+    <sys:String x:Key="Str_Dashboard_LaunchFailed">Start fehlgeschlagen: {0}</sys:String>
+    <sys:String x:Key="Str_Dashboard_StoppedForOverheat">Mining wurde automatisch wegen GPU-Überhitzung gestoppt.</sys:String>
+    <sys:String x:Key="Str_Dashboard_GpuQueryFailedBeforeLaunch">Die GPUs konnten vor dem Start nicht ermittelt werden ({0}); die automatische Modellauswahl des Miners wird verwendet.</sys:String>
+    <sys:String x:Key="Str_App_AlreadyRunningUnreachable">Keryx Node Manager läuft bereits, konnte aber nicht erreicht werden. Prüfen Sie den Infobereich (Tray).</sys:String>
+
+    <!-- NodeViewModel (executable browse dialog, endpoint check) -->
+    <sys:String x:Key="Str_Node_BrowseDialog_Title">keryxd.exe auswählen</sys:String>
+    <sys:String x:Key="Str_Node_BrowseDialog_Filter">keryxd.exe|keryxd.exe|Ausführbare Dateien (*.exe)|*.exe</sys:String>
+    <sys:String x:Key="Str_Node_SettingsSaved">Node-Einstellungen gespeichert.</sys:String>
+    <sys:String x:Key="Str_Node_CheckingEndpoint">{0}:{1} wird geprüft...</sys:String>
+    <sys:String x:Key="Str_Node_EndpointAccepting">Endpoint {0}:{1} nimmt Verbindungen an.</sys:String>
+    <sys:String x:Key="Str_Node_EndpointNotResponding">Endpoint {0}:{1} antwortet nicht (3 s Zeitüberschreitung). Der Node läuft nicht, oder der Port ist falsch.</sys:String>
+    <sys:String x:Key="Str_Node_ConnectFailed">Verbindung zu {0}:{1} fehlgeschlagen: {2}</sys:String>
+
+    <!-- MinerViewModel (executable/models dialogs, address validation, preview) -->
+    <sys:String x:Key="Str_Miner_BrowseExecutable_Title">keryx-miner.exe auswählen</sys:String>
+    <sys:String x:Key="Str_Miner_BrowseExecutable_Filter">keryx-miner.exe|keryx-miner.exe|Ausführbare Dateien (*.exe)|*.exe</sys:String>
+    <sys:String x:Key="Str_Miner_BrowseModelsDir_Title">Modellordner auswählen</sys:String>
+    <sys:String x:Key="Str_Miner_InvalidAddress">Dies sieht nicht wie eine gültige Keryx-Adresse aus (erwartet keryx:... oder keryxtest:...).</sys:String>
+    <sys:String x:Key="Str_Miner_SettingsSaved">Miner-Einstellungen gespeichert.</sys:String>
+    <sys:String x:Key="Str_Miner_CommandPreviewError">(Befehl konnte nicht erstellt werden: {0})</sys:String>
+
+    <!-- ProfilesViewModel (profile list summaries, switch/create/rename/delete status) -->
+    <sys:String x:Key="Str_Profiles_NoAddress">keine Adresse festgelegt</sys:String>
+    <sys:String x:Key="Str_Profiles_GpuAuto">GPU: automatisch</sys:String>
+    <sys:String x:Key="Str_Profiles_GpuAssignedCount">Zugewiesene GPUs: {0}</sys:String>
+    <sys:String x:Key="Str_Profiles_ActiveProfile">Aktives Profil: "{0}".</sys:String>
+    <sys:String x:Key="Str_Profiles_SwitchFailed">Profilwechsel fehlgeschlagen: {0}</sys:String>
+    <sys:String x:Key="Str_Profiles_Created">Profil "{0}" erstellt und aktiviert.</sys:String>
+    <sys:String x:Key="Str_Profiles_CreateFailed">Profil konnte nicht erstellt werden: {0}</sys:String>
+    <sys:String x:Key="Str_Profiles_Renamed">Profil "{0}" wurde in "{1}" umbenannt.</sys:String>
+    <sys:String x:Key="Str_Profiles_RenameFailed">Umbenennen des Profils fehlgeschlagen: {0}</sys:String>
+    <sys:String x:Key="Str_Profiles_Deleted">Profil "{0}" gelöscht.</sys:String>
+    <sys:String x:Key="Str_Profiles_DeleteFailed">Löschen des Profils fehlgeschlagen: {0}</sys:String>
+
+    <!-- SettingsViewModel (autostart status/errors) -->
+    <sys:String x:Key="Str_Settings_CheckAutostartFailed">Autostart-Status konnte nicht geprüft werden: {0}</sys:String>
+    <sys:String x:Key="Str_Settings_ExePathNotFound">Der Pfad der ausführbaren Datei konnte nicht ermittelt werden.</sys:String>
+    <sys:String x:Key="Str_Settings_AutostartEnabled">Autostart aktiviert: Die App startet bei der nächsten Windows-Anmeldung.</sys:String>
+    <sys:String x:Key="Str_Settings_AutostartDisabled">Autostart deaktiviert.</sys:String>
+    <sys:String x:Key="Str_Settings_AutostartChangeFailed">Ändern des Autostarts fehlgeschlagen: {0}</sys:String>
+    <sys:String x:Key="Str_Settings_SavedGeneric">Einstellungen gespeichert.</sys:String>
+
+    <!-- BinaryUpdateSectionViewModel (check/install update status) -->
+    <sys:String x:Key="Str_Update_NoWindowsArchive">Version {0} ist verfügbar, aber dieses Release hat kein Windows-Archiv (win64-amd64.zip).</sys:String>
+    <sys:String x:Key="Str_Update_Available">Update verfügbar: {0}.</sys:String>
+    <sys:String x:Key="Str_Update_UpToDate">Die neueste Version ist bereits installiert.</sys:String>
+    <sys:String x:Key="Str_Update_CheckFailed">Prüfung auf Updates fehlgeschlagen: {0}</sys:String>
+    <sys:String x:Key="Str_Update_Installed">Aktualisiert auf {0}.</sys:String>
+    <sys:String x:Key="Str_Update_FileLocked">Datei konnte nicht ersetzt werden - der Prozess scheint noch zu laufen. Stoppen Sie ihn auf der Übersichtsseite und versuchen Sie es erneut. ({0})</sys:String>
+    <sys:String x:Key="Str_Update_InstallError">Update-Fehler: {0}</sys:String>
+
+    <!-- GpuOverclockSectionViewModel (apply/reset confirm dialogs, status) -->
+    <sys:String x:Key="Str_Overclock_CriticalTemp">"{0}" hat derzeit eine kritische Temperatur - die Übertaktung wird erst angewendet, wenn die Karte unter die Schwelle abgekühlt ist.</sys:String>
+    <sys:String x:Key="Str_Overclock_FanManual">
+Lüfter: {0}% (manueller Modus)</sys:String>
+    <sys:String x:Key="Str_Overclock_FanAuto">
+Lüfter: automatisch (keine Änderungen)</sys:String>
+    <sys:String x:Key="Str_Overclock_ApplyConfirm_Body">Übertaktung auf "{0}" anwenden?
+
+Kern: {1} MHz
+Speicher: {2} MHz{3}
+
+Das Ändern von GPU-Taktraten und/oder Lüftereinstellungen ist ein potenziell riskanter Vorgang: falsche Werte können zu Treiberinstabilität, Einfrieren oder Überhitzung führen. Fortfahren?</sys:String>
+    <sys:String x:Key="Str_Overclock_ApplyConfirm_Title">GPU-Übertaktung</sys:String>
+    <sys:String x:Key="Str_Overclock_Applied">Übertaktung angewendet.</sys:String>
+    <sys:String x:Key="Str_Overclock_ResetConfirm_Body">Übertaktung für "{0}" auf Werkseinstellungen zurücksetzen (0 MHz, automatischer Lüfter)?</sys:String>
+    <sys:String x:Key="Str_Overclock_ResetConfirm_Title">Übertaktung zurücksetzen</sys:String>
+    <sys:String x:Key="Str_Overclock_ResetDone">Auf Werkseinstellungen zurückgesetzt.</sys:String>
+
+    <!-- PublicNodeListViewModel (discovery/ping/switch status messages) -->
+    <sys:String x:Key="Str_PublicNodes_EmptyList">Die Liste ist leer. Wenn Sie einen Link zu einer Liste öffentlicher Nodes haben, geben Sie ihn oben ein, oder klicken Sie auf „Über eigenen Node suchen".</sys:String>
+    <sys:String x:Key="Str_PublicNodes_LoadedCount">Nodes geladen: {0}.</sys:String>
+    <sys:String x:Key="Str_PublicNodes_LoadFailed">Laden der Node-Liste fehlgeschlagen: {0}</sys:String>
+    <sys:String x:Key="Str_PublicNodes_NoNewPeersFromOwnNode">Ihr Node hat keine neuen Peers gemeldet (er ist möglicherweise noch mit niemandem verbunden, oder die Liste enthält sie bereits).</sys:String>
+    <sys:String x:Key="Str_PublicNodes_AddedPeersFromOwnNode">{0} über die RPC Ihres Node gefundene Peer(s) hinzugefügt.</sys:String>
+    <sys:String x:Key="Str_PublicNodes_DiscoverFromOwnNodeFailed">Peers konnten nicht von Ihrem eigenen Node abgerufen werden - stellen Sie sicher, dass er läuft. ({0})</sys:String>
+    <sys:String x:Key="Str_PublicNodes_NoNewPeersFromNode">Node "{0}" hat keine neuen Peers gemeldet, oder sein RPC-Port ist nicht erreichbar.</sys:String>
+    <sys:String x:Key="Str_PublicNodes_AddedPeersFromNode">{0} über die RPC von Node "{1}" gefundene Peer(s) hinzugefügt.</sys:String>
+    <sys:String x:Key="Str_PublicNodes_DiscoverThroughNodeFailed">Peers konnten nicht von "{0}" abgerufen werden - der RPC-Port ist höchstwahrscheinlich extern geschlossen (normal, die meisten Betreiber öffnen ihn nicht). ({1})</sys:String>
+    <sys:String x:Key="Str_PublicNodes_UptimeNoteSuffix"> · vom Betreiber gemeldete Verfügbarkeit: {0}%</sys:String>
+    <sys:String x:Key="Str_PublicNodes_Reachable">Online · {0} ms{1}</sys:String>
+    <sys:String x:Key="Str_PublicNodes_Unreachable">Nicht erreichbar ({0}){1}</sys:String>
+    <sys:String x:Key="Str_PublicNodes_SavedLocallyNote">Nach erfolgreicher Erreichbarkeitsprüfung lokal gespeichert.</sys:String>
+    <sys:String x:Key="Str_PublicNodes_NodeSelected">Node "{0}" ({1}:{2}) für die Verbindung ausgewählt. Der Autostart des lokalen Node wurde deaktiviert - Sie können ihn auf dieser Seite wieder aktivieren.</sys:String>
+    <sys:String x:Key="Str_PublicNodes_SwitchedBackToOwn">Zurück zu Ihrem eigenen Node gewechselt.</sys:String>
+    <sys:String x:Key="Str_PublicNodes_AutoSwitchedBackSynced">Ihr Node hat die Synchronisierung abgeschlossen - automatisch zurückgewechselt.</sys:String>
+
+    <!-- ModelsViewModel / ModelCardViewModel (download status, delete confirm, sizes) -->
+    <sys:String x:Key="Str_Models_NoModelsDirConfigured">Legen Sie den Modellordner auf der Seite „Miner" fest, um Dateien hier zu verwalten.</sys:String>
+    <sys:String x:Key="Str_Models_Installed">Installiert ({0}).</sys:String>
+    <sys:String x:Key="Str_Models_DownloadPaused">Download pausiert ({0} empfangen).</sys:String>
+    <sys:String x:Key="Str_Models_NotInstalled">Nicht installiert. Das Modell wird beim ersten Start auch automatisch vom Miner über IPFS heruntergeladen - diese Seite dient nur zur manuellen Vorbereitung.</sys:String>
+    <sys:String x:Key="Str_Models_SetModelsDirFirst">Legen Sie zunächst den Modellordner auf der Seite „Miner" fest.</sys:String>
+    <sys:String x:Key="Str_Models_InvalidUrl">Die URL muss ein vollständiger http:// oder https://-Link sein.</sys:String>
+    <sys:String x:Key="Str_Models_DownloadingWithTotal">Wird heruntergeladen... {0}% ({1} von {2})</sys:String>
+    <sys:String x:Key="Str_Models_DownloadingNoTotal">Wird heruntergeladen... {0}% ({1})</sys:String>
+    <sys:String x:Key="Str_Models_DownloadingUnknownTotal">Wird heruntergeladen... {0} (Gesamtgröße unbekannt)</sys:String>
+    <sys:String x:Key="Str_Models_DownloadComplete">Download abgeschlossen.</sys:String>
+    <sys:String x:Key="Str_Models_DownloadPausedByUser">Download pausiert - klicken Sie auf „Fortsetzen", um an derselben Stelle fortzufahren.</sys:String>
+    <sys:String x:Key="Str_Models_DownloadError">Download-Fehler: {0}</sys:String>
+    <sys:String x:Key="Str_Models_OfficialProgressWithTotal">{0} {1}% ({2} von {3})</sys:String>
+    <sys:String x:Key="Str_Models_OfficialProgressNoTotal">{0} {1}</sys:String>
+    <sys:String x:Key="Str_Models_DownloadCancelled">Download abgebrochen.</sys:String>
+    <sys:String x:Key="Str_Models_DeleteConfirm_Body">Modell "{0}" löschen? Die Datei wird dauerhaft von der Festplatte entfernt.</sys:String>
+    <sys:String x:Key="Str_Models_DeleteConfirm_Title">Modell löschen</sys:String>
+    <sys:String x:Key="Str_Models_SizeGb">{0} GB</sys:String>
+    <sys:String x:Key="Str_Models_SizeMb">{0} MB</sys:String>
+    <sys:String x:Key="Str_Models_SizeKb">{0} KB</sys:String>
+    <sys:String x:Key="Str_Models_TotalDiskUsage">Installierte Modelle: {0}, belegter Speicherplatz: {1}.</sys:String>
+
+    <!-- WizardViewModel (step header, profile create, address/GPU checks) -->
+    <sys:String x:Key="Str_Wizard_StepHeader">Schritt {0} von {1}</sys:String>
+    <sys:String x:Key="Str_Wizard_EnterProfileName">Geben Sie einen Namen für das neue Profil ein.</sys:String>
+    <sys:String x:Key="Str_Wizard_ProfileCreated">Profil "{0}" erstellt und aktiviert - der Assistent konfiguriert es jetzt.</sys:String>
+    <sys:String x:Key="Str_Wizard_ProfileCreateFailed">Profil konnte nicht erstellt werden: {0}</sys:String>
+    <sys:String x:Key="Str_Wizard_InvalidAddress">Dies sieht nicht wie eine gültige Keryx-Adresse aus (erwartet keryx:... oder keryxtest:...). Der Assistent lässt Sie fortfahren, aber der Node wird das Mining mit einer ungültigen Adresse ablehnen.</sys:String>
+    <sys:String x:Key="Str_Wizard_NoGpuDetected">Keine NVIDIA-GPUs erkannt.</sys:String>
+
+    <!-- NodeView restructure (0.2.6 brief §8): public nodes first, own-node settings collapsed -->
+    <sys:String x:Key="Str_Node_PublicNodesHeader">Öffentliche Nodes</sys:String>
+    <sys:String x:Key="Str_Node_PublicNodesDesc">Wenn Sie noch keinen eigenen Node haben oder dieser noch synchronisiert, können Sie vorübergehend über einen anderen minen. Die Liste wird manuell gepflegt (das Protokoll hat kein öffentliches Node-Register) - optional können Sie unten einen Link zu einer JSON-Liste angeben.</sys:String>
+    <sys:String x:Key="Str_Node_RemoteListUrlTooltip">URL einer öffentlichen Node-Liste im JSON-Format (optional)</sys:String>
+    <sys:String x:Key="Str_Node_RefreshList">Liste aktualisieren</sys:String>
+    <sys:String x:Key="Str_Node_DiscoverFromOwnNodeButton">Peers über meinen Node finden</sys:String>
+    <sys:String x:Key="Str_Node_DiscoverFromOwnNodeTooltip">Ihren eigenen laufenden Node per RPC nach seiner Peer-Liste fragen (getConnectedPeerInfo/getPeerAddresses)</sys:String>
+    <sys:String x:Key="Str_Node_SwitchBackToOwnNodeButton">Zurück zu meinem Node</sys:String>
+    <sys:String x:Key="Str_Node_WatchingSyncNote">Synchronisierungsfortschritt Ihres Node wird beobachtet - sobald er bereit ist, wechselt das Mining automatisch wieder zu ihm.</sys:String>
+    <sys:String x:Key="Str_Node_PingButton">Prüfen</sys:String>
+    <sys:String x:Key="Str_Node_DiscoverThroughNodeButton">Peers über diesen finden</sys:String>
+    <sys:String x:Key="Str_Node_DiscoverThroughNodeTooltip">Diesen Node per RPC nach seinen Peers fragen (funktioniert nur, wenn sein RPC-Port extern offen ist - die meisten Nodes halten ihn geschlossen, was normal ist)</sys:String>
+    <sys:String x:Key="Str_Node_UseNodeButton">Verwenden</sys:String>
+    <sys:String x:Key="Str_Node_OwnSettingsHeader">Einstellungen des eigenen Node</sys:String>
+    <sys:String x:Key="Str_Node_FirewallExpanderHeader">Muss ich einen Port öffnen und die Firewall konfigurieren?</sys:String>
+    <sys:String x:Key="Str_Node_FirewallBody1">Nein, nicht zum Minen. Ihr Node funktioniert einwandfrei mit einer gewöhnlichen Heiminternetverbindung und nur ausgehenden Verbindungen - dafür ist kein offener Port/keine öffentliche IP nötig.</sys:String>
+    <sys:String x:Key="Str_Node_FirewallBody2">Dies ist nur nötig, wenn Sie MÖCHTEN, dass sich andere Netzwerkteilnehmer mit Ihrem Node verbinden können (eingehende Verbindungen) - das hilft der Gesundheit des gesamten Netzwerks, ist aber für Sie persönlich nicht erforderlich. Falls Sie es dennoch möchten: (1) Sie benötigen eine öffentliche IP-Adresse, nicht nur eine hinter dem NAT/CGNAT Ihres Providers; (2) Sie müssen den P2P-Port des Node (standardmäßig 22111) auf Ihrem Router zum Computer weiterleiten (Port-Forwarding), auf dem keryxd läuft; (3) Sie müssen in der Windows-Firewall eingehende Verbindungen auf diesem Port für keryxd.exe zulassen.</sys:String>
+    <sys:String x:Key="Str_Node_UpdateHeader">keryxd.exe aktualisieren</sys:String>
+    <sys:String x:Key="Str_Node_UpdateInstalledVersionPrefix">Installierte Version: </sys:String>
+    <sys:String x:Key="Str_Node_UpdateLatestVersionPrefix">   ·   Neueste Version: </sys:String>
+    <sys:String x:Key="Str_Node_UpdateCheckButton">Nach Updates suchen</sys:String>
+    <sys:String x:Key="Str_Node_UpdateInstallButton">Update installieren</sys:String>
+    <sys:String x:Key="Str_Node_UpdateUnknown">unbekannt</sys:String>
+    <sys:String x:Key="Str_Node_DataDirHeader">Node-Daten (data dir)</sys:String>
+    <sys:String x:Key="Str_Node_DataDirDesc">keryxd verfügt über keinen offiziellen integrierten Snapshot-Download-Mechanismus - aber das Keryx-Team veröffentlicht gelegentlich ein Datenarchiv für einen schnellen Start (HTTP-Link oder .torrent). Fügen Sie unten den aktuellen Link ein - das Format wird automatisch anhand der .torrent-Erweiterung erkannt.</sys:String>
+    <sys:String x:Key="Str_Node_DataDirUrlLabel">Link zu einem Archiv (.zip) oder einer .torrent-Datei</sys:String>
+    <sys:String x:Key="Str_Node_DataDirDirLabel">Datenverzeichnis</sys:String>
+    <sys:String x:Key="Str_Node_DataDirDownloadButton">Herunterladen und entpacken</sys:String>
+
+    <!-- ModelsView Discord/mirrors card (0.2.6 brief §9) -->
+    <sys:String x:Key="Str_Models_DiscordHeader">Aktuelle Modelle und Mirrors</sys:String>
+    <sys:String x:Key="Str_Models_DiscordBody">Die neuesten Modellankündigungen, offizielle Torrent-Dateien, Hugging Face, Google Drive und andere Mirrors werden im Keryx-Discord veröffentlicht. Vor dem manuellen Herunterladen eines Modells empfiehlt es sich, den Kanal Model Setup zu prüfen. Discord ist nicht die einzige Quelle für Modelle - der automatische Download über IPFS und der Download über den direkten Link unten funktionieren weiterhin.</sys:String>
+    <sys:String x:Key="Str_Models_DiscordButton">Keryx-Discord öffnen</sys:String>
+    <sys:String x:Key="Str_Models_DiscordOpenFailed">Link konnte nicht geöffnet werden: {0}</sys:String>
+</ResourceDictionary>

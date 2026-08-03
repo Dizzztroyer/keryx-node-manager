@@ -333,4 +333,39 @@ Changing GPU clocks and/or fan settings is a potentially risky operation: incorr
     <sys:String x:Key="Str_Wizard_ProfileCreateFailed">Failed to create profile: {0}</sys:String>
     <sys:String x:Key="Str_Wizard_InvalidAddress">This doesn't look like a valid Keryx address (expected keryx:... or keryxtest:...). The wizard lets you continue, but the node will reject mining with an invalid address.</sys:String>
     <sys:String x:Key="Str_Wizard_NoGpuDetected">No NVIDIA GPUs detected.</sys:String>
+
+    <!-- NodeView restructure (0.2.6 brief §8): public nodes first, own-node settings collapsed -->
+    <sys:String x:Key="Str_Node_PublicNodesHeader">Public nodes</sys:String>
+    <sys:String x:Key="Str_Node_PublicNodesDesc">If you don't have your own node yet, or it's still syncing, you can mine through someone else's temporarily. The list is maintained manually (the protocol has no public node registry) - optionally provide a link to a JSON list below.</sys:String>
+    <sys:String x:Key="Str_Node_RemoteListUrlTooltip">URL of a public node list in JSON format (optional)</sys:String>
+    <sys:String x:Key="Str_Node_RefreshList">Refresh list</sys:String>
+    <sys:String x:Key="Str_Node_DiscoverFromOwnNodeButton">Find peers through my node</sys:String>
+    <sys:String x:Key="Str_Node_DiscoverFromOwnNodeTooltip">Ask your own running node for its peer list via RPC (getConnectedPeerInfo/getPeerAddresses)</sys:String>
+    <sys:String x:Key="Str_Node_SwitchBackToOwnNodeButton">Switch back to my node</sys:String>
+    <sys:String x:Key="Str_Node_WatchingSyncNote">Watching your node's sync progress - once it's ready, mining will automatically switch back to it.</sys:String>
+    <sys:String x:Key="Str_Node_PingButton">Check</sys:String>
+    <sys:String x:Key="Str_Node_DiscoverThroughNodeButton">Find peers through it</sys:String>
+    <sys:String x:Key="Str_Node_DiscoverThroughNodeTooltip">Ask this node about its peers via RPC (only works if its RPC port is open externally - most nodes keep it closed, which is normal)</sys:String>
+    <sys:String x:Key="Str_Node_UseNodeButton">Use</sys:String>
+    <sys:String x:Key="Str_Node_OwnSettingsHeader">Your own node settings</sys:String>
+    <sys:String x:Key="Str_Node_FirewallExpanderHeader">Do I need to open a port and configure the firewall?</sys:String>
+    <sys:String x:Key="Str_Node_FirewallBody1">No, not for mining. Your node works fine with an ordinary home internet connection and outgoing connections only - an open port/public IP is not needed for that.</sys:String>
+    <sys:String x:Key="Str_Node_FirewallBody2">This is only needed if you WANT other network participants to be able to connect to your node (incoming connections) - this helps the health of the network as a whole, but isn't required for you personally. If you do want this: (1) you need a public IP address, not just one behind your provider's NAT/CGNAT; (2) you need to port-forward the node's P2P port (22111 by default) on your router to the computer running keryxd; (3) you need to allow inbound connections on that port for keryxd.exe in the Windows Firewall.</sys:String>
+    <sys:String x:Key="Str_Node_UpdateHeader">Update keryxd.exe</sys:String>
+    <sys:String x:Key="Str_Node_UpdateInstalledVersionPrefix">Installed version: </sys:String>
+    <sys:String x:Key="Str_Node_UpdateLatestVersionPrefix">   ·   Latest version: </sys:String>
+    <sys:String x:Key="Str_Node_UpdateCheckButton">Check for updates</sys:String>
+    <sys:String x:Key="Str_Node_UpdateInstallButton">Install update</sys:String>
+    <sys:String x:Key="Str_Node_UpdateUnknown">unknown</sys:String>
+    <sys:String x:Key="Str_Node_DataDirHeader">Node data (data dir)</sys:String>
+    <sys:String x:Key="Str_Node_DataDirDesc">keryxd has no official built-in snapshot-download mechanism - but the Keryx team occasionally publishes a data archive for a quick start (HTTP link or .torrent). Paste the current link below - the format is detected automatically from the .torrent extension.</sys:String>
+    <sys:String x:Key="Str_Node_DataDirUrlLabel">Link to an archive (.zip) or a .torrent file</sys:String>
+    <sys:String x:Key="Str_Node_DataDirDirLabel">Data directory</sys:String>
+    <sys:String x:Key="Str_Node_DataDirDownloadButton">Download and extract</sys:String>
+
+    <!-- ModelsView Discord/mirrors card (0.2.6 brief §9) -->
+    <sys:String x:Key="Str_Models_DiscordHeader">Latest models and mirrors</sys:String>
+    <sys:String x:Key="Str_Models_DiscordBody">The latest model announcements, official torrent files, Hugging Face, Google Drive, and other mirrors are posted in the Keryx Discord. Before downloading a model manually, it's a good idea to check the Model Setup channel. Discord isn't the only source for models - automatic download via IPFS and the direct-link download below still work.</sys:String>
+    <sys:String x:Key="Str_Models_DiscordButton">Open Keryx Discord</sys:String>
+    <sys:String x:Key="Str_Models_DiscordOpenFailed">Failed to open the link: {0}</sys:String>
 </ResourceDictionary>

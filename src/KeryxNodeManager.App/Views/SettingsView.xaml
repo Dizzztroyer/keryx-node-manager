@@ -111,6 +111,7 @@
                     <ComboBoxItem Tag="it" Content="Italiano"/>
                     <ComboBoxItem Tag="fr" Content="Français"/>
                     <ComboBoxItem Tag="uk" Content="Українська"/>
+                    <ComboBoxItem Tag="de" Content="Deutsch"/>
                 </ComboBox>
             </StackPanel>
         </Border>

@@ -386,6 +386,16 @@ public partial class ModelsViewModel : ObservableObject
     [ObservableProperty]
     private string _totalDiskUsageText = "";
 
+    /// <summary>Status line for the Discord/mirrors card (0.2.6 brief §9) - only ever set when
+    /// OpenDiscordCommand's Process.Start throws (no browser/URL handler registered, etc.); stays
+    /// empty otherwise so the card doesn't show a permanent "nothing happened yet" placeholder.</summary>
+    [ObservableProperty]
+    private string _discordLinkStatus = "";
+
+    /// <summary>Real, live Keryx Discord channel where the team posts model announcements and
+    /// mirrors (0.2.6 brief §9) - not guessed, taken directly from the task's own link.</summary>
+    public const string DiscordModelSetupUrl = "https://discordapp.com/channels/1493916105809465396/1519997395419791380";
+
     public ModelsViewModel(ProfileStore profileStore, HttpClient httpClient)
     {
         _profileStore = profileStore;
@@ -405,6 +415,25 @@ public partial class ModelsViewModel : ObservableObject
     {
         foreach (var card in Models) card.RefreshState();
         RefreshTotalDiskUsage();
+    }
+
+    /// <summary>Opens the Keryx Discord's Model Setup channel in the system's default browser/
+    /// Discord client (0.2.6 brief §9). Wrapped in try/catch, unlike MainWindow.xaml.cs's older
+    /// SocialLink_RequestNavigate handler, because a missing/broken URL handler association on the
+    /// user's machine is a real, user-facing failure mode this button should report instead of
+    /// letting Process.Start's exception disappear silently or crash the app.</summary>
+    [RelayCommand]
+    private void OpenDiscord()
+    {
+        try
+        {
+            Process.Start(new ProcessStartInfo(DiscordModelSetupUrl) { UseShellExecute = true });
+            DiscordLinkStatus = "";
+        }
+        catch (Exception ex)
+        {
+            DiscordLinkStatus = AppStrings.Format("Str_Models_DiscordOpenFailed", ex.Message);
+        }
     }
 
     private void RefreshTotalDiskUsage()

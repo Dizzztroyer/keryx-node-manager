@@ -46,6 +46,7 @@ public class CoreStringsTests : IDisposable
     [InlineData("it")]
     [InlineData("fr")]
     [InlineData("uk")]
+    [InlineData("de")]
     public void Get_EveryNonRussianLanguageHasNoMissingKeys(string language)
     {
         // Every key present in the Russian dictionary (the always-complete baseline every other

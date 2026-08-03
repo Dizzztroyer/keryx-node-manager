@@ -333,4 +333,38 @@ Modificare le frequenze e/o la ventola della GPU è un'operazione potenzialmente
     <sys:String x:Key="Str_Wizard_ProfileCreateFailed">Impossibile creare il profilo: {0}</sys:String>
     <sys:String x:Key="Str_Wizard_InvalidAddress">Non sembra un indirizzo Keryx valido (atteso keryx:... o keryxtest:...). La procedura guidata consente di continuare, ma il nodo rifiuterà il mining con un indirizzo non valido.</sys:String>
     <sys:String x:Key="Str_Wizard_NoGpuDetected">Nessuna GPU NVIDIA rilevata.</sys:String>
+    <!-- NodeView restructure (0.2.6 brief §8): public nodes first, own-node settings collapsed -->
+    <sys:String x:Key="Str_Node_PublicNodesHeader">Nodi pubblici</sys:String>
+    <sys:String x:Key="Str_Node_PublicNodesDesc">Se non si dispone ancora di un proprio nodo, o è ancora in sincronizzazione, è possibile minare temporaneamente tramite un altro. L'elenco è gestito manualmente (il protocollo non ha un registro pubblico dei nodi) - facoltativamente indicare un link a un elenco JSON qui sotto.</sys:String>
+    <sys:String x:Key="Str_Node_RemoteListUrlTooltip">URL di un elenco pubblico di nodi in formato JSON (facoltativo)</sys:String>
+    <sys:String x:Key="Str_Node_RefreshList">Aggiorna elenco</sys:String>
+    <sys:String x:Key="Str_Node_DiscoverFromOwnNodeButton">Trova peer tramite il mio nodo</sys:String>
+    <sys:String x:Key="Str_Node_DiscoverFromOwnNodeTooltip">Chiedi al tuo nodo in esecuzione il suo elenco di peer tramite RPC (getConnectedPeerInfo/getPeerAddresses)</sys:String>
+    <sys:String x:Key="Str_Node_SwitchBackToOwnNodeButton">Torna al mio nodo</sys:String>
+    <sys:String x:Key="Str_Node_WatchingSyncNote">Sto osservando l'avanzamento della sincronizzazione del tuo nodo - non appena sarà pronto, il mining tornerà automaticamente ad esso.</sys:String>
+    <sys:String x:Key="Str_Node_PingButton">Verifica</sys:String>
+    <sys:String x:Key="Str_Node_DiscoverThroughNodeButton">Trova peer tramite questo nodo</sys:String>
+    <sys:String x:Key="Str_Node_DiscoverThroughNodeTooltip">Chiedi a questo nodo i suoi peer tramite RPC (funziona solo se la sua porta RPC è aperta esternamente - la maggior parte dei nodi la tiene chiusa, il che è normale)</sys:String>
+    <sys:String x:Key="Str_Node_UseNodeButton">Usa</sys:String>
+    <sys:String x:Key="Str_Node_OwnSettingsHeader">Impostazioni del proprio nodo</sys:String>
+    <sys:String x:Key="Str_Node_FirewallExpanderHeader">È necessario aprire una porta e configurare il firewall?</sys:String>
+    <sys:String x:Key="Str_Node_FirewallBody1">No, non per minare. Il tuo nodo funziona perfettamente con una normale connessione internet domestica e solo connessioni in uscita - non serve una porta aperta/IP pubblico per questo.</sys:String>
+    <sys:String x:Key="Str_Node_FirewallBody2">Questo serve solo se VUOI che altri partecipanti della rete possano connettersi al tuo nodo (connessioni in entrata) - questo aiuta la salute della rete nel suo complesso, ma non è obbligatorio per te personalmente. Se comunque lo desideri: (1) devi avere un indirizzo IP pubblico, non solo uno dietro il NAT/CGNAT del provider; (2) devi inoltrare (port forward) la porta P2P del nodo (22111 di default) sul router verso il computer su cui gira keryxd; (3) devi consentire le connessioni in entrata su quella porta per keryxd.exe nel Firewall di Windows.</sys:String>
+    <sys:String x:Key="Str_Node_UpdateHeader">Aggiornamento di keryxd.exe</sys:String>
+    <sys:String x:Key="Str_Node_UpdateInstalledVersionPrefix">Versione installata: </sys:String>
+    <sys:String x:Key="Str_Node_UpdateLatestVersionPrefix">   ·   Ultima versione: </sys:String>
+    <sys:String x:Key="Str_Node_UpdateCheckButton">Controlla aggiornamenti</sys:String>
+    <sys:String x:Key="Str_Node_UpdateInstallButton">Installa aggiornamento</sys:String>
+    <sys:String x:Key="Str_Node_UpdateUnknown">sconosciuta</sys:String>
+    <sys:String x:Key="Str_Node_DataDirHeader">Dati del nodo (data dir)</sys:String>
+    <sys:String x:Key="Str_Node_DataDirDesc">keryxd non ha un meccanismo ufficiale integrato per lo scaricamento di snapshot - ma il team Keryx pubblica occasionalmente un archivio dati per un avvio rapido (link HTTP o .torrent). Incolla qui sotto il link attuale - il formato viene rilevato automaticamente dall'estensione .torrent.</sys:String>
+    <sys:String x:Key="Str_Node_DataDirUrlLabel">Link a un archivio (.zip) o a un file .torrent</sys:String>
+    <sys:String x:Key="Str_Node_DataDirDirLabel">Cartella dati</sys:String>
+    <sys:String x:Key="Str_Node_DataDirDownloadButton">Scarica ed estrai</sys:String>
+
+    <!-- ModelsView Discord/mirrors card (0.2.6 brief §9) -->
+    <sys:String x:Key="Str_Models_DiscordHeader">Modelli e mirror aggiornati</sys:String>
+    <sys:String x:Key="Str_Models_DiscordBody">Gli ultimi annunci sui modelli, i file torrent ufficiali, Hugging Face, Google Drive e altri mirror vengono pubblicati sul Discord di Keryx. Prima di scaricare manualmente un modello, è consigliabile controllare il canale Model Setup. Discord non è l'unica fonte per i modelli: il download automatico tramite IPFS e il download tramite link diretto qui sotto continuano a funzionare.</sys:String>
+    <sys:String x:Key="Str_Models_DiscordButton">Apri il Discord di Keryx</sys:String>
+    <sys:String x:Key="Str_Models_DiscordOpenFailed">Impossibile aprire il link: {0}</sys:String>
 </ResourceDictionary>
