@@ -62,6 +62,8 @@
     <sys:String x:Key="Str_Models_Cancel">Скасувати</sys:String>
     <sys:String x:Key="Str_Models_Delete">Видалити</sys:String>
     <sys:String x:Key="Str_Models_OpenFolder">Відкрити папку</sys:String>
+    <sys:String x:Key="Str_Models_DownloadOfficial">Завантажити офіційну модель</sys:String>
+    <sys:String x:Key="Str_Models_ManualMirrorExpander">Вказати власне посилання (інше дзеркало)</sys:String>
 
     <sys:String x:Key="Str_Node_Title">Нода</sys:String>
     <sys:String x:Key="Str_Node_PathLabel">Шлях до keryxd.exe</sys:String>
@@ -129,6 +131,12 @@
     <sys:String x:Key="Str_Wizard_Step2_ModelsLabel">Папка моделей (обов'язково)</sys:String>
     <sys:String x:Key="Str_Wizard_Step2_Browse">Огляд...</sys:String>
     <sys:String x:Key="Str_Wizard_Step2_Note">Шляхи до keryxd.exe/keryx-miner.exe можна вказати пізніше на сторінках «Вузол» і «Майнер» — для продовження майстра достатньо вказати папку моделей.</sys:String>
+    <sys:String x:Key="Str_Wizard_Step2_NodeHeader">Нода (keryxd.exe)</sys:String>
+    <sys:String x:Key="Str_Wizard_Step2_MinerHeader">Майнер (keryx-miner.exe)</sys:String>
+    <sys:String x:Key="Str_Wizard_Step2_ModelsHeader">Папка для моделей</sys:String>
+    <sys:String x:Key="Str_Wizard_Step2_ManualFileExpander">Вказати інший файл вручну</sys:String>
+    <sys:String x:Key="Str_Wizard_Step2_ManualFolderExpander">Вибрати іншу папку</sys:String>
+    <sys:String x:Key="Str_Wizard_Step2_DefaultPrefix">За замовчуванням: </sys:String>
     <sys:String x:Key="Str_Wizard_Step3_Title">Адреса для нарахування винагороди</sys:String>
     <sys:String x:Key="Str_Wizard_Step3_Body">Вказується лише публічна адреса (keryx:... або keryxtest:...). Майстер ніколи не запитує і не зберігає seed-фразу чи приватний ключ.</sys:String>
     <sys:String x:Key="Str_Wizard_Step4_Title">Попереднє призначення моделей за відеокартами</sys:String>

@@ -6,6 +6,7 @@
     <UserControl.Resources>
         <BooleanToVisibilityConverter x:Key="BoolToVis"/>
         <conv:StringToVisibilityConverter x:Key="StringToVis"/>
+        <conv:InverseBooleanToVisibilityConverter x:Key="InverseBoolToVis"/>
     </UserControl.Resources>
     <DockPanel>
         <StackPanel DockPanel.Dock="Top" Margin="0,0,0,16">
@@ -41,41 +42,65 @@
                                          Value="{Binding ProgressPercent, Mode=OneWay}"
                                          IsIndeterminate="{Binding ProgressIsIndeterminate}"/>
 
-                            <TextBlock Text="{DynamicResource Str_Models_UrlLabel}"
-                                       Foreground="{StaticResource TextSecondaryBrush}" Margin="0,12,0,0"/>
-                            <TextBox Text="{Binding SourceUrl, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                     Margin="0,4,0,0" Padding="8" Background="{StaticResource SurfaceAltBrush}"
-                                     Foreground="{StaticResource TextPrimaryBrush}" BorderThickness="0"/>
+                            <!-- Primary, one-click path: install straight from the verified
+                                 official mirror (KeryxNodeManager.Core.ModelsManagement.
+                                 OfficialModelMirrors) - no URL to find or paste. This is the
+                                 button most users should ever need to touch on this page. -->
+                            <Button Content="{DynamicResource Str_Models_DownloadOfficial}" Style="{StaticResource PrimaryButtonStyle}"
+                                    Command="{Binding DownloadOfficialCommand}" Margin="0,12,0,0"
+                                    HorizontalAlignment="Left"
+                                    Visibility="{Binding IsInstalled, Converter={StaticResource InverseBoolToVis}}"/>
 
-                            <TextBlock Text="{DynamicResource Str_Models_Sha256Label}"
-                                       Foreground="{StaticResource TextSecondaryBrush}" Margin="0,8,0,0"/>
-                            <TextBox Text="{Binding ExpectedSha256, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                     Margin="0,4,0,0" Padding="8" Background="{StaticResource SurfaceAltBrush}"
-                                     Foreground="{StaticResource TextPrimaryBrush}" BorderThickness="0"/>
-
-                            <StackPanel Orientation="Horizontal" Margin="0,12,0,0">
-                                <Button Content="{DynamicResource Str_Models_Download}" Style="{StaticResource PrimaryButtonStyle}"
-                                        Command="{Binding DownloadCommand}" Margin="0,0,8,0"
-                                        Visibility="{Binding ShowDownloadButton, Converter={StaticResource BoolToVis}}"/>
-                                <!-- Distinct label for resuming a paused download vs. starting fresh
-                                     (PROJECT_STATUS.md "In progress" item 6) - same DownloadCommand,
-                                     ModelDownloader/ModelCardViewModel already resume from the
-                                     partial file on disk when one exists, only the label was
-                                     previously always "Скачать" regardless of paused state. -->
-                                <Button Content="{DynamicResource Str_Models_Resume}" Style="{StaticResource PrimaryButtonStyle}"
-                                        Command="{Binding DownloadCommand}" Margin="0,0,8,0"
-                                        Visibility="{Binding ShowResumeButton, Converter={StaticResource BoolToVis}}"/>
-                                <Button Content="{DynamicResource Str_Models_Pause}" Style="{StaticResource SecondaryButtonStyle}"
-                                        Command="{Binding PauseCommand}" Margin="0,0,8,0"
-                                        Visibility="{Binding IsDownloading, Converter={StaticResource BoolToVis}}"/>
-                                <Button Content="{DynamicResource Str_Models_Cancel}" Style="{StaticResource SecondaryButtonStyle}"
-                                        Command="{Binding CancelDownloadCommand}" Margin="0,0,8,0"/>
+                            <StackPanel Orientation="Horizontal" Margin="0,12,0,0"
+                                        Visibility="{Binding IsInstalled, Converter={StaticResource BoolToVis}}">
                                 <Button Content="{DynamicResource Str_Models_Delete}" Style="{StaticResource SecondaryButtonStyle}"
-                                        Command="{Binding DeleteCommand}" Margin="0,0,8,0"
-                                        Visibility="{Binding IsInstalled, Converter={StaticResource BoolToVis}}"/>
+                                        Command="{Binding DeleteCommand}" Margin="0,0,8,0"/>
                                 <Button Content="{DynamicResource Str_Models_OpenFolder}" Style="{StaticResource SecondaryButtonStyle}"
                                         Command="{Binding OpenFolderCommand}"/>
                             </StackPanel>
+
+                            <StackPanel Orientation="Horizontal" Margin="0,8,0,0"
+                                        Visibility="{Binding IsDownloading, Converter={StaticResource BoolToVis}}">
+                                <Button Content="{DynamicResource Str_Models_Pause}" Style="{StaticResource SecondaryButtonStyle}"
+                                        Command="{Binding PauseCommand}" Margin="0,0,8,0"/>
+                                <Button Content="{DynamicResource Str_Models_Cancel}" Style="{StaticResource SecondaryButtonStyle}"
+                                        Command="{Binding CancelDownloadCommand}"/>
+                            </StackPanel>
+
+                            <!-- Advanced/override path, collapsed by default - a different or
+                                 newer mirror than the one baked into this build (brief follow-up
+                                 2026-08-03: manual "specify a path/URL" fields should be the
+                                 exception, not the default, for a mainstream user). -->
+                            <Expander Header="{DynamicResource Str_Models_ManualMirrorExpander}" Margin="0,12,0,0"
+                                      Visibility="{Binding IsInstalled, Converter={StaticResource InverseBoolToVis}}">
+                                <StackPanel Margin="0,8,0,0">
+                                    <TextBlock Text="{DynamicResource Str_Models_UrlLabel}"
+                                               Foreground="{StaticResource TextSecondaryBrush}"/>
+                                    <TextBox Text="{Binding SourceUrl, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                             Margin="0,4,0,0" Padding="8" Background="{StaticResource SurfaceAltBrush}"
+                                             Foreground="{StaticResource TextPrimaryBrush}" BorderThickness="0"/>
+
+                                    <TextBlock Text="{DynamicResource Str_Models_Sha256Label}"
+                                               Foreground="{StaticResource TextSecondaryBrush}" Margin="0,8,0,0"/>
+                                    <TextBox Text="{Binding ExpectedSha256, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                             Margin="0,4,0,0" Padding="8" Background="{StaticResource SurfaceAltBrush}"
+                                             Foreground="{StaticResource TextPrimaryBrush}" BorderThickness="0"/>
+
+                                    <StackPanel Orientation="Horizontal" Margin="0,12,0,0">
+                                        <Button Content="{DynamicResource Str_Models_Download}" Style="{StaticResource PrimaryButtonStyle}"
+                                                Command="{Binding DownloadCommand}" Margin="0,0,8,0"
+                                                Visibility="{Binding ShowDownloadButton, Converter={StaticResource BoolToVis}}"/>
+                                        <!-- Distinct label for resuming a paused download vs. starting fresh
+                                             (PROJECT_STATUS.md "In progress" item 6) - same DownloadCommand,
+                                             ModelDownloader/ModelCardViewModel already resume from the
+                                             partial file on disk when one exists, only the label was
+                                             previously always "Скачать" regardless of paused state. -->
+                                        <Button Content="{DynamicResource Str_Models_Resume}" Style="{StaticResource PrimaryButtonStyle}"
+                                                Command="{Binding DownloadCommand}"
+                                                Visibility="{Binding ShowResumeButton, Converter={StaticResource BoolToVis}}"/>
+                                    </StackPanel>
+                                </StackPanel>
+                            </Expander>
                         </StackPanel>
                     </Border>
                 </DataTemplate>

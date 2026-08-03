@@ -107,53 +107,79 @@
                     </StackPanel>
                 </Border>
 
-                <!-- Step 2: Directories -->
+                <!-- Step 2: Directories - now mostly automatic (brief follow-up, 2026-08-03):
+                     keryxd.exe/keryx-miner.exe install themselves the moment this step is shown
+                     (WizardViewModel.AutoInstallMissingBinariesAsync, fired from
+                     OnCurrentStepIndexChanged) and the models folder already has a real default
+                     (DefaultInstallPaths.ModelsDirectory) - a user only ever needs to touch the
+                     Expanders below if they want a different location than the defaults. -->
                 <Border Style="{StaticResource CardStyle}" Visibility="{Binding IsStep2Directories, Converter={StaticResource BoolToVis}}">
                     <StackPanel>
                         <TextBlock Text="{DynamicResource Str_Wizard_Step2_Title}" FontSize="16" FontWeight="SemiBold"/>
 
-                        <TextBlock Text="{DynamicResource Str_Wizard_Step2_NodeLabel}" Foreground="{StaticResource TextSecondaryBrush}" Margin="0,12,0,0"/>
-                        <Grid Margin="0,4,0,0">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="Auto"/>
-                            </Grid.ColumnDefinitions>
-                            <TextBox Grid.Column="0" Text="{Binding NodeExecutablePathInput, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                     Padding="8" Background="{StaticResource SurfaceAltBrush}"
-                                     Foreground="{StaticResource TextPrimaryBrush}" BorderThickness="0"/>
-                            <Button Grid.Column="1" Content="{DynamicResource Str_Wizard_Step2_Browse}" Margin="8,0,0,0"
-                                    Style="{StaticResource SecondaryButtonStyle}" Command="{Binding BrowseNodeExecutableCommand}"/>
-                        </Grid>
+                        <TextBlock Text="{DynamicResource Str_Wizard_Step2_NodeHeader}" FontWeight="SemiBold" Margin="0,16,0,0"/>
+                        <TextBlock Text="{Binding NodeUpdate.StatusMessage}" TextWrapping="Wrap"
+                                   Foreground="{StaticResource TextSecondaryBrush}" Margin="0,4,0,0"/>
+                        <ProgressBar Height="6" Minimum="0" Maximum="100" Margin="0,6,0,0"
+                                     Value="{Binding NodeUpdate.ProgressPercent, Mode=OneWay}"
+                                     IsIndeterminate="{Binding NodeUpdate.IsBusy}"
+                                     Visibility="{Binding NodeUpdate.IsBusy, Converter={StaticResource BoolToVis}}"/>
+                        <Expander Header="{DynamicResource Str_Wizard_Step2_ManualFileExpander}" Margin="0,8,0,0">
+                            <Grid Margin="0,8,0,0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBox Grid.Column="0" Text="{Binding NodeExecutablePathInput, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                         Padding="8" Background="{StaticResource SurfaceAltBrush}"
+                                         Foreground="{StaticResource TextPrimaryBrush}" BorderThickness="0"/>
+                                <Button Grid.Column="1" Content="{DynamicResource Str_Wizard_Step2_Browse}" Margin="8,0,0,0"
+                                        Style="{StaticResource SecondaryButtonStyle}" Command="{Binding BrowseNodeExecutableCommand}"/>
+                            </Grid>
+                        </Expander>
 
-                        <TextBlock Text="{DynamicResource Str_Wizard_Step2_MinerLabel}" Foreground="{StaticResource TextSecondaryBrush}" Margin="0,16,0,0"/>
-                        <Grid Margin="0,4,0,0">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="Auto"/>
-                            </Grid.ColumnDefinitions>
-                            <TextBox Grid.Column="0" Text="{Binding MinerExecutablePathInput, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                     Padding="8" Background="{StaticResource SurfaceAltBrush}"
-                                     Foreground="{StaticResource TextPrimaryBrush}" BorderThickness="0"/>
-                            <Button Grid.Column="1" Content="{DynamicResource Str_Wizard_Step2_Browse}" Margin="8,0,0,0"
-                                    Style="{StaticResource SecondaryButtonStyle}" Command="{Binding BrowseMinerExecutableCommand}"/>
-                        </Grid>
+                        <TextBlock Text="{DynamicResource Str_Wizard_Step2_MinerHeader}" FontWeight="SemiBold" Margin="0,20,0,0"/>
+                        <TextBlock Text="{Binding MinerUpdate.StatusMessage}" TextWrapping="Wrap"
+                                   Foreground="{StaticResource TextSecondaryBrush}" Margin="0,4,0,0"/>
+                        <ProgressBar Height="6" Minimum="0" Maximum="100" Margin="0,6,0,0"
+                                     Value="{Binding MinerUpdate.ProgressPercent, Mode=OneWay}"
+                                     IsIndeterminate="{Binding MinerUpdate.IsBusy}"
+                                     Visibility="{Binding MinerUpdate.IsBusy, Converter={StaticResource BoolToVis}}"/>
+                        <Expander Header="{DynamicResource Str_Wizard_Step2_ManualFileExpander}" Margin="0,8,0,0">
+                            <Grid Margin="0,8,0,0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBox Grid.Column="0" Text="{Binding MinerExecutablePathInput, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                         Padding="8" Background="{StaticResource SurfaceAltBrush}"
+                                         Foreground="{StaticResource TextPrimaryBrush}" BorderThickness="0"/>
+                                <Button Grid.Column="1" Content="{DynamicResource Str_Wizard_Step2_Browse}" Margin="8,0,0,0"
+                                        Style="{StaticResource SecondaryButtonStyle}" Command="{Binding BrowseMinerExecutableCommand}"/>
+                            </Grid>
+                        </Expander>
 
-                        <TextBlock Text="{DynamicResource Str_Wizard_Step2_ModelsLabel}" Foreground="{StaticResource TextSecondaryBrush}" Margin="0,16,0,0"/>
-                        <Grid Margin="0,4,0,0">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="Auto"/>
-                            </Grid.ColumnDefinitions>
-                            <TextBox Grid.Column="0" Text="{Binding ModelsDirectoryInput, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                     Padding="8" Background="{StaticResource SurfaceAltBrush}"
-                                     Foreground="{StaticResource TextPrimaryBrush}" BorderThickness="0"/>
-                            <Button Grid.Column="1" Content="{DynamicResource Str_Wizard_Step2_Browse}" Margin="8,0,0,0"
-                                    Style="{StaticResource SecondaryButtonStyle}" Command="{Binding BrowseModelsDirectoryCommand}"/>
-                        </Grid>
+                        <TextBlock Text="{DynamicResource Str_Wizard_Step2_ModelsHeader}" FontWeight="SemiBold" Margin="0,20,0,0"/>
+                        <TextBlock Foreground="{StaticResource TextSecondaryBrush}" Margin="0,4,0,0" TextWrapping="Wrap">
+                            <Run Text="{DynamicResource Str_Wizard_Step2_DefaultPrefix}"/><Run Text="{Binding Profile.ModelsDirectory, Mode=OneWay}"/>
+                        </TextBlock>
+                        <Expander Header="{DynamicResource Str_Wizard_Step2_ManualFolderExpander}" Margin="0,8,0,0">
+                            <Grid Margin="0,8,0,0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBox Grid.Column="0" Text="{Binding ModelsDirectoryInput, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                         Padding="8" Background="{StaticResource SurfaceAltBrush}"
+                                         Foreground="{StaticResource TextPrimaryBrush}" BorderThickness="0"/>
+                                <Button Grid.Column="1" Content="{DynamicResource Str_Wizard_Step2_Browse}" Margin="8,0,0,0"
+                                        Style="{StaticResource SecondaryButtonStyle}" Command="{Binding BrowseModelsDirectoryCommand}"/>
+                            </Grid>
+                        </Expander>
                         <TextBlock Text="{Binding DirectoriesError}" Foreground="{StaticResource ErrorBrush}"
                                    TextWrapping="Wrap" Margin="0,8,0,0"/>
                         <TextBlock Text="{DynamicResource Str_Wizard_Step2_Note}"
-                                   TextWrapping="Wrap" FontStyle="Italic" Foreground="{StaticResource TextSecondaryBrush}" Margin="0,8,0,0"/>
+                                   TextWrapping="Wrap" FontStyle="Italic" Foreground="{StaticResource TextSecondaryBrush}" Margin="0,12,0,0"/>
                     </StackPanel>
                 </Border>
 

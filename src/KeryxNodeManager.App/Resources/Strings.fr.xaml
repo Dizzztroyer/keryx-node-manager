@@ -59,6 +59,8 @@
     <sys:String x:Key="Str_Models_Cancel">Annuler</sys:String>
     <sys:String x:Key="Str_Models_Delete">Supprimer</sys:String>
     <sys:String x:Key="Str_Models_OpenFolder">Ouvrir le dossier</sys:String>
+    <sys:String x:Key="Str_Models_DownloadOfficial">Télécharger le modèle officiel</sys:String>
+    <sys:String x:Key="Str_Models_ManualMirrorExpander">Indiquer votre propre lien (autre miroir)</sys:String>
 
     <sys:String x:Key="Str_Node_Title">Nœud</sys:String>
     <sys:String x:Key="Str_Node_PathLabel">Chemin vers keryxd.exe</sys:String>
@@ -125,6 +127,12 @@
     <sys:String x:Key="Str_Wizard_Step2_ModelsLabel">Dossier des modèles (obligatoire)</sys:String>
     <sys:String x:Key="Str_Wizard_Step2_Browse">Parcourir...</sys:String>
     <sys:String x:Key="Str_Wizard_Step2_Note">Les chemins vers keryxd.exe/keryx-miner.exe peuvent être indiqués plus tard sur les pages « Nœud » et « Mineur » — pour continuer l'assistant, il suffit d'indiquer le dossier des modèles.</sys:String>
+    <sys:String x:Key="Str_Wizard_Step2_NodeHeader">Nœud (keryxd.exe)</sys:String>
+    <sys:String x:Key="Str_Wizard_Step2_MinerHeader">Mineur (keryx-miner.exe)</sys:String>
+    <sys:String x:Key="Str_Wizard_Step2_ModelsHeader">Dossier des modèles</sys:String>
+    <sys:String x:Key="Str_Wizard_Step2_ManualFileExpander">Indiquer un autre fichier manuellement</sys:String>
+    <sys:String x:Key="Str_Wizard_Step2_ManualFolderExpander">Choisir un autre dossier</sys:String>
+    <sys:String x:Key="Str_Wizard_Step2_DefaultPrefix">Par défaut : </sys:String>
     <sys:String x:Key="Str_Wizard_Step3_Title">Adresse de récompense</sys:String>
     <sys:String x:Key="Str_Wizard_Step3_Body">Seule l'adresse publique est indiquée (keryx:... ou keryxtest:...). L'assistant ne demande ni n'enregistre jamais de phrase seed ou de clé privée.</sys:String>
     <sys:String x:Key="Str_Wizard_Step4_Title">Aperçu de l'attribution des modèles par GPU</sys:String>

@@ -1,4 +1,5 @@
 using System.Collections.ObjectModel;
+using System.Net.Http;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using KeryxNodeManager.Core.Config;
@@ -6,6 +7,8 @@ using KeryxNodeManager.Core.Diagnostics;
 using KeryxNodeManager.Core.Gpu;
 using KeryxNodeManager.Core.ModelAssignment;
 using KeryxNodeManager.Core.Models;
+using KeryxNodeManager.Core.ModelsManagement;
+using KeryxNodeManager.Core.Updates;
 using KeryxNodeManager.Core.Validation;
 using Microsoft.Win32;
 
@@ -129,15 +132,51 @@ public partial class WizardViewModel : ObservableObject
     public ObservableCollection<WizardCheckRow> Checks { get; } = new();
     public ObservableCollection<WizardGpuPreviewRow> GpuPreview { get; } = new();
 
-    public WizardViewModel(ProfileStore profileStore, IGpuInfoProvider gpuInfoProvider, TierAssigner tierAssigner)
+    /// <summary>Drives the same "Установить автоматически" one-click install flow as the
+    /// Node/Miner pages (BinaryUpdateSectionViewModel, reused rather than reimplemented) - the
+    /// wizard is exactly where a brand-new user should never have to manually go find and browse
+    /// to keryxd.exe/keryx-miner.exe (brief follow-up, 2026-08-03).</summary>
+    public BinaryUpdateSectionViewModel NodeUpdate { get; }
+    public BinaryUpdateSectionViewModel MinerUpdate { get; }
+
+    public WizardViewModel(
+        ProfileStore profileStore, IGpuInfoProvider gpuInfoProvider, TierAssigner tierAssigner, HttpClient httpClient)
     {
         _profileStore = profileStore;
         _gpuInfoProvider = gpuInfoProvider;
         _tierAssigner = tierAssigner;
 
+        // Zero-input defaults (brief follow-up, 2026-08-03): a first-time user should be able to
+        // reach the Finish step having only typed their mining address. Models directory gets a
+        // real default immediately; the executables are installed automatically once the user
+        // reaches step 2 (see OnCurrentStepIndexChanged) rather than defaulted silently here, since
+        // that one genuinely needs a network download and visible progress.
+        if (string.IsNullOrWhiteSpace(Profile.ModelsDirectory))
+        {
+            Profile.ModelsDirectory = DefaultInstallPaths.ModelsDirectory;
+        }
+
         _nodeExecutablePathInput = Profile.NodeExecutablePath;
         _minerExecutablePathInput = Profile.MinerExecutablePath;
         _modelsDirectoryInput = Profile.ModelsDirectory;
+
+        var updateService = new BinaryUpdateService(new GitHubReleaseChecker(httpClient), new ModelDownloader(httpClient));
+        NodeUpdate = new BinaryUpdateSectionViewModel(
+            updateService,
+            ManagedBinaryKind.Node,
+            getExecutablePath: () => Profile.NodeExecutablePath,
+            setExecutablePath: v => { Profile.NodeExecutablePath = v; NodeExecutablePathInput = v; },
+            getInstalledVersion: () => Profile.NodeInstalledVersion,
+            setInstalledVersion: v => Profile.NodeInstalledVersion = v,
+            persist: () => { });
+        MinerUpdate = new BinaryUpdateSectionViewModel(
+            updateService,
+            ManagedBinaryKind.Miner,
+            getExecutablePath: () => Profile.MinerExecutablePath,
+            setExecutablePath: v => { Profile.MinerExecutablePath = v; MinerExecutablePathInput = v; },
+            getInstalledVersion: () => Profile.MinerInstalledVersion,
+            setInstalledVersion: v => Profile.MinerInstalledVersion = v,
+            persist: () => { });
     }
 
     partial void OnNodeExecutablePathInputChanged(string value) => Profile.NodeExecutablePath = value;
@@ -169,6 +208,7 @@ public partial class WizardViewModel : ObservableObject
         BackCommand.NotifyCanExecuteChanged();
 
         if (value == 1) _ = RunSystemChecksAsync();
+        if (value == 2) _ = AutoInstallMissingBinariesAsync();
         if (value == 4) _ = RefreshGpuPreviewAsync();
         if (value == 6) IsAddressValid = KeryxAddressValidator.LooksValid(Profile.MiningAddress);
     }
@@ -254,6 +294,22 @@ public partial class WizardViewModel : ObservableObject
             ? null
             : "Адрес не похож на действительный Keryx-адрес (ожидается keryx:... или keryxtest:...). " +
               "Мастер позволяет продолжить, но запуск майнинга с неверным адресом будет отклонён узлом.";
+    }
+
+    /// <summary>Fires automatically the first time step 2 is shown (see
+    /// OnCurrentStepIndexChanged), so a brand-new user reaches this step and simply watches two
+    /// downloads happen instead of being told to go find and browse to two .exe files. Only acts
+    /// on whichever of Node/Miner has NO path configured yet - if the user already pointed at an
+    /// existing install (e.g. their own dev build, arriving here via a re-run of the wizard), that
+    /// choice is left untouched. Network failures here are non-fatal: InstallUpdateCommand's own
+    /// StatusMessage reports the problem inline and Next remains available, since step 2's
+    /// CanGoNext only ever validated ModelsDirectoryInput, not these paths - a user without
+    /// internet access right now can still finish the wizard and install the binaries later from
+    /// the Node/Miner pages.</summary>
+    private async Task AutoInstallMissingBinariesAsync()
+    {
+        if (NodeUpdate.NeedsFirstInstall) await NodeUpdate.InstallUpdateCommand.ExecuteAsync(null);
+        if (MinerUpdate.NeedsFirstInstall) await MinerUpdate.InstallUpdateCommand.ExecuteAsync(null);
     }
 
     [RelayCommand]

@@ -1,6 +1,7 @@
 using System.IO;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using KeryxNodeManager.Core.Config;
 using KeryxNodeManager.Core.ModelsManagement;
 using KeryxNodeManager.Core.Updates;
 
@@ -21,12 +22,22 @@ namespace KeryxNodeManager.App.ViewModels;
 /// stack trace - this ViewModel has no handle on the actual running process (ProcessSupervisor
 /// instances are owned by DashboardViewModel, not shared here), so it cannot stop it itself; the
 /// user is directed to the Dashboard instead.
+///
+/// InstallUpdateAsync used to hard-require the caller to already have typed/browsed to an
+/// executable path before it would do anything ("Сначала укажите путь..."). That was exactly the
+/// kind of friction a first-time, non-developer user should never have to deal with (brief
+/// follow-up, 2026-08-03) - if no path is configured yet, this now auto-picks
+/// KeryxNodeManager.Core.Config.DefaultInstallPaths.ExecutablePathFor(kind) and persists it via
+/// setExecutablePath, so clicking one button is enough to go from "nothing installed" to "running
+/// binary" with zero manual path entry. BrowseExecutable on Node/Miner pages still lets anyone
+/// point at a different/existing install instead.
 /// </summary>
 public partial class BinaryUpdateSectionViewModel : ObservableObject
 {
     private readonly BinaryUpdateService _updateService;
     private readonly ManagedBinaryKind _kind;
     private readonly Func<string> _getExecutablePath;
+    private readonly Action<string> _setExecutablePath;
     private readonly Func<string?> _getInstalledVersion;
     private readonly Action<string> _setInstalledVersion;
     private readonly Action _persist;
@@ -50,10 +61,16 @@ public partial class BinaryUpdateSectionViewModel : ObservableObject
 
     public string? InstalledVersion => _getInstalledVersion();
 
+    /// <summary>True once this binary has never been installed by this app AND no path is
+    /// configured - drives the UI toward a single prominent "Установить автоматически" button
+    /// instead of the check/install pair that assumes a path already exists.</summary>
+    public bool NeedsFirstInstall => string.IsNullOrWhiteSpace(_getExecutablePath());
+
     public BinaryUpdateSectionViewModel(
         BinaryUpdateService updateService,
         ManagedBinaryKind kind,
         Func<string> getExecutablePath,
+        Action<string> setExecutablePath,
         Func<string?> getInstalledVersion,
         Action<string> setInstalledVersion,
         Action persist)
@@ -61,6 +78,7 @@ public partial class BinaryUpdateSectionViewModel : ObservableObject
         _updateService = updateService;
         _kind = kind;
         _getExecutablePath = getExecutablePath;
+        _setExecutablePath = setExecutablePath;
         _getInstalledVersion = getInstalledVersion;
         _setInstalledVersion = setInstalledVersion;
         _persist = persist;
@@ -106,8 +124,13 @@ public partial class BinaryUpdateSectionViewModel : ObservableObject
         var exePath = _getExecutablePath();
         if (string.IsNullOrWhiteSpace(exePath))
         {
-            StatusMessage = "Сначала укажите путь к исполняемому файлу выше.";
-            return;
+            // No path configured yet - auto-default rather than block the user (see class doc
+            // comment). Persisted immediately so a crash/close mid-download doesn't lose the
+            // choice, and so BrowseExecutable's "current path" display picks it up too.
+            exePath = DefaultInstallPaths.ExecutablePathFor(_kind);
+            _setExecutablePath(exePath);
+            _persist();
+            OnPropertyChanged(nameof(NeedsFirstInstall));
         }
 
         IsBusy = true;

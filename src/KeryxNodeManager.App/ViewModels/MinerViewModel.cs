@@ -52,6 +52,17 @@ public partial class MinerViewModel : ObservableObject
         _gpuInfoProvider = gpuInfoProvider;
         _tierAssigner = tierAssigner;
         ExtraArgumentsText = string.Join(" ", Profile.ExtraMinerArguments);
+
+        // A brand-new profile has never asked the user to pick a models folder - defaulting this
+        // to a sensible, already-writable location removes one more "укажите путь к..." prompt a
+        // mainstream user shouldn't have to answer before the Models page's one-click download
+        // even becomes usable (BrowseModelsDirectory below still lets anyone override this).
+        if (string.IsNullOrWhiteSpace(Profile.ModelsDirectory))
+        {
+            Profile.ModelsDirectory = Core.Config.DefaultInstallPaths.ModelsDirectory;
+            _ = _profileStore.SaveAsync();
+        }
+
         ValidateAddress();
         _ = RefreshPreviewAsync();
 
@@ -60,6 +71,11 @@ public partial class MinerViewModel : ObservableObject
             updateService,
             ManagedBinaryKind.Miner,
             getExecutablePath: () => Profile.MinerExecutablePath,
+            setExecutablePath: v =>
+            {
+                Profile.MinerExecutablePath = v;
+                OnPropertyChanged(nameof(Profile));
+            },
             getInstalledVersion: () => Profile.MinerInstalledVersion,
             setInstalledVersion: v => Profile.MinerInstalledVersion = v,
             persist: () => { _ = _profileStore.SaveAsync(); });

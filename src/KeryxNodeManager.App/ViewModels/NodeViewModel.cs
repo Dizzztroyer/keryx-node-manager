@@ -45,6 +45,12 @@ public partial class NodeViewModel : ObservableObject
             updateService,
             ManagedBinaryKind.Node,
             getExecutablePath: () => Profile.NodeExecutablePath,
+            setExecutablePath: v =>
+            {
+                Profile.NodeExecutablePath = v;
+                ExecutablePathIsValid = File.Exists(Profile.NodeExecutablePath);
+                OnPropertyChanged(nameof(Profile));
+            },
             getInstalledVersion: () => Profile.NodeInstalledVersion,
             setInstalledVersion: v => Profile.NodeInstalledVersion = v,
             persist: () => { _ = _profileStore.SaveAsync(); });

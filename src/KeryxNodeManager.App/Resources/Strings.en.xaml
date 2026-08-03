@@ -59,6 +59,8 @@
     <sys:String x:Key="Str_Models_Cancel">Cancel</sys:String>
     <sys:String x:Key="Str_Models_Delete">Delete</sys:String>
     <sys:String x:Key="Str_Models_OpenFolder">Open folder</sys:String>
+    <sys:String x:Key="Str_Models_DownloadOfficial">Download official model</sys:String>
+    <sys:String x:Key="Str_Models_ManualMirrorExpander">Specify your own link (different mirror)</sys:String>
 
     <sys:String x:Key="Str_Node_Title">Node</sys:String>
     <sys:String x:Key="Str_Node_PathLabel">Path to keryxd.exe</sys:String>
@@ -125,6 +127,12 @@
     <sys:String x:Key="Str_Wizard_Step2_ModelsLabel">Models folder (required)</sys:String>
     <sys:String x:Key="Str_Wizard_Step2_Browse">Browse...</sys:String>
     <sys:String x:Key="Str_Wizard_Step2_Note">Paths to keryxd.exe/keryx-miner.exe can be set later on the "Node" and "Miner" pages — to continue the wizard, it's enough to set the models folder.</sys:String>
+    <sys:String x:Key="Str_Wizard_Step2_NodeHeader">Node (keryxd.exe)</sys:String>
+    <sys:String x:Key="Str_Wizard_Step2_MinerHeader">Miner (keryx-miner.exe)</sys:String>
+    <sys:String x:Key="Str_Wizard_Step2_ModelsHeader">Models folder</sys:String>
+    <sys:String x:Key="Str_Wizard_Step2_ManualFileExpander">Specify a different file manually</sys:String>
+    <sys:String x:Key="Str_Wizard_Step2_ManualFolderExpander">Choose a different folder</sys:String>
+    <sys:String x:Key="Str_Wizard_Step2_DefaultPrefix">Default: </sys:String>
     <sys:String x:Key="Str_Wizard_Step3_Title">Reward address</sys:String>
     <sys:String x:Key="Str_Wizard_Step3_Body">Only a public address is entered (keryx:... or keryxtest:...). The wizard never asks for or stores a seed phrase or private key.</sys:String>
     <sys:String x:Key="Str_Wizard_Step4_Title">Preview model assignment by GPU</sys:String>

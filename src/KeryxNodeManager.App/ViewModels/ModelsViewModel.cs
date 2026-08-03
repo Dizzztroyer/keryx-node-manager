@@ -16,12 +16,16 @@ namespace KeryxNodeManager.App.ViewModels;
 /// never assumed), a user-entered mirror URL + optional checksum, and download/pause/cancel/
 /// delete controls wired to the real Core.ModelsManagement.ModelDownloader (brief §7).
 ///
-/// No URL is pre-filled for any tier. docs/KERYX_RESEARCH.md §7 notes the miner's own README
-/// lists HuggingFace/direct/torrent mirrors for manual installs, but this research pass did not
-/// capture the exact links or published checksums - shipping a guessed URL would be worse than
-/// asking the user to paste one they trust from that README (or let the miner's own IPFS
-/// auto-download handle it on first run, which needs no URL at all - this page is a convenience
-/// for pre-staging models before first launch, not the only way to get them).
+/// The manual "paste a URL you trust" field below has no URL pre-filled for any tier, by design -
+/// but each tier also now offers a one-click "Скачать официальную модель" button
+/// (DownloadOfficialCommand) that installs from KeryxNodeManager.Core.ModelsManagement.
+/// OfficialModelMirrors, a small hardcoded table of mirrors the Keryx Labs team announced and this
+/// app independently verified live (see that class's own doc comment for the verification method/
+/// date) - added specifically to remove the "you must go find and paste a URL yourself" friction
+/// for a mainstream, non-developer user. The manual field remains for anyone who wants a different
+/// or newer mirror. Either way, the miner's own IPFS auto-download still works with no URL at all -
+/// this page is a convenience for pre-staging models before first launch, not the only way to get
+/// them.
 /// </summary>
 public partial class ModelCardViewModel : ObservableObject
 {
@@ -36,7 +40,14 @@ public partial class ModelCardViewModel : ObservableObject
 
     private readonly ProfileStore _profileStore;
     private readonly ModelDownloader _downloader;
+    private readonly OfficialModelDownloadService _officialDownloader;
     private CancellationTokenSource? _cts;
+
+    /// <summary>Whether a verified official mirror exists for this tier (see
+    /// OfficialModelMirrors) - drives whether the one-click "Скачать официальную модель" button
+    /// shows at all. All 5 tiers currently have one, but this stays defensive in case a future
+    /// tier is added before its mirror is verified.</summary>
+    public bool HasOfficialMirror => OfficialModelMirrors.TryGet(Spec.Tier) is not null;
 
     [ObservableProperty]
     [NotifyCanExecuteChangedFor(nameof(DownloadCommand))]
@@ -86,11 +97,14 @@ public partial class ModelCardViewModel : ObservableObject
         ShowResumeButton = !IsDownloading && HasPausedDownload;
     }
 
-    public ModelCardViewModel(ModelSpec spec, ProfileStore profileStore, ModelDownloader downloader)
+    public ModelCardViewModel(
+        ModelSpec spec, ProfileStore profileStore, ModelDownloader downloader,
+        OfficialModelDownloadService officialDownloader)
     {
         Spec = spec;
         _profileStore = profileStore;
         _downloader = downloader;
+        _officialDownloader = officialDownloader;
 
         if (_profileStore.ActiveProfile.ModelSources.TryGetValue(spec.Tier.ToString(), out var saved))
         {
@@ -218,6 +232,77 @@ public partial class ModelCardViewModel : ObservableObject
         }
     }
 
+    private bool CanDownloadOfficial() => !IsDownloading && HasOfficialMirror;
+
+    /// <summary>One-click install from the verified official mirror (see OfficialModelMirrors) -
+    /// no URL to paste, no path to pick. Falls back to the same
+    /// KeryxNodeManager.Core.Config.DefaultInstallPaths.ModelsDirectory the rest of the app now
+    /// defaults to if the user genuinely has no ModelsDirectory configured yet (should be rare -
+    /// MinerViewModel now defaults this on first load), so this button works even before the user
+    /// has ever visited the Miner page.</summary>
+    [RelayCommand(CanExecute = nameof(CanDownloadOfficial))]
+    private async Task DownloadOfficialAsync()
+    {
+        var mirror = OfficialModelMirrors.TryGet(Spec.Tier);
+        if (mirror is null) return;
+
+        var modelsDir = _profileStore.ActiveProfile.ModelsDirectory;
+        if (string.IsNullOrWhiteSpace(modelsDir))
+        {
+            modelsDir = KeryxNodeManager.Core.Config.DefaultInstallPaths.ModelsDirectory;
+            _profileStore.ActiveProfile.ModelsDirectory = modelsDir;
+            await _profileStore.SaveAsync();
+        }
+
+        _cts = new CancellationTokenSource();
+        IsDownloading = true;
+        HasPausedDownload = false;
+        ProgressIsIndeterminate = true;
+
+        var progress = new Progress<OfficialModelDownloadProgress>(p =>
+        {
+            if (p.TotalBytes is long total && total > 0)
+            {
+                ProgressIsIndeterminate = false;
+                ProgressPercent = 100.0 * p.BytesReceived / total;
+                StatusText = $"{p.Phase} {ProgressPercent:F1}% ({FormatSize(p.BytesReceived)} из {FormatSize(total)})";
+            }
+            else
+            {
+                ProgressIsIndeterminate = true;
+                StatusText = $"{p.Phase} {FormatSize(p.BytesReceived)}";
+            }
+        });
+
+        try
+        {
+            // Torrent mirror preferred when available (offloads bandwidth from the single HTTP
+            // origin) - same preference DataDirDownloadService's callers use, falls back to the
+            // direct HTTP URL for tiers with no torrent (currently just VeryLight).
+            var source = mirror.TorrentUrl ?? mirror.DirectUrl;
+            await _officialDownloader.DownloadAndInstallAsync(Spec, source, modelsDir, progress, _cts.Token);
+            StatusText = "Скачивание завершено.";
+        }
+        catch (OperationCanceledException)
+        {
+            StatusText = "Скачивание отменено.";
+        }
+        catch (OfficialModelDownloadException ex)
+        {
+            StatusText = ex.Message;
+        }
+        catch (Exception ex)
+        {
+            StatusText = $"Ошибка скачивания: {ex.Message}";
+        }
+        finally
+        {
+            IsDownloading = false;
+            _cts = null;
+            RefreshState();
+        }
+    }
+
     [RelayCommand]
     private void Pause()
     {
@@ -305,9 +390,10 @@ public partial class ModelsViewModel : ObservableObject
     {
         _profileStore = profileStore;
         var downloader = new ModelDownloader(httpClient);
+        var officialDownloader = new OfficialModelDownloadService(httpClient);
         foreach (var spec in ModelTierCatalog.Tiers)
         {
-            var card = new ModelCardViewModel(spec, profileStore, downloader);
+            var card = new ModelCardViewModel(spec, profileStore, downloader, officialDownloader);
             card.StateChanged += RefreshTotalDiskUsage;
             Models.Add(card);
         }

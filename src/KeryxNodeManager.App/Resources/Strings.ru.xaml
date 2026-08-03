@@ -82,6 +82,10 @@
     <sys:String x:Key="Str_Models_Cancel">Отмена</sys:String>
     <sys:String x:Key="Str_Models_Delete">Удалить</sys:String>
     <sys:String x:Key="Str_Models_OpenFolder">Открыть папку</sys:String>
+    <!-- One-click official-mirror download (brief follow-up, 2026-08-03) - see
+         OfficialModelMirrors in Core for the verified mirror table this button installs from. -->
+    <sys:String x:Key="Str_Models_DownloadOfficial">Скачать официальную модель</sys:String>
+    <sys:String x:Key="Str_Models_ManualMirrorExpander">Указать свою ссылку (другое зеркало)</sys:String>
 
     <!-- Node page (brief §8), fourth slice of the full-extraction pass. NodeViewModel.StatusMessage
          (connectivity check results/errors) and the native OpenFileDialog title/filter set in C#
@@ -161,6 +165,15 @@
     <sys:String x:Key="Str_Wizard_Step2_ModelsLabel">Папка моделей (обязательно)</sys:String>
     <sys:String x:Key="Str_Wizard_Step2_Browse">Обзор...</sys:String>
     <sys:String x:Key="Str_Wizard_Step2_Note">Пути к keryxd.exe/keryx-miner.exe можно указать позже на страницах «Узел» и «Майнер» — для продолжения мастера достаточно указать папку моделей.</sys:String>
+    <!-- Step 2 auto-install UI (brief follow-up, 2026-08-03) - keryxd.exe/keryx-miner.exe now
+         install themselves automatically on this step; these keys drive the new headers/expanders
+         that replaced the old "type a path" fields as the primary UI. -->
+    <sys:String x:Key="Str_Wizard_Step2_NodeHeader">Нода (keryxd.exe)</sys:String>
+    <sys:String x:Key="Str_Wizard_Step2_MinerHeader">Майнер (keryx-miner.exe)</sys:String>
+    <sys:String x:Key="Str_Wizard_Step2_ModelsHeader">Папка для моделей</sys:String>
+    <sys:String x:Key="Str_Wizard_Step2_ManualFileExpander">Указать другой файл вручную</sys:String>
+    <sys:String x:Key="Str_Wizard_Step2_ManualFolderExpander">Выбрать другую папку</sys:String>
+    <sys:String x:Key="Str_Wizard_Step2_DefaultPrefix">По умолчанию: </sys:String>
     <sys:String x:Key="Str_Wizard_Step3_Title">Адрес для начисления вознаграждения</sys:String>
     <sys:String x:Key="Str_Wizard_Step3_Body">Указывается только публичный адрес (keryx:... или keryxtest:...). Мастер никогда не запрашивает и не сохраняет seed-фразу или приватный ключ.</sys:String>
     <sys:String x:Key="Str_Wizard_Step4_Title">Предварительное назначение моделей по видеокартам</sys:String>
