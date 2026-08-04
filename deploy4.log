@@ -1,7 +1,9 @@
-==== START 04.08.2026  8:31:01,67 ==== 
+==== START 04.08.2026  8:35:47,38 ==== 
 ---- dotnet build ---- 
   Определение проектов для восстановления...
-  Все проекты обновлены для восстановления.
+  Восстановлен C:\Users\hambi\KRX_miner\KeryxNodeManager\src\KeryxNodeManager.App\KeryxNodeManager.App.csproj (за 2,28 с).
+  Восстановлен C:\Users\hambi\KRX_miner\KeryxNodeManager\src\KeryxNodeManager.Core\KeryxNodeManager.Core.csproj (за 2,28 с).
+  Проектов обновлено для восстановления: 1 из 3.
   KeryxNodeManager.Core -> C:\Users\hambi\KRX_miner\KeryxNodeManager\src\KeryxNodeManager.Core\bin\Release\net8.0\KeryxNodeManager.Core.dll
   KeryxNodeManager.Core.Tests -> C:\Users\hambi\KRX_miner\KeryxNodeManager\tests\KeryxNodeManager.Core.Tests\bin\Release\net8.0\KeryxNodeManager.Core.Tests.dll
   KeryxNodeManager.App -> C:\Users\hambi\KRX_miner\KeryxNodeManager\src\KeryxNodeManager.App\bin\Release\net8.0-windows\KeryxNodeManager.dll
@@ -10,7 +12,7 @@
     Предупреждений: 0
     Ошибок: 0
 
-Прошло времени 00:00:02.50
+Прошло времени 00:00:04.30
 ---- dotnet test ---- 
   Определение проектов для восстановления...
   Все проекты обновлены для восстановления.

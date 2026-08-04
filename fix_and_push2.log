@@ -1,0 +1,43 @@
+==== START 04.08.2026  8:35:13,64 ==== 
+---- undo the bad commit (it was never accepted by GitHub, safe to drop) ---- 
+---- unstage the large binaries entirely (already removed from disk) ---- 
+Unstaged changes after reset:
+M	deploy4.log
+---- add a .gitignore rule so this can never happen again ---- 
+warning: in the working copy of '.gitignore', LF will be replaced by CRLF the next time Git touches it
+---- staging only the real fix ---- 
+warning: in the working copy of 'fix_and_push2.bat', LF will be replaced by CRLF the next time Git touches it
+---- status before commit ---- 
+M  .gitignore
+M  deploy3.log
+AM deploy4.log
+A  deploy_updater_fix.bat
+A  fix_and_push.bat
+A  fix_and_push2.bat
+A  install_miner_plugins.bat
+A  install_miner_plugins.log
+M  src/KeryxNodeManager.Core/Updates/BinaryUpdateService.cs
+M  tests/KeryxNodeManager.Core.Tests/BinaryUpdateServiceTests.cs
+?? fix_and_push.log
+?? fix_and_push2.log
+---- committing ---- 
+[main 121351c] 0.2.7: fix updater dropping plugin DLLs on install; gitignore *.dll to stop large binaries from ever being committed again
+ 10 files changed, 343 insertions(+)
+ create mode 100644 deploy4.log
+ create mode 100644 deploy_updater_fix.bat
+ create mode 100644 fix_and_push.bat
+ create mode 100644 fix_and_push2.bat
+ create mode 100644 install_miner_plugins.bat
+ create mode 100644 install_miner_plugins.log
+---- pushing ---- 
+To https://github.com/Dizzztroyer/keryx-node-manager.git
+   50a6606..121351c  main -> main
+---- final status ---- 
+ M deploy4.log
+?? fix_and_push.log
+?? fix_and_push2.log
+121351c 0.2.7: fix updater dropping plugin DLLs on install; gitignore *.dll to stop large binaries from ever being committed again
+50a6606 0.2.7: detect missing keryx-miner plugin DLLs (No workers found) and surface a clear Dashboard banner pointing at the official Discord for a complete build
+ea5b49b 0.2.7: surface keryx-miner's CUDA runtime failure on the Dashboard with a direct download link, instead of only in Logs
+DONE 
+==== END 04.08.2026  8:35:15,98 ==== 

@@ -1,0 +1,55 @@
+==== START 04.08.2026  8:33:18,75 ==== 
+---- removing accidentally-tracked large binaries from working tree ---- 
+---- git status after reset ---- 
+AD _miner_update/cublas64_12.dll
+AD _miner_update/cublasLt64_12.dll
+M  deploy3.log
+AM deploy4.log
+A  deploy_updater_fix.bat
+A  install_miner_plugins.bat
+A  install_miner_plugins.log
+AD keryx-llama.dll
+AD keryxcuda.dll
+M  src/KeryxNodeManager.Core/Updates/BinaryUpdateService.cs
+M  tests/KeryxNodeManager.Core.Tests/BinaryUpdateServiceTests.cs
+?? fix_and_push.bat
+?? fix_and_push.log
+50a6606 0.2.7: detect missing keryx-miner plugin DLLs (No workers found) and surface a clear Dashboard banner pointing at the official Discord for a complete build
+ea5b49b 0.2.7: surface keryx-miner's CUDA runtime failure on the Dashboard with a direct download link, instead of only in Logs
+55b8f54 0.2.7 fixes: Models page scroll + accurate download %, throttled progress reporting, Logs page capped to last 50 lines, Node page highlights the in-use public node, About page step-by-step mining guide (all 7 languages), autostart Startup-folder fallback when Task Scheduler is blocked
+---- staging only the real fix ---- 
+warning: in the working copy of 'fix_and_push.bat', LF will be replaced by CRLF the next time Git touches it
+---- committing ---- 
+[main d3577fd] 0.2.7: fix updater dropping plugin DLLs - ApplyUpdate now copies sibling files (e.g. keryxcuda.dll, keryx-llama.dll) extracted alongside the exe, not just the exe itself, so a fresh user's own Install Update never leaves a newer binary paired with missing/stale plugins
+ 12 files changed, 289 insertions(+)
+ create mode 100644 _miner_update/cublas64_12.dll
+ create mode 100644 _miner_update/cublasLt64_12.dll
+ create mode 100644 deploy4.log
+ create mode 100644 deploy_updater_fix.bat
+ create mode 100644 fix_and_push.bat
+ create mode 100644 install_miner_plugins.bat
+ create mode 100644 install_miner_plugins.log
+ create mode 100644 keryx-llama.dll
+ create mode 100644 keryxcuda.dll
+---- pushing ---- 
+remote: warning: File _miner_update/cublas64_12.dll is 96.13 MB; this is larger than GitHub's recommended maximum file size of 50.00 MB        
+remote: error: Trace: 8b603fbc2aee2f5c8b1e71918657460dc643e30a226d1a729a5ed7c0ab36dee0        
+remote: error: See https://gh.io/lfs for more information.        
+remote: error: File _miner_update/cublasLt64_12.dll is 252.20 MB; this exceeds GitHub's file size limit of 100.00 MB        
+remote: error: File keryx-llama.dll is 617.59 MB; this exceeds GitHub's file size limit of 100.00 MB        
+remote: error: GH001: Large files detected. You may want to try Git Large File Storage - https://git-lfs.github.com.        
+To https://github.com/Dizzztroyer/keryx-node-manager.git
+ ! [remote rejected] main -> main (pre-receive hook declined)
+error: failed to push some refs to 'https://github.com/Dizzztroyer/keryx-node-manager.git'
+---- final status ---- 
+ D _miner_update/cublas64_12.dll
+ D _miner_update/cublasLt64_12.dll
+ M deploy4.log
+ D keryx-llama.dll
+ D keryxcuda.dll
+?? fix_and_push.log
+d3577fd 0.2.7: fix updater dropping plugin DLLs - ApplyUpdate now copies sibling files (e.g. keryxcuda.dll, keryx-llama.dll) extracted alongside the exe, not just the exe itself, so a fresh user's own Install Update never leaves a newer binary paired with missing/stale plugins
+50a6606 0.2.7: detect missing keryx-miner plugin DLLs (No workers found) and surface a clear Dashboard banner pointing at the official Discord for a complete build
+ea5b49b 0.2.7: surface keryx-miner's CUDA runtime failure on the Dashboard with a direct download link, instead of only in Logs
+DONE 
+==== END 04.08.2026  8:34:07,73 ==== 
