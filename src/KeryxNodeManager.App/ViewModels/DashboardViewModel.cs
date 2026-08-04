@@ -9,11 +9,13 @@ using KeryxNodeManager.Core.Gpu;
 using KeryxNodeManager.Core.Logging;
 using KeryxNodeManager.Core.ModelAssignment;
 using KeryxNodeManager.Core.Models;
+using KeryxNodeManager.Core.ModelsManagement;
 using KeryxNodeManager.Core.Networking;
 using KeryxNodeManager.Core.Process;
 using KeryxNodeManager.Core.Runtime;
 using KeryxNodeManager.Core.Safety;
 using KeryxNodeManager.Core.Localization;
+using System.Net.Http;
 
 namespace KeryxNodeManager.App.ViewModels;
 
@@ -47,6 +49,7 @@ public partial class DashboardViewModel : ObservableObject
     private readonly ProcessSupervisor _nodeSupervisor;
     private readonly ProcessSupervisor _minerSupervisor;
     private readonly WalletRpcService _walletRpcService = new();
+    private readonly OfficialModelDownloadService _officialModelDownloader;
 
     [ObservableProperty]
     private string _nodeStatus = "";
@@ -112,6 +115,34 @@ public partial class DashboardViewModel : ObservableObject
     /// escrow stats, never by this counter.</summary>
     [ObservableProperty]
     private bool _showHashrateAnomalyWarning;
+
+    /// <summary>True while StartAllAsync is downloading a missing tier's model on the user's
+    /// behalf before launching keryx-miner (2026-08-04 user follow-up: they saw a real % progress
+    /// bar on the Models page's own manual download, but nothing at all during the miner's own
+    /// first-run IPFS auto-download - root cause: that download happens entirely inside
+    /// keryx-miner.exe itself, with no progress/byte-count of any kind in its stdout for this app
+    /// to parse, see docs/KERYX_RESEARCH.md §7). Rather than inventing a fake percentage for an
+    /// opaque subprocess download, EnsureModelsDownloadedAsync now proactively runs the SAME
+    /// OfficialModelDownloadService the Models page's "Скачать официальную модель" button already
+    /// uses - real bytes-received/total from an HTTP or torrent transfer this app itself drives -
+    /// before the miner is even started, so the miner finds the model already installed and never
+    /// needs its own silent fetch at all.</summary>
+    [ObservableProperty]
+    private bool _isDownloadingModel;
+
+    [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(ModelDownloadProgressPercentText))]
+    private double _modelDownloadProgressPercent;
+
+    /// <summary>See ModelCardViewModel.ProgressPercentText's own doc comment - same "NN%" label
+    /// convention reused here rather than a second, differently-formatted copy.</summary>
+    public string ModelDownloadProgressPercentText => $"{ModelDownloadProgressPercent:F0}%";
+
+    [ObservableProperty]
+    private bool _modelDownloadProgressIsIndeterminate;
+
+    [ObservableProperty]
+    private string _modelDownloadStatusText = "";
 
     /// <summary>Formatted "12.34567890 KRX" (or a placeholder before the first successful load) -
     /// read from keryxd's own getBalanceByAddress RPC against the profile's public MiningAddress.
@@ -265,7 +296,7 @@ public partial class DashboardViewModel : ObservableObject
 
     public DashboardViewModel(
         IKeryxRuntimeBackend runtimeBackend, IGpuInfoProvider gpuInfoProvider, TierAssigner tierAssigner,
-        ProfileStore profileStore, LogSink logSink, SafetyMonitor safetyMonitor)
+        ProfileStore profileStore, LogSink logSink, SafetyMonitor safetyMonitor, HttpClient httpClient)
     {
         _runtimeBackend = runtimeBackend;
         _gpuInfoProvider = gpuInfoProvider;
@@ -274,6 +305,7 @@ public partial class DashboardViewModel : ObservableObject
         _logSink = logSink;
         _safetyMonitor = safetyMonitor;
         _safetyMonitor.EventRaised += OnSafetyEventRaised;
+        _officialModelDownloader = new OfficialModelDownloadService(httpClient);
 
         var profile = _profileStore.ActiveProfile;
         _nodeSupervisor = new ProcessSupervisor(
@@ -365,6 +397,8 @@ public partial class DashboardViewModel : ObservableObject
         ShowCudaRuntimeWarning = false;
         ShowMissingPluginWarning = false;
         ShowHashrateAnomalyWarning = false;
+        IsDownloadingModel = false;
+        ModelDownloadStatusText = "";
 
         if (string.IsNullOrWhiteSpace(profile.NodeExecutablePath) && !IsMockBackend)
         {
@@ -425,6 +459,13 @@ public partial class DashboardViewModel : ObservableObject
                     minerEnv["CUDA_VISIBLE_DEVICES"] = MinerArgumentBuilder.BuildCudaVisibleDevices(enabledCudaIndexes);
                 }
 
+                // Real-progress model pre-download (2026-08-04 user follow-up - see
+                // IsDownloadingModel's own doc comment for the full "why"): make sure every tier
+                // this launch actually assigned to a GPU is already installed BEFORE the miner
+                // starts, so keryx-miner never has to fall back to its own silent, unparseable
+                // IPFS fetch in the first place.
+                await EnsureModelsDownloadedAsync(gpuAssignments);
+
                 var minerSpec = new MinerLaunchSpec(
                     ExecutablePath: profile.MinerExecutablePath,
                     Arguments: minerArgs,
@@ -454,6 +495,86 @@ public partial class DashboardViewModel : ObservableObject
         catch (Exception ex)
         {
             LastActionMessage = AppStrings.Format("Str_Dashboard_LaunchFailed", ex.Message);
+        }
+    }
+
+    /// <summary>Downloads every tier actually assigned to a GPU this launch (deduplicated - two
+    /// cards on the same tier only download it once) that isn't already installed, using the exact
+    /// same OfficialModelDownloadService the Models page's own "Скачать официальную модель" button
+    /// drives - real HTTP/torrent byte-progress, not a guess. Runs sequentially, before the miner
+    /// process is started, specifically so the miner finds the file already there and never falls
+    /// back to its own silent IPFS fetch (see IsDownloadingModel's doc comment for the full
+    /// motivation). A missing official mirror or a failed download does not block the miner launch
+    /// - it just means that tier's model may still not exist when the miner starts, in which case
+    /// the miner's own (progress-less) auto-download is the same fallback that existed before this
+    /// method was added, not a new failure mode.</summary>
+    private async Task EnsureModelsDownloadedAsync(IReadOnlyList<ModelTier?> gpuAssignments)
+    {
+        var profile = _profileStore.ActiveProfile;
+        var modelsDir = profile.ModelsDirectory;
+        if (string.IsNullOrWhiteSpace(modelsDir))
+        {
+            modelsDir = DefaultInstallPaths.ModelsDirectory;
+            profile.ModelsDirectory = modelsDir;
+            await _profileStore.SaveAsync();
+        }
+
+        var neededTiers = gpuAssignments.Where(t => t is not null).Select(t => t!.Value).Distinct();
+        foreach (var tier in neededTiers)
+        {
+            var spec = ModelTierCatalog.Get(tier);
+            if (ModelFileLocator.IsInstalled(modelsDir, spec.DirName)) continue;
+
+            var mirror = OfficialModelMirrors.TryGet(tier);
+            if (mirror is null)
+            {
+                // No verified mirror for this tier (defensive only - every tier currently has one,
+                // see OfficialModelMirrors) - fall back to the miner's own silent IPFS download
+                // exactly as before this feature existed. Nothing this app can do here produces a
+                // real percentage for that path (see IsDownloadingModel's doc comment), so an
+                // honest "please wait, no progress available" note is better than either a fake
+                // bar or total silence.
+                ModelDownloadStatusText = AppStrings.Format("Str_Dashboard_ModelAutoDownloadNoMirror", spec.Name);
+                continue;
+            }
+
+            IsDownloadingModel = true;
+            ModelDownloadProgressIsIndeterminate = true;
+            ModelDownloadProgressPercent = 0;
+            ModelDownloadStatusText = AppStrings.Format("Str_Dashboard_ModelAutoDownloadStarting", spec.Name);
+
+            var progress = new Progress<OfficialModelDownloadProgress>(p =>
+            {
+                if (p.TotalBytes is long total && total > 0)
+                {
+                    ModelDownloadProgressIsIndeterminate = false;
+                    ModelDownloadProgressPercent = 100.0 * p.BytesReceived / total;
+                    ModelDownloadStatusText = AppStrings.Format(
+                        "Str_Dashboard_ModelAutoDownloadProgress", spec.Name, p.Phase, ModelDownloadProgressPercent.ToString("F1"));
+                }
+                else
+                {
+                    ModelDownloadProgressIsIndeterminate = true;
+                    ModelDownloadStatusText = AppStrings.Format("Str_Dashboard_ModelAutoDownloadProgressNoTotal", spec.Name, p.Phase);
+                }
+            });
+
+            try
+            {
+                var source = mirror.TorrentUrl ?? mirror.DirectUrl;
+                await _officialModelDownloader.DownloadAndInstallAsync(spec, source, modelsDir, progress, CancellationToken.None);
+                ModelDownloadStatusText = AppStrings.Format("Str_Dashboard_ModelAutoDownloadComplete", spec.Name);
+            }
+            catch (Exception ex)
+            {
+                // Same "don't block the launch on it" fallback as the no-mirror branch above - the
+                // miner can still attempt its own IPFS fetch for this tier.
+                ModelDownloadStatusText = AppStrings.Format("Str_Dashboard_ModelAutoDownloadError", spec.Name, ex.Message);
+            }
+            finally
+            {
+                IsDownloadingModel = false;
+            }
         }
     }
 

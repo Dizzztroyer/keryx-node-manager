@@ -66,6 +66,17 @@
     <sys:String x:Key="Str_Dashboard_HashrateAnomalyTitle">Looks like a hashrate counter bug</sys:String>
     <sys:String x:Key="Str_Dashboard_HashrateAnomalyBody">The miner log shows one device reporting a hashrate in Ghash/s or Thash/s - that's not physically plausible (for reference, the whole Keryx network totals only tens of gigahashes/s). This looks like a counting bug inside keryx-miner itself (not this app) - judge your real output by accepted blocks, not this number. Worth reporting in the Keryx Labs Discord.</sys:String>
 
+    <!-- DashboardViewModel.EnsureModelsDownloadedAsync (2026-08-04 user follow-up): real progress
+         for the model that's about to auto-install before the miner starts, instead of no
+         indicator at all while keryx-miner did its own silent IPFS fetch. -->
+    <sys:String x:Key="Str_Dashboard_ModelDownloadTitle">Model download</sys:String>
+    <sys:String x:Key="Str_Dashboard_ModelAutoDownloadNoMirror">{0}: no official mirror exists for this tier - the miner will try to download it itself over IPFS, with no progress indicator.</sys:String>
+    <sys:String x:Key="Str_Dashboard_ModelAutoDownloadStarting">{0}: starting download...</sys:String>
+    <sys:String x:Key="Str_Dashboard_ModelAutoDownloadProgress">{0}: {1} {2}%</sys:String>
+    <sys:String x:Key="Str_Dashboard_ModelAutoDownloadProgressNoTotal">{0}: {1}</sys:String>
+    <sys:String x:Key="Str_Dashboard_ModelAutoDownloadComplete">{0}: model installed.</sys:String>
+    <sys:String x:Key="Str_Dashboard_ModelAutoDownloadError">{0}: automatic download failed ({1}). The miner will try to fetch it itself over IPFS.</sys:String>
+
     <sys:String x:Key="Str_Dashboard_Wallet_Title">Wallet (mining address balance)</sys:String>
     <sys:String x:Key="Str_Dashboard_Wallet_PublicOnlyNote">Public address only — this app never stores or requests a private key or seed phrase.</sys:String>
     <sys:String x:Key="Str_Dashboard_Wallet_NoAddress">No mining address set — enter one on the Miner page.</sys:String>

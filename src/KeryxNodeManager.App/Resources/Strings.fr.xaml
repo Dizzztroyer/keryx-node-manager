@@ -61,6 +61,17 @@
     <sys:String x:Key="Str_Dashboard_HashrateAnomalyTitle">Cela ressemble à un bug du compteur de hashrate</sys:String>
     <sys:String x:Key="Str_Dashboard_HashrateAnomalyBody">Le journal du mineur indique qu'un périphérique rapporte un hashrate en Ghash/s ou Thash/s - ce n'est pas physiquement plausible (à titre de comparaison, tout le réseau Keryx totalise seulement quelques dizaines de gigahashes/s). Cela ressemble à un bug de comptage dans keryx-miner lui-même (pas dans cette application) - évaluez votre production réelle par les blocs acceptés, pas par ce chiffre. Cela vaut la peine de le signaler sur le Discord de Keryx Labs.</sys:String>
 
+    <!-- DashboardViewModel.EnsureModelsDownloadedAsync (2026-08-04 user follow-up): real progress
+         for the model that's about to auto-install before the miner starts, instead of no
+         indicator at all while keryx-miner did its own silent IPFS fetch. -->
+    <sys:String x:Key="Str_Dashboard_ModelDownloadTitle">Téléchargement du modèle</sys:String>
+    <sys:String x:Key="Str_Dashboard_ModelAutoDownloadNoMirror">{0} : aucun mirroir officiel n'existe pour ce palier - le mineur tentera de le télécharger lui-même via IPFS, sans indicateur de progression.</sys:String>
+    <sys:String x:Key="Str_Dashboard_ModelAutoDownloadStarting">{0} : démarrage du téléchargement...</sys:String>
+    <sys:String x:Key="Str_Dashboard_ModelAutoDownloadProgress">{0} : {1} {2}%</sys:String>
+    <sys:String x:Key="Str_Dashboard_ModelAutoDownloadProgressNoTotal">{0} : {1}</sys:String>
+    <sys:String x:Key="Str_Dashboard_ModelAutoDownloadComplete">{0} : modèle installé.</sys:String>
+    <sys:String x:Key="Str_Dashboard_ModelAutoDownloadError">{0} : le téléchargement automatique a échoué ({1}). Le mineur tentera de le télécharger lui-même via IPFS.</sys:String>
+
     <sys:String x:Key="Str_Dashboard_Wallet_Title">Portefeuille (solde de l'adresse de minage)</sys:String>
     <sys:String x:Key="Str_Dashboard_Wallet_PublicOnlyNote">Adresse publique uniquement — cette application ne stocke ni ne demande jamais de clé privée ou de phrase secrète.</sys:String>
     <sys:String x:Key="Str_Dashboard_Wallet_NoAddress">Aucune adresse de minage définie — indiquez-en une sur la page Mineur.</sys:String>

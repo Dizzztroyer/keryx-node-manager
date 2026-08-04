@@ -61,6 +61,17 @@
     <sys:String x:Key="Str_Dashboard_HashrateAnomalyTitle">Sembra un bug del contatore di hashrate</sys:String>
     <sys:String x:Key="Str_Dashboard_HashrateAnomalyBody">Il log del miner mostra un dispositivo che riporta un hashrate in Ghash/s o Thash/s - non è fisicamente plausibile (per confronto, l'intera rete Keryx totalizza solo decine di gigahash/s). Sembra un bug di conteggio nello stesso keryx-miner (non in questa app) - valuta la tua produzione reale dai blocchi accettati, non da questo numero. Vale la pena segnalarlo sul Discord di Keryx Labs.</sys:String>
 
+    <!-- DashboardViewModel.EnsureModelsDownloadedAsync (2026-08-04 user follow-up): real progress
+         for the model that's about to auto-install before the miner starts, instead of no
+         indicator at all while keryx-miner did its own silent IPFS fetch. -->
+    <sys:String x:Key="Str_Dashboard_ModelDownloadTitle">Download del modello</sys:String>
+    <sys:String x:Key="Str_Dashboard_ModelAutoDownloadNoMirror">{0}: non esiste un mirror ufficiale per questo livello - il miner proverà a scaricarlo da solo via IPFS, senza indicatore di avanzamento.</sys:String>
+    <sys:String x:Key="Str_Dashboard_ModelAutoDownloadStarting">{0}: avvio del download...</sys:String>
+    <sys:String x:Key="Str_Dashboard_ModelAutoDownloadProgress">{0}: {1} {2}%</sys:String>
+    <sys:String x:Key="Str_Dashboard_ModelAutoDownloadProgressNoTotal">{0}: {1}</sys:String>
+    <sys:String x:Key="Str_Dashboard_ModelAutoDownloadComplete">{0}: modello installato.</sys:String>
+    <sys:String x:Key="Str_Dashboard_ModelAutoDownloadError">{0}: download automatico non riuscito ({1}). Il miner proverà a scaricarlo da solo via IPFS.</sys:String>
+
     <sys:String x:Key="Str_Dashboard_Wallet_Title">Portafoglio (saldo dell'indirizzo di mining)</sys:String>
     <sys:String x:Key="Str_Dashboard_Wallet_PublicOnlyNote">Solo indirizzo pubblico — questa app non memorizza né richiede mai una chiave privata o una seed phrase.</sys:String>
     <sys:String x:Key="Str_Dashboard_Wallet_NoAddress">Nessun indirizzo di mining impostato — inseriscilo nella pagina Miner.</sys:String>

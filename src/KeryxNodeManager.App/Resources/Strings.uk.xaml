@@ -64,6 +64,17 @@
     <sys:String x:Key="Str_Dashboard_HashrateAnomalyTitle">Схоже на баг лічильника хешрейту</sys:String>
     <sys:String x:Key="Str_Dashboard_HashrateAnomalyBody">У логу майнера один пристрій показує хешрейт у Ghash/s або Thash/s - це фізично неправдоподібно (для порівняння, вся мережа Keryx сумарно дає лише десятки гігахешів/с). Схоже на баг підрахунку в самому keryx-miner (не в цьому застосунку) - реальний видобуток краще оцінювати за кількістю прийнятих блоків, а не за цим числом. Варто повідомити про це в Discord Keryx Labs.</sys:String>
 
+    <!-- DashboardViewModel.EnsureModelsDownloadedAsync (2026-08-04 user follow-up): real progress
+         for the model that's about to auto-install before the miner starts, instead of no
+         indicator at all while keryx-miner did its own silent IPFS fetch. -->
+    <sys:String x:Key="Str_Dashboard_ModelDownloadTitle">Завантаження моделі</sys:String>
+    <sys:String x:Key="Str_Dashboard_ModelAutoDownloadNoMirror">{0}: офіційного дзеркала для цього рівня немає - майнер спробує завантажити модель сам через IPFS, без індикатора прогресу.</sys:String>
+    <sys:String x:Key="Str_Dashboard_ModelAutoDownloadStarting">{0}: починаємо завантаження...</sys:String>
+    <sys:String x:Key="Str_Dashboard_ModelAutoDownloadProgress">{0}: {1} {2}%</sys:String>
+    <sys:String x:Key="Str_Dashboard_ModelAutoDownloadProgressNoTotal">{0}: {1}</sys:String>
+    <sys:String x:Key="Str_Dashboard_ModelAutoDownloadComplete">{0}: модель встановлено.</sys:String>
+    <sys:String x:Key="Str_Dashboard_ModelAutoDownloadError">{0}: не вдалося автоматично завантажити модель ({1}). Майнер спробує зробити це сам через IPFS.</sys:String>
+
     <sys:String x:Key="Str_Dashboard_Wallet_Title">Гаманець (баланс адреси майнінгу)</sys:String>
     <sys:String x:Key="Str_Dashboard_Wallet_PublicOnlyNote">Лише публічна адреса — застосунок ніколи не зберігає і не запитує приватний ключ чи сід-фразу.</sys:String>
     <sys:String x:Key="Str_Dashboard_Wallet_NoAddress">Адресу майнінгу не задано — вкажіть її на сторінці «Майнер».</sys:String>

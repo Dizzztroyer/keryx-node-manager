@@ -79,6 +79,17 @@
     <sys:String x:Key="Str_Dashboard_HashrateAnomalyTitle">Похоже на ошибку счётчика хешрейта</sys:String>
     <sys:String x:Key="Str_Dashboard_HashrateAnomalyBody">В логе майнера одно из устройств показывает хешрейт в Ghash/s или Thash/s — это физически неправдоподобно (для сравнения, вся сеть Keryx суммарно даёт порядка десятков гигахешей/с). Похоже на ошибку счётчика в самом keryx-miner (не в этом приложении) — реальную добычу лучше оценивать по количеству принятых блоков, а не по этой цифре. Стоит сообщить об этом в Discord Keryx Labs.</sys:String>
 
+    <!-- DashboardViewModel.EnsureModelsDownloadedAsync (2026-08-04 user follow-up): real progress
+         for the model that's about to auto-install before the miner starts, instead of no
+         indicator at all while keryx-miner did its own silent IPFS fetch. -->
+    <sys:String x:Key="Str_Dashboard_ModelDownloadTitle">Загрузка модели</sys:String>
+    <sys:String x:Key="Str_Dashboard_ModelAutoDownloadNoMirror">{0}: официального зеркала для этого тира нет — майнер попробует скачать модель сам через IPFS, без индикатора прогресса.</sys:String>
+    <sys:String x:Key="Str_Dashboard_ModelAutoDownloadStarting">{0}: начинаем загрузку...</sys:String>
+    <sys:String x:Key="Str_Dashboard_ModelAutoDownloadProgress">{0}: {1} {2}%</sys:String>
+    <sys:String x:Key="Str_Dashboard_ModelAutoDownloadProgressNoTotal">{0}: {1}</sys:String>
+    <sys:String x:Key="Str_Dashboard_ModelAutoDownloadComplete">{0}: модель установлена.</sys:String>
+    <sys:String x:Key="Str_Dashboard_ModelAutoDownloadError">{0}: не удалось скачать модель автоматически ({1}). Майнер попробует сделать это сам через IPFS.</sys:String>
+
     <!-- Wallet card (Dashboard): balance + recent unspent outputs for the profile's own public
          MiningAddress, via keryxd's getBalanceByAddress/getUtxosByAddresses RPC (requires the
          node's utxoindex flag). Public-address-only - no private key/seed is ever read or stored

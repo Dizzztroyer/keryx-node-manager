@@ -61,6 +61,17 @@
     <sys:String x:Key="Str_Dashboard_HashrateAnomalyTitle">Parece un error del contador de hashrate</sys:String>
     <sys:String x:Key="Str_Dashboard_HashrateAnomalyBody">El registro del minero muestra que un dispositivo reporta un hashrate en Ghash/s o Thash/s - eso no es físicamente plausible (como referencia, toda la red Keryx suma solo decenas de gigahashes/s). Parece un error de conteo dentro del propio keryx-miner (no de esta app) - evalúa tu producción real por los bloques aceptados, no por esta cifra. Vale la pena reportarlo en el Discord de Keryx Labs.</sys:String>
 
+    <!-- DashboardViewModel.EnsureModelsDownloadedAsync (2026-08-04 user follow-up): real progress
+         for the model that's about to auto-install before the miner starts, instead of no
+         indicator at all while keryx-miner did its own silent IPFS fetch. -->
+    <sys:String x:Key="Str_Dashboard_ModelDownloadTitle">Descarga de modelo</sys:String>
+    <sys:String x:Key="Str_Dashboard_ModelAutoDownloadNoMirror">{0}: no existe un mirror oficial para este nivel - el minero intentará descargarlo por su cuenta vía IPFS, sin indicador de progreso.</sys:String>
+    <sys:String x:Key="Str_Dashboard_ModelAutoDownloadStarting">{0}: iniciando descarga...</sys:String>
+    <sys:String x:Key="Str_Dashboard_ModelAutoDownloadProgress">{0}: {1} {2}%</sys:String>
+    <sys:String x:Key="Str_Dashboard_ModelAutoDownloadProgressNoTotal">{0}: {1}</sys:String>
+    <sys:String x:Key="Str_Dashboard_ModelAutoDownloadComplete">{0}: modelo instalado.</sys:String>
+    <sys:String x:Key="Str_Dashboard_ModelAutoDownloadError">{0}: la descarga automática falló ({1}). El minero intentará descargarlo por su cuenta vía IPFS.</sys:String>
+
     <sys:String x:Key="Str_Dashboard_Wallet_Title">Cartera (saldo de la dirección de minería)</sys:String>
     <sys:String x:Key="Str_Dashboard_Wallet_PublicOnlyNote">Solo la dirección pública — esta aplicación nunca almacena ni solicita una clave privada o frase semilla.</sys:String>
     <sys:String x:Key="Str_Dashboard_Wallet_NoAddress">No se ha definido una dirección de minería — indícala en la página del Minero.</sys:String>

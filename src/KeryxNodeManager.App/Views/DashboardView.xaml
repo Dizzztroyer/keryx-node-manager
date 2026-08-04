@@ -6,6 +6,7 @@
     <UserControl.Resources>
         <conv:StringToVisibilityConverter x:Key="StringToVis"/>
         <conv:CountToVisibilityConverter x:Key="CountToVis"/>
+        <conv:InverseBooleanToVisibilityConverter x:Key="InverseBoolToVis"/>
         <BooleanToVisibilityConverter x:Key="BoolToVis"/>
     </UserControl.Resources>
     <StackPanel>
@@ -101,6 +102,30 @@
 
         <TextBlock Text="{Binding LastActionMessage}" Margin="0,16,0,0" TextWrapping="Wrap"
                    Foreground="{DynamicResource TextSecondaryBrush}"/>
+
+        <!-- Model auto-download progress (2026-08-04 user follow-up): the user noticed a real %
+             bar on the Models page's manual download but nothing at all while a model auto-
+             installs on first miner launch. DashboardViewModel.EnsureModelsDownloadedAsync now
+             proactively downloads any missing tier BEFORE starting the miner, using the exact same
+             real-progress OfficialModelDownloadService the Models page's own button uses - see its
+             IsDownloadingModel doc comment for why keryx-miner's own IPFS fetch could never be
+             parsed for a real percentage in the first place. -->
+        <Border Style="{DynamicResource CardStyle}" Margin="0,16,0,0"
+                Visibility="{Binding IsDownloadingModel, Converter={StaticResource BoolToVis}}">
+            <StackPanel>
+                <TextBlock Text="{DynamicResource Str_Dashboard_ModelDownloadTitle}" FontWeight="SemiBold"/>
+                <Grid Margin="0,10,0,0">
+                    <ProgressBar Height="6" Minimum="0" Maximum="100"
+                                 Value="{Binding ModelDownloadProgressPercent, Mode=OneWay}"
+                                 IsIndeterminate="{Binding ModelDownloadProgressIsIndeterminate}"/>
+                    <TextBlock Text="{Binding ModelDownloadProgressPercentText}" FontSize="10" Margin="0,10,0,0"
+                               Foreground="{DynamicResource TextSecondaryBrush}"
+                               Visibility="{Binding ModelDownloadProgressIsIndeterminate, Converter={StaticResource InverseBoolToVis}}"/>
+                </Grid>
+                <TextBlock Text="{Binding ModelDownloadStatusText}" Margin="0,10,0,0" TextWrapping="Wrap"
+                           Foreground="{DynamicResource TextSecondaryBrush}"/>
+            </StackPanel>
+        </Border>
 
         <!-- "Known issues" nudge (PROJECT_STATUS.md): missing NodeExecutablePath/MiningAddress
              used to be an inert message with no way to act on it - this button jumps straight to

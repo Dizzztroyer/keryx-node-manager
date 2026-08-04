@@ -62,6 +62,17 @@
     <sys:String x:Key="Str_Dashboard_HashrateAnomalyTitle">Sieht nach einem Hashrate-Zähler-Bug aus</sys:String>
     <sys:String x:Key="Str_Dashboard_HashrateAnomalyBody">Im Miner-Log meldet ein Gerät eine Hashrate in Ghash/s oder Thash/s - das ist physikalisch nicht plausibel (zum Vergleich: das gesamte Keryx-Netzwerk liegt nur bei einigen zehn Gigahashes/s). Das sieht nach einem Zählfehler in keryx-miner selbst aus (nicht in dieser App) - beurteile deine tatsächliche Leistung anhand der akzeptierten Blöcke, nicht dieser Zahl. Es lohnt sich, das im Keryx Labs Discord zu melden.</sys:String>
 
+    <!-- DashboardViewModel.EnsureModelsDownloadedAsync (2026-08-04 user follow-up): real progress
+         for the model that's about to auto-install before the miner starts, instead of no
+         indicator at all while keryx-miner did its own silent IPFS fetch. -->
+    <sys:String x:Key="Str_Dashboard_ModelDownloadTitle">Modell-Download</sys:String>
+    <sys:String x:Key="Str_Dashboard_ModelAutoDownloadNoMirror">{0}: für diese Stufe existiert kein offizieller Mirror - der Miner versucht, es selbst über IPFS herunterzuladen, ohne Fortschrittsanzeige.</sys:String>
+    <sys:String x:Key="Str_Dashboard_ModelAutoDownloadStarting">{0}: Download wird gestartet...</sys:String>
+    <sys:String x:Key="Str_Dashboard_ModelAutoDownloadProgress">{0}: {1} {2}%</sys:String>
+    <sys:String x:Key="Str_Dashboard_ModelAutoDownloadProgressNoTotal">{0}: {1}</sys:String>
+    <sys:String x:Key="Str_Dashboard_ModelAutoDownloadComplete">{0}: Modell installiert.</sys:String>
+    <sys:String x:Key="Str_Dashboard_ModelAutoDownloadError">{0}: automatischer Download fehlgeschlagen ({1}). Der Miner versucht, es selbst über IPFS zu laden.</sys:String>
+
     <sys:String x:Key="Str_Dashboard_Wallet_Title">Wallet (Guthaben der Mining-Adresse)</sys:String>
     <sys:String x:Key="Str_Dashboard_Wallet_PublicOnlyNote">Nur die öffentliche Adresse — diese App speichert oder fragt niemals einen privaten Schlüssel oder eine Seed-Phrase ab.</sys:String>
     <sys:String x:Key="Str_Dashboard_Wallet_NoAddress">Keine Mining-Adresse festgelegt — bitte auf der Miner-Seite eintragen.</sys:String>
