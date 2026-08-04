@@ -59,6 +59,9 @@
     <sys:String x:Key="Str_Dashboard_PluginWarningBody">CUDA funktioniert, aber der Miner konnte keine Worker-/Plugin-Module finden - eine oder mehrere Dateien, die neben keryx-miner.exe liegen müssen, fehlen. Das passiert meist, wenn bei der Installation nur die .exe kopiert wurde, ohne die zugehörigen .dll-Dateien. Besorge dir den vollständigen Dateisatz erneut aus einer offiziellen Quelle (z. B. dem Discord des Keryx-Teams) und ersetze den ganzen Ordner.</sys:String>
     <sys:String x:Key="Str_Dashboard_PluginWarningButton">Keryx Labs Discord öffnen</sys:String>
 
+    <sys:String x:Key="Str_Dashboard_HashrateAnomalyTitle">Sieht nach einem Hashrate-Zähler-Bug aus</sys:String>
+    <sys:String x:Key="Str_Dashboard_HashrateAnomalyBody">Im Miner-Log meldet ein Gerät eine Hashrate in Ghash/s oder Thash/s - das ist physikalisch nicht plausibel (zum Vergleich: das gesamte Keryx-Netzwerk liegt nur bei einigen zehn Gigahashes/s). Das sieht nach einem Zählfehler in keryx-miner selbst aus (nicht in dieser App) - beurteile deine tatsächliche Leistung anhand der akzeptierten Blöcke, nicht dieser Zahl. Es lohnt sich, das im Keryx Labs Discord zu melden.</sys:String>
+
     <sys:String x:Key="Str_Dashboard_Wallet_Title">Wallet (Guthaben der Mining-Adresse)</sys:String>
     <sys:String x:Key="Str_Dashboard_Wallet_PublicOnlyNote">Nur die öffentliche Adresse — diese App speichert oder fragt niemals einen privaten Schlüssel oder eine Seed-Phrase ab.</sys:String>
     <sys:String x:Key="Str_Dashboard_Wallet_NoAddress">Keine Mining-Adresse festgelegt — bitte auf der Miner-Seite eintragen.</sys:String>
@@ -412,4 +415,14 @@ Das Ändern von GPU-Taktraten und/oder Lüftereinstellungen ist ein potenziell r
     <sys:String x:Key="Str_Models_DiscordBody">Die neuesten Modellankündigungen, offizielle Torrent-Dateien, Hugging Face, Google Drive und andere Mirrors werden im Keryx-Discord veröffentlicht. Vor dem manuellen Herunterladen eines Modells empfiehlt es sich, den Kanal Model Setup zu prüfen. Discord ist nicht die einzige Quelle für Modelle - der automatische Download über IPFS und der Download über den direkten Link unten funktionieren weiterhin.</sys:String>
     <sys:String x:Key="Str_Models_DiscordButton">Keryx-Discord öffnen</sys:String>
     <sys:String x:Key="Str_Models_DiscordOpenFailed">Link konnte nicht geöffnet werden: {0}</sys:String>
+
+    <sys:String x:Key="Str_Models_TierTable_Header">Tier-Referenztabelle: welches Miner-Flag und Modell zu welchem Tier gehört, und welchen Anteil der Blockbelohnung dieses Tier ungefähr behält.</sys:String>
+    <sys:String x:Key="Str_Models_TierTable_ColTier">Tier</sys:String>
+    <sys:String x:Key="Str_Models_TierTable_ColFlag">Miner-Flag</sys:String>
+    <sys:String x:Key="Str_Models_TierTable_ColModel">Modell (Quant)</sys:String>
+    <sys:String x:Key="Str_Models_TierTable_ColMinVram">Min. VRAM</sys:String>
+    <sys:String x:Key="Str_Models_TierTable_ColWeights">Gewichte (ca.)</sys:String>
+    <sys:String x:Key="Str_Models_TierTable_ColRewardShare">Tier-Belohnungsanteil</sys:String>
+    <sys:String x:Key="Str_Models_TierTable_DefaultFlag">(Standard)</sys:String>
+    <sys:String x:Key="Str_Models_TierTable_Footnote">Der "Tier-Belohnungsanteil" ist nur einer von zwei Multiplikatoren. Dein tatsächlicher Anteil wird zusätzlich mit einem separaten Halte-Bonus (40-100 %, abhängig davon, wie viel deiner eigenen Produktion du hältst statt verkaufst) multipliziert - "68 %" ist also nicht das ganze Bild.</sys:String>
 </ResourceDictionary>

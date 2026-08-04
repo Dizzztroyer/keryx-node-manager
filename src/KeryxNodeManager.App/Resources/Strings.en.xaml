@@ -63,6 +63,9 @@
     <sys:String x:Key="Str_Dashboard_PluginWarningBody">CUDA is working, but the miner couldn't find any worker/plugin modules - one or more files that need to sit next to keryx-miner.exe are missing. This usually happens when only the .exe was copied during install, without its companion .dll files. Get the full file set again from an official source (e.g. the Keryx team's Discord) and replace the whole folder.</sys:String>
     <sys:String x:Key="Str_Dashboard_PluginWarningButton">Open Keryx Labs Discord</sys:String>
 
+    <sys:String x:Key="Str_Dashboard_HashrateAnomalyTitle">Looks like a hashrate counter bug</sys:String>
+    <sys:String x:Key="Str_Dashboard_HashrateAnomalyBody">The miner log shows one device reporting a hashrate in Ghash/s or Thash/s - that's not physically plausible (for reference, the whole Keryx network totals only tens of gigahashes/s). This looks like a counting bug inside keryx-miner itself (not this app) - judge your real output by accepted blocks, not this number. Worth reporting in the Keryx Labs Discord.</sys:String>
+
     <sys:String x:Key="Str_Dashboard_Wallet_Title">Wallet (mining address balance)</sys:String>
     <sys:String x:Key="Str_Dashboard_Wallet_PublicOnlyNote">Public address only — this app never stores or requests a private key or seed phrase.</sys:String>
     <sys:String x:Key="Str_Dashboard_Wallet_NoAddress">No mining address set — enter one on the Miner page.</sys:String>
@@ -416,4 +419,14 @@ Changing GPU clocks and/or fan settings is a potentially risky operation: incorr
     <sys:String x:Key="Str_Models_DiscordBody">The latest model announcements, official torrent files, Hugging Face, Google Drive, and other mirrors are posted in the Keryx Discord. Before downloading a model manually, it's a good idea to check the Model Setup channel. Discord isn't the only source for models - automatic download via IPFS and the direct-link download below still work.</sys:String>
     <sys:String x:Key="Str_Models_DiscordButton">Open Keryx Discord</sys:String>
     <sys:String x:Key="Str_Models_DiscordOpenFailed">Failed to open the link: {0}</sys:String>
+
+    <sys:String x:Key="Str_Models_TierTable_Header">Tier reference table: which miner flag and model correspond to which tier, and roughly how much of the block reward that tier keeps.</sys:String>
+    <sys:String x:Key="Str_Models_TierTable_ColTier">Tier</sys:String>
+    <sys:String x:Key="Str_Models_TierTable_ColFlag">Miner flag</sys:String>
+    <sys:String x:Key="Str_Models_TierTable_ColModel">Model (quant)</sys:String>
+    <sys:String x:Key="Str_Models_TierTable_ColMinVram">Min VRAM</sys:String>
+    <sys:String x:Key="Str_Models_TierTable_ColWeights">Weights (approx.)</sys:String>
+    <sys:String x:Key="Str_Models_TierTable_ColRewardShare">Tier reward share</sys:String>
+    <sys:String x:Key="Str_Models_TierTable_DefaultFlag">(default)</sys:String>
+    <sys:String x:Key="Str_Models_TierTable_Footnote">"Tier reward share" is only one of two multipliers. Your actual miner cut is further multiplied by a separate holder-ratio bonus (40-100%, based on how much of your own production you hold vs. sell) - so "68%" isn't the whole picture on its own.</sys:String>
 </ResourceDictionary>

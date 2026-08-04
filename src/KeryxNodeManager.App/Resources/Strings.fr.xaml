@@ -58,6 +58,9 @@
     <sys:String x:Key="Str_Dashboard_PluginWarningBody">CUDA fonctionne, mais le mineur n'a trouvé aucun module worker/plugin - un ou plusieurs fichiers devant se trouver à côté de keryx-miner.exe sont manquants. Cela arrive généralement quand seul le .exe a été copié à l'installation, sans ses fichiers .dll associés. Récupère l'ensemble complet des fichiers depuis une source officielle (par ex. le Discord de l'équipe Keryx) et remplace tout le dossier.</sys:String>
     <sys:String x:Key="Str_Dashboard_PluginWarningButton">Ouvrir le Discord de Keryx Labs</sys:String>
 
+    <sys:String x:Key="Str_Dashboard_HashrateAnomalyTitle">Cela ressemble à un bug du compteur de hashrate</sys:String>
+    <sys:String x:Key="Str_Dashboard_HashrateAnomalyBody">Le journal du mineur indique qu'un périphérique rapporte un hashrate en Ghash/s ou Thash/s - ce n'est pas physiquement plausible (à titre de comparaison, tout le réseau Keryx totalise seulement quelques dizaines de gigahashes/s). Cela ressemble à un bug de comptage dans keryx-miner lui-même (pas dans cette application) - évaluez votre production réelle par les blocs acceptés, pas par ce chiffre. Cela vaut la peine de le signaler sur le Discord de Keryx Labs.</sys:String>
+
     <sys:String x:Key="Str_Dashboard_Wallet_Title">Portefeuille (solde de l'adresse de minage)</sys:String>
     <sys:String x:Key="Str_Dashboard_Wallet_PublicOnlyNote">Adresse publique uniquement — cette application ne stocke ni ne demande jamais de clé privée ou de phrase secrète.</sys:String>
     <sys:String x:Key="Str_Dashboard_Wallet_NoAddress">Aucune adresse de minage définie — indiquez-en une sur la page Mineur.</sys:String>
@@ -410,4 +413,14 @@ Modifier les fréquences et/ou le ventilateur du GPU est une opération potentie
     <sys:String x:Key="Str_Models_DiscordBody">Les dernières annonces de modèles, les fichiers torrent officiels, Hugging Face, Google Drive et d'autres mirroirs sont publiés sur le Discord de Keryx. Avant de télécharger un modèle manuellement, il est recommandé de consulter le canal Model Setup. Discord n'est pas la seule source de modèles : le téléchargement automatique via IPFS et le téléchargement par lien direct ci-dessous fonctionnent toujours.</sys:String>
     <sys:String x:Key="Str_Models_DiscordButton">Ouvrir le Discord de Keryx</sys:String>
     <sys:String x:Key="Str_Models_DiscordOpenFailed">Impossible d'ouvrir le lien : {0}</sys:String>
+
+    <sys:String x:Key="Str_Models_TierTable_Header">Tableau de référence des paliers : quel indicateur du mineur et quel modèle correspondent à quel palier, et environ quelle part de la récompense de bloc ce palier conserve.</sys:String>
+    <sys:String x:Key="Str_Models_TierTable_ColTier">Palier</sys:String>
+    <sys:String x:Key="Str_Models_TierTable_ColFlag">Indicateur du mineur</sys:String>
+    <sys:String x:Key="Str_Models_TierTable_ColModel">Modèle (quant.)</sys:String>
+    <sys:String x:Key="Str_Models_TierTable_ColMinVram">VRAM min.</sys:String>
+    <sys:String x:Key="Str_Models_TierTable_ColWeights">Poids (approx.)</sys:String>
+    <sys:String x:Key="Str_Models_TierTable_ColRewardShare">Part de récompense du palier</sys:String>
+    <sys:String x:Key="Str_Models_TierTable_DefaultFlag">(par défaut)</sys:String>
+    <sys:String x:Key="Str_Models_TierTable_Footnote">La « part de récompense du palier » n'est qu'un des deux multiplicateurs. Votre part réelle de mineur est en plus multipliée par un bonus de détention séparé (40-100 %, selon la part de votre propre production que vous conservez plutôt que de vendre) - donc « 68 % » n'est pas toute l'histoire.</sys:String>
 </ResourceDictionary>

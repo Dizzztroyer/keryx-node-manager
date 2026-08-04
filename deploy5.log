@@ -45,3 +45,59 @@
 ?? src/KeryxNodeManager.App/Converters/CountToVisibilityConverter.cs
 ?? src/KeryxNodeManager.Core/Networking/WalletRpcService.cs
 ---- git add/commit/push ---- 
+warning: in the working copy of 'deploy4.log', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/KeryxNodeManager.App/Resources/Strings.de.xaml', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/KeryxNodeManager.App/Resources/Strings.en.xaml', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/KeryxNodeManager.App/Resources/Strings.es.xaml', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/KeryxNodeManager.App/Resources/Strings.fr.xaml', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/KeryxNodeManager.App/Resources/Strings.it.xaml', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/KeryxNodeManager.App/Resources/Strings.ru.xaml', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/KeryxNodeManager.App/Resources/Strings.uk.xaml', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/KeryxNodeManager.App/ViewModels/DashboardViewModel.cs', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/KeryxNodeManager.App/Views/DashboardView.xaml', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/KeryxNodeManager.App/Views/DashboardView.xaml.cs', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/KeryxNodeManager.Core/Cli/NodeArgumentBuilder.cs', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/KeryxNodeManager.Core/Models/MiningProfile.cs', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/KeryxNodeManager.Core/Networking/KeryxRpcJsonClient.cs', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'tests/KeryxNodeManager.Core.Tests/KeryxRpcJsonClientTests.cs', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'tests/KeryxNodeManager.Core.Tests/NodeArgumentBuilderTests.cs', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'deploy5.log', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'deploy_wallet_feature.bat', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/KeryxNodeManager.App/Converters/CountToVisibilityConverter.cs', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/KeryxNodeManager.Core/Networking/WalletRpcService.cs', LF will be replaced by CRLF the next time Git touches it
+[main 2dee74c] 0.2.7: add public-address wallet balance + recent unspent outputs to Dashboard (getBalanceByAddress/getUtxosByAddresses RPC, --utxoindex); no private key/seed ever touched
+ 20 files changed, 636 insertions(+), 10 deletions(-)
+ create mode 100644 deploy5.log
+ create mode 100644 deploy_wallet_feature.bat
+ create mode 100644 src/KeryxNodeManager.App/Converters/CountToVisibilityConverter.cs
+ create mode 100644 src/KeryxNodeManager.Core/Networking/WalletRpcService.cs
+To https://github.com/Dizzztroyer/keryx-node-manager.git
+   f746c9f..2dee74c  main -> main
+---- dotnet publish (self-contained win-x64) ---- 
+  ╨Ю╨┐╤А╨╡╨┤╨╡╨╗╨╡╨╜╨╕╨╡ ╨┐╤А╨╛╨╡╨║╤В╨╛╨▓ ╨┤╨╗╤П ╨▓╨╛╤Б╤Б╤В╨░╨╜╨╛╨▓╨╗╨╡╨╜╨╕╤П...
+  ╨Т╨╛╤Б╤Б╤В╨░╨╜╨╛╨▓╨╗╨╡╨╜ C:\Users\hambi\KRX_miner\KeryxNodeManager\src\KeryxNodeManager.Core\KeryxNodeManager.Core.csproj (╨╖╨░ 214┬а╨╝╤Б).
+  ╨Т╨╛╤Б╤Б╤В╨░╨╜╨╛╨▓╨╗╨╡╨╜ C:\Users\hambi\KRX_miner\KeryxNodeManager\src\KeryxNodeManager.App\KeryxNodeManager.App.csproj (╨╖╨░ 215┬а╨╝╤Б).
+  KeryxNodeManager.Core -> C:\Users\hambi\KRX_miner\KeryxNodeManager\src\KeryxNodeManager.Core\bin\Release\net8.0\KeryxNodeManager.Core.dll
+  KeryxNodeManager.App -> C:\Users\hambi\KRX_miner\KeryxNodeManager\src\KeryxNodeManager.App\bin\Release\net8.0-windows\win-x64\KeryxNodeManager.dll
+  KeryxNodeManager.App -> C:\Users\hambi\KRX_miner\KeryxNodeManager\artifacts\publish\win-x64\
+---- stopping old KeryxNodeManager.exe (UI only) ---- 
+Успешно: Процесс "KeryxNodeManager.exe", с идентификатором 62716, был завершен.
+---- robocopy into real install directory ---- 
+
+
+------------------------------------------------------------------------------
+
+               ВсегоСкопировано ПропущеноНесоответствие      СБОЙДополнения
+Каталогов :        14         0        14         0         0         0
+  Файлов :       509         7       502         0         0         3
+    Байт :  163.84 m    1.35 m  162.48 m         0         0    4.90 m
+   Время :   0:00:00   0:00:00                       0:00:00   0:00:00
+
+
+Скорость :           203 635 857 Байт/сек.
+Скорость :             11652,138 МБ/мин.
+   Окончание: вторник, 4 августа 2026 г. 09:00:08
+
+---- relaunching updated app ---- 
+DEPLOY_DONE 
+==== END 04.08.2026  9:00:08,23 ==== 

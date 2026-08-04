@@ -15,7 +15,12 @@ public partial class DashboardView : UserControl
         if (DataContext is DashboardViewModel vm)
         {
             _ = vm.RefreshCommand.ExecuteAsync(null);
-            _ = vm.RefreshWalletCommand.ExecuteAsync(null);
+            // Wallet card is hidden for now (DashboardViewModel.WalletFeatureEnabled) - don't
+            // open an RPC connection attempt in the background for a feature nobody can see.
+            if (DashboardViewModel.WalletFeatureEnabled)
+            {
+                _ = vm.RefreshWalletCommand.ExecuteAsync(null);
+            }
         }
     }
 }

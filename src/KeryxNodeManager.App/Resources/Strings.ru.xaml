@@ -73,6 +73,12 @@
     <sys:String x:Key="Str_Dashboard_PluginWarningBody">CUDA работает, но у майнера не нашлось ни одного рабочего модуля (плагина) — не хватает файла(ов), которые должны лежать рядом с keryx-miner.exe. Скорее всего, при установке скопировался только сам .exe, без нужных .dll. Возьми полный набор файлов заново из официального источника (например, канала Discord команды Keryx) и замени папку целиком.</sys:String>
     <sys:String x:Key="Str_Dashboard_PluginWarningButton">Открыть Discord Keryx Labs</sys:String>
 
+    <!-- Hashrate anomaly banner (2026-08-04): keryx-miner's own per-device counter can report
+         physically impossible values (Ghash/s or Thash/s for one card) - a real bug in the miner
+         binary itself, not something this app computes. -->
+    <sys:String x:Key="Str_Dashboard_HashrateAnomalyTitle">Похоже на ошибку счётчика хешрейта</sys:String>
+    <sys:String x:Key="Str_Dashboard_HashrateAnomalyBody">В логе майнера одно из устройств показывает хешрейт в Ghash/s или Thash/s — это физически неправдоподобно (для сравнения, вся сеть Keryx суммарно даёт порядка десятков гигахешей/с). Похоже на ошибку счётчика в самом keryx-miner (не в этом приложении) — реальную добычу лучше оценивать по количеству принятых блоков, а не по этой цифре. Стоит сообщить об этом в Discord Keryx Labs.</sys:String>
+
     <!-- Wallet card (Dashboard): balance + recent unspent outputs for the profile's own public
          MiningAddress, via keryxd's getBalanceByAddress/getUtxosByAddresses RPC (requires the
          node's utxoindex flag). Public-address-only - no private key/seed is ever read or stored
@@ -461,4 +467,17 @@
     <sys:String x:Key="Str_Models_DiscordBody">Последние объявления о моделях, официальные torrent-файлы, Hugging Face, Google Drive и другие зеркала публикуются в Discord Keryx. Перед ручной загрузкой модели рекомендуется проверить канал Model Setup. Discord - не единственный источник моделей: автоматическая загрузка через IPFS и загрузка по прямой ссылке ниже по-прежнему работают.</sys:String>
     <sys:String x:Key="Str_Models_DiscordButton">Открыть Discord Keryx</sys:String>
     <sys:String x:Key="Str_Models_DiscordOpenFailed">Не удалось открыть ссылку: {0}</sys:String>
+
+    <!-- Tier reference table (2026-08-04) - model/flag/VRAM columns match ModelTierCatalog's own
+         verified numbers, reward-share % confirmed against keryx-node's params.rs
+         (TIER_REWARD_BPS_H2). See ModelsView.xaml's doc comment for full sourcing. -->
+    <sys:String x:Key="Str_Models_TierTable_Header">Таблица тиров: какой флаг майнера и модель соответствуют какому тиру, и какую долю блочной награды за это оставляют.</sys:String>
+    <sys:String x:Key="Str_Models_TierTable_ColTier">Тир</sys:String>
+    <sys:String x:Key="Str_Models_TierTable_ColFlag">Флаг майнера</sys:String>
+    <sys:String x:Key="Str_Models_TierTable_ColModel">Модель (квант)</sys:String>
+    <sys:String x:Key="Str_Models_TierTable_ColMinVram">Мин. VRAM</sys:String>
+    <sys:String x:Key="Str_Models_TierTable_ColWeights">Веса (прибл.)</sys:String>
+    <sys:String x:Key="Str_Models_TierTable_ColRewardShare">Доля награды за тир</sys:String>
+    <sys:String x:Key="Str_Models_TierTable_DefaultFlag">(по умолчанию)</sys:String>
+    <sys:String x:Key="Str_Models_TierTable_Footnote">"Доля награды за тир" — это только один из двух множителей. Итоговая доля майнера дополнительно умножается на отдельный бонус за удержание монет (40-100%, зависит от того, сколько от собственной добычи вы держите, а не продаёте) — так что "68%" само по себе не вся картина.</sys:String>
 </ResourceDictionary>

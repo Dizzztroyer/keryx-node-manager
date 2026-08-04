@@ -48,6 +48,22 @@
             </StackPanel>
         </Border>
 
+        <!-- 2026-08-04: keryx-miner's own per-device hashrate counter can report physically
+             impossible values (e.g. "7.13 Thash/s" for one card, while the whole Keryx network's
+             published total was only ~25 GH/s) - a real upstream miner bug (see
+             DashboardViewModel.ShowHashrateAnomalyWarning's doc comment), not something this app
+             computes. Amber/warning styling (not the red error banner above) since this doesn't
+             mean mining is broken - it means one specific number in the log shouldn't be trusted. -->
+        <Border Style="{DynamicResource CardStyle}" Margin="0,0,0,16" BorderBrush="{DynamicResource WarningBrush}"
+                BorderThickness="1" Visibility="{Binding ShowHashrateAnomalyWarning, Converter={StaticResource BoolToVis}}">
+            <StackPanel>
+                <TextBlock Text="{DynamicResource Str_Dashboard_HashrateAnomalyTitle}" FontWeight="Bold"
+                           Foreground="{DynamicResource WarningBrush}"/>
+                <TextBlock Text="{DynamicResource Str_Dashboard_HashrateAnomalyBody}" TextWrapping="Wrap"
+                           Margin="0,6,0,0" Foreground="{DynamicResource TextPrimaryBrush}"/>
+            </StackPanel>
+        </Border>
+
         <UniformGrid Columns="3" Rows="1">
             <Border Style="{DynamicResource CardStyle}" Margin="0,0,12,0">
                 <StackPanel>
@@ -100,8 +116,18 @@
              calls. Public-address-only by construction - this app has no private key/seed anywhere
              in it, so there is nothing secret here to protect or leak; see WalletRpcService's doc
              comment. "Недавние поступления" is deliberately labeled as unspent outputs, not a full
-             transaction history - keryxd's RPC surface has no address-history call. -->
-        <Border Style="{DynamicResource CardStyle}" Margin="0,16,0,0">
+             transaction history - keryxd's RPC surface has no address-history call.
+
+             Hidden from the public build for now (2026-08-04, user's own request) pending a full
+             wallet feature (seed import, consolidation, real transaction history) built against
+             Keryx Labs' own desktop wallet - see docs/WALLET_INTEGRATION_PLAN.md. Same pattern as
+             GpuOverclockSectionViewModel.UiFeatureEnabled: hardcoded Collapsed rather than a
+             binding, since DashboardViewModel.WalletFeatureEnabled is a compile-time constant -
+             flip it back to true and restore
+             Visibility="{Binding WalletFeatureEnabled, Converter={StaticResource BoolToVis}}" once
+             this card is ready to ship again. All the ViewModel/Core wiring behind it (RPC client,
+             WalletRpcService, RefreshWalletCommand) is left fully intact. -->
+        <Border Style="{DynamicResource CardStyle}" Margin="0,16,0,0" Visibility="Collapsed">
             <StackPanel>
                 <Grid>
                     <Grid.ColumnDefinitions>

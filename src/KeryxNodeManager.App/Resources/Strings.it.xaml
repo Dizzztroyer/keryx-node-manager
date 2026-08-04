@@ -58,6 +58,9 @@
     <sys:String x:Key="Str_Dashboard_PluginWarningBody">CUDA funziona, ma il miner non ha trovato alcun modulo worker/plugin - mancano uno o più file che devono stare accanto a keryx-miner.exe. Di solito succede quando durante l'installazione è stato copiato solo l'.exe, senza i file .dll associati. Scarica di nuovo il set completo di file da una fonte ufficiale (ad es. il Discord del team Keryx) e sostituisci l'intera cartella.</sys:String>
     <sys:String x:Key="Str_Dashboard_PluginWarningButton">Apri il Discord di Keryx Labs</sys:String>
 
+    <sys:String x:Key="Str_Dashboard_HashrateAnomalyTitle">Sembra un bug del contatore di hashrate</sys:String>
+    <sys:String x:Key="Str_Dashboard_HashrateAnomalyBody">Il log del miner mostra un dispositivo che riporta un hashrate in Ghash/s o Thash/s - non è fisicamente plausibile (per confronto, l'intera rete Keryx totalizza solo decine di gigahash/s). Sembra un bug di conteggio nello stesso keryx-miner (non in questa app) - valuta la tua produzione reale dai blocchi accettati, non da questo numero. Vale la pena segnalarlo sul Discord di Keryx Labs.</sys:String>
+
     <sys:String x:Key="Str_Dashboard_Wallet_Title">Portafoglio (saldo dell'indirizzo di mining)</sys:String>
     <sys:String x:Key="Str_Dashboard_Wallet_PublicOnlyNote">Solo indirizzo pubblico — questa app non memorizza né richiede mai una chiave privata o una seed phrase.</sys:String>
     <sys:String x:Key="Str_Dashboard_Wallet_NoAddress">Nessun indirizzo di mining impostato — inseriscilo nella pagina Miner.</sys:String>
@@ -409,4 +412,14 @@ Modificare le frequenze e/o la ventola della GPU è un'operazione potenzialmente
     <sys:String x:Key="Str_Models_DiscordBody">Gli ultimi annunci sui modelli, i file torrent ufficiali, Hugging Face, Google Drive e altri mirror vengono pubblicati sul Discord di Keryx. Prima di scaricare manualmente un modello, è consigliabile controllare il canale Model Setup. Discord non è l'unica fonte per i modelli: il download automatico tramite IPFS e il download tramite link diretto qui sotto continuano a funzionare.</sys:String>
     <sys:String x:Key="Str_Models_DiscordButton">Apri il Discord di Keryx</sys:String>
     <sys:String x:Key="Str_Models_DiscordOpenFailed">Impossibile aprire il link: {0}</sys:String>
+
+    <sys:String x:Key="Str_Models_TierTable_Header">Tabella di riferimento dei tier: quale flag del miner e modello corrispondono a quale tier, e circa quanta parte della ricompensa del blocco quel tier trattiene.</sys:String>
+    <sys:String x:Key="Str_Models_TierTable_ColTier">Tier</sys:String>
+    <sys:String x:Key="Str_Models_TierTable_ColFlag">Flag del miner</sys:String>
+    <sys:String x:Key="Str_Models_TierTable_ColModel">Modello (quant.)</sys:String>
+    <sys:String x:Key="Str_Models_TierTable_ColMinVram">VRAM min.</sys:String>
+    <sys:String x:Key="Str_Models_TierTable_ColWeights">Pesi (circa)</sys:String>
+    <sys:String x:Key="Str_Models_TierTable_ColRewardShare">Quota ricompensa del tier</sys:String>
+    <sys:String x:Key="Str_Models_TierTable_DefaultFlag">(predefinito)</sys:String>
+    <sys:String x:Key="Str_Models_TierTable_Footnote">La "quota ricompensa del tier" è solo uno dei due moltiplicatori. La tua quota effettiva come miner viene ulteriormente moltiplicata per un bonus separato basato sulla detenzione (40-100%, in base a quanto della tua produzione trattieni invece di vendere) - quindi "68%" non è tutta la storia.</sys:String>
 </ResourceDictionary>

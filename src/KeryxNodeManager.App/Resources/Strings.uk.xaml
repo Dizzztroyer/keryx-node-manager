@@ -61,6 +61,9 @@
     <sys:String x:Key="Str_Dashboard_PluginWarningBody">CUDA працює, але майнер не знайшов жодного робочого модуля (плагіна) - бракує файлів, які мають лежати поруч із keryx-miner.exe. Найімовірніше, під час встановлення скопіювався лише сам .exe, без потрібних .dll. Візьми повний набір файлів заново з офіційного джерела (наприклад, Discord команди Keryx) і заміни всю папку.</sys:String>
     <sys:String x:Key="Str_Dashboard_PluginWarningButton">Відкрити Discord Keryx Labs</sys:String>
 
+    <sys:String x:Key="Str_Dashboard_HashrateAnomalyTitle">Схоже на баг лічильника хешрейту</sys:String>
+    <sys:String x:Key="Str_Dashboard_HashrateAnomalyBody">У логу майнера один пристрій показує хешрейт у Ghash/s або Thash/s - це фізично неправдоподібно (для порівняння, вся мережа Keryx сумарно дає лише десятки гігахешів/с). Схоже на баг підрахунку в самому keryx-miner (не в цьому застосунку) - реальний видобуток краще оцінювати за кількістю прийнятих блоків, а не за цим числом. Варто повідомити про це в Discord Keryx Labs.</sys:String>
+
     <sys:String x:Key="Str_Dashboard_Wallet_Title">Гаманець (баланс адреси майнінгу)</sys:String>
     <sys:String x:Key="Str_Dashboard_Wallet_PublicOnlyNote">Лише публічна адреса — застосунок ніколи не зберігає і не запитує приватний ключ чи сід-фразу.</sys:String>
     <sys:String x:Key="Str_Dashboard_Wallet_NoAddress">Адресу майнінгу не задано — вкажіть її на сторінці «Майнер».</sys:String>
@@ -413,4 +416,14 @@
     <sys:String x:Key="Str_Models_DiscordBody">Останні анонси моделей, офіційні torrent-файли, Hugging Face, Google Drive та інші дзеркала публікуються в Discord Keryx. Перед ручним завантаженням моделі рекомендується перевірити канал Model Setup. Discord - не єдине джерело моделей: автоматичне завантаження через IPFS і завантаження за прямим посиланням нижче так само працюють.</sys:String>
     <sys:String x:Key="Str_Models_DiscordButton">Відкрити Discord Keryx</sys:String>
     <sys:String x:Key="Str_Models_DiscordOpenFailed">Не вдалося відкрити посилання: {0}</sys:String>
+
+    <sys:String x:Key="Str_Models_TierTable_Header">Довідкова таблиця тірів: який прапорець майнера і модель відповідають якому тіру, і яку частку блокової винагороди цей тір залишає.</sys:String>
+    <sys:String x:Key="Str_Models_TierTable_ColTier">Тір</sys:String>
+    <sys:String x:Key="Str_Models_TierTable_ColFlag">Прапорець майнера</sys:String>
+    <sys:String x:Key="Str_Models_TierTable_ColModel">Модель (квант)</sys:String>
+    <sys:String x:Key="Str_Models_TierTable_ColMinVram">Мін. VRAM</sys:String>
+    <sys:String x:Key="Str_Models_TierTable_ColWeights">Ваги (прибл.)</sys:String>
+    <sys:String x:Key="Str_Models_TierTable_ColRewardShare">Частка винагороди за тір</sys:String>
+    <sys:String x:Key="Str_Models_TierTable_DefaultFlag">(за замовчуванням)</sys:String>
+    <sys:String x:Key="Str_Models_TierTable_Footnote">"Частка винагороди за тір" - це лише один із двох множників. Ваша фактична частка майнера додатково множиться на окремий бонус за утримання (40-100%, залежно від того, скільки власного видобутку ви тримаєте, а не продаєте) - тож "68%" це не вся картина.</sys:String>
 </ResourceDictionary>

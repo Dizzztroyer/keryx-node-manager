@@ -58,6 +58,9 @@
     <sys:String x:Key="Str_Dashboard_PluginWarningBody">CUDA funciona, pero el minero no encontró ningún módulo de trabajo/plugin - faltan uno o más archivos que deben estar junto a keryx-miner.exe. Esto suele pasar cuando solo se copió el .exe durante la instalación, sin sus archivos .dll asociados. Vuelve a obtener el conjunto completo de archivos desde una fuente oficial (por ejemplo, el Discord del equipo de Keryx) y reemplaza la carpeta entera.</sys:String>
     <sys:String x:Key="Str_Dashboard_PluginWarningButton">Abrir Discord de Keryx Labs</sys:String>
 
+    <sys:String x:Key="Str_Dashboard_HashrateAnomalyTitle">Parece un error del contador de hashrate</sys:String>
+    <sys:String x:Key="Str_Dashboard_HashrateAnomalyBody">El registro del minero muestra que un dispositivo reporta un hashrate en Ghash/s o Thash/s - eso no es físicamente plausible (como referencia, toda la red Keryx suma solo decenas de gigahashes/s). Parece un error de conteo dentro del propio keryx-miner (no de esta app) - evalúa tu producción real por los bloques aceptados, no por esta cifra. Vale la pena reportarlo en el Discord de Keryx Labs.</sys:String>
+
     <sys:String x:Key="Str_Dashboard_Wallet_Title">Cartera (saldo de la dirección de minería)</sys:String>
     <sys:String x:Key="Str_Dashboard_Wallet_PublicOnlyNote">Solo la dirección pública — esta aplicación nunca almacena ni solicita una clave privada o frase semilla.</sys:String>
     <sys:String x:Key="Str_Dashboard_Wallet_NoAddress">No se ha definido una dirección de minería — indícala en la página del Minero.</sys:String>
@@ -409,4 +412,14 @@ Cambiar las frecuencias y/o el ventilador de la GPU es una operación potencialm
     <sys:String x:Key="Str_Models_DiscordBody">Los últimos anuncios de modelos, archivos torrent oficiales, Hugging Face, Google Drive y otros mirrors se publican en el Discord de Keryx. Antes de descargar un modelo manualmente, es recomendable revisar el canal Model Setup. Discord no es la única fuente de modelos: la descarga automática vía IPFS y la descarga por enlace directo de abajo también siguen funcionando.</sys:String>
     <sys:String x:Key="Str_Models_DiscordButton">Abrir Discord de Keryx</sys:String>
     <sys:String x:Key="Str_Models_DiscordOpenFailed">No se pudo abrir el enlace: {0}</sys:String>
+
+    <sys:String x:Key="Str_Models_TierTable_Header">Tabla de referencia de niveles: qué indicador del minero y modelo corresponde a cada nivel, y aproximadamente qué parte de la recompensa del bloque conserva ese nivel.</sys:String>
+    <sys:String x:Key="Str_Models_TierTable_ColTier">Nivel</sys:String>
+    <sys:String x:Key="Str_Models_TierTable_ColFlag">Indicador del minero</sys:String>
+    <sys:String x:Key="Str_Models_TierTable_ColModel">Modelo (cuant.)</sys:String>
+    <sys:String x:Key="Str_Models_TierTable_ColMinVram">VRAM mín.</sys:String>
+    <sys:String x:Key="Str_Models_TierTable_ColWeights">Pesos (aprox.)</sys:String>
+    <sys:String x:Key="Str_Models_TierTable_ColRewardShare">Parte de recompensa del nivel</sys:String>
+    <sys:String x:Key="Str_Models_TierTable_DefaultFlag">(predeterminado)</sys:String>
+    <sys:String x:Key="Str_Models_TierTable_Footnote">La "parte de recompensa del nivel" es solo uno de dos multiplicadores. Tu parte real como minero se multiplica además por una bonificación separada por retención (40-100%, según cuánto de tu propia producción conservas en vez de vender) - así que "68%" no es toda la historia.</sys:String>
 </ResourceDictionary>

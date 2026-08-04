@@ -34,6 +34,16 @@ public partial class DashboardViewModel : ObservableObject
     private readonly ProfileStore _profileStore;
     private readonly LogSink _logSink;
     private readonly SafetyMonitor _safetyMonitor;
+    /// <summary>Hides the Dashboard wallet card in the public build (2026-08-04, user's own
+    /// request) pending a full wallet feature (seed import, consolidation, real transaction
+    /// history) built against Keryx Labs' own desktop wallet - see
+    /// docs/WALLET_INTEGRATION_PLAN.md. Same pattern as
+    /// GpuOverclockSectionViewModel.UiFeatureEnabled: the View reads this compile-time constant
+    /// directly (hardcoded Visibility="Collapsed" in DashboardView.xaml, not a live binding) - the
+    /// RPC client, WalletRpcService, and RefreshWalletCommand behind it are left fully intact and
+    /// still covered by tests, only the View is gated.</summary>
+    public const bool WalletFeatureEnabled = false;
+
     private readonly ProcessSupervisor _nodeSupervisor;
     private readonly ProcessSupervisor _minerSupervisor;
     private readonly WalletRpcService _walletRpcService = new();
@@ -88,6 +98,20 @@ public partial class DashboardViewModel : ObservableObject
     /// posts current builds).</summary>
     [ObservableProperty]
     private bool _showMissingPluginWarning;
+
+    /// <summary>True once a per-device hashrate line from keryx-miner's own log reports Ghash/s or
+    /// higher for a single GPU - real-world trigger (2026-08-04): a user's NVIDIA CMP 90HX logged
+    /// "7.13 Thash/s" while the Keryx network's own published total hashrate was ~25 GH/s at the
+    /// time - a single card cannot legitimately out-hash the entire network by ~280x. This is the
+    /// miner's own "hashes_tried" counter (src/miner.rs) being incremented far faster than any real
+    /// PoM walk work for that specific device - almost certainly an upstream keryx-miner counting
+    /// bug (possibly specific to headless CMP cards), not something this app computes or can fix
+    /// in its own code (the number comes verbatim from keryx-miner.exe's stdout). Rather than
+    /// silently displaying an obviously-impossible number as if it were real mining performance,
+    /// this flags it - the user's actual yield is still honestly represented by accepted_blocks/
+    /// escrow stats, never by this counter.</summary>
+    [ObservableProperty]
+    private bool _showHashrateAnomalyWarning;
 
     /// <summary>Formatted "12.34567890 KRX" (or a placeholder before the first successful load) -
     /// read from keryxd's own getBalanceByAddress RPC against the profile's public MiningAddress.
@@ -206,6 +230,25 @@ public partial class DashboardViewModel : ObservableObject
         {
             App.Current.Dispatcher.Invoke(() => ShowMissingPluginWarning = true);
         }
+        DetectImplausibleDeviceHashrate(line);
+    }
+
+    /// <summary>Matches keryx-miner's own real per-device log line, e.g.
+    /// "Device #0 (NVIDIA CMP 90HX): 7.13 Thash/s" (see MinerManager::log_hashrate in
+    /// src/miner.rs - the exact "Device {id}: {rate:.2} {suffix}" format). Ghash/s or Thash/s for a
+    /// single consumer/mining GPU on this algorithm is not physically plausible (see
+    /// ShowHashrateAnomalyWarning's doc comment) - only ever flips the warning ON here, cleared at
+    /// the top of every fresh StartAllAsync like the other miner-log-driven warnings.</summary>
+    private static readonly System.Text.RegularExpressions.Regex DeviceHashrateLineRegex = new(
+        @"Device\s+#\d+[^:]*:\s*[\d.]+\s*(Ghash|Thash)/s",
+        System.Text.RegularExpressions.RegexOptions.Compiled | System.Text.RegularExpressions.RegexOptions.IgnoreCase);
+
+    private void DetectImplausibleDeviceHashrate(string line)
+    {
+        if (DeviceHashrateLineRegex.IsMatch(line))
+        {
+            App.Current.Dispatcher.Invoke(() => ShowHashrateAnomalyWarning = true);
+        }
     }
 
     /// <summary>Raised when the user clicks the "Перейти к настройкам" nudge button.
@@ -321,6 +364,7 @@ public partial class DashboardViewModel : ObservableObject
         MissingConfigTarget = null;
         ShowCudaRuntimeWarning = false;
         ShowMissingPluginWarning = false;
+        ShowHashrateAnomalyWarning = false;
 
         if (string.IsNullOrWhiteSpace(profile.NodeExecutablePath) && !IsMockBackend)
         {
