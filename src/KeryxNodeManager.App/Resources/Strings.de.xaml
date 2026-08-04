@@ -59,6 +59,15 @@
     <sys:String x:Key="Str_Dashboard_PluginWarningBody">CUDA funktioniert, aber der Miner konnte keine Worker-/Plugin-Module finden - eine oder mehrere Dateien, die neben keryx-miner.exe liegen müssen, fehlen. Das passiert meist, wenn bei der Installation nur die .exe kopiert wurde, ohne die zugehörigen .dll-Dateien. Besorge dir den vollständigen Dateisatz erneut aus einer offiziellen Quelle (z. B. dem Discord des Keryx-Teams) und ersetze den ganzen Ordner.</sys:String>
     <sys:String x:Key="Str_Dashboard_PluginWarningButton">Keryx Labs Discord öffnen</sys:String>
 
+    <sys:String x:Key="Str_Dashboard_Wallet_Title">Wallet (Guthaben der Mining-Adresse)</sys:String>
+    <sys:String x:Key="Str_Dashboard_Wallet_PublicOnlyNote">Nur die öffentliche Adresse — diese App speichert oder fragt niemals einen privaten Schlüssel oder eine Seed-Phrase ab.</sys:String>
+    <sys:String x:Key="Str_Dashboard_Wallet_NoAddress">Keine Mining-Adresse festgelegt — bitte auf der Miner-Seite eintragen.</sys:String>
+    <sys:String x:Key="Str_Dashboard_Wallet_NoRecentEntries">Noch keine unausgegebenen Eingänge auf dieser Adresse.</sys:String>
+    <sys:String x:Key="Str_Dashboard_Wallet_Error">Guthaben konnte nicht abgerufen werden: {0}. Stelle sicher, dass die Node läuft und synchronisiert ist.</sys:String>
+    <sys:String x:Key="Str_Dashboard_Wallet_RecentEntriesHeader">Letzte Eingänge (unausgegeben)</sys:String>
+    <sys:String x:Key="Str_Dashboard_Wallet_EntryTypeReward">Blockbelohnung</sys:String>
+    <sys:String x:Key="Str_Dashboard_Wallet_EntryTypeIncoming">Eingang</sys:String>
+
     <sys:String x:Key="Str_Gpu_Title">GPUs</sys:String>
     <sys:String x:Key="Str_Gpu_Refresh">Aktualisieren</sys:String>
     <sys:String x:Key="Str_Gpu_CudaLabel">CUDA </sys:String>

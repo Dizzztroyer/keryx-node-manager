@@ -26,3 +26,39 @@
 
 ╨Я╤А╨╛╨╣╨┤╨╡╨╜!   : ╨╜╨╡ ╨┐╤А╨╛╨╣╨┤╨╡╨╜╨╛     0, ╨┐╤А╨╛╨╣╨┤╨╡╨╜╨╛   183, ╨┐╤А╨╛╨┐╤Г╤Й╨╡╨╜╨╛     0, ╨▓╤Б╨╡╨│╨╛   183, ╨┤╨╗╨╕╤В╨╡╨╗╤М╨╜╨╛╤Б╤В╤М 2 s. - KeryxNodeManager.Core.Tests.dll (net8.0)
 ---- git add/commit/push ---- 
+warning: in the working copy of 'fix_and_push.log', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'fix_and_push2.log', LF will be replaced by CRLF the next time Git touches it
+[main f746c9f] 0.2.7: fix updater dropping plugin DLLs - ApplyUpdate now copies sibling files (e.g. keryxcuda.dll, keryx-llama.dll) extracted alongside the exe, not just the exe itself, so a fresh user's own Install Update never leaves a newer binary paired with missing/stale plugins
+ 3 files changed, 103 insertions(+), 3 deletions(-)
+ create mode 100644 fix_and_push.log
+ create mode 100644 fix_and_push2.log
+To https://github.com/Dizzztroyer/keryx-node-manager.git
+   121351c..f746c9f  main -> main
+---- dotnet publish (self-contained win-x64) ---- 
+  ╨Ю╨┐╤А╨╡╨┤╨╡╨╗╨╡╨╜╨╕╨╡ ╨┐╤А╨╛╨╡╨║╤В╨╛╨▓ ╨┤╨╗╤П ╨▓╨╛╤Б╤Б╤В╨░╨╜╨╛╨▓╨╗╨╡╨╜╨╕╤П...
+  ╨Т╨╛╤Б╤Б╤В╨░╨╜╨╛╨▓╨╗╨╡╨╜ C:\Users\hambi\KRX_miner\KeryxNodeManager\src\KeryxNodeManager.Core\KeryxNodeManager.Core.csproj (╨╖╨░ 194┬а╨╝╤Б).
+  ╨Т╨╛╤Б╤Б╤В╨░╨╜╨╛╨▓╨╗╨╡╨╜ C:\Users\hambi\KRX_miner\KeryxNodeManager\src\KeryxNodeManager.App\KeryxNodeManager.App.csproj (╨╖╨░ 195┬а╨╝╤Б).
+  KeryxNodeManager.Core -> C:\Users\hambi\KRX_miner\KeryxNodeManager\src\KeryxNodeManager.Core\bin\Release\net8.0\KeryxNodeManager.Core.dll
+  KeryxNodeManager.App -> C:\Users\hambi\KRX_miner\KeryxNodeManager\src\KeryxNodeManager.App\bin\Release\net8.0-windows\win-x64\KeryxNodeManager.dll
+  KeryxNodeManager.App -> C:\Users\hambi\KRX_miner\KeryxNodeManager\artifacts\publish\win-x64\
+---- stopping old KeryxNodeManager.exe (UI only - keryxd.exe/keryx-miner.exe are never touched) ---- 
+Успешно: Процесс "KeryxNodeManager.exe", с идентификатором 2396, был завершен.
+---- robocopy into real install directory ---- 
+
+
+------------------------------------------------------------------------------
+
+               ВсегоСкопировано ПропущеноНесоответствие      СБОЙДополнения
+Каталогов :        14         0        14         0         0         0
+  Файлов :       509         7       502         0         0         3
+    Байт :  163.82 m    1.33 m  162.48 m         0         0    4.90 m
+   Время :   0:00:00   0:00:00                       0:00:00   0:00:00
+
+
+Скорость :           232 955 166 Байт/сек.
+Скорость :             13329,802 МБ/мин.
+   Окончание: вторник, 4 августа 2026 г. 08:36:03
+
+---- relaunching updated app ---- 
+DEPLOY_DONE 
+==== END 04.08.2026  8:36:03,20 ==== 

@@ -15,6 +15,7 @@ public partial class DashboardView : UserControl
         if (DataContext is DashboardViewModel vm)
         {
             _ = vm.RefreshCommand.ExecuteAsync(null);
+            _ = vm.RefreshWalletCommand.ExecuteAsync(null);
         }
     }
 }

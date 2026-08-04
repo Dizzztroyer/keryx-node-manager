@@ -64,6 +64,59 @@ public class KeryxRpcJsonClientTests
     }
 
     [Fact]
+    public async Task GetBalanceByAddressAsync_RealLoopbackServer_ParsesBalanceAndSendsAddress()
+    {
+        var port = GetFreeLoopbackPort();
+        using var listener = new TcpListener(IPAddress.Loopback, port);
+        listener.Start();
+        var serverTask = RawWebSocketTestServer.AcceptOneMessageCaptureRequestAndRespondAsync(
+            listener, """{"balance":123456789}""");
+
+        await using var client = new KeryxRpcJsonClient();
+        await client.ConnectAsync("127.0.0.1", port, CancellationToken.None);
+        var result = await client.GetBalanceByAddressAsync("keryx:qexampleaddress", CancellationToken.None);
+
+        Assert.Equal(123456789UL, result.Balance);
+
+        var rawRequest = await serverTask;
+        using var doc = JsonDocument.Parse(rawRequest);
+        Assert.Equal("getBalanceByAddress", doc.RootElement.GetProperty("method").GetString());
+        Assert.Equal("keryx:qexampleaddress", doc.RootElement.GetProperty("params").GetProperty("address").GetString());
+
+        listener.Stop();
+    }
+
+    [Fact]
+    public async Task GetUtxosByAddressesAsync_RealLoopbackServer_ParsesEntriesAndSendsAddressList()
+    {
+        var port = GetFreeLoopbackPort();
+        using var listener = new TcpListener(IPAddress.Loopback, port);
+        listener.Start();
+        var serverTask = RawWebSocketTestServer.AcceptOneMessageCaptureRequestAndRespondAsync(
+            listener,
+            """
+            {"entries":[{"address":"keryx:qexampleaddress","outpoint":{"transactionId":"abc123","index":0},"utxoEntry":{"amount":500000000,"scriptPublicKey":{"version":0,"scriptPublicKey":""},"blockDaaScore":42,"isCoinbase":true}}]}
+            """);
+
+        await using var client = new KeryxRpcJsonClient();
+        await client.ConnectAsync("127.0.0.1", port, CancellationToken.None);
+        var result = await client.GetUtxosByAddressesAsync(new[] { "keryx:qexampleaddress" }, CancellationToken.None);
+
+        var entry = Assert.Single(result.Entries);
+        Assert.Equal(500000000UL, entry.UtxoEntry!.Amount);
+        Assert.True(entry.UtxoEntry!.IsCoinbase);
+        Assert.Equal(42UL, entry.UtxoEntry!.BlockDaaScore);
+        Assert.Equal("abc123", entry.Outpoint!.TransactionId);
+
+        var rawRequest = await serverTask;
+        using var doc = JsonDocument.Parse(rawRequest);
+        Assert.Equal("getUtxosByAddresses", doc.RootElement.GetProperty("method").GetString());
+        Assert.Equal("keryx:qexampleaddress", doc.RootElement.GetProperty("params").GetProperty("addresses")[0].GetString());
+
+        listener.Stop();
+    }
+
+    [Fact]
     public async Task Call_ServerReturnsErrorField_ThrowsKeryxRpcException()
     {
         var port = GetFreeLoopbackPort();
@@ -102,9 +155,25 @@ public class KeryxRpcJsonClientTests
             await using var stream = tcpClient.GetStream();
 
             await PerformHandshakeAsync(stream);
-            var (id, method) = await ReadOneTextFrameAsync(stream);
+            var (id, method, _) = await ReadOneTextFrameAsync(stream);
             var responseJson = $$"""{"id":{{id}},"result":{{buildResultJson(method)}}}""";
             await SendTextFrameAsync(stream, responseJson);
+        }
+
+        /// <summary>Same as <see cref="AcceptOneMessageAndRespondAsync"/> but hands the caller the
+        /// full raw request JSON (not just the method name) so a test can assert on what was sent
+        /// as "params" - used to verify GetBalanceByAddressAsync/GetUtxosByAddressesAsync actually
+        /// transmit the address(es) they were given, not just that they parse a canned response.</summary>
+        public static async Task<string> AcceptOneMessageCaptureRequestAndRespondAsync(TcpListener listener, string resultJson)
+        {
+            using var tcpClient = await listener.AcceptTcpClientAsync();
+            await using var stream = tcpClient.GetStream();
+
+            await PerformHandshakeAsync(stream);
+            var (id, _, rawRequestJson) = await ReadOneTextFrameAsync(stream);
+            var responseJson = $$"""{"id":{{id}},"result":{{resultJson}}}""";
+            await SendTextFrameAsync(stream, responseJson);
+            return rawRequestJson;
         }
 
         public static async Task AcceptOneMessageAndRespondErrorAsync(TcpListener listener, string errorText)
@@ -113,7 +182,7 @@ public class KeryxRpcJsonClientTests
             await using var stream = tcpClient.GetStream();
 
             await PerformHandshakeAsync(stream);
-            var (id, _) = await ReadOneTextFrameAsync(stream);
+            var (id, _, _) = await ReadOneTextFrameAsync(stream);
             var responseJson = $$"""{"id":{{id}},"error":"{{errorText}}"}""";
             await SendTextFrameAsync(stream, responseJson);
         }
@@ -151,7 +220,7 @@ public class KeryxRpcJsonClientTests
             return sb.ToString();
         }
 
-        private static async Task<(long Id, string Method)> ReadOneTextFrameAsync(NetworkStream stream)
+        private static async Task<(long Id, string Method, string RawJson)> ReadOneTextFrameAsync(NetworkStream stream)
         {
             var header = new byte[2];
             await ReadExactAsync(stream, header, 2);
@@ -196,7 +265,7 @@ public class KeryxRpcJsonClientTests
             using var doc = JsonDocument.Parse(json);
             var id = doc.RootElement.GetProperty("id").GetInt64();
             var method = doc.RootElement.GetProperty("method").GetString() ?? "";
-            return (id, method);
+            return (id, method, json);
         }
 
         private static async Task SendTextFrameAsync(NetworkStream stream, string json)

@@ -63,6 +63,15 @@
     <sys:String x:Key="Str_Dashboard_PluginWarningBody">CUDA is working, but the miner couldn't find any worker/plugin modules - one or more files that need to sit next to keryx-miner.exe are missing. This usually happens when only the .exe was copied during install, without its companion .dll files. Get the full file set again from an official source (e.g. the Keryx team's Discord) and replace the whole folder.</sys:String>
     <sys:String x:Key="Str_Dashboard_PluginWarningButton">Open Keryx Labs Discord</sys:String>
 
+    <sys:String x:Key="Str_Dashboard_Wallet_Title">Wallet (mining address balance)</sys:String>
+    <sys:String x:Key="Str_Dashboard_Wallet_PublicOnlyNote">Public address only — this app never stores or requests a private key or seed phrase.</sys:String>
+    <sys:String x:Key="Str_Dashboard_Wallet_NoAddress">No mining address set — enter one on the Miner page.</sys:String>
+    <sys:String x:Key="Str_Dashboard_Wallet_NoRecentEntries">No unspent incoming amounts on this address yet.</sys:String>
+    <sys:String x:Key="Str_Dashboard_Wallet_Error">Couldn't fetch balance: {0}. Make sure the node is running and synced.</sys:String>
+    <sys:String x:Key="Str_Dashboard_Wallet_RecentEntriesHeader">Recent incoming (unspent)</sys:String>
+    <sys:String x:Key="Str_Dashboard_Wallet_EntryTypeReward">Block reward</sys:String>
+    <sys:String x:Key="Str_Dashboard_Wallet_EntryTypeIncoming">Incoming</sys:String>
+
     <sys:String x:Key="Str_Gpu_Title">GPUs</sys:String>
     <sys:String x:Key="Str_Gpu_Refresh">Refresh</sys:String>
     <sys:String x:Key="Str_Gpu_CudaLabel">CUDA </sys:String>

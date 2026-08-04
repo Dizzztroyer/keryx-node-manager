@@ -73,6 +73,19 @@
     <sys:String x:Key="Str_Dashboard_PluginWarningBody">CUDA работает, но у майнера не нашлось ни одного рабочего модуля (плагина) — не хватает файла(ов), которые должны лежать рядом с keryx-miner.exe. Скорее всего, при установке скопировался только сам .exe, без нужных .dll. Возьми полный набор файлов заново из официального источника (например, канала Discord команды Keryx) и замени папку целиком.</sys:String>
     <sys:String x:Key="Str_Dashboard_PluginWarningButton">Открыть Discord Keryx Labs</sys:String>
 
+    <!-- Wallet card (Dashboard): balance + recent unspent outputs for the profile's own public
+         MiningAddress, via keryxd's getBalanceByAddress/getUtxosByAddresses RPC (requires the
+         node's utxoindex flag). Public-address-only - no private key/seed is ever read or stored
+         anywhere in this app, see WalletRpcService's doc comment. -->
+    <sys:String x:Key="Str_Dashboard_Wallet_Title">Кошелёк (баланс майнинг-адреса)</sys:String>
+    <sys:String x:Key="Str_Dashboard_Wallet_PublicOnlyNote">Только публичный адрес — приложение никогда не хранит и не запрашивает приватный ключ или сид-фразу.</sys:String>
+    <sys:String x:Key="Str_Dashboard_Wallet_NoAddress">Адрес майнинга не задан — укажите его на странице «Майнер».</sys:String>
+    <sys:String x:Key="Str_Dashboard_Wallet_NoRecentEntries">Пока нет непотраченных поступлений на этот адрес.</sys:String>
+    <sys:String x:Key="Str_Dashboard_Wallet_Error">Не удалось получить баланс: {0}. Убедитесь, что нода запущена и синхронизирована.</sys:String>
+    <sys:String x:Key="Str_Dashboard_Wallet_RecentEntriesHeader">Недавние поступления (непотраченные)</sys:String>
+    <sys:String x:Key="Str_Dashboard_Wallet_EntryTypeReward">Награда за блок</sys:String>
+    <sys:String x:Key="Str_Dashboard_Wallet_EntryTypeIncoming">Поступление</sys:String>
+
     <!-- GPU page (brief §6), second slice of the full-extraction pass. Same scope limitation as
          Dashboard: GpuCardViewModel.AssignmentSummary comes from Core's TierAssigner.Explanation
          (a genuine Core-layer message, not covered here) and GpuViewModel.ModeOptions is a static

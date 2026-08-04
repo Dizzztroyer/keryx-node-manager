@@ -43,6 +43,18 @@ public sealed class MiningProfile
     /// testnet per keryxd --help) - NodeArgumentBuilder only emits an explicit port if this is set.</summary>
     public int? NodeRpcJsonPort { get; set; }
 
+    /// <summary>Whether to launch keryxd with --utxoindex, the flag its RPC surface requires
+    /// before getBalanceByAddress/getUtxosByAddresses will answer anything (confirmed against the
+    /// real keryxd/src/args.rs flag list in docs/KERYX_RESEARCH.md - without it those RPC calls
+    /// return keryxd's own "the required --utxoindex flag has not been specified" error, which this
+    /// app surfaces verbatim rather than guessing at a friendlier message). Defaults on, same
+    /// reasoning as NodeRpcJsonEnabled: the Dashboard wallet balance/recent-activity card this
+    /// profile field exists for is meant to work for a plain user with zero extra configuration.
+    /// The real cost is keryxd building and maintaining the UTXO index on disk/CPU - not free, but
+    /// the same trade-off keryxd's own docs treat as the normal way to run a node that answers
+    /// address queries at all.</summary>
+    public bool NodeUtxoIndexEnabled { get; set; } = true;
+
     public string IpfsUrl { get; set; } = "http://127.0.0.1:5001";
     public decimal DevFundPercent { get; set; } = 2.0m;
     public List<GpuAssignment> GpuAssignments { get; set; } = new();

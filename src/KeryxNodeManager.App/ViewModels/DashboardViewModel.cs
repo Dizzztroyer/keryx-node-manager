@@ -1,3 +1,5 @@
+using System.Collections.ObjectModel;
+using System.Globalization;
 using System.IO;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
@@ -7,6 +9,7 @@ using KeryxNodeManager.Core.Gpu;
 using KeryxNodeManager.Core.Logging;
 using KeryxNodeManager.Core.ModelAssignment;
 using KeryxNodeManager.Core.Models;
+using KeryxNodeManager.Core.Networking;
 using KeryxNodeManager.Core.Process;
 using KeryxNodeManager.Core.Runtime;
 using KeryxNodeManager.Core.Safety;
@@ -33,6 +36,7 @@ public partial class DashboardViewModel : ObservableObject
     private readonly SafetyMonitor _safetyMonitor;
     private readonly ProcessSupervisor _nodeSupervisor;
     private readonly ProcessSupervisor _minerSupervisor;
+    private readonly WalletRpcService _walletRpcService = new();
 
     [ObservableProperty]
     private string _nodeStatus = "";
@@ -84,6 +88,90 @@ public partial class DashboardViewModel : ObservableObject
     /// posts current builds).</summary>
     [ObservableProperty]
     private bool _showMissingPluginWarning;
+
+    /// <summary>Formatted "12.34567890 KRX" (or a placeholder before the first successful load) -
+    /// read from keryxd's own getBalanceByAddress RPC against the profile's public MiningAddress.
+    /// Never derived from anything secret: this app never reads, stores, or has any concept of a
+    /// private key/seed - see WalletRpcService's doc comment.</summary>
+    [ObservableProperty]
+    private string _walletBalanceText = "—";
+
+    [ObservableProperty]
+    private bool _isWalletBusy;
+
+    /// <summary>Set on any wallet refresh failure (node not running, --utxoindex not enabled yet
+    /// while keryxd is still rebuilding it, no address configured, etc.) - always keryxd's own
+    /// error text where one exists, per this app's "let the node be authoritative" convention
+    /// (see WalletRpcService doc comment), never a guessed-at friendlier rewrite.</summary>
+    [ObservableProperty]
+    private string? _walletStatusMessage;
+
+    /// <summary>Unspent outputs currently held by the mining address, newest-first - see
+    /// WalletRpcService's doc comment for why this is "recent activity still sitting in the
+    /// wallet," not a full transaction history (keryxd's RPC surface has no such call).</summary>
+    public ObservableCollection<WalletUtxoRowViewModel> WalletRecentEntries { get; } = new();
+
+    [RelayCommand]
+    private async Task RefreshWalletAsync()
+    {
+        var profile = _profileStore.ActiveProfile;
+        if (string.IsNullOrWhiteSpace(profile.MiningAddress))
+        {
+            WalletBalanceText = "—";
+            WalletRecentEntries.Clear();
+            WalletStatusMessage = AppStrings.Get("Str_Dashboard_Wallet_NoAddress");
+            return;
+        }
+
+        IsWalletBusy = true;
+        WalletStatusMessage = null;
+        try
+        {
+            // The wRPC JSON listener is always loopback-only (NodeArgumentBuilder never binds it
+            // anywhere else), and only ever answers for the keryxd instance THIS app itself
+            // launches - so this always polls 127.0.0.1, never the active profile's NodeEndpoint
+            // (which may point at a substitute public node with no RPC access at all). Same
+            // invariant as PublicNodeListViewModel.OwnNodeRpcAddress().
+            var port = profile.NodeRpcJsonPort
+                ?? (profile.UseTestnet ? NodeArgumentBuilder.DefaultRpcJsonPortTestnet : NodeArgumentBuilder.DefaultRpcJsonPortMainnet);
+
+            var snapshot = await _walletRpcService.GetSnapshotAsync(
+                "127.0.0.1", port, profile.MiningAddress, maxEntries: 15, CancellationToken.None);
+
+            WalletBalanceText = FormatSompi(snapshot.BalanceSompi);
+            WalletRecentEntries.Clear();
+            foreach (var entry in snapshot.RecentEntries)
+            {
+                WalletRecentEntries.Add(new WalletUtxoRowViewModel(
+                    FormatSompi(entry.AmountSompi),
+                    entry.IsCoinbase
+                        ? AppStrings.Get("Str_Dashboard_Wallet_EntryTypeReward")
+                        : AppStrings.Get("Str_Dashboard_Wallet_EntryTypeIncoming"),
+                    ShortenTxId(entry.TransactionId)));
+            }
+            if (WalletRecentEntries.Count == 0)
+            {
+                WalletStatusMessage = AppStrings.Get("Str_Dashboard_Wallet_NoRecentEntries");
+            }
+        }
+        catch (Exception ex)
+        {
+            WalletStatusMessage = AppStrings.Format("Str_Dashboard_Wallet_Error", ex.Message);
+        }
+        finally
+        {
+            IsWalletBusy = false;
+        }
+    }
+
+    /// <summary>Sompi -> KRX display text, 8 decimal places (1 KRX = 100,000,000 sompi - see
+    /// WalletRpcService's doc comment). Always culture-invariant so a decimal comma locale doesn't
+    /// silently produce an unparseable/misleading number for a currency amount.</summary>
+    private static string FormatSompi(ulong sompi) =>
+        (sompi / 100_000_000m).ToString("0.00000000", CultureInfo.InvariantCulture) + " KRX";
+
+    private static string ShortenTxId(string txId) =>
+        string.IsNullOrEmpty(txId) || txId.Length <= 16 ? txId : $"{txId[..8]}…{txId[^8..]}";
 
     [RelayCommand]
     private void OpenCudaDownloadPage()
@@ -390,4 +478,22 @@ public partial class DashboardViewModel : ObservableObject
         string.IsNullOrWhiteSpace(executablePath)
             ? AppDomain.CurrentDomain.BaseDirectory
             : (Path.GetDirectoryName(executablePath) ?? AppDomain.CurrentDomain.BaseDirectory);
+}
+
+/// <summary>Plain display row for the Dashboard wallet card's recent-entries list - already
+/// formatted (amount text, localized type label, shortened tx id) so the View binds directly with
+/// no converters. Immutable/no INotifyPropertyChanged: rebuilt fresh on every RefreshWalletAsync,
+/// never mutated in place.</summary>
+public sealed class WalletUtxoRowViewModel
+{
+    public string AmountText { get; }
+    public string TypeText { get; }
+    public string TransactionIdText { get; }
+
+    public WalletUtxoRowViewModel(string amountText, string typeText, string transactionIdText)
+    {
+        AmountText = amountText;
+        TypeText = typeText;
+        TransactionIdText = transactionIdText;
+    }
 }

@@ -58,6 +58,15 @@
     <sys:String x:Key="Str_Dashboard_PluginWarningBody">CUDA fonctionne, mais le mineur n'a trouvé aucun module worker/plugin - un ou plusieurs fichiers devant se trouver à côté de keryx-miner.exe sont manquants. Cela arrive généralement quand seul le .exe a été copié à l'installation, sans ses fichiers .dll associés. Récupère l'ensemble complet des fichiers depuis une source officielle (par ex. le Discord de l'équipe Keryx) et remplace tout le dossier.</sys:String>
     <sys:String x:Key="Str_Dashboard_PluginWarningButton">Ouvrir le Discord de Keryx Labs</sys:String>
 
+    <sys:String x:Key="Str_Dashboard_Wallet_Title">Portefeuille (solde de l'adresse de minage)</sys:String>
+    <sys:String x:Key="Str_Dashboard_Wallet_PublicOnlyNote">Adresse publique uniquement — cette application ne stocke ni ne demande jamais de clé privée ou de phrase secrète.</sys:String>
+    <sys:String x:Key="Str_Dashboard_Wallet_NoAddress">Aucune adresse de minage définie — indiquez-en une sur la page Mineur.</sys:String>
+    <sys:String x:Key="Str_Dashboard_Wallet_NoRecentEntries">Aucune entrée non dépensée sur cette adresse pour le moment.</sys:String>
+    <sys:String x:Key="Str_Dashboard_Wallet_Error">Impossible de récupérer le solde : {0}. Vérifiez que le nœud est démarré et synchronisé.</sys:String>
+    <sys:String x:Key="Str_Dashboard_Wallet_RecentEntriesHeader">Entrées récentes (non dépensées)</sys:String>
+    <sys:String x:Key="Str_Dashboard_Wallet_EntryTypeReward">Récompense de bloc</sys:String>
+    <sys:String x:Key="Str_Dashboard_Wallet_EntryTypeIncoming">Entrée</sys:String>
+
     <sys:String x:Key="Str_Gpu_Title">Cartes graphiques</sys:String>
     <sys:String x:Key="Str_Gpu_Refresh">Actualiser</sys:String>
     <sys:String x:Key="Str_Gpu_CudaLabel">CUDA </sys:String>

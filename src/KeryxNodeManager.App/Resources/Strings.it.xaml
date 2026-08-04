@@ -58,6 +58,15 @@
     <sys:String x:Key="Str_Dashboard_PluginWarningBody">CUDA funziona, ma il miner non ha trovato alcun modulo worker/plugin - mancano uno o più file che devono stare accanto a keryx-miner.exe. Di solito succede quando durante l'installazione è stato copiato solo l'.exe, senza i file .dll associati. Scarica di nuovo il set completo di file da una fonte ufficiale (ad es. il Discord del team Keryx) e sostituisci l'intera cartella.</sys:String>
     <sys:String x:Key="Str_Dashboard_PluginWarningButton">Apri il Discord di Keryx Labs</sys:String>
 
+    <sys:String x:Key="Str_Dashboard_Wallet_Title">Portafoglio (saldo dell'indirizzo di mining)</sys:String>
+    <sys:String x:Key="Str_Dashboard_Wallet_PublicOnlyNote">Solo indirizzo pubblico — questa app non memorizza né richiede mai una chiave privata o una seed phrase.</sys:String>
+    <sys:String x:Key="Str_Dashboard_Wallet_NoAddress">Nessun indirizzo di mining impostato — inseriscilo nella pagina Miner.</sys:String>
+    <sys:String x:Key="Str_Dashboard_Wallet_NoRecentEntries">Ancora nessuna entrata non spesa su questo indirizzo.</sys:String>
+    <sys:String x:Key="Str_Dashboard_Wallet_Error">Impossibile recuperare il saldo: {0}. Assicurati che il nodo sia in esecuzione e sincronizzato.</sys:String>
+    <sys:String x:Key="Str_Dashboard_Wallet_RecentEntriesHeader">Entrate recenti (non spese)</sys:String>
+    <sys:String x:Key="Str_Dashboard_Wallet_EntryTypeReward">Ricompensa blocco</sys:String>
+    <sys:String x:Key="Str_Dashboard_Wallet_EntryTypeIncoming">Entrata</sys:String>
+
     <sys:String x:Key="Str_Gpu_Title">Schede video</sys:String>
     <sys:String x:Key="Str_Gpu_Refresh">Aggiorna</sys:String>
     <sys:String x:Key="Str_Gpu_CudaLabel">CUDA </sys:String>

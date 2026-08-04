@@ -5,6 +5,7 @@
              Loaded="UserControl_Loaded">
     <UserControl.Resources>
         <conv:StringToVisibilityConverter x:Key="StringToVis"/>
+        <conv:CountToVisibilityConverter x:Key="CountToVis"/>
         <BooleanToVisibilityConverter x:Key="BoolToVis"/>
     </UserControl.Resources>
     <StackPanel>
@@ -93,5 +94,57 @@
         <Button Content="{DynamicResource Str_Dashboard_GoToSettings}" Style="{DynamicResource SecondaryButtonStyle}"
                 Command="{Binding GoToMissingConfigCommand}" HorizontalAlignment="Left" Margin="0,8,0,0"
                 Visibility="{Binding MissingConfigTarget, Converter={StaticResource StringToVis}}"/>
+
+        <!-- Wallet card: balance + recent unspent outputs for the profile's own public mining
+             address (MiningAddress), read via keryxd's getBalanceByAddress/getUtxosByAddresses RPC
+             calls. Public-address-only by construction - this app has no private key/seed anywhere
+             in it, so there is nothing secret here to protect or leak; see WalletRpcService's doc
+             comment. "Недавние поступления" is deliberately labeled as unspent outputs, not a full
+             transaction history - keryxd's RPC surface has no address-history call. -->
+        <Border Style="{DynamicResource CardStyle}" Margin="0,16,0,0">
+            <StackPanel>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Grid.Column="0">
+                        <TextBlock Text="{DynamicResource Str_Dashboard_Wallet_Title}" FontWeight="Bold"/>
+                        <TextBlock Text="{Binding WalletBalanceText}" FontSize="24" FontWeight="SemiBold" Margin="0,6,0,0"/>
+                        <TextBlock Text="{DynamicResource Str_Dashboard_Wallet_PublicOnlyNote}" TextWrapping="Wrap"
+                                   Foreground="{DynamicResource TextSecondaryBrush}" FontSize="11" Margin="0,4,0,0"/>
+                    </StackPanel>
+                    <Button Grid.Column="1" Content="{DynamicResource Str_Dashboard_Refresh}"
+                            Style="{DynamicResource SecondaryButtonStyle}" VerticalAlignment="Top"
+                            Command="{Binding RefreshWalletCommand}"/>
+                </Grid>
+
+                <TextBlock Text="{Binding WalletStatusMessage}" TextWrapping="Wrap" Margin="0,10,0,0"
+                           Foreground="{DynamicResource TextSecondaryBrush}"
+                           Visibility="{Binding WalletStatusMessage, Converter={StaticResource StringToVis}}"/>
+
+                <TextBlock Text="{DynamicResource Str_Dashboard_Wallet_RecentEntriesHeader}" FontWeight="SemiBold"
+                           Margin="0,14,0,6"
+                           Visibility="{Binding WalletRecentEntries.Count, Converter={StaticResource CountToVis}}"/>
+                <ItemsControl ItemsSource="{Binding WalletRecentEntries}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Grid Margin="0,0,0,4">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Grid.Column="0" Text="{Binding TransactionIdText}" FontFamily="Consolas"
+                                           Foreground="{DynamicResource TextSecondaryBrush}"/>
+                                <TextBlock Grid.Column="1" Text="{Binding TypeText}" Margin="12,0,12,0"
+                                           Foreground="{DynamicResource TextSecondaryBrush}"/>
+                                <TextBlock Grid.Column="2" Text="{Binding AmountText}" FontWeight="SemiBold"/>
+                            </Grid>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </StackPanel>
+        </Border>
     </StackPanel>
 </UserControl>

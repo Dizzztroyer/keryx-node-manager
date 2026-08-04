@@ -61,6 +61,15 @@
     <sys:String x:Key="Str_Dashboard_PluginWarningBody">CUDA працює, але майнер не знайшов жодного робочого модуля (плагіна) - бракує файлів, які мають лежати поруч із keryx-miner.exe. Найімовірніше, під час встановлення скопіювався лише сам .exe, без потрібних .dll. Візьми повний набір файлів заново з офіційного джерела (наприклад, Discord команди Keryx) і заміни всю папку.</sys:String>
     <sys:String x:Key="Str_Dashboard_PluginWarningButton">Відкрити Discord Keryx Labs</sys:String>
 
+    <sys:String x:Key="Str_Dashboard_Wallet_Title">Гаманець (баланс адреси майнінгу)</sys:String>
+    <sys:String x:Key="Str_Dashboard_Wallet_PublicOnlyNote">Лише публічна адреса — застосунок ніколи не зберігає і не запитує приватний ключ чи сід-фразу.</sys:String>
+    <sys:String x:Key="Str_Dashboard_Wallet_NoAddress">Адресу майнінгу не задано — вкажіть її на сторінці «Майнер».</sys:String>
+    <sys:String x:Key="Str_Dashboard_Wallet_NoRecentEntries">Поки що немає непотрачених надходжень на цю адресу.</sys:String>
+    <sys:String x:Key="Str_Dashboard_Wallet_Error">Не вдалося отримати баланс: {0}. Переконайтеся, що нода запущена та синхронізована.</sys:String>
+    <sys:String x:Key="Str_Dashboard_Wallet_RecentEntriesHeader">Останні надходження (непотрачені)</sys:String>
+    <sys:String x:Key="Str_Dashboard_Wallet_EntryTypeReward">Нагорода за блок</sys:String>
+    <sys:String x:Key="Str_Dashboard_Wallet_EntryTypeIncoming">Надходження</sys:String>
+
     <sys:String x:Key="Str_Gpu_Title">Відеокарти</sys:String>
     <sys:String x:Key="Str_Gpu_Refresh">Оновити</sys:String>
     <sys:String x:Key="Str_Gpu_CudaLabel">CUDA </sys:String>

@@ -98,4 +98,27 @@ public class NodeArgumentBuilderTests
         var rpcArg = Assert.Single(args, a => a.StartsWith("--rpclisten-json"));
         Assert.StartsWith("--rpclisten-json=127.0.0.1:", rpcArg);
     }
+
+    [Fact]
+    public void Build_UtxoIndexEnabledByDefault_EmitsFlag()
+    {
+        // NodeUtxoIndexEnabled defaults true (see MiningProfile's doc comment) so the Dashboard
+        // wallet balance/recent-activity card works out of the box - getBalanceByAddress and
+        // getUtxosByAddresses both require --utxoindex or keryxd rejects the call outright.
+        var profile = new MiningProfile();
+
+        var args = NodeArgumentBuilder.Build(profile, appDataDir: null);
+
+        Assert.Contains("--utxoindex", args);
+    }
+
+    [Fact]
+    public void Build_UtxoIndexDisabled_OmitsFlag()
+    {
+        var profile = new MiningProfile { NodeUtxoIndexEnabled = false };
+
+        var args = NodeArgumentBuilder.Build(profile, appDataDir: null);
+
+        Assert.DoesNotContain("--utxoindex", args);
+    }
 }

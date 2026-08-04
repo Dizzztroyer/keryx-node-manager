@@ -39,6 +39,11 @@ public static class NodeArgumentBuilder
             args.Add($"--rpclisten-json=127.0.0.1:{port}");
         }
 
+        if (profile.NodeUtxoIndexEnabled)
+        {
+            args.Add("--utxoindex");
+        }
+
         foreach (var extra in profile.ExtraNodeArguments)
         {
             if (!string.IsNullOrWhiteSpace(extra))
