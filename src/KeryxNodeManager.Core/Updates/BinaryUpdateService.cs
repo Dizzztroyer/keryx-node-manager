@@ -110,6 +110,17 @@ public sealed class BinaryUpdateService
     /// rather than silently corrupting a running process's image). The previous binary is backed
     /// up to `{targetExePath}.bak` (overwriting any earlier backup) before the copy, so a bad
     /// download/extract that still somehow passes this far can be manually rolled back.
+    ///
+    /// A release archive commonly ships more than just the exe alongside it - e.g. keryx-miner's
+    /// GPU backend plugin DLLs and its LLM inference engine DLL, which MUST sit in the same
+    /// directory as keryx-miner.exe or the miner silently loses functionality (mining fails with
+    /// "No workers found") without this class ever seeing an error. Only ever copying the exe
+    /// itself here (as this method originally did) meant every one of this app's own "Install
+    /// update" runs would leave a newer exe paired with stale/missing plugin files the moment a
+    /// release started bundling them - a real user hitting Update would get exactly this failure,
+    /// not just a hand-patched dev machine. So this also copies every other file that was
+    /// extracted alongside the exe into the target directory, keeping the installed exe and its
+    /// plugins as one consistent set straight from the official release, every time.
     /// </summary>
     public void ApplyUpdate(string extractedExePath, string targetExePath)
     {
@@ -127,6 +138,25 @@ public sealed class BinaryUpdateService
         }
 
         File.Copy(extractedExePath, targetExePath, overwrite: true);
+
+        var extractedDir = Path.GetDirectoryName(extractedExePath);
+        if (!string.IsNullOrEmpty(extractedDir) && !string.IsNullOrEmpty(targetDir))
+        {
+            foreach (var siblingFile in Directory.EnumerateFiles(extractedDir))
+            {
+                if (string.Equals(siblingFile, extractedExePath, StringComparison.OrdinalIgnoreCase)) continue;
+
+                var destPath = Path.Combine(targetDir, Path.GetFileName(siblingFile));
+
+                // extractedDir and targetDir can be the same directory (e.g. tests, or a caller
+                // that extracts in place) - copying a file onto itself throws (Windows treats it
+                // as a sharing violation), so skip when source and destination already resolve to
+                // the same file rather than letting File.Copy attempt a self-copy.
+                if (string.Equals(Path.GetFullPath(siblingFile), Path.GetFullPath(destPath), StringComparison.OrdinalIgnoreCase)) continue;
+
+                File.Copy(siblingFile, destPath, overwrite: true);
+            }
+        }
     }
 }
 

@@ -1,0 +1,24 @@
+==== 04.08.2026  8:17:14,21 ==== 
+---- stopping KeryxNodeManager.exe so keryx-miner.exe file handles are free ---- 
+Успешно: Процесс "KeryxNodeManager.exe", с идентификатором 52584, был завершен.
+Ошибка: Не удается найти процесс "keryx-miner.exe".
+---- copying official plugin files into the real miner bin directory ---- 
+Скопировано файлов:         1.
+Скопировано файлов:         1.
+---- listing bin dir after copy ---- 
+ Том в устройстве C не имеет метки.
+ Серийный номер тома: CC94-DA46
+
+ Содержимое папки C:\Users\hambi\AppData\Local\KeryxNodeManager\bin
+
+04.08.2026  08:17    <DIR>          .
+04.08.2026  00:37    <DIR>          ..
+03.08.2026  22:30                64 escrow.key
+27.07.2026  12:03       647 592 448 keryx-llama.dll
+29.07.2026  13:08         9 204 224 keryx-miner.exe
+04.08.2026  08:14        13 892 096 keryxcuda.dll
+02.08.2026  21:37        37 885 952 keryxd.exe
+               5 файлов    708 574 784 байт
+               2 папок  556 748 656 640 байт свободно
+---- relaunching KeryxNodeManager ---- 
+INSTALL_DONE 

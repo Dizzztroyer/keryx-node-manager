@@ -12,3 +12,9 @@ CHANGELOG.md
 docs/ARCHITECTURE.md
 docs/KERYX_RESEARCH.md
 docs/RECOVERY.md
+ 
+# Large third-party binaries that sometimes get dropped into the repo root during 
+# manual diagnostics/testing - these must never be committed (GitHub rejects files 
+# over 100MB, and they don't belong in source control anyway). 
+*.dll 
+_miner_update/ 

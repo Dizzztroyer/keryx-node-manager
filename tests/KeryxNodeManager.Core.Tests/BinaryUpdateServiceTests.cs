@@ -131,6 +131,43 @@ public class BinaryUpdateServiceTests
     }
 
     [Fact]
+    public void ApplyUpdate_CopiesSiblingPluginFilesAlongsideExe()
+    {
+        // Regression test for the real bug this session found: a release archive commonly bundles
+        // plugin/runtime DLLs (e.g. keryx-miner's GPU backend + LLM inference engine) next to the
+        // exe, and those files MUST land next to the installed exe too, or a real user hitting
+        // "Install update" through this app ends up with a newer exe paired with missing plugins
+        // and mining silently breaks ("No workers found") with no error surfaced here at all.
+        var extractedDir = CreateTempDir();
+        var targetDir = CreateTempDir();
+        try
+        {
+            var extractedExePath = Path.Combine(extractedDir, "keryx-miner.exe");
+            File.WriteAllBytes(extractedExePath, new byte[] { 9, 9, 9 });
+            File.WriteAllBytes(Path.Combine(extractedDir, "keryxcuda.dll"), new byte[] { 5, 5 });
+            File.WriteAllBytes(Path.Combine(extractedDir, "keryx-llama.dll"), new byte[] { 7, 7, 7, 7 });
+
+            var targetExePath = Path.Combine(targetDir, "keryx-miner.exe");
+            var service = new BinaryUpdateService(
+                new Updates.GitHubReleaseChecker(new HttpClient(new FakeGetHandler(Array.Empty<byte>()))),
+                new ModelDownloader(new HttpClient(new FakeGetHandler(Array.Empty<byte>()))));
+
+            service.ApplyUpdate(extractedExePath, targetExePath);
+
+            Assert.Equal(new byte[] { 9, 9, 9 }, File.ReadAllBytes(targetExePath));
+            Assert.True(File.Exists(Path.Combine(targetDir, "keryxcuda.dll")));
+            Assert.True(File.Exists(Path.Combine(targetDir, "keryx-llama.dll")));
+            Assert.Equal(new byte[] { 5, 5 }, File.ReadAllBytes(Path.Combine(targetDir, "keryxcuda.dll")));
+            Assert.Equal(new byte[] { 7, 7, 7, 7 }, File.ReadAllBytes(Path.Combine(targetDir, "keryx-llama.dll")));
+        }
+        finally
+        {
+            Directory.Delete(extractedDir, recursive: true);
+            Directory.Delete(targetDir, recursive: true);
+        }
+    }
+
+    [Fact]
     public void ApplyUpdate_ExtractedFileMissing_ThrowsWithoutTouchingTarget()
     {
         var dir = CreateTempDir();
