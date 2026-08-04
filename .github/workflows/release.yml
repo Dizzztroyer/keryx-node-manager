@@ -1,0 +1,213 @@
+name: Build and publish Windows release
+
+on:
+  workflow_dispatch:
+
+  release:
+    types:
+      - published
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    name: Build Windows release
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up .NET 8
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.0.x
+
+      - name: Read application version
+        id: version
+        shell: pwsh
+        run: |
+          [xml]$project = Get-Content `
+            "src/KeryxNodeManager.App/KeryxNodeManager.App.csproj"
+
+          $version = $project.Project.PropertyGroup.Version |
+            Where-Object { $_ } |
+            Select-Object -First 1
+
+          if ([string]::IsNullOrWhiteSpace($version)) {
+            throw "Could not read Version from KeryxNodeManager.App.csproj"
+          }
+
+          $version = $version.Trim()
+
+          Write-Host "Application version: $version"
+          "version=$version" >> $env:GITHUB_OUTPUT
+
+      - name: Validate release tag
+        if: github.event_name == 'release'
+        shell: pwsh
+        env:
+          RELEASE_TAG: ${{ github.event.release.tag_name }}
+          APP_VERSION: ${{ steps.version.outputs.version }}
+        run: |
+          $expectedTag = "v$env:APP_VERSION"
+
+          Write-Host "Release tag: $env:RELEASE_TAG"
+          Write-Host "Expected tag: $expectedTag"
+
+          if ($env:RELEASE_TAG -ne $expectedTag) {
+            throw "Release tag '$env:RELEASE_TAG' does not match application version '$env:APP_VERSION'. Expected '$expectedTag'."
+          }
+
+      - name: Validate installer version
+        shell: pwsh
+        env:
+          APP_VERSION: ${{ steps.version.outputs.version }}
+        run: |
+          $installerFile = "installer/KeryxNodeManager.iss"
+          $installerContent = Get-Content $installerFile -Raw
+
+          $expected = "#define MyAppVersion `"$env:APP_VERSION`""
+
+          if (-not $installerContent.Contains($expected)) {
+            throw "Installer version does not match application version. Expected: $expected"
+          }
+
+          Write-Host "Installer version matches application version."
+
+      - name: Show .NET information
+        shell: pwsh
+        run: |
+          dotnet --info
+
+      - name: Install Inno Setup
+        shell: pwsh
+        run: |
+          choco install innosetup --yes --no-progress
+
+          $candidates = @(
+            "C:\Program Files (x86)\Inno Setup 6\ISCC.exe",
+            "C:\Program Files\Inno Setup 6\ISCC.exe",
+            "$env:LOCALAPPDATA\Programs\Inno Setup 6\ISCC.exe"
+          )
+
+          $iscc = $candidates |
+            Where-Object { Test-Path $_ } |
+            Select-Object -First 1
+
+          if (-not $iscc) {
+            throw "Inno Setup compiler ISCC.exe was not found after installation."
+          }
+
+          Write-Host "Inno Setup compiler found: $iscc"
+
+      - name: Clean old artifacts
+        shell: pwsh
+        run: |
+          if (Test-Path "artifacts") {
+            Remove-Item "artifacts" -Recurse -Force
+          }
+
+          New-Item -ItemType Directory -Path "artifacts" -Force |
+            Out-Null
+
+      - name: Restore dependencies
+        shell: pwsh
+        run: |
+          dotnet restore KeryxNodeManager.sln
+
+      - name: Build solution
+        shell: pwsh
+        run: |
+          dotnet build KeryxNodeManager.sln `
+            --configuration Release `
+            --no-restore
+
+      - name: Run tests
+        shell: pwsh
+        run: |
+          dotnet test `
+            tests/KeryxNodeManager.Core.Tests/KeryxNodeManager.Core.Tests.csproj `
+            --configuration Release `
+            --no-restore `
+            --verbosity normal
+
+      - name: Build release files
+        shell: pwsh
+        run: |
+          powershell `
+            -NoProfile `
+            -ExecutionPolicy Bypass `
+            -File scripts/build-release.ps1
+
+      - name: Verify release files
+        shell: pwsh
+        env:
+          APP_VERSION: ${{ steps.version.outputs.version }}
+        run: |
+          $setup = "artifacts/KeryxNodeManager-Setup-$env:APP_VERSION.exe"
+          $portable = "artifacts/KeryxNodeManager-Portable-$env:APP_VERSION.zip"
+          $checksums = "artifacts/checksums.txt"
+
+          $requiredFiles = @(
+            $setup,
+            $portable,
+            $checksums
+          )
+
+          foreach ($file in $requiredFiles) {
+            if (-not (Test-Path $file)) {
+              throw "Required release file was not created: $file"
+            }
+
+            $item = Get-Item $file
+
+            if ($item.Length -eq 0) {
+              throw "Release file is empty: $file"
+            }
+
+            Write-Host "$($item.Name): $($item.Length) bytes"
+          }
+
+          $checksumContent = Get-Content $checksums -Raw
+
+          if (-not $checksumContent.Contains(
+            "KeryxNodeManager-Setup-$env:APP_VERSION.exe"
+          )) {
+            throw "Installer is missing from checksums.txt"
+          }
+
+          if (-not $checksumContent.Contains(
+            "KeryxNodeManager-Portable-$env:APP_VERSION.zip"
+          )) {
+            throw "Portable ZIP is missing from checksums.txt"
+          }
+
+          Write-Host ""
+          Write-Host "Checksums:"
+          Get-Content $checksums
+
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: KeryxNodeManager-${{ steps.version.outputs.version }}
+          path: |
+            artifacts/KeryxNodeManager-Setup-${{ steps.version.outputs.version }}.exe
+            artifacts/KeryxNodeManager-Portable-${{ steps.version.outputs.version }}.zip
+            artifacts/checksums.txt
+          if-no-files-found: error
+          retention-days: 30
+
+      - name: Attach files to GitHub Release
+        if: github.event_name == 'release'
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ github.event.release.tag_name }}
+          files: |
+            artifacts/KeryxNodeManager-Setup-${{ steps.version.outputs.version }}.exe
+            artifacts/KeryxNodeManager-Portable-${{ steps.version.outputs.version }}.zip
+            artifacts/checksums.txt
+          fail_on_unmatched_files: true
