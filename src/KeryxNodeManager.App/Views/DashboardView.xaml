@@ -29,6 +29,24 @@
             </StackPanel>
         </Border>
 
+        <!-- 0.2.7 fix: real root cause found 2026-08-04 - keryx-miner's own GPU mining backend
+             loads from a plugin DLL sitting next to the executable (same architecture as its
+             kaspa-miner ancestor). If that file is missing, the miner starts, verifies CUDA
+             inference fine, then reports zero plugins/workers and exits - an installation problem
+             this app cannot silently repair, since the correct companion file must come from
+             wherever the user obtained this specific keryx-miner build. -->
+        <Border Style="{DynamicResource CardStyle}" Margin="0,0,0,16" BorderBrush="{DynamicResource ErrorBrush}"
+                BorderThickness="1" Visibility="{Binding ShowMissingPluginWarning, Converter={StaticResource BoolToVis}}">
+            <StackPanel>
+                <TextBlock Text="{DynamicResource Str_Dashboard_PluginWarningTitle}" FontWeight="Bold"
+                           Foreground="{DynamicResource ErrorBrush}"/>
+                <TextBlock Text="{DynamicResource Str_Dashboard_PluginWarningBody}" TextWrapping="Wrap"
+                           Margin="0,6,0,0" Foreground="{DynamicResource TextPrimaryBrush}"/>
+                <Button Content="{DynamicResource Str_Dashboard_PluginWarningButton}" Style="{DynamicResource PrimaryButtonStyle}"
+                        Command="{Binding OpenMinerDiscordCommand}" HorizontalAlignment="Left" Margin="0,10,0,0"/>
+            </StackPanel>
+        </Border>
+
         <UniformGrid Columns="3" Rows="1">
             <Border Style="{DynamicResource CardStyle}" Margin="0,0,12,0">
                 <StackPanel>

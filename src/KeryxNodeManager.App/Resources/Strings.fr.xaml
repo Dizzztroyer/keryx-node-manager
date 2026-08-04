@@ -54,6 +54,9 @@
     <sys:String x:Key="Str_Dashboard_CudaWarningTitle">Le mineur ne peut pas utiliser ta carte graphique</sys:String>
     <sys:String x:Key="Str_Dashboard_CudaWarningBody">Une carte graphique CUDA a été détectée, mais le runtime CUDA nécessaire n'a pas pu se charger - le minage ne se fait pas réellement, même si le processus tourne. Installe manuellement le NVIDIA CUDA Toolkit 12.6 puis redémarre le mineur (Tout arrêter → Tout démarrer).</sys:String>
     <sys:String x:Key="Str_Dashboard_CudaWarningButton">Télécharger CUDA Toolkit 12.6</sys:String>
+    <sys:String x:Key="Str_Dashboard_PluginWarningTitle">L'installation du mineur est incomplète</sys:String>
+    <sys:String x:Key="Str_Dashboard_PluginWarningBody">CUDA fonctionne, mais le mineur n'a trouvé aucun module worker/plugin - un ou plusieurs fichiers devant se trouver à côté de keryx-miner.exe sont manquants. Cela arrive généralement quand seul le .exe a été copié à l'installation, sans ses fichiers .dll associés. Récupère l'ensemble complet des fichiers depuis une source officielle (par ex. le Discord de l'équipe Keryx) et remplace tout le dossier.</sys:String>
+    <sys:String x:Key="Str_Dashboard_PluginWarningButton">Ouvrir le Discord de Keryx Labs</sys:String>
 
     <sys:String x:Key="Str_Gpu_Title">Cartes graphiques</sys:String>
     <sys:String x:Key="Str_Gpu_Refresh">Actualiser</sys:String>

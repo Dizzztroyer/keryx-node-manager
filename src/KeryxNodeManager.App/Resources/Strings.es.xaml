@@ -54,6 +54,9 @@
     <sys:String x:Key="Str_Dashboard_CudaWarningTitle">El minero no puede usar tu tarjeta gráfica</sys:String>
     <sys:String x:Key="Str_Dashboard_CudaWarningBody">Se detectó una tarjeta gráfica CUDA, pero el runtime de CUDA necesario no se pudo cargar - en realidad no se está minando aunque el proceso esté en marcha. Instala manualmente el NVIDIA CUDA Toolkit 12.6 y reinicia el minero (Detener todo → Iniciar todo).</sys:String>
     <sys:String x:Key="Str_Dashboard_CudaWarningButton">Descargar CUDA Toolkit 12.6</sys:String>
+    <sys:String x:Key="Str_Dashboard_PluginWarningTitle">La instalación del minero está incompleta</sys:String>
+    <sys:String x:Key="Str_Dashboard_PluginWarningBody">CUDA funciona, pero el minero no encontró ningún módulo de trabajo/plugin - faltan uno o más archivos que deben estar junto a keryx-miner.exe. Esto suele pasar cuando solo se copió el .exe durante la instalación, sin sus archivos .dll asociados. Vuelve a obtener el conjunto completo de archivos desde una fuente oficial (por ejemplo, el Discord del equipo de Keryx) y reemplaza la carpeta entera.</sys:String>
+    <sys:String x:Key="Str_Dashboard_PluginWarningButton">Abrir Discord de Keryx Labs</sys:String>
 
     <sys:String x:Key="Str_Gpu_Title">Tarjetas gráficas</sys:String>
     <sys:String x:Key="Str_Gpu_Refresh">Actualizar</sys:String>

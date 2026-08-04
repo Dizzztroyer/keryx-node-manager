@@ -57,6 +57,9 @@
     <sys:String x:Key="Str_Dashboard_CudaWarningTitle">Майнер не може використати відеокарту</sys:String>
     <sys:String x:Key="Str_Dashboard_CudaWarningBody">Виявлено CUDA-відеокарту, але потрібний CUDA runtime не завантажився - майнінг фактично не йде, хоча процес запущено. Встанови вручну NVIDIA CUDA Toolkit 12.6 і перезапусти майнер (Зупинити все → Запустити все).</sys:String>
     <sys:String x:Key="Str_Dashboard_CudaWarningButton">Завантажити CUDA Toolkit 12.6</sys:String>
+    <sys:String x:Key="Str_Dashboard_PluginWarningTitle">Встановлення майнера неповне</sys:String>
+    <sys:String x:Key="Str_Dashboard_PluginWarningBody">CUDA працює, але майнер не знайшов жодного робочого модуля (плагіна) - бракує файлів, які мають лежати поруч із keryx-miner.exe. Найімовірніше, під час встановлення скопіювався лише сам .exe, без потрібних .dll. Візьми повний набір файлів заново з офіційного джерела (наприклад, Discord команди Keryx) і заміни всю папку.</sys:String>
+    <sys:String x:Key="Str_Dashboard_PluginWarningButton">Відкрити Discord Keryx Labs</sys:String>
 
     <sys:String x:Key="Str_Gpu_Title">Відеокарти</sys:String>
     <sys:String x:Key="Str_Gpu_Refresh">Оновити</sys:String>

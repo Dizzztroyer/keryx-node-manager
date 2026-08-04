@@ -1,0 +1,96 @@
+==== 04.08.2026  7:49:37,75 ==== 
+---- nvidia-smi ---- 
+Tue Aug  4 07:49:37 2026       
++-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 591.86                 Driver Version: 591.86         CUDA Version: 13.1     |
++-----------------------------------------+------------------------+----------------------+
+| GPU  Name                  Driver-Model | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+|                                         |                        |               MIG M. |
+|=========================================+========================+======================|
+|   0  NVIDIA GeForce RTX 5070      WDDM  |   00000000:01:00.0  On |                  N/A |
+|  0%   40C    P0             20W /  250W |    2070MiB /  12227MiB |      0%      Default |
+|                                         |                        |                  N/A |
++-----------------------------------------+------------------------+----------------------+
+|   1  NVIDIA CMP 90HX              TCC   |   00000000:0D:00.0 Off |                  N/A |
+| 33%   37C    P0             72W /  250W |      10MiB /  10240MiB |      0%      Default |
+|                                         |                        |                  N/A |
++-----------------------------------------+------------------------+----------------------+
+
++-----------------------------------------------------------------------------------------+
+| Processes:                                                                              |
+|  GPU   GI   CI              PID   Type   Process name                        GPU Memory |
+|        ID   ID                                                               Usage      |
+|=========================================================================================|
+|    0   N/A  N/A            3176    C+G   C:\Windows\explorer.exe               N/A      |
+|    0   N/A  N/A            4788    C+G   ..._pzs8sxrjxfjjc\app\claude.exe      N/A      |
+|    0   N/A  N/A            9368    C+G   ...indows-x86_64-none\python.exe      N/A      |
+|    0   N/A  N/A           10484    C+G   ...xyewy\ShellExperienceHost.exe      N/A      |
+|    0   N/A  N/A           11700    C+G   ...2txyewy\CrossDeviceResume.exe      N/A      |
+|    0   N/A  N/A           13764    C+G   ..._cw5n1h2txyewy\SearchHost.exe      N/A      |
+|    0   N/A  N/A           13772    C+G   ...y\StartMenuExperienceHost.exe      N/A      |
+|    0   N/A  N/A           15840    C+G   ...0.4078.105\msedgewebview2.exe      N/A      |
+|    0   N/A  N/A           16592    C+G   ...8bbwe\PhoneExperienceHost.exe      N/A      |
+|    0   N/A  N/A           18180    C+G   ...r\frontend\Docker Desktop.exe      N/A      |
+|    0   N/A  N/A           19000    C+G   ...0.4078.105\msedgewebview2.exe      N/A      |
+|    0   N/A  N/A           19996    C+G   ...5n1h2txyewy\TextInputHost.exe      N/A      |
+|    0   N/A  N/A           20848    C+G   ...cord\app-1.0.9250\Discord.exe      N/A      |
+|    0   N/A  N/A           24016    C+G   ...0.4078.105\msedgewebview2.exe      N/A      |
+|    0   N/A  N/A           24752    C+G   ...2p2nqsd0c76g0\app\ChatGPT.exe      N/A      |
+|    0   N/A  N/A           25076    C+G   ...ntrolPanel\SystemSettings.exe      N/A      |
+|    0   N/A  N/A           26880    C+G   ...\cef.win64\steamwebhelper.exe      N/A      |
+|    0   N/A  N/A           27880    C+G   ...Telegram Desktop\Telegram.exe      N/A      |
+|    0   N/A  N/A           29616    C+G   ...adeonsoftware\AMDRSSrcExt.exe      N/A      |
+|    0   N/A  N/A           30052    C+G   ...ams\signal-desktop\Signal.exe      N/A      |
+|    0   N/A  N/A           30896    C+G   ...onsoftware\RadeonSoftware.exe      N/A      |
+|    0   N/A  N/A           31740    C+G   ...Chrome\Application\chrome.exe      N/A      |
+|    0   N/A  N/A           33680    C+G   ...Chrome\Application\chrome.exe      N/A      |
+|    0   N/A  N/A           33752    C+G   ...indows-x86_64-none\python.exe      N/A      |
+|    0   N/A  N/A           33900    C+G   ...c76g0\app\ChatGPT Classic.exe      N/A      |
+|    0   N/A  N/A           37472    C+G   ...8wekyb3d8bbwe\M365Copilot.exe      N/A      |
+|    0   N/A  N/A           37572    C+G   ...n1h2txyewy\CHXSmartScreen.exe      N/A      |
+|    0   N/A  N/A           37896    C+G   ...0.4078.105\msedgewebview2.exe      N/A      |
+|    0   N/A  N/A           39464    C+G   ...em32\ApplicationFrameHost.exe      N/A      |
+|    0   N/A  N/A           52860    C+G   ...SnippingTool\SnippingTool.exe      N/A      |
+|    0   N/A  N/A           53000    C+G   ...ams\signal-desktop\Signal.exe      N/A      |
+|    0   N/A  N/A           53532    C+G   ...indows\System32\ShellHost.exe      N/A      |
+|    0   N/A  N/A           60872    C+G   ...yb3d8bbwe\WindowsTerminal.exe      N/A      |
+|    0   N/A  N/A           61404    C+G   ...eManager\KeryxNodeManager.exe      N/A      |
+|    0   N/A  N/A           61432    C+G   ..._pzs8sxrjxfjjc\app\claude.exe      N/A      |
++-----------------------------------------------------------------------------------------+
+---- nvidia-smi driver/CUDA version query ---- 
+name, driver_version
+NVIDIA GeForce RTX 5070, 591.86
+NVIDIA CMP 90HX, 591.86
+---- CUDA toolkit install dirs ---- 
+ Том в устройстве C не имеет метки.
+ Серийный номер тома: CC94-DA46
+
+ Содержимое папки C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA
+
+04.08.2026  01:59    <DIR>          .
+04.08.2026  01:59    <DIR>          ..
+04.08.2026  02:00    <DIR>          v12.6
+               0 файлов              0 байт
+               3 папок  566 280 302 592 байт свободно
+---- searching for cudart64 DLLs on disk (system + toolkit + miner dir) ---- 
+C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v12.6\bin\cudart64_12.dll
+Файл не найден
+C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v12.6\bin\cudart64_12.dll
+Файл не найден
+---- PATH ---- 
+C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v12.6\bin;C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v12.6\libnvvp;C:\Python314\Scripts\;C:\Python314\;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\AutoHotkey;C:\Program Files\WireGuard\;C:\Program Files\Git\cmd;C:\Program Files\nodejs\;C:\ProgramData\chocolatey\bin;C:\Program Files\Tailscale\;C:\Program Files\Docker\Docker\resources\bin;C:\Program Files\GitHub CLI\;C:\Program Files\dotnet\;C:\Program Files\NVIDIA Corporation\Nsight Compute 2024.3.0\;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR;C:\Users\hambi\.cargo\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\Docker\Docker\resources\bin;C:\Program Files\AutoHotkey;C:\Program Files\WireGuard\;C:\Program Files\Git\cmd;C:\Users\hambi\AppData\Local\Microsoft\WindowsApps;C:\Users\hambi\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\hambi\AppData\Local\Python\bin;C:\Users\hambi\AppData\Local\Programs\Antigravity\bin;C:\Program Files\JetBrains\PyCharm 2025.3.3\bin;C:\Users\hambi\AppData\Local\Python\PythonCore-3.14-64;C:\Users\hambi\AppData\Local\Python\PythonCore-3.14-64\Scripts;C:\Users\hambi\AppData\Local\Microsoft\WinGet\Packages\astral-sh.uv_Microsoft.Winget.Source_8wekyb3d8bbwe;;C:\Users\hambi\bin;C:\Users\hambi\AppData\Local\Programs\Ollama;C:\Users\hambi\AppData\Roaming\npm;C:\Users\hambi\.dotnet\tools 
+---- miner bin dir contents ---- 
+ Том в устройстве C не имеет метки.
+ Серийный номер тома: CC94-DA46
+
+ Содержимое папки C:\Users\hambi\AppData\Local\KeryxNodeManager\bin
+
+03.08.2026  22:30    <DIR>          .
+04.08.2026  00:37    <DIR>          ..
+03.08.2026  22:30                64 escrow.key
+29.07.2026  13:08         9 204 224 keryx-miner.exe
+02.08.2026  21:37        37 885 952 keryxd.exe
+               3 файлов     47 090 240 байт
+               2 папок  566 280 302 592 байт свободно
+DIAG_DONE 

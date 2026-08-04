@@ -70,11 +70,34 @@ public partial class DashboardViewModel : ObservableObject
     [ObservableProperty]
     private bool _showCudaRuntimeWarning;
 
+    /// <summary>True once keryx-miner reports "Plugins: []" followed by "No workers found/
+    /// specified" - real-world root cause found 2026-08-04: the exe alone was installed in
+    /// %LOCALAPPDATA%\KeryxNodeManager\bin without its required companion plugin DLL(s)
+    /// (keryx-miner's own architecture loads its GPU mining backend from a DLL sitting next to the
+    /// executable - same pattern as its kaspa-miner ancestor's libkaspacuda.dll/libkaspaopencl.dll,
+    /// confirmed live: fixing the separate CUDA-toolkit issue alone did NOT fix this - the miner got
+    /// as far as verifying CUDA inference successfully, then still reported zero plugins/workers).
+    /// This is a "the miner installation is incomplete" problem, not something this app's code can
+    /// silently repair - the correct companion file(s) must come from wherever the user obtained
+    /// this exact keryx-miner build (the public GitHub releases page only has an older, differently
+    /// -architected version - see this app's own Discord card on the Models page for where the team
+    /// posts current builds).</summary>
+    [ObservableProperty]
+    private bool _showMissingPluginWarning;
+
     [RelayCommand]
     private void OpenCudaDownloadPage()
     {
         System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo(
             "https://developer.nvidia.com/cuda-12-6-0-download-archive")
+        { UseShellExecute = true });
+    }
+
+    [RelayCommand]
+    private void OpenMinerDiscord()
+    {
+        System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo(
+            "https://discord.gg/U9eDmBUKTF")
         { UseShellExecute = true });
     }
 
@@ -89,6 +112,11 @@ public partial class DashboardViewModel : ObservableObject
         if (line.Contains("CUDA runtime lib", StringComparison.OrdinalIgnoreCase))
         {
             App.Current.Dispatcher.Invoke(() => ShowCudaRuntimeWarning = true);
+        }
+        if (line.Contains("No workers", StringComparison.OrdinalIgnoreCase) ||
+            line.Contains("Plugins: []", StringComparison.OrdinalIgnoreCase))
+        {
+            App.Current.Dispatcher.Invoke(() => ShowMissingPluginWarning = true);
         }
     }
 
@@ -204,6 +232,7 @@ public partial class DashboardViewModel : ObservableObject
         var profile = _profileStore.ActiveProfile;
         MissingConfigTarget = null;
         ShowCudaRuntimeWarning = false;
+        ShowMissingPluginWarning = false;
 
         if (string.IsNullOrWhiteSpace(profile.NodeExecutablePath) && !IsMockBackend)
         {

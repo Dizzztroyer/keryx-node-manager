@@ -26,3 +26,48 @@
 
 ╨Я╤А╨╛╨╣╨┤╨╡╨╜!   : ╨╜╨╡ ╨┐╤А╨╛╨╣╨┤╨╡╨╜╨╛     0, ╨┐╤А╨╛╨╣╨┤╨╡╨╜╨╛   182, ╨┐╤А╨╛╨┐╤Г╤Й╨╡╨╜╨╛     0, ╨▓╤Б╨╡╨│╨╛   182, ╨┤╨╗╨╕╤В╨╡╨╗╤М╨╜╨╛╤Б╤В╤М 2 s. - KeryxNodeManager.Core.Tests.dll (net8.0)
 ---- git add/commit/push ---- 
+warning: in the working copy of 'deploy.log', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/KeryxNodeManager.App/Resources/Strings.de.xaml', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/KeryxNodeManager.App/Resources/Strings.en.xaml', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/KeryxNodeManager.App/Resources/Strings.es.xaml', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/KeryxNodeManager.App/Resources/Strings.fr.xaml', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/KeryxNodeManager.App/Resources/Strings.it.xaml', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/KeryxNodeManager.App/Resources/Strings.ru.xaml', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/KeryxNodeManager.App/Resources/Strings.uk.xaml', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/KeryxNodeManager.App/ViewModels/DashboardViewModel.cs', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/KeryxNodeManager.App/Views/DashboardView.xaml', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'deploy_cuda_warning.bat', LF will be replaced by CRLF the next time Git touches it
+[main ea5b49b] 0.2.7: surface keryx-miner's CUDA runtime failure on the Dashboard with a direct download link, instead of only in Logs
+ 12 files changed, 347 insertions(+), 1 deletion(-)
+ create mode 100644 deploy2.log
+ create mode 100644 deploy_cuda_warning.bat
+To https://github.com/Dizzztroyer/keryx-node-manager.git
+   55b8f54..ea5b49b  main -> main
+---- dotnet publish (self-contained win-x64) ---- 
+  ╨Ю╨┐╤А╨╡╨┤╨╡╨╗╨╡╨╜╨╕╨╡ ╨┐╤А╨╛╨╡╨║╤В╨╛╨▓ ╨┤╨╗╤П ╨▓╨╛╤Б╤Б╤В╨░╨╜╨╛╨▓╨╗╨╡╨╜╨╕╤П...
+  ╨Т╨╛╤Б╤Б╤В╨░╨╜╨╛╨▓╨╗╨╡╨╜ C:\Users\hambi\KRX_miner\KeryxNodeManager\src\KeryxNodeManager.Core\KeryxNodeManager.Core.csproj (╨╖╨░ 198┬а╨╝╤Б).
+  ╨Т╨╛╤Б╤Б╤В╨░╨╜╨╛╨▓╨╗╨╡╨╜ C:\Users\hambi\KRX_miner\KeryxNodeManager\src\KeryxNodeManager.App\KeryxNodeManager.App.csproj (╨╖╨░ 200┬а╨╝╤Б).
+  KeryxNodeManager.Core -> C:\Users\hambi\KRX_miner\KeryxNodeManager\src\KeryxNodeManager.Core\bin\Release\net8.0\KeryxNodeManager.Core.dll
+  KeryxNodeManager.App -> C:\Users\hambi\KRX_miner\KeryxNodeManager\src\KeryxNodeManager.App\bin\Release\net8.0-windows\win-x64\KeryxNodeManager.dll
+  KeryxNodeManager.App -> C:\Users\hambi\KRX_miner\KeryxNodeManager\artifacts\publish\win-x64\
+---- stopping old KeryxNodeManager.exe (UI only - keryxd.exe/keryx-miner.exe are never touched) ---- 
+Успешно: Процесс "KeryxNodeManager.exe", с идентификатором 54424, был завершен.
+---- robocopy into real install directory ---- 
+
+
+------------------------------------------------------------------------------
+
+               ВсегоСкопировано ПропущеноНесоответствие      СБОЙДополнения
+Каталогов :        14         0        14         0         0         0
+  Файлов :       509         7       502         0         0         3
+    Байт :  163.81 m    1.32 m  162.48 m         0         0    4.90 m
+   Время :   0:00:00   0:00:00                       0:00:00   0:00:00
+
+
+Скорость :           231 704 500 Байт/сек.
+Скорость :             13258,238 МБ/мин.
+   Окончание: вторник, 4 августа 2026 г. 01:51:01
+
+---- relaunching updated app ---- 
+DEPLOY_DONE 
+==== END 04.08.2026  1:51:01,23 ==== 

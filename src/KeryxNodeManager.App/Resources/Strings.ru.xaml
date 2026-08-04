@@ -69,6 +69,9 @@
     <sys:String x:Key="Str_Dashboard_CudaWarningTitle">Майнер не может использовать видеокарту</sys:String>
     <sys:String x:Key="Str_Dashboard_CudaWarningBody">Обнаружена CUDA-видеокарта, но нужный CUDA runtime не загрузился — майнинг фактически не идёт, хотя процесс запущен. Нужно вручную установить NVIDIA CUDA Toolkit 12.6 и перезапустить майнер (Остановить всё → Запустить всё).</sys:String>
     <sys:String x:Key="Str_Dashboard_CudaWarningButton">Скачать CUDA Toolkit 12.6</sys:String>
+    <sys:String x:Key="Str_Dashboard_PluginWarningTitle">Установка майнера неполная</sys:String>
+    <sys:String x:Key="Str_Dashboard_PluginWarningBody">CUDA работает, но у майнера не нашлось ни одного рабочего модуля (плагина) — не хватает файла(ов), которые должны лежать рядом с keryx-miner.exe. Скорее всего, при установке скопировался только сам .exe, без нужных .dll. Возьми полный набор файлов заново из официального источника (например, канала Discord команды Keryx) и замени папку целиком.</sys:String>
+    <sys:String x:Key="Str_Dashboard_PluginWarningButton">Открыть Discord Keryx Labs</sys:String>
 
     <!-- GPU page (brief §6), second slice of the full-extraction pass. Same scope limitation as
          Dashboard: GpuCardViewModel.AssignmentSummary comes from Core's TierAssigner.Explanation
