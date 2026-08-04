@@ -40,99 +40,10 @@
                                Visibility="{Binding DiscordLinkStatus, Converter={StaticResource StringToVis}}"/>
                 </StackPanel>
             </Border>
-
-            <!-- Tier reference table (2026-08-04, user request): which miner flag/model/VRAM goes
-                 with which tier, and roughly how much of the block reward that tier keeps. Model
-                 name/quant/VRAM columns are KeryxNodeManager.Core.Models.ModelTierCatalog's own
-                 verified numbers (read directly from keryx-miner's src/models.rs - see that file's
-                 doc comment), not re-typed by hand, so this table can never silently drift out of
-                 sync with what the app actually downloads/launches. "Weights" and "Доля награды"
-                 are additional reference numbers confirmed against keryx-node's
-                 consensus/core/src/config/params.rs (TIER_REWARD_BPS_H2 = [6800,7600,8400,9200,
-                 10000] - exactly 68/76/84/92/100%, indexed by tier position 0-4) and the weight-size
-                 comments next to each ModelSpec in keryx-miner's models.rs - both fetched and
-                 verified directly against the real source on 2026-08-04, not guessed. The
-                 footnote spells out the one caveat that table alone doesn't: this tier share is
-                 multiplied by a SEPARATE holder-ratio bonus (40-100%, RATIO_REWARD_BPS) based on
-                 how much of your own production you hold vs. sell - so "68%" is not the whole
-                 story on its own. -->
-            <Border Style="{DynamicResource CardStyle}" Margin="0,16,0,0">
-                <StackPanel>
-                    <TextBlock Text="{DynamicResource Str_Models_TierTable_Header}" FontWeight="SemiBold"
-                               Foreground="{DynamicResource TextPrimaryBrush}" TextWrapping="Wrap"/>
-
-                    <Grid Margin="0,12,0,0">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto" MinWidth="30"/>
-                            <ColumnDefinition Width="Auto" MinWidth="90"/>
-                            <ColumnDefinition Width="*" MinWidth="230"/>
-                            <ColumnDefinition Width="Auto" MinWidth="70"/>
-                            <ColumnDefinition Width="Auto" MinWidth="70"/>
-                            <ColumnDefinition Width="Auto" MinWidth="70"/>
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                        </Grid.RowDefinitions>
-
-                        <!-- Header row -->
-                        <TextBlock Grid.Row="0" Grid.Column="0" Text="{DynamicResource Str_Models_TierTable_ColTier}" FontWeight="SemiBold" Margin="0,0,10,6" Foreground="{DynamicResource TextSecondaryBrush}"/>
-                        <TextBlock Grid.Row="0" Grid.Column="1" Text="{DynamicResource Str_Models_TierTable_ColFlag}" FontWeight="SemiBold" Margin="0,0,10,6" Foreground="{DynamicResource TextSecondaryBrush}"/>
-                        <TextBlock Grid.Row="0" Grid.Column="2" Text="{DynamicResource Str_Models_TierTable_ColModel}" FontWeight="SemiBold" Margin="0,0,10,6" Foreground="{DynamicResource TextSecondaryBrush}"/>
-                        <TextBlock Grid.Row="0" Grid.Column="3" Text="{DynamicResource Str_Models_TierTable_ColMinVram}" FontWeight="SemiBold" Margin="0,0,10,6" Foreground="{DynamicResource TextSecondaryBrush}"/>
-                        <TextBlock Grid.Row="0" Grid.Column="4" Text="{DynamicResource Str_Models_TierTable_ColWeights}" FontWeight="SemiBold" Margin="0,0,10,6" Foreground="{DynamicResource TextSecondaryBrush}"/>
-                        <TextBlock Grid.Row="0" Grid.Column="5" Text="{DynamicResource Str_Models_TierTable_ColRewardShare}" FontWeight="SemiBold" Margin="0,0,0,6" Foreground="{DynamicResource TextSecondaryBrush}"/>
-
-                        <!-- Tier 0 -->
-                        <TextBlock Grid.Row="1" Grid.Column="0" Text="0" Margin="0,0,10,4"/>
-                        <TextBlock Grid.Row="1" Grid.Column="1" Text="--very-light" FontFamily="Consolas" Margin="0,0,10,4"/>
-                        <TextBlock Grid.Row="1" Grid.Column="2" Text="Qwen3-8B-abliterated (Q4_K_S)" Margin="0,0,10,4" TextWrapping="Wrap"/>
-                        <TextBlock Grid.Row="1" Grid.Column="3" Text="6 GB" Margin="0,0,10,4"/>
-                        <TextBlock Grid.Row="1" Grid.Column="4" Text="~4.6 GB" Margin="0,0,10,4"/>
-                        <TextBlock Grid.Row="1" Grid.Column="5" Text="68%" Margin="0,0,0,4"/>
-
-                        <!-- Tier 1 -->
-                        <TextBlock Grid.Row="2" Grid.Column="0" Text="1" Margin="0,0,10,4"/>
-                        <TextBlock Grid.Row="2" Grid.Column="1" Text="--light" FontFamily="Consolas" Margin="0,0,10,4"/>
-                        <TextBlock Grid.Row="2" Grid.Column="2" Text="Mistral-7B-v0.3-abliterated (Q6_K)" Margin="0,0,10,4" TextWrapping="Wrap"/>
-                        <TextBlock Grid.Row="2" Grid.Column="3" Text="8 GB" Margin="0,0,10,4"/>
-                        <TextBlock Grid.Row="2" Grid.Column="4" Text="~5.9 GB" Margin="0,0,10,4"/>
-                        <TextBlock Grid.Row="2" Grid.Column="5" Text="76%" Margin="0,0,0,4"/>
-
-                        <!-- Tier 2 (default - no flag) -->
-                        <TextBlock Grid.Row="3" Grid.Column="0" Text="2" Margin="0,0,10,4"/>
-                        <TextBlock Grid.Row="3" Grid.Column="1" Text="{DynamicResource Str_Models_TierTable_DefaultFlag}" FontFamily="Consolas" Margin="0,0,10,4"/>
-                        <TextBlock Grid.Row="3" Grid.Column="2" Text="GLM-4-9B-0414-abliterated (Q6_K)" Margin="0,0,10,4" TextWrapping="Wrap"/>
-                        <TextBlock Grid.Row="3" Grid.Column="3" Text="12 GB" Margin="0,0,10,4"/>
-                        <TextBlock Grid.Row="3" Grid.Column="4" Text="~8.3 GB" Margin="0,0,10,4"/>
-                        <TextBlock Grid.Row="3" Grid.Column="5" Text="84%" Margin="0,0,0,4"/>
-
-                        <!-- Tier 3 -->
-                        <TextBlock Grid.Row="4" Grid.Column="0" Text="3" Margin="0,0,10,4"/>
-                        <TextBlock Grid.Row="4" Grid.Column="1" Text="--high" FontFamily="Consolas" Margin="0,0,10,4"/>
-                        <TextBlock Grid.Row="4" Grid.Column="2" Text="Qwen3.6-27B-abliterated-v2 (Q4_K_M)" Margin="0,0,10,4" TextWrapping="Wrap"/>
-                        <TextBlock Grid.Row="4" Grid.Column="3" Text="24 GB" Margin="0,0,10,4"/>
-                        <TextBlock Grid.Row="4" Grid.Column="4" Text="~16.5 GB" Margin="0,0,10,4"/>
-                        <TextBlock Grid.Row="4" Grid.Column="5" Text="92%" Margin="0,0,0,4"/>
-
-                        <!-- Tier 4 -->
-                        <TextBlock Grid.Row="5" Grid.Column="0" Text="4" Margin="0,0,10,0"/>
-                        <TextBlock Grid.Row="5" Grid.Column="1" Text="--very-high" FontFamily="Consolas" Margin="0,0,10,0"/>
-                        <TextBlock Grid.Row="5" Grid.Column="2" Text="Kimi-Linear-48B-A3B-Instruct-abliterated (Q4_K_M)" Margin="0,0,10,0" TextWrapping="Wrap"/>
-                        <TextBlock Grid.Row="5" Grid.Column="3" Text="30 GB" Margin="0,0,10,0"/>
-                        <TextBlock Grid.Row="5" Grid.Column="4" Text="~29.7 GB" Margin="0,0,10,0"/>
-                        <TextBlock Grid.Row="5" Grid.Column="5" Text="100%" Margin="0,0,0,0"/>
-                    </Grid>
-
-                    <TextBlock Text="{DynamicResource Str_Models_TierTable_Footnote}" Margin="0,14,0,0" TextWrapping="Wrap"
-                               FontSize="11" Foreground="{DynamicResource TextSecondaryBrush}"/>
-                </StackPanel>
-            </Border>
         </StackPanel>
+        <!-- The tier reference table used to live here; moved to GpuView.xaml on 2026-08-04
+             per user follow-up (fits better next to the per-GPU mode picker). See GpuView.xaml's
+             own doc comment for the sourcing note. -->
 
         <!-- 0.2.7 fix: the ItemsControl itself has no scrolling behavior of its own - it only lays
              out its items and reports its full desired height to the parent DockPanel, which simply

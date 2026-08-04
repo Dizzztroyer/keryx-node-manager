@@ -239,4 +239,90 @@
     </Setter>
   </Style>
 
+  <!-- Themed ScrollBar (2026-08-04, user follow-up: the "ползунок" on the Models page looked
+       wrong). Root cause: this app had NO ScrollBar style anywhere, so every scrollable page
+       (Models, GPU, Node, Miner, Settings, Profiles, About, Logs, the setup wizard) was rendering
+       the OS's default light-chrome scrollbar directly on this dark theme's near-black surfaces -
+       exactly the clash the user flagged. Applied app-wide via TargetType (not x:Key), same
+       pattern as the ComboBox fix above, so every existing and future ScrollViewer picks this up
+       automatically with no per-view changes. Only vertical scrolling is actually used anywhere in
+       this app today (grep confirms no ScrollViewer sets HorizontalScrollBarVisibility), but both
+       orientations are templated so a future horizontal scrollbar doesn't fall back to the
+       untemplated system default. -->
+  <Style x:Key="ScrollBarThumbStyle" TargetType="Thumb">
+    <Setter Property="Background" Value="{DynamicResource BorderBrush2}"/>
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="Thumb">
+          <Border Background="{TemplateBinding Background}" CornerRadius="4" Margin="2"/>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+    <Style.Triggers>
+      <Trigger Property="IsMouseOver" Value="True">
+        <Setter Property="Background" Value="{DynamicResource AccentBrush}"/>
+      </Trigger>
+      <Trigger Property="IsDragging" Value="True">
+        <Setter Property="Background" Value="{DynamicResource AccentBrush}"/>
+      </Trigger>
+    </Style.Triggers>
+  </Style>
+
+  <Style x:Key="ScrollBarRepeatButtonStyle" TargetType="RepeatButton">
+    <Setter Property="IsTabStop" Value="False"/>
+    <Setter Property="Focusable" Value="False"/>
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="RepeatButton">
+          <Rectangle Fill="Transparent"/>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
+
+  <ControlTemplate x:Key="VerticalScrollBarTemplate" TargetType="ScrollBar">
+    <Grid Background="{TemplateBinding Background}">
+      <Track x:Name="PART_Track" IsDirectionReversed="True" Focusable="False">
+        <Track.DecreaseRepeatButton>
+          <RepeatButton Style="{StaticResource ScrollBarRepeatButtonStyle}" Command="ScrollBar.PageUpCommand"/>
+        </Track.DecreaseRepeatButton>
+        <Track.IncreaseRepeatButton>
+          <RepeatButton Style="{StaticResource ScrollBarRepeatButtonStyle}" Command="ScrollBar.PageDownCommand"/>
+        </Track.IncreaseRepeatButton>
+        <Track.Thumb>
+          <Thumb Style="{StaticResource ScrollBarThumbStyle}" MinHeight="30"/>
+        </Track.Thumb>
+      </Track>
+    </Grid>
+  </ControlTemplate>
+
+  <ControlTemplate x:Key="HorizontalScrollBarTemplate" TargetType="ScrollBar">
+    <Grid Background="{TemplateBinding Background}">
+      <Track x:Name="PART_Track" Focusable="False">
+        <Track.DecreaseRepeatButton>
+          <RepeatButton Style="{StaticResource ScrollBarRepeatButtonStyle}" Command="ScrollBar.PageLeftCommand"/>
+        </Track.DecreaseRepeatButton>
+        <Track.IncreaseRepeatButton>
+          <RepeatButton Style="{StaticResource ScrollBarRepeatButtonStyle}" Command="ScrollBar.PageRightCommand"/>
+        </Track.IncreaseRepeatButton>
+        <Track.Thumb>
+          <Thumb Style="{StaticResource ScrollBarThumbStyle}" MinWidth="30"/>
+        </Track.Thumb>
+      </Track>
+    </Grid>
+  </ControlTemplate>
+
+  <Style TargetType="ScrollBar">
+    <Setter Property="Background" Value="Transparent"/>
+    <Setter Property="Width" Value="10"/>
+    <Setter Property="Template" Value="{StaticResource VerticalScrollBarTemplate}"/>
+    <Style.Triggers>
+      <Trigger Property="Orientation" Value="Horizontal">
+        <Setter Property="Width" Value="Auto"/>
+        <Setter Property="Height" Value="10"/>
+        <Setter Property="Template" Value="{StaticResource HorizontalScrollBarTemplate}"/>
+      </Trigger>
+    </Style.Triggers>
+  </Style>
+
 </ResourceDictionary>
